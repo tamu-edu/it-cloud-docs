@@ -1,0 +1,27 @@
+[book]
+authors = ["Your name here"]
+language = "en"
+multilingual = false
+src = "src"
+title = "What is your site name"
+
+[preprocessor]
+
+[preprocessor.admonish]
+command = "mdbook-admonish"
+assets_version = "2.0.0" # do not edit: managed by `mdbook-admonish install`
+
+[output]
+
+[output.html]
+default-theme = "aggie"
+preferred-dark-theme = "navy"
+additional-css = ["./theme/css/mdbook-admonish.css", "./theme/css/tabbed-code-blocks.css"]
+additional-js = ["./theme/js/tabbed-code-blocks.js"]
+
+[output.html.print]
+enable = false
+
+[output.html.fold]
+enable = true    # whether or not to enable section folding
+level = 0         # the depth to start folding
