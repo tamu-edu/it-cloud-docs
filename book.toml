@@ -1,9 +1,9 @@
 [book]
-authors = ["Your name here"]
+authors = ["Technology Services - Cloud & Platform Security"]
 language = "en"
 multilingual = false
 src = "src"
-title = "What is your site name"
+title = "Cloud Documentation (WIP)"
 
 [preprocessor]
 

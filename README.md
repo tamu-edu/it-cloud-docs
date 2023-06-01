@@ -1,3 +1,14 @@
+TODO:
+- [x] Initialize mdbook default contents
+- [x] Install addons
+- [x] Add Aggie template customizations
+- [x] Add basic infrastructure to SUMMARY.md
+- [ ] Reserve CNAME docs.cloud.tamu.edu
+- [ ] Configure GitHub Actions to build and deploy to GitHub Pages
+- [ ] Add instructions for adding new section(s)
+
+
+
 # Identity Security Documentation Template
 
 These steps will walk you though setting up a [mdbook](https://rust-lang.github.io/mdBook/index.html) site using the Identity Security Docs template
