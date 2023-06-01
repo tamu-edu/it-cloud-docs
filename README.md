@@ -3,9 +3,9 @@ TODO:
 - [x] Install addons
 - [x] Add Aggie template customizations
 - [x] Add basic infrastructure to SUMMARY.md
-- [] Reserve CNAME docs.cloud.tamu.edu
-- [] Configure GitHub Actions to build and deploy to GitHub Pages
-- [] Add instructions for adding new section(s)
+- [ ] Reserve CNAME docs.cloud.tamu.edu
+- [ ] Configure GitHub Actions to build and deploy to GitHub Pages
+- [ ] Add instructions for adding new section(s)
 
 
 
