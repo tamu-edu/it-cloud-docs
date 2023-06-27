@@ -4,8 +4,8 @@
 # Cloud & Platform Security
 
 - [Github](./cps/github.md)
-    - [Sec-GH-Automation](./cps/github.md#security-gh-automation)
-    - [Monthly Report Repo PAT](./cps/github.md#monthly-report-repo-pat)
+    - [Sec-GH-Automation]()
+    - [Monthly Report Repo PAT]()
 
 # AIP Placeholder
 
