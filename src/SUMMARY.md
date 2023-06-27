@@ -1,12 +1,11 @@
-# Summary 
+# Summary
 
 [Home](./index.md)
 # Cloud & Platform Security
 
-- [Placeholder](./cps/chapter_1.md)
-    - [Nested Placeholder]()
-    - [Nested Placeholder]()
-    - [Nested Placeholder]()
+- [Github](./cps/github.md)
+    - [Sec-GH-Automation](./cps/github.md#security-gh-automation)
+    - [Monthly Report Repo PAT](./cps/github.md#monthly-report-repo-pat)
 
 # AIP Placeholder
 
