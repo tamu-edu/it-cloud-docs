@@ -29,4 +29,5 @@ Initial Sections:
 ```admonish note
 While overall formatting follows Markdown conventions, contents *within* ***tables*** need to be formatted using HTML, i.e. `<br>` for line breaks and `<ul><li>item</li></ul>` for listed items, without a newline in the .md file between vertical/straight slashes (|). Alternatively, `<br>• ` can be used to create a more compactly formatted bullet point.
 ```
+
 #### Hellow world!
