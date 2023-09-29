@@ -3,9 +3,7 @@
 [Home](./index.md)
 # Cloud & Platform Security
 
-- [Github](./cps/github.md)
-    - [Sec-GH-Automation]()
-    - [Monthly Report Repo PAT]()
+- [Chapter 1](./cps/chapter_1.md)
 
 # AIP Placeholder
 
