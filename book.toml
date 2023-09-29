@@ -18,6 +18,7 @@ default-theme = "aggie"
 preferred-dark-theme = "navy"
 additional-css = ["./theme/css/mdbook-admonish.css", "./theme/css/tabbed-code-blocks.css"]
 additional-js = ["./theme/js/tabbed-code-blocks.js"]
+edit-url-template = "https://github.com/tamu-edu/it-cloud-docs/edit/main/{path}"
 
 [output.html.print]
 enable = false
