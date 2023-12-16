@@ -1,6 +1,6 @@
 # Welcome
 
-Landing page for the project.
+Welcome to the documentation home for Cloud at Texas A&M.
 
 ```admonish warning
 This is a work in progress.
@@ -10,7 +10,7 @@ This is a work in progress.
 
 Initial Sections:
 ```admonish info class="aggiecustom2" title="Cloud & Platform Security" collapsible=true
-* [Cloud & Platform Security](./cps/chapter_1.md) <description here>
+* [Cloud & Platform Security](./cps/Email_Security.md) <Email Security>
 ```
 
 ```admonish info class="aggiecustom2" title="Aggie Innovation Platform" collapsible=true
@@ -20,14 +20,4 @@ Initial Sections:
 
 ### Contact Information
 
-| Example table | |
-| --- | --- |
-| Name | John Doe |
-| Email | placeholder:<br>• johndoe.placeholder@tamu.edu<br>• joeaggie.placeholder@tamu.edu |
-| Phone | placeholder:<ul><li>(979) 123-4567</li><li>(979) 765-4321</li></ul> |
-
-```admonish note
-While overall formatting follows Markdown conventions, contents *within* ***tables*** need to be formatted using HTML, i.e. `<br>` for line breaks and `<ul><li>item</li></ul>` for listed items, without a newline in the .md file between vertical/straight slashes (|). Alternatively, `<br>• ` can be used to create a more compactly formatted bullet point.
-```
-
-#### Hellow world!
+If you have questions regarding the content of this website (such as a request to update specific information), please reach out to cloudsecurity@tamu.edu or aip@tamu.edu.

@@ -3,7 +3,11 @@
 [Home](./index.md)
 # Cloud & Platform Security
 
-- [Chapter 1](./cps/chapter_1.md)
+- [Email Security](./cps/email_security.md)
+  - [Email Authentication Protocols](./cps/email/protocols.md)
+  - [FAQ](./cps/email/faq.md)
+  - [DMARC Check](./cps/email/checker.md)
+  - [DMARC Report](./cps/email/checker.md)
 
 # AIP Placeholder
 
