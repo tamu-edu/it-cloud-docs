@@ -10,7 +10,7 @@ This is a work in progress.
 
 Initial Sections:
 ```admonish info class="aggiecustom2" title="Cloud & Platform Security" collapsible=true
-* [Cloud & Platform Security](./cps/Email_Security.md) <Email Security>
+* [Cloud & Platform Security](./cps/email_security.md) <Email Security>
 ```
 
 ```admonish info class="aggiecustom2" title="Aggie Innovation Platform" collapsible=true
