@@ -36,7 +36,7 @@ After navigating to this site and selecting the DMARC Summary dashboard, you wil
 - DKIM Alignment Details - a table with information on DKIM, its passage and alignment (did DMARC pass using DKIM)
 
 ```admonish warning
-The dashboards do not provide information on the status of specific email messages. Instead, it was designed to provide insight into provides an overview of who is sending mail on behalf of your domain or subdomain.
+The dashboards do not provide information on the status of specific email messages. Instead, it was designed to provide insight into who is sending mail on behalf of your domain or subdomain.
 ```
 
 ## Use Case
@@ -49,7 +49,7 @@ The scenario is to find who is sending on behalf of a given 'tamu.edu' subdomain
 4) In the 'DMARC Passage' pie chart, select the three dots next to 'false' and select 'filter for'
 
 ```admonish info
-By hovering your mouse over a data table value and using the magnifying glass icons, you can filter on our filter out different values.
+By hovering your mouse over a data table value and using the magnifying glass icons, you can filter on different values.
 ```
 
-The dashboards should now show data for messages that fail DMARC compliance.  The data can be filtered to see specific time periods or messages from specific organizations. Please open an ticket or send an email to [security@tamu.edu](mailto:security@tamu.edu) with the filters and search parameters used.  Cloud and Platform Security can use this information to determine why email authentication failed and work with you to get the problem resolved.  
+The dashboards should now show data for messages that fail DMARC compliance.  The data can be filtered to see specific time periods or messages from specific organizations. Please open an ticket or send an email to [security@tamu.edu](mailto:security@tamu.edu) with the filters and search parameters used.  Cloud and Platform Security can use this information to help determine why email authentication failed and work with you to get the problem resolved.
