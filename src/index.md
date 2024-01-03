@@ -20,4 +20,4 @@ Initial Sections:
 
 ### Contact Information
 
-If you have questions regarding the content of this website (such as a request to update specific information), please reach out to cloudsecurity@tamu.edu or aip@tamu.edu.
+If you have questions regarding the content of this website (such as a request to update specific information), please reach out to [cloudsecurity@tamu.edu](mailto:cloudsecurity@tamu.edu) or aip@tamu.edu.
