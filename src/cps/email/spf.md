@@ -29,12 +29,10 @@ The easiest way to verify your SPF record is to use the command line:
 5. Look for the TXT record that starts with v=spf1. This is the SPF record for the domain.
 
 ```shell
-nslookup -q=txt subdomain.tamu.edu
+nslookup -q=txt itsec.tamu.edu
 Server:         128.194.254.1
 Address:        128.194.254.1#53
 
-subdomain.tamu.edu        text = "v=spf1 redirect=tamu.edu"
-subdomain.tamu.edu        text = "MS=AD712EA956D7B98D5A87A44852E462XXXXXXXXX"
-subdomain.tamu.edu        text = "hnzuV2uq2ZoWnQftwdSvcVtniWmAP7Vx+SlD9i1kpCIdKRx7E9X5FJkrDzWgNEDy080NAoRMoX7XXXXXXXXX=="
-
+itsec.tamu.edu  text = "Cf1d0NpcH6b6AS7GNfUPe3wWNIgoHEli6TVdNy+9A0ugCq1NyRfZpg7k3ahoIeY07+WHnXXXXXXXXXXX=="
+itsec.tamu.edu  text = "v=spf1 redirect=tamu.edu"
 ```
