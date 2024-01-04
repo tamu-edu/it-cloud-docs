@@ -38,7 +38,7 @@ However, here a few requirements that have been finalized.
 
 - SPF records will be inherited from tamu.edu, or will include tamu.edu’s SPF record with a softfail
 - DKIM signing will be configured on the Proofpoint and Gmail for all outbound mail
-- 3rd Party Mailers will need to utilize DKIM signing for authentication when delivering on behalf of the root 'tamu.edu domain and for 'tamu.edu' subdomain
+- 3rd Party Mailers and cloud applications will need to utilize DKIM signing for authentication when delivering on behalf of the root 'tamu.edu' domain and for 'tamu.edu' subdomain
 - TLS enabled for all outgoing mail
 - Utilize SPF and/or DKIM signing for DMARC alignment
 
