@@ -9,6 +9,7 @@ This is a work in progress.
 ## Getting Started
 
 Initial Sections:
+
 ```admonish info class="aggiecustom2" title="Cloud & Platform Security" collapsible=true
 * [Cloud & Platform Security](./cps/email_security.md) <Email Security>
 ```

@@ -95,7 +95,3 @@ Senders that already include an unsubscribe link in their messages have until Ju
 Google provides Postmaster Tools to help deliver essential insights into important metrics that can identify problem areas in email sending practices.  More information can be found under [Monitoring and Tools](./tools.md).
 
 At this time other third party mailers like Yahoo and Apple do not provide their own version of Google's Postmaster Tools.
-
-## Where can I learn more about Texas A&M's email policies?
-
-- point them to documented email policies

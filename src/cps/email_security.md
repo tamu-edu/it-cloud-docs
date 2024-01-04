@@ -21,5 +21,4 @@ For additional requirements, information and frequently asked questions see the 
 - [DMARC](./email/dmarc.md)
 - [Monitoring/Tools](./email/tools.md)
 - [Bulk Mail](./email/bulk.md)
-- [Policies]()
 - [FAQ](./email/faq.md)
