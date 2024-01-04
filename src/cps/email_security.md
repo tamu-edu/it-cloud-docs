@@ -23,5 +23,5 @@ For additional requirements, information and frequently asked questions see the 
 - [Resources and Tools](./email/tools.md)
   - [DMARC Check](./email/checker.md)
   - [DMARC Report](./email/reporting.md)
-  - [Postmaster Tools](./email/reporting.md)
+  - [Postmaster Tools](./email/postmaster.md)
 - [Bulk Mail](./email/bulk.md)

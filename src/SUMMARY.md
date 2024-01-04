@@ -13,5 +13,5 @@
   - [Resources and Tools](./cps/email/tools.md)
     - [DMARC Check](./cps/email/checker.md)
     - [DMARC Report](./cps/email/reporting.md)
-    - [Postmaster Tools](./cps/email/reporting.md)
+    - [Postmaster Tools](./cps/email/postmaster.md)
   - [Bulk Mail](./cps/email/bulk.md)
