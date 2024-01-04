@@ -36,11 +36,11 @@ Exact policies and requirements are still being finalized.  The guidelines provi
 
 However, here a few requirements that have been finalized.
 
-- SPF records will be inherited from tamu.edu, or will include tamu.edu’s SPF record with a softfail.
-- DKIM signing will be configured on the Proofpoint and Gmail for all outbound mail.
-- 3rd Party Mailers will need to utilize DKIM signing for authentication when delivering on behalf of the root 'tamu.edu domain and for 'tamu.edu' subdomain.
+- SPF records will be inherited from tamu.edu, or will include tamu.edu’s SPF record with a softfail
+- DKIM signing will be configured on the Proofpoint and Gmail for all outbound mail
+- 3rd Party Mailers will need to utilize DKIM signing for authentication when delivering on behalf of the root 'tamu.edu domain and for 'tamu.edu' subdomain
 - TLS enabled for all outgoing mail
-- Utilize SPF and/or DKIM signing for DMARC alignment.
+- Utilize SPF and/or DKIM signing for DMARC alignment
 
 ## What happens if my 'tamu.edu' subdomain fails to meet these requirements?
 
@@ -56,27 +56,33 @@ Mail sent using Texas A&M approved email and marketing platforms should continue
 - Mail sent directly from cloud applications (SaaS providers, AmazonSES, etc)
 - Mail sent externally that does not flow through approved email gateways
 
-If you use a service that impersonates the root 'tamu.edu' domain or 'tamu.edu' subdomains, you could be affected.  You can use tools like the DMARC Check Website and the DMARC Report Website to check your DMARC compliance.  Please reach out to [security@tamu.edu](mailto:security@tamu.edu) if you have questions or concerns.
+If you use a service that impersonates the root 'tamu.edu' domain or 'tamu.edu' subdomains, you could be affected.  You can use tools like the [DMARC Check Website](https://dmarc-check.itsec.tamu.edu) and the [DMARC Report Website](https://dmarc-report.kb.us-central1.gcp.cloud.es.io:9243/) to check your DMARC compliance, for more information on these tools see the [DMARC Check](./checker.md) and [DMARC Report](./reporting.md) pages.  Please reach out to [security@tamu.edu](mailto:security@tamu.edu) if you have questions or concerns.
 
 ## What should my SPF DNS record look like?
 
-- `v=spf1 redirect=tamu.edu`
+All 'tamu.edu' subdomains should be configured to inherit from the root 'tamu.edu' domain and should be set to:
+
+`v=spf1 redirect:tamu.edu`
+
+As part of our effort to comply with Google and Yahoo email sender requirements, we will be creating SPF records for all 'tamu.edu' subdomains.  For more information see the [SPF](./spf.md) page or the SPF KB article [KB0021277](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0021277).
 
 ## How can I check my SPF record?
 
-- instructions on how to verify your spf DNS record?
+The easiest way to check your SPF record is to query DNS.  For detailed instructions see the [SPF](./spf.md) page.
 
 ## How can I check my DKIM record?
 
-- on this list or manually with instructions
+All 'tamu.edu' subdomains will be required to have DKIM signing configured for all outbound messages.  We will be configuring DKIM for all 'tamu.edu' subdomains that send email from our Proofpoint Security Email Gateway (SEG).  For email being sent from third party mailers or cloud applications (see the question "How do I know if my subdomain/service is affected" for more information), DKIM signing will need to be setup. See the [KB0021277](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0021277) for more information on sending mail using third party mailers.
 
-## How can I verify my DMARC compliance?
+The easiest way to check your DKIM record is to query DNS.  For detailed instructions see the [DKIM](./dkim.md) page.
 
-- DMARC Checker Website
+## How can I check my DMARC compliance?
+
+The [DMARC Check website](https://dmarc-check.itsec.tamu.edu) is an automated tool that can be used to check your email authentication compliance with DMARC.  For more information on this tool see the [DMARC Check](./checker.md) page.
 
 ## How can I find who is sending email on my behalf?
 
-- DMARC Report Website
+The [DMARC Reporting website](https://dmarc-report.kb.us-central1.gcp.cloud.es.io:9243/) is a website that contains DMARC Reporting data.  This data can be used to determine who is impersonating 'tamu.edu' subdomains by sending mail on their behalf.  For more information on this tool see the [DMARC Reporting](./reporting.md) page.
 
 ## Do all messages require one-click unsubscribe?
 
