@@ -16,11 +16,25 @@ In order to meet this new requirement, any 'tamu.edu' subdomain without an exist
 
 For those subdomains that have existing SPF records, Cloud and Platform Security will work with technology professionals and email administrators to transition to a `v=spf1 include:tamu.edu ~all` SPF record.  The ultimate goal will be for all subdomains to work towards a `v=spf1 redirect:tamu.edu` SPF record.
 
+For more information on SPF see [KB0021277](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0021277).
+
 ## SPF Validation
 
-There are several ways to validate your SPF record.
+The easiest way to verify your SPF record is to use the command line:
 
-### Command Line
+1. Open your terminal or command prompt on your computer.
+2. Type in `dig txt domain.com` or `nslookup -q=txt subdomain.tamu.edu`. Replace domain.com with your 'tamu.edu' subdomain name that you want to check.
+3. Click "Enter" to execute the command.
+4. You will see a list of TXT records associated with the domain.
+5. Look for the TXT record that starts with v=spf1. This is the SPF record for the domain.
 
+```shell
+nslookup -q=txt subdomain.tamu.edu
+Server:         128.194.254.1
+Address:        128.194.254.1#53
 
-### MXToolbox
+subdomain.tamu.edu        text = "v=spf1 redirect=tamu.edu"
+subdomain.tamu.edu        text = "MS=AD712EA956D7B98D5A87A44852E462XXXXXXXXX"
+subdomain.tamu.edu        text = "hnzuV2uq2ZoWnQftwdSvcVtniWmAP7Vx+SlD9i1kpCIdKRx7E9X5FJkrDzWgNEDy080NAoRMoX7XXXXXXXXX=="
+
+```
