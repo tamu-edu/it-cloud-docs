@@ -1,6 +1,6 @@
 # DMARC
 
-Domain-based Message Authentication, Reporting & Conformance([DMARC](https://dmarc.org)) is an email standard designed to prevent spammers from using a domain to send email without the domain owner’s permission.  DMARC helps senders and receivers determine if a messages is legitimate.  DMARC provides for is an email authentication, policy, and reporting protocol. 
+Domain-based Message Authentication, Reporting & Conformance([DMARC](https://dmarc.org)) is an email standard designed to prevent spammers from using a domain to send email without the domain owner’s permission.  DMARC helps senders and receivers determine if a messages is legitimate.  DMARC provides for is an email authentication, policy, and reporting protocol.
 
 1) **Email Authentication** - DMARC combines the authorization and authentication results of two other protocols, SPF and DKIM, to determine whether email sent from your domain is authentic.
 2) **Email Policy** - DMARC publishes a public policy instructing recipient servers how to respond if they receive email from your domain that was determined to be inauthentic.
