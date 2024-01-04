@@ -12,11 +12,13 @@ In order to further protect email and comply with upcoming requirements from lar
 
 - [SPF](./email/spf.md)
 - [DKIM](./email/dkim.md)
+- [DMARC](./email/dmarc.md)
 
 For additional requirements, information and frequently asked questions see the following:
 
 - [SPF](./email/spf.md)
 - [DKIM](./email/dkim.md)
+- [DMARC](./email/dmarc.md)
 - [Monitoring/Tools](./email/tools.md)
 - [Bulk Mail](./email/bulk.md)
 - [Policies]()
