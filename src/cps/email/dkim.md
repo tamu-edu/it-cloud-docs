@@ -28,9 +28,9 @@ In order to protect email and comply with upcoming requirements from large email
 
 However, DKIM signing can also be used by third party mailers.  DKIM signing is required for all mail sent from third party mailers impersonating the root 'tamu.edu' domain and all 'tamu.edu' subdomains. Third party mailers can include marketing platforms such as MailChimp and Constant Contact.  See [KB0021277](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0021277) for more information on sending mail using third party mailers.
 
-## DKIM Validation
+## Check DKIM Record
 
-The easiest way to verify your SPF record is to use the command line:
+The easiest way to check your DKIM record is to use the command line:
 
 1) Open the console or command line on your computer.
 2) Type `nslookup -q=txt <selector>._domainkey.<subdomain>` where `<selector>` is the DKIM selector and `<subdomain>` is the 'tamu.edu' subdomain name.

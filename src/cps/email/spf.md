@@ -18,9 +18,9 @@ For those subdomains that have existing SPF records, Cloud and Platform Security
 
 For more information on SPF see [KB0021277](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0021277).
 
-## SPF Validation
+## Check SPF Record
 
-The easiest way to verify your SPF record is to use the command line:
+The easiest way to check your SPF record is to use the command line:
 
 1. Open your terminal or command prompt on your computer.
 2. Type in `dig txt domain.com` or `nslookup -q=txt subdomain.tamu.edu`. Replace domain.com with your 'tamu.edu' subdomain name that you want to check.
