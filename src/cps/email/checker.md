@@ -25,6 +25,7 @@ If the tool reports a DKIM failure, you can follow the steps below for your spec
 ```admonish info
 For additional information see [KB0021277](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0021277) for more information on sending mail using third party mailers.
 ```
+
 ```admonish warning
 This tool is only useful for email sent from an '@tamu.edu' domain or subdomain that has been sent from a third party mailer.
 ```

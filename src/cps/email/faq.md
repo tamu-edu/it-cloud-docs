@@ -1,11 +1,12 @@
 # FAQ
+
 ```admonish info
 This site is a work in progress and will be updated regularly.  Please check back frequently for updates.
 ```
 
 ## Why are these changes necessary?
 
-Email providers like, Gmail and Yahoo are implementing stricter sender guidelines.  These guidelines follow best practices and aim to reduce the amount of fraudulent spam and phishing messages that make it into user's inboxes.  Aditionaly, these guidelines will likely become standards for all email providers and senders.
+Email providers like, Gmail and Yahoo are implementing stricter sender guidelines.  These guidelines follow best practices and aim to reduce the amount of fraudulent spam and phishing messages that make it into user's inboxes.  Additionally, these guidelines will likely become standards for all email providers and senders.
 
 ## When are these changes needed?
 
@@ -33,7 +34,7 @@ Yahoo's requirements follow the requirements as specified by Google.  For more i
 
 Exact policies and requirements are still being finalized.  The guidelines provided by Google and Yahoo above will heavily influence the final policy and implementation for Texas A&M services.
 
-The implementaion will include:
+The implementation will include:
 
 - SPF records to be inherited from tamu.edu, or will include tamu.edu’s SPF record with a softfail
 - DKIM signing will be implemented on all outbound mail gateways
@@ -56,12 +57,13 @@ Mail sent using Texas A&M approved email and marketing platforms should continue
 - Mail sent externally that does not flow through approved email gateways
 
 ```admonish warning
-If you use a service that impersonates the root 'tamu.edu' domain or 'tamu.edu' subdomains, you may be affected.
+If you use a service that impersonates the root `tamu.edu` domain or `tamu.edu` subdomains, you may be affected.
 
 You can use the [DMARC Check Website](https://dmarc-check.itsec.tamu.edu) to check your DMARC compliance.
 
 For more information on these tools see the [DMARC Check](./checker.md) and [DMARC Report](./reporting.md) pages.
 ```
+
 ## What should my SPF record look like?
 
 All 'tamu.edu' subdomains should be configured to inherit from the root 'tamu.edu' domain and should be set to:
