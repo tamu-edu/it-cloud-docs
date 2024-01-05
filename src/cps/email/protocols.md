@@ -1,8 +1,8 @@
-# Email Authentication Protocols
-
 ```admonish info
 This site is a work in progress and will be updated regularly.  Please check back frequently for updates.
 ```
+
+# Email Authentication Protocols
 
 SPF, DKIM and DMARC function as email authentication protocols.  These protocols help providers verify the origin of a message and whether it comes from a trustworthy source.
 
@@ -24,9 +24,7 @@ Sender Policy Framework ([SPF](https://en.wikipedia.org/wiki/Sender_Policy_Frame
 
 ```admonish info
 SPF operates on the [email envelope](https://datatracker.ietf.org/doc/html/rfc5321#section-2.3.1), not the body or message header.
-```
 
-```admonish info
 SPF is an older protocol and limits the number of networks that can be included in a policy. Due to the size and scope of Texas A&M University's email infrastructure, combined with the security concerns surrounding IP address trust, SPF is not a sustainable model for authenticating mail.
 ```
 

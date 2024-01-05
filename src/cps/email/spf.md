@@ -1,8 +1,8 @@
-# SPF
-
 ```admonish info
 This site is a work in progress and will be updated regularly.  Please check back frequently for updates.
 ```
+
+# SPF
 
 Sender Policy Framework ([SPF](https://en.wikipedia.org/wiki/Sender_Policy_Framework)) is a method of email authorization used to specify which servers are permitted to send on behalf of a domain. SPF helps prevent spoofing, where an email is made to appear as if it came from an organization when, in reality, it did not.
 
@@ -18,7 +18,7 @@ Publishing an invalid SPF record, including a record containing too many address
 
 ## SPF Requirements
 
-All `tamu.edu` domains which send mail are required to have an SPF record in DNS. The SPF record should be configured to inherit from the root `tamu.edu` domain.  The SPF record should be set to:
+All 'tamu.edu' domains which send mail are required to have an SPF record in DNS. The SPF record should be configured to inherit from the root 'tamu.edu' domain.  The SPF record should be set to:
 
 `v=spf1 redirect:tamu.edu`
 

@@ -1,8 +1,8 @@
-# DKIM
-
 ```admonish info
 This site is a work in progress and will be updated regularly.  Please check back frequently for updates.
 ```
+
+# DKIM
 
 Domain Keys Identified Mail ([DKIM](https://dkim.org/)), is a message-based signature that uses cryptography to sign email and verify that your email was not altered in transit.  Email signed with DKIM confirms your legitimacy and trustworthiness as a sender, which helps deliver your messages to a recipient’s inbox rather than to their junk or spam folders. Over time, DKIM can have a positive impact on your domain reputation, improving your email deliverability.
 
@@ -28,14 +28,14 @@ While [the protocol may be very complicated](https://dkim.org/), the DKIM protoc
 
 ## DKIM Requirements
 
-All `tamu.edu` subdomains are required to have DKIM signing configured for all outbound messages.  At present, DKIM signing is configured on two of our outgoing mail gateways, the ProofPoint Security Email Gateway (SEG) and Google Workspace (Formerly G Suite).
+All 'tamu.edu' subdomains are required to have DKIM signing configured for all outbound messages.  At present, DKIM signing is configured on two of our outgoing mail gateways, the ProofPoint Security Email Gateway (SEG) and Google Workspace (Formerly G Suite).
 
 ```admonish warning
 At present, messages sent to external addresses via the gateway.tamu.edu delivery setting do not traverse the mail gateways. Therefore, mail sent via this service will not be DKIM signed if destined for external recipients. Retirees with `@tamu.edu` mail addresses fall into this category.
 ```
 
 ```admonish info
-DKIM signing is required for all mail sent from third party mailers sending on behalf of the `tamu.edu` domain and all `tamu.edu` subdomains. Third party mailers include marketing platforms such as MailChimp and Constant Contact.  See [KB0021277](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0021277) for more information on sending mail using third party mailers.
+DKIM signing is required for all mail sent from third party mailers sending on behalf of the 'tamu.edu' domain and all 'tamu.edu' subdomains. Third party mailers include marketing platforms such as MailChimp and Constant Contact.  See [KB0021277](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0021277) for more information on sending mail using third party mailers.
 ```
 
 ## Check DKIM Record

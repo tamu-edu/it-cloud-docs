@@ -1,9 +1,8 @@
-
-# DMARC
-
 ```admonish info
 This site is a work in progress and will be updated regularly.  Please check back frequently for updates.
 ```
+
+# DMARC
 
 Domain-based Message Authentication, Reporting & Conformance([DMARC](https://dmarc.org)) is an email standard designed to prevent spammers from using a domain to send email without the domain owner’s permission.  DMARC helps senders and receivers determine if a messages is legitimate.  DMARC provides for is an email authentication, policy, and reporting protocol.
 
@@ -28,11 +27,11 @@ Domain Alignment ensures that the email address in the "From:" header is the act
 
 ## DMARC Requirements
 
-All `tamu.edu` subdomains will inherit the root `tamu.edu` dommain's DMARC policy. All outgoing mail or mail sent from third party mailers including cloud applications, will need to pass DMARC to ensure deiliverability.
+All 'tamu.edu' subdomains will inherit the root 'tamu.edu' dommain's DMARC policy. All outgoing mail or mail sent from third party mailers including cloud applications, will need to pass DMARC to ensure deiliverability.
 
 ## Check DMARC Record
 
-The `tamu.edu` subdomains will not have DMARC records, but will inherit from the root `tamu.edu` domain.  To look up the 'tamu.edu' domain's DMARC record:
+The 'tamu.edu' subdomains will not have DMARC records, but will inherit from the root 'tamu.edu' domain.  To look up the 'tamu.edu' domain's DMARC record:
 
 1) Open a console or command line on your computer.
 2) Type `nslookup -q=txt _dmarc.tamu.edu`.

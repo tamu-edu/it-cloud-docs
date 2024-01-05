@@ -1,8 +1,8 @@
-# DMARC Check Website
-
 ```admonish info
 This site is a work in progress and will be updated regularly.  Please check back frequently for updates.
 ```
+
+# DMARC Check Website
 
 The DMARC Check website is a tool to check your email authentication compliance with DMARC.
 

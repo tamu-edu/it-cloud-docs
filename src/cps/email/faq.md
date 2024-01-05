@@ -1,8 +1,8 @@
-# FAQ
-
 ```admonish info
 This site is a work in progress and will be updated regularly.  Please check back frequently for updates.
 ```
+
+# FAQ
 
 ## Why are these changes necessary?
 
@@ -57,7 +57,7 @@ Mail sent using Texas A&M approved email and marketing platforms should continue
 - Mail sent externally that does not flow through approved email gateways
 
 ```admonish warning
-If you use a service that impersonates the root `tamu.edu` domain or `tamu.edu` subdomains, you may be affected.
+If you use a service that impersonates the root 'tamu.edu' domain or 'tamu.edu' subdomains, you may be affected.
 
 You can use the [DMARC Check Website](https://dmarc-check.itsec.tamu.edu) to check your DMARC compliance.
 
