@@ -1,8 +1,8 @@
-# DKIM
-
 ```admonish info
 This site is a work in progress and will be updated regularly.  Please check back frequently for updates.
 ```
+
+# DKIM
 
 Domain Keys Identified Mail ([DKIM](https://dkim.org/)), is a message-based signature that uses cryptography to sign email and verify that your email was not altered in transit.  Email signed with DKIM confirms your legitimacy and trustworthiness as a sender, which helps deliver your messages to a recipient’s inbox rather than to their junk or spam folders. Over time, DKIM can have a positive impact on your domain reputation, improving your email deliverability.
 

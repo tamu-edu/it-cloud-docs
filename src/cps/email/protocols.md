@@ -1,8 +1,8 @@
-# Email Authentication Protocols
-
 ```admonish info
 This site is a work in progress and will be updated regularly.  Please check back frequently for updates.
 ```
+
+# Email Authentication Protocols
 
 SPF, DKIM and DMARC function as email authentication protocols.  These protocols help providers verify the origin of a message and whether it comes from a trustworthy source.
 

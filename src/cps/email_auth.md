@@ -1,8 +1,8 @@
-# Email Authentication
-
 ```admonish info
 This site is a work in progress and will be updated regularly.  Please check back frequently for updates.
 ```
+
+# Email Authentication
 
 Email authentication (or email validation) is the process used to verify the source and legitimacy of an email message.  Utilizing email authentication helps to protect against email threats, such as phishing, fraud and spam, while also helping ensure that your messages reach the inbox.
 

@@ -1,9 +1,8 @@
-
-# DMARC
-
 ```admonish info
 This site is a work in progress and will be updated regularly.  Please check back frequently for updates.
 ```
+
+# DMARC
 
 Domain-based Message Authentication, Reporting & Conformance([DMARC](https://dmarc.org)) is an email standard designed to prevent spammers from using a domain to send email without the domain owner’s permission.  DMARC helps senders and receivers determine if a messages is legitimate.  DMARC provides for is an email authentication, policy, and reporting protocol.
 

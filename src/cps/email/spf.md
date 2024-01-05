@@ -1,8 +1,8 @@
-# SPF
-
 ```admonish info
 This site is a work in progress and will be updated regularly.  Please check back frequently for updates.
 ```
+
+# SPF
 
 Sender Policy Framework ([SPF](https://en.wikipedia.org/wiki/Sender_Policy_Framework)) is a method of email authorization used to specify which servers are permitted to send on behalf of a domain. SPF helps prevent spoofing, where an email is made to appear as if it came from an organization when, in reality, it did not.
 
