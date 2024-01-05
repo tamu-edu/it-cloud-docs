@@ -1,5 +1,7 @@
 # DKIM
-
+```admonish info
+This site is a work in progress and will be updated regularly.  Please check back frequently for updates.
+```
 Domain Keys Identified Mail ([DKIM](https://dkim.org/)), is a message-based signature that uses cryptography to sign email and verify that your email was not altered in transit.  Email signed with DKIM confirms your legitimacy and trustworthiness as a sender, which helps deliver your messages to a recipient’s inbox rather than to their junk or spam folders. Over time, DKIM can have a positive impact on your domain reputation, improving your email deliverability.
 
 A DKIM record is a specially formatted DNS TXT record that stores the public key to be used by receiving mail servers when verifying a message’s signature. A DKIM record might look something like this:
@@ -17,22 +19,27 @@ Where:
 - `p` indicates the the type of key (in this case, public)
 - the very long string that starts with MIGfMA0GC is the public key itself
 
-While [the protocol may be very complicated](https://dkim.org/), the short version is that the DKIM process works thanks to a private/public key pair, and requires two main actions.
+While [the protocol may be very complicated](https://dkim.org/), the DKIM protocol uses a private/public key pair, and requires two main actions.
 
 1) As your email is leaving the outgoing mail gateway, a DKIM signature is added to the headers of the email. The email gets signed with a private key in the shape of a unique ‘hash’ string of characters.
 2) Recipient servers then use the public key published to your domain’s DNS to check your DKIM signature on incoming messages. Once the signature is verified with the public key by the recipient, the message passes DKIM and is considered authentic—which means the source of the message has been verified, and the body wasn’t changed in transit.
 
 ## DKIM Requirements
 
-In order to protect email and comply with upcoming requirements from large email providers like Google and Yahoo, all 'tamu.edu' subdomains will be required to have DKIM signing configured for all outbound messages.  At Texas A&M DKIM signing is configured on our outgoing mail gateways, the ProofPoint Security Email Gateway (SEG) and Google Workspace (Formerly G Suite).
+All 'tamu.edu' subdomains are required to have DKIM signing configured for all outbound messages.  At present, DKIM signing is configured on two of our outgoing mail gateways, the ProofPoint Security Email Gateway (SEG) and Google Workspace (Formerly G Suite).
 
-However, DKIM signing can also be used by third party mailers.  DKIM signing is required for all mail sent from third party mailers impersonating the root 'tamu.edu' domain and all 'tamu.edu' subdomains. Third party mailers can include marketing platforms such as MailChimp and Constant Contact.  See [KB0021277](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0021277) for more information on sending mail using third party mailers.
+```admonish warning
+At present, messages sent to external addresses via the gateway.tamu.edu delivery setting do not traverse the mail gateways. Therefore, mail sent via this service will not be DKIM signed if destined for external recipients. Retirees with @tamu.edu mail addresses fall into this category.
+```
+```admonish info
+DKIM signing is required for all mail sent from third party mailers sending on behalf of the 'tamu.edu' domain and all 'tamu.edu' subdomains. Third party mailers include marketing platforms such as MailChimp and Constant Contact.  See [KB0021277](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0021277) for more information on sending mail using third party mailers.
+```
 
 ## Check DKIM Record
 
-The easiest way to check your DKIM record is to use the command line:
+The easiest way to view a DKIM record is to use the command line:
 
-1) Open the console or command line on your computer.
+1) Open a console or command line on your computer.
 2) Type `nslookup -q=txt <selector>._domainkey.<subdomain>` where `<selector>` is the DKIM selector and `<subdomain>` is the 'tamu.edu' subdomain name.
 
 ```admonish info

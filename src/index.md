@@ -1,17 +1,13 @@
-# Welcome
-
-Welcome to the documentation home for Cloud at Texas A&M.
-
-```admonish warning
-This is a work in progress.
+```admonish info
+This site is a work in progress and will be updated regularly.  Please check back frequently for updates.
 ```
 
-## Getting Started
+## Cloud and Platform Security
 
-Initial Sections:
+### Email Security:
 
-```admonish info class="aggiecustom2" title="Cloud & Platform Security" collapsible=true
-* [Cloud & Platform Security](./cps/email_security.md) <Email Security>
+```admonish info class="aggiecustom2" title="Email Authentication" collapsible=true
+* [Email Authentication](./cps/email_auth.md) <Email Authentication>
 ```
 
 ### Contact Information

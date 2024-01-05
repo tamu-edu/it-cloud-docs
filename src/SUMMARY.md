@@ -4,7 +4,7 @@
 
 ## Cloud & Platform Security
 
-- [Email Security](./cps/email_security.md)
+- [Email Authentication](./cps/email_auth.md)
   - [Email Authentication Protocols](./cps/email/protocols.md)
   - [FAQ](./cps/email/faq.md)
   - [SPF](./cps/email/spf.md)
