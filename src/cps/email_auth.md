@@ -4,12 +4,10 @@ This site is a work in progress and will be updated regularly.  Please check bac
 
 # Email Authentication
 
-Email authentication (or email validation) is the process used to verify the source and legitimacy of an email message.  Utilizing email authentication helps to protect against email threats, such as phishing, fraud and spam, while also helping ensure that your messages reach the inbox.
+Email authentication (or email validation) is the process used to verify the source and legitimacy of an email message.  Utilizing email authentication helps to protect against email threats, such as phishing, fraud and spam.  To understand email authentication, it is important to understand the [protocols](./email/protocols.md) used.
 
-When understanding email authentication and security at Texas A&M, it is important to understand the [protocols](./email/protocols.md) that make up email authentication.
+To increase email deliverability and comply with requirements from email providers such as [Google](https://support.google.com/mail/answer/81126?hl=en#:~:text=1%20Set%20up%20SPF%20and%20DKIM%20email%20authentication,rate%20of%200.30%25%20or%20higher.%20...%20More%20items) and [Yahoo](https://senders.yahooinc.com/best-practices/), Technology Services is expanding the use of these protocols to all ```tamu.edu``` subdomains, often referred to as boutique domains.
 
-SPF, DKIM and DMARC have been implemented for the 'tamu.edu' domain.
-
-In order to increase email deliverability and comply with requirements from email providers like Google and Yahoo, we are expanding the use of these email authentication protocols to all 'tamu.edu' subdomains, or boutique addresses (`subdomain.tamu.edu`), that send to external recipients.  At a minimum, all 'tamu.edu' subdomains that send to external recipients will need to implement both SPF and DKIM and will need to pass DMARC.
+At minimum, mail sent to external recipients will need to implement both [SPF](./spf.md) and [DKIM](./dkim.md), and will need to pass [DMARC](./dmarc.md). This has already been implemented for the root domain, ```tamu.edu```.
 
 For additional requirements, information and frequently asked questions, visit the other pages in this section.
