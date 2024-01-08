@@ -1,0 +1,36 @@
+name: github pages
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+        - closed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup mdBook (with plugins)
+        uses: jontze/action-mdbook@v2
+        with:
+            token: ${{secrets.GITHUB_TOKEN}}
+            mdbook-version: 'latest'
+            use-admonish: true
+            admonish-version: "~1.9.0"
+
+
+      - run: mdbook build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./book
+          cname: docs.cloud.tamu.edu
