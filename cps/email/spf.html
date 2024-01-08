@@ -325,40 +325,51 @@
 </div>
 <h1 id="spf"><a class="header" href="#spf">SPF</a></h1>
 <p>Sender Policy Framework (<a href="https://en.wikipedia.org/wiki/Sender_Policy_Framework">SPF</a>) is a method of email authorization used to specify which servers are permitted to send on behalf of a domain. SPF helps prevent spoofing, where an email is made to appear as if it came from an organization when, in reality, it did not.</p>
-<div id="admonition-info-1" class="admonition info">
+<div id="admonition-note" class="admonition note">
 <div class="admonition-title">
-<p>Info</p>
-<p><a class="admonition-anchor-link" href="#admonition-info-1"></a></p>
+<p>Note</p>
+<p><a class="admonition-anchor-link" href="#admonition-note"></a></p>
 </div>
 <div>
 <p>SPF operates on the <a href="https://datatracker.ietf.org/doc/html/rfc5321#section-2.3.1">email envelope</a>, not the body or message header.</p>
 </div>
 </div>
 <p>SPF is implemented via DNS records which specify authorized address ranges. The <a href="https://tools.ietf.org/html/rfc7208">RFC</a> limits the record to a maximum of 10 DNS queries, and a total of 255 bytes per query. These constraints limit the number of addresses an organization can authorize.</p>
-<div id="admonition-info-2" class="admonition info">
+<div id="admonition-warning" class="admonition warning">
 <div class="admonition-title">
-<p>Info</p>
-<p><a class="admonition-anchor-link" href="#admonition-info-2"></a></p>
+<p>Warning</p>
+<p><a class="admonition-anchor-link" href="#admonition-warning"></a></p>
 </div>
 <div>
-<p>Publishing an invalid SPF record, including a record containing too many addresses, may result in all email from the sending domain failing delivery. It is imperative that both the integrity and legitimacy of the record be closely maintained.</p>
+<p>Publishing an invalid SPF record, including a record containing too many addresses, may result in all email from the sending domain failing delivery. It is imperative that the record's integrity is maintained.</p>
 </div>
 </div>
 <h2 id="spf-requirements"><a class="header" href="#spf-requirements">SPF Requirements</a></h2>
-<p>All 'tamu.edu' domains which send mail are required to have an SPF record in DNS. The SPF record should be configured to inherit from the root 'tamu.edu' domain.  The SPF record should be set to:</p>
-<p><code>v=spf1 redirect:tamu.edu</code></p>
-<div id="admonition-info-3" class="admonition info">
+<p>All domains which send mail are required to have an SPF record in DNS. The SPF record should be configured to inherit the policy of the root <code>tamu.edu</code> domain.</p>
+<div id="admonition-info-1" class="admonition info">
 <div class="admonition-title">
 <p>Info</p>
-<p><a class="admonition-anchor-link" href="#admonition-info-3"></a></p>
+<p><a class="admonition-anchor-link" href="#admonition-info-1"></a></p>
 </div>
 <div>
-<p>Any <code>tamu.edu</code> domain without an existing SPF record will have the <code>v=spf1 redirect:tamu.edu</code> DNS record created.</p>
-<p>For domains with existing SPF records, Cloud and Platform Security will work with those who use the domain to send mail. Any invalid or improper SPF records will be changed to ensure mail delivery.</p>
+<p>All subdomains should publish this SPF record:</p>
+<p><code>v=spf1 redirect:tamu.edu</code></p>
+<p>A subdomain which does not publish an SPF record will have the above record created.</p>
+<p>For a subdomain with an existing an SPF record, Technology Services will work with domain custodians to validate the existing record. Invalid or improper records will be updated as necessary.</p>
 </div>
 </div>
-<p>For legacy documentation on SPF at Texas A&amp;M see <a href="https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&amp;sys_id=KB0012557">KB0021277</a>.</p>
-<h2 id="check-spf-record"><a class="header" href="#check-spf-record">Check SPF Record</a></h2>
+For legacy documentation on SPF at Texas A&M see [KB0021277](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0012557).
+<div id="admonition-warning-1" class="admonition warning">
+<div class="admonition-title">
+<p>Warning</p>
+<p><a class="admonition-anchor-link" href="#admonition-warning-1"></a></p>
+</div>
+<div>
+<p>Messages relayed to external systems via the gateway.tamu.edu delivery setting will not pass SPF.</p>
+<p>These messages will not deliver to Gmail and Yahoo recipients starting in February 2024.</p>
+</div>
+</div>
+<h2 id="check-an-spf-record"><a class="header" href="#check-an-spf-record">Check an SPF Record</a></h2>
 <p>The easiest way to check an SPF record is to use the command line:</p>
 <ol>
 <li>Open a terminal or command line on your computer.</li>
