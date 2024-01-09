@@ -29,6 +29,7 @@ A subdomain which does not publish an SPF record will have the above record crea
 
 For a subdomain with an existing an SPF record, Technology Services will work with domain custodians to validate the existing record. Invalid or improper records will be updated as necessary.
 ```
+
 For legacy documentation on SPF at Texas A&M see [KB0021277](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0012557).
 
 ```admonish warning
