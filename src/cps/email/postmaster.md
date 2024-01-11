@@ -11,7 +11,7 @@ According to Gmail, leveraging these tools allows for an assessment of the overa
 ## Access and Setup
 
 ```admonish warning
-Access to Postmaster Tools is reserved for technology professionals who administer 'tamu.edu' email enabled subdomains.
+Access to Postmaster Tools is reserved for technology professionals who administer `tamu.edu` email enabled subdomains.
 ```
 
 1) Request access to the postmaster tools, by opening a ServiceNow ticket or email [security@tamu.edu](mailto:security@tamu.edu).  Please include the domain or list of domains that would like to be granted access.

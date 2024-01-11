@@ -46,16 +46,16 @@ The dashboards do not provide information on the status of specific email messag
 ## Using the Site
 
 ```admonish example
-Find who is sending on behalf of a given 'tamu.edu' subdomain.
-```
+Find who is sending on behalf of a given `tamu.edu` subdomain.
 
 1) Login to the [DMARC Reporting website](https://dmarc-report.kb.us-central1.gcp.cloud.es.io:9243/)
 2) Select the hamburger menu -> select 'dashboard' -> select 'DMARC Summary'
 3) Use the 'From Domain' dropdown to select a subdomain.  The dashboards will update based upon the selected 'From Domain'.
 4) In the 'DMARC Passage' pie chart, select the three dots next to 'false' and select 'filter for'
 
-```admonish info
-By hovering your mouse over a data table value and using the magnifying glass icons, you can filter on different values.
-```
 
-The dashboards would show data for messages that fail DMARC compliance for the selected "From Domain".  The data can be filtered further to see specific time periods or messages from specific organizations.
+By hovering your mouse over a data table value and using the magnifying glass icons, you can filter on different values.
+
+
+The dashboards will show data for messages that fail DMARC compliance for the selected "From Domain".  The data can be filtered further to see specific time periods or messages from specific organizations.
+```
