@@ -28,11 +28,12 @@ The DKIM protocol has two steps which utilize a public/private key pair.
 
 ## DKIM Requirements
 
-All domains which send email are required to have DKIM signing configured for outbound messages.  
+All domains which send email are required to have DKIM signing configured for outbound messages.
 
 ```admonish info
 DKIM signing is already configured for email originating in TAMU Gmail, Microsoft 365 Exchange, and applications configured to send email through `smtp-relay.tamu.edu`.
 ```
+
 All outgoing email, including email sent from third parties like cloud-hosted applications and marketing platforms, should be DKIM signed to ensure deiliverability.
 
 See [KB0021277](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0021277) for more information on sending mail using third party mailers.
