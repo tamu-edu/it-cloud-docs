@@ -18,10 +18,10 @@ Publishing an invalid SPF record, including a record containing too many address
 
 ## SPF Requirements
 
-All domains which send mail are required to have an SPF record in DNS. The SPF record should be configured to inherit the policy of the root `tamu.edu` domain.
+All domains which send mail are required to have an SPF record in DNS. The SPF record should be configured to inherit the policy of the `tamu.edu` domain.
 
 ```admonish info
-All subdomains should publish this SPF record:
+To inherit the `tamu.edu` SPF policy, publish this SPF record:
 
 `v=spf1 redirect:tamu.edu`
 

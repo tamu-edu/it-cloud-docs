@@ -8,7 +8,7 @@ Domain-based Message Authentication, Reporting & Conformance([DMARC](https://dma
 
 1) **Email Authentication** - DMARC combines the authorization and authentication results of two other protocols, SPF and DKIM, to determine whether email sent from your domain is authentic.
 2) **Email Policy** - DMARC publishes a public policy instructing recipient servers how to respond if they receive email from your domain that was determined to be inauthentic.
-3) **Email Reporting** - DMARC provides reporting mechanisms for domain owners to monitor, assess, and confirm that mail being sent from their domain is legitimate.
+3) **Email Reporting** - DMARC provides reporting mechanisms for domain owners to monitor, assess, and confirm that email being sent from their domain is legitimate.
 
 DMARC Policies are creating using a DNS TXT Record.  Here is a sample DMARC record:
 
@@ -27,11 +27,11 @@ Domain Alignment ensures that the email address in the "From:" header is the act
 
 ## DMARC Requirements
 
-All subdomains will inherit the root 'tamu.edu' dommain's DMARC policy. All outgoing mail or mail sent from third party mailers including cloud applications, will need to pass DMARC to ensure deiliverability.
+All subdomains will inherit the `tamu.edu` DMARC policy. All outgoing email, including email sent from third parties like cloud-hosted applications and marketing platforms, is required to pass DMARC to ensure deiliverability.
 
 ## Check a DMARC Record
 
-Subdomains will not have DMARC records, but will inherit from the root 'tamu.edu' domain.  To look up the 'tamu.edu' domain's DMARC record:
+Subdomains will not have DMARC policies of their own, but will inherit from the root `tamu.edu` policy.  To look up the `tamu.edu` DMARC record:
 
 1) Open a console or command line on your computer.
 2) Type `nslookup -q=txt _dmarc.tamu.edu`.
