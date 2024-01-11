@@ -14,7 +14,6 @@ The majority of the requirements are being implemented in February of 2024.  Goo
 
 ## What are the requirements from Google and Yahoo?
 
-
 |All Senders|Bulk Senders (>5000 messages per day)|
 |-----|-----|
 |SPF or DKIM email authentication|SPF and DKIM email authentication|
@@ -28,7 +27,8 @@ The majority of the requirements are being implemented in February of 2024.  Goo
 ||One-click unsubscribe for marketing mail|
 
 For more information:
-- [Googles Email Sender Guidelines](https://support.google.com/mail/answer/81126?sjid=8436365022205706809-NC) 
+
+- [Googles Email Sender Guidelines](https://support.google.com/mail/answer/81126?sjid=8436365022205706809-NC)
 - [Yahoo's Email Sender Requirements](https://senders.yahooinc.com/best-practices/).
 
 ## What does Texas A&M's implementation of these standards mean for me?
