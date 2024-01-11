@@ -17,27 +17,52 @@ The DMARC Reporting website uses Kibana dashboards for aggregated DMARC report d
 The service only keeps data reported within the last 30 days. To see deliverability information beyond 30 days, other tools are available.
 ```
 
-<!-- ## Dashboard
 
 After navigating to this site and selecting the DMARC Summary dashboard, you will see the following:
 
 - From Domain panel - a dropdown with a list of from domains that can be used to filter the data
 - Total Message Count - the number of messages reported on for the domain in the last 30 days
+
+![From Panel and Total Message Count](./img/dr-from-count.png)
+
 - SPF Alignment - pie chart that displays the percentage messages that pass or fail SPF
 - DKIM Alignment - pie chart that displays the percentage messages that pass or fail DKIM
 - DMARC Passage - pie chart that displays the percentage messages that pass or fail DMARC
+
+![SPF Alignment, DKIM Alignment, DMARC Passage](./img/dr-alignment.png)
+
 - DMARC Passage Over Time - chart of how many messages passed DMARC over time
 - Message Disposition over Time -  chart of the number of messages that had a specific DMARC policy applied; if the status is 'none', that means that the policy was not applied and that the email reached the recipient's inbox, whereas 'quarantine' and 'reject' mean the policy was applied and that the message was either quarantined or rejected
+
+![DMARC Passage Over Time and Message Disposition over Time](./img/dr-over-time.png)
+
 - Reporting Organizations - a table with a list of organizations that are sending DMARC reports for the specified domain
 - Top 2000 Message Sources by Reverse DNS - a table with a list of sending servers grouped by the base domain in their reverse DNS
 - Message Volume by Header From - a table with a list of email from domains, sorted by message volume
+
+![Reporting Organizations, Top 2000 Message Sources by reverse DNS](./img/dr-orgs-top-2000-volume.png)
+
 - Map of Message Source Countries - a map of the world outlining how many messages were received from each country
 - Message Source Countries - a table with the number of messages received from each country on the map
+
+![Map of Message Source Countries and Message Source Countries](./img/dr-map-countries.png)
+
 - Top 1000 Message Source IP Addresses - a table with a breakdown of the top 1000 message source IPs
+
+![Top 1000 Message Source IP Addresses](./img/dr-top-1000.png)
+
 - Overview - a table that provides an overall look at the DMARC Report data, including if SPF and/or DKIM passed and if SPF or DKIM passed DMARC authentication
+
+![Overview](./img/dr-overview.png)
+
 - Published Policies (as reported) - a table that provides information about which published DMARC Policy was applied
 - SPF Alignment Details - a table with information on SPF, its passage and alignment (did DMARC pass using SPF)
+
+![Published Policies (as reported) and SPF Alignment Detals](./img/dr-publised-policies-spf-alignment.png)
+
 - DKIM Alignment Details - a table with information on DKIM, its passage and alignment (did DMARC pass using DKIM)
+
+![DKIM Alignment Details](./img/dr-dkim-alignment.png)
 
 ```admonish warning
 The dashboards do not provide information on the status of specific email messages. Instead, it was designed to provide insight into who is sending mail on behalf of your domain or subdomain.
