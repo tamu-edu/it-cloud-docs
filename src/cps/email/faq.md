@@ -57,7 +57,7 @@ These requirements apply to all messages sent from `tamu.edu` domains.
 
 Messages sent using Texas A&M approved email and marketing platforms should continue to work as intended.  However, services that may be affected are:
 
-- Enmail sent from third party mailers (marketing platforms like MailChimp and SendGrid)
+- Email sent from third party mailers (marketing platforms like MailChimp and SendGrid)
 - Email sent directly from cloud applications (SaaS providers, AmazonSES, etc)
 - Email sent externally that does not traverse approved email gateways
 
