@@ -345,14 +345,14 @@
 </div>
 </div>
 <h2 id="spf-requirements"><a class="header" href="#spf-requirements">SPF Requirements</a></h2>
-<p>All domains which send mail are required to have an SPF record in DNS. The SPF record should be configured to inherit the policy of the root <code>tamu.edu</code> domain.</p>
+<p>All domains which send mail are required to have an SPF record in DNS. The SPF record should be configured to inherit the policy of the <code>tamu.edu</code> domain.</p>
 <div id="admonition-info-1" class="admonition info">
 <div class="admonition-title">
 <p>Info</p>
 <p><a class="admonition-anchor-link" href="#admonition-info-1"></a></p>
 </div>
 <div>
-<p>All subdomains should publish this SPF record:</p>
+<p>To inherit the <code>tamu.edu</code> SPF policy, publish this SPF record:</p>
 <p><code>v=spf1 redirect:tamu.edu</code></p>
 <p>A subdomain which does not publish an SPF record will have the above record created.</p>
 <p>For a subdomain with an existing an SPF record, Technology Services will work with domain custodians to validate the existing record. Invalid or improper records will be updated as necessary.</p>
