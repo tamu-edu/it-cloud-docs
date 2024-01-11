@@ -8,15 +8,13 @@ This site is a work in progress and will be updated regularly.  Please check bac
 
 Email providers like, Gmail and Yahoo are implementing stricter sender guidelines.  These guidelines follow best practices and aim to reduce the amount of fraudulent spam and phishing messages that make it into user's inboxes.  Additionally, these guidelines will likely become standards for all email providers and senders.
 
-## When are these changes needed?
+## When are these changes taking effect?
 
 The majority of the requirements are being implemented in February of 2024.  Google is implementing these changes on February 1, 2024.  Yahoo also specifies a date of early February 2024.  However, some requirements like one-click unsubscribe are being implemented in June of 2024.
 
 ## What are the requirements from Google and Yahoo?
 
-Gmail’s New Email Sender Guidelines
-
-|All Senders|Bulk Senders (>5000 emails per day)|
+|All Senders|Bulk Senders (>5000 messages per day)|
 |-----|-----|
 |SPF or DKIM email authentication|SPF and DKIM email authentication|
 |Valid PTR Records|Valid PTR Records|
@@ -28,65 +26,74 @@ Gmail’s New Email Sender Guidelines
 ||From:header aligned with either SPF domain or DKIM domain|
 ||One-click unsubscribe for marketing mail|
 
-Yahoo's requirements follow the requirements as specified by Google.  For more information see [Googles Email Sender Guidelines](https://support.google.com/mail/answer/81126?sjid=8436365022205706809-NC) and [Yahoo's Email Sender Requirements](https://senders.yahooinc.com/best-practices/).
+For more information:
+
+- [Googles Email Sender Guidelines](https://support.google.com/mail/answer/81126?sjid=8436365022205706809-NC)
+- [Yahoo's Email Sender Requirements](https://senders.yahooinc.com/best-practices/).
 
 ## What does Texas A&M's implementation of these standards mean for me?
 
-Exact policies and requirements are still being finalized.  The guidelines provided by Google and Yahoo above will heavily influence the final policy and implementation for Texas A&M services.
+Policies are being finalized. The guidelines provided by Google and Yahoo above will heavily influence the final policy and implementation for Texas A&M.
 
-The implementation will include:
+So far, this includes:
 
-- SPF records to be inherited from tamu.edu, or will include tamu.edu’s SPF record with a softfail
+- SPF records to be inherited from `tamu.edu`, or will include `tamu.edu`’s SPF record with a softfail
 - DKIM signing will be implemented on all outbound mail gateways
-- Third party mailers and cloud applications will utilize DKIM signing for authentication when delivering on behalf of all tamu.edu domains.
+- Third party mailers and cloud applications will utilize DKIM signing for authentication when delivering on behalf of all `tamu.edu` domains.
 - TLS will be used to deliver all outbound mail
 - DMARC compliance will be required for all outbound mail
 
-## What happens if a 'tamu.edu' subdomain does not meet these standards?
+## What happens if a `tamu.edu` domain does not meet these standards?
 
-Failure to comply with these guidelines by February 2024 may result in emails being flagged as spam, quarantined or rejected. Email flagged as spam could significantly impact your reputation and in turn, your communication and marketing efforts.
-
-Repeated violations might lead to your domain or IP address being blacklisted, severely affecting your ability to send emails to users of these services.
-
-## How do I know if my subdomain/service is affected?
-
-Mail sent using Texas A&M approved email and marketing platforms should continue to work as intended.  However, services that may be affected are:
-
-- Mail sent from third party mailers (marketing platforms like MailChimp and SendGrid)
-- Mail sent directly from cloud applications (SaaS providers, AmazonSES, etc)
-- Mail sent externally that does not flow through approved email gateways
+Failure to comply with these guidelines by February 2024 may result in messages being flagged as spam, quarantined or rejected. This can significantly impact your domain's reputation and in turn, your communication and marketing efforts.
 
 ```admonish warning
-If you use a service that impersonates the root 'tamu.edu' domain or 'tamu.edu' subdomains, you may be affected.
+Sustained non-compliance can lead to your domain or IP address being blocked entirely, severely affecting your ability to send any messages to users of these services.
+```
+
+## How do I know if I am affected?
+
+These requirements apply to all messages sent from `tamu.edu` domains.
+
+Messages sent using Texas A&M approved email and marketing platforms should continue to work as intended.  However, services that may be affected are:
+
+- Email sent from third party mailers (marketing platforms like MailChimp and SendGrid)
+- Email sent directly from cloud applications (SaaS providers, AmazonSES, etc)
+- Email sent externally that does not traverse approved email gateways
+
+```admonish warning
+If you use a third-party service that sends messages on behalf of the `tamu.edu` domain or a subdomain, you should verify your compliance with the provided tools.
 
 You can use the [DMARC Check Website](https://dmarc-check.itsec.tamu.edu) to check your DMARC compliance.
 
-For more information on these tools see the [DMARC Check](./checker.md) and [DMARC Report](./reporting.md) pages.
+For more information, see the [DMARC Check](./checker.md) and [DMARC Report](./reporting.md) pages.
 ```
 
 ## What should my SPF record look like?
 
-All 'tamu.edu' subdomains should be configured to inherit from the root 'tamu.edu' domain and should be set to:
+All `tamu.edu` subdomains should be configured to inherit from the root `tamu.edu` domain and should be set to:
 
 `v=spf1 redirect:tamu.edu`
 
-As part of our effort to comply with Google and Yahoo email sender requirements, we will be creating SPF records for all 'tamu.edu' subdomains.  For more information see the [SPF](./spf.md) page.
+```admonish info
+To comply with Google and Yahoo email sender requirements, SPF records will be created for all `tamu.edu` subdomains.  For more information see the [SPF](./spf.md) page.
+```
 
-## How can I check my SPF record?
+## How can I check an SPF record?
 
-The easiest way to check your SPF record is to query DNS.  For detailed instructions see the [SPF](./spf.md) page.
+The easiest way to check an SPF record is to query DNS.  For detailed instructions see the [SPF](./spf.md) page.
 
-## How can I check my DKIM record?
+## How can I check a DKIM record?
 
-The easiest way to check your DKIM record is to query DNS.  For detailed instructions see the [DKIM](./dkim.md) page.
+The easiest way to check a DKIM record is to query DNS.  For detailed instructions see the [DKIM](./dkim.md) page.
 
 ## How can I check my DMARC compliance?
 
-The [DMARC Check website](https://dmarc-check.itsec.tamu.edu) is an automated tool that can be used to check your email authentication compliance with DMARC.
+You can use the [DMARC Check Website](https://dmarc-check.itsec.tamu.edu) to check your DMARC compliance.
 
 For more information on this tool see the [DMARC Check](./checker.md) page.
 
-## How can I find who is sending email on my behalf?
+## How can I see who is sending email from a `tamu.edu` domain?
 
 See the [Resources and Tools](./tools.md) page.
 

@@ -6,7 +6,7 @@ This site is a work in progress and will be updated regularly.  Please check bac
 
 SPF, DKIM and DMARC function as email authentication protocols.  These protocols help providers verify the origin of a message and whether it comes from a trustworthy source.
 
-Technology Services has enabled DMARC for the root tamu.edu domain. DMARC uses both the DKIM and SPF protocols to verify the legitimacy of an email. While this document is intended to explain what these protocols are and how to use them, consider it an overview. This topic is complex.
+Technology Services has enabled DMARC for the `tamu.edu` domain. DMARC uses both the DKIM and SPF protocols to verify the legitimacy of an email. While this document is intended to explain what these protocols are and how to use them, consider it an overview. This topic is complex.
 
 ## What is DMARC?
 
