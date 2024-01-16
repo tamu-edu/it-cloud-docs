@@ -71,17 +71,33 @@ The dashboards do not provide information on the status of specific email messag
 
 ## Using the Site
 
-```admonish example
-Find who is sending on behalf of a given `tamu.edu` subdomain.
+### Login
 
-1) Login to the [DMARC Reporting website](https://dmarc-report.kb.us-central1.gcp.cloud.es.io:9243/)
-2) Select the hamburger menu -> select 'dashboard' -> select 'DMARC Summary'
-3) Use the 'From Domain' dropdown to select a subdomain.  The dashboards will update based upon the selected 'From Domain'.
-4) In the 'DMARC Passage' pie chart, select the three dots next to 'false' and select 'filter for'
+1) Navigate to the [DMARC Reporting website](https://dmarc-report.kb.us-central1.gcp.cloud.es.io:9243/)
+2) Login by selecting 'Login with Azure AD'
+3) From the List of Dashboards -> select 'DMARC Summary'
 
+### Filter for specific domain(s)
 
-By hovering your mouse over a data table value and using the magnifying glass icons, you can filter on different values.
+Filtering for specific domain(s) will help you determine who is sending on behalf of a given `tamu.edu` subdomain.  To filter for specific domain(s), use the 'From Domain' dropdown to search for and select subdomain(s).  The dashboards will update based upon the selected 'From Domain(s)'.
 
+### Filter for failed DMARC results
 
-The dashboards will show data for messages that fail DMARC compliance for the selected "From Domain".  The data can be filtered further to see specific time periods or messages from specific organizations.
-```
+The main purpose of the DMARC Reporting dashboard is to determine who is sending no your behalf and is failing DMARC compliance.  To filter by failed DMARC results, navigate to the 'DMARC Passage' pie chart, select the three dots next to 'false' and select 'filter for'.
+
+### Filter for a specific Organization
+
+Filtering which organizations have sent on your behalf can help narrow down services and configuration issues.  To apply this filter, navigate to the 'Reporting Organizations' panel, hover of the name of the organization you want to filter and select the '+' button.
+
+### Additional Information
+
+You can filter on different values by hovering your mouse over a data table value and using the magnifying glass icons.  Some additional filters that could be helpful are:
+
+| Dashboard Panel | Field(s) to Filter |
+| -------- | ------- |
+| Top 1000 Message Source by IP Address | IP address |
+| Overview | Disposition |
+| SPF Alignment | Envelope From, SPF Result, SPF Alignment |
+| DKIM Alignment | DKIM Selector, DKIM Domain, DKIM Result, DKIM Alignment |
+
+In addition, the data can be filtered further to view specific time periods.  To clear a filtered field, scroll to the top and click the 'x' next to the filter you wish to remove.  The selected domain(s) can be cleared by hovering over the 'From Domain' dropdown and clicking the eraser icon.
