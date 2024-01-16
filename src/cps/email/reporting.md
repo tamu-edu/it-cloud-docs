@@ -77,6 +77,7 @@ The dashboards do not provide information on the status of specific email messag
 2) Login by selecting 'Login with Azure AD'
 3) From the List of Dashboards -> select 'DMARC Summary'
 
+
 ### Filter for specific domain(s)
 
 Filtering for specific domain(s) will help you determine who is sending on behalf of a given `tamu.edu` subdomain.  To filter for specific domain(s), use the 'From Domain' dropdown to search for and select subdomain(s).  The dashboards will update based upon the selected 'From Domain(s)'.
