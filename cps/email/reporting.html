@@ -341,49 +341,84 @@
 <p>The service only keeps data reported within the last 30 days. To see deliverability information beyond 30 days, other tools are available.</p>
 </div>
 </div>
-<!-- ## Dashboard
-
-After navigating to this site and selecting the DMARC Summary dashboard, you will see the following:
-
-- From Domain panel - a dropdown with a list of from domains that can be used to filter the data
-- Total Message Count - the number of messages reported on for the domain in the last 30 days
-- SPF Alignment - pie chart that displays the percentage messages that pass or fail SPF
-- DKIM Alignment - pie chart that displays the percentage messages that pass or fail DKIM
-- DMARC Passage - pie chart that displays the percentage messages that pass or fail DMARC
-- DMARC Passage Over Time - chart of how many messages passed DMARC over time
-- Message Disposition over Time -  chart of the number of messages that had a specific DMARC policy applied; if the status is 'none', that means that the policy was not applied and that the email reached the recipient's inbox, whereas 'quarantine' and 'reject' mean the policy was applied and that the message was either quarantined or rejected
-- Reporting Organizations - a table with a list of organizations that are sending DMARC reports for the specified domain
-- Top 2000 Message Sources by Reverse DNS - a table with a list of sending servers grouped by the base domain in their reverse DNS
-- Message Volume by Header From - a table with a list of email from domains, sorted by message volume
-- Map of Message Source Countries - a map of the world outlining how many messages were received from each country
-- Message Source Countries - a table with the number of messages received from each country on the map
-- Top 1000 Message Source IP Addresses - a table with a breakdown of the top 1000 message source IPs
-- Overview - a table that provides an overall look at the DMARC Report data, including if SPF and/or DKIM passed and if SPF or DKIM passed DMARC authentication
-- Published Policies (as reported) - a table that provides information about which published DMARC Policy was applied
-- SPF Alignment Details - a table with information on SPF, its passage and alignment (did DMARC pass using SPF)
-- DKIM Alignment Details - a table with information on DKIM, its passage and alignment (did DMARC pass using DKIM)
-
-```admonish warning
-The dashboards do not provide information on the status of specific email messages. Instead, it was designed to provide insight into who is sending mail on behalf of your domain or subdomain.
-```-->
-<h2 id="using-the-site"><a class="header" href="#using-the-site">Using the Site</a></h2>
-<div id="admonition-example" class="admonition example">
+<h2 id="dashboards"><a class="header" href="#dashboards">Dashboards</a></h2>
+<p>After navigating to this site and selecting the DMARC Summary dashboard, you will see the following:</p>
+<ul>
+<li><strong>From Domain panel</strong> - a dropdown with a list of from domains that can be used to filter the data</li>
+<li><strong>Total Message Count</strong> - the number of messages reported on for the domain in the last 30 days</li>
+</ul>
+<p><img src="./img/dr-from-count.png" alt="From Panel and Total Message Count" /></p>
+<ul>
+<li><strong>SPF Alignment</strong> - pie chart that displays the percentage messages that pass or fail SPF</li>
+<li><strong>DKIM Alignment</strong> - pie chart that displays the percentage messages that pass or fail DKIM</li>
+<li><strong>DMARC Passage</strong> - pie chart that displays the percentage messages that pass or fail DMARC</li>
+</ul>
+<p><img src="./img/dr-alignment.png" alt="SPF Alignment, DKIM Alignment, DMARC Passage" /></p>
+<ul>
+<li><strong>DMARC Passage Over Time</strong> - chart of how many messages passed DMARC over time</li>
+<li><strong>Message Disposition over Time</strong> -  chart of the number of messages that had a specific DMARC policy applied; if the status is 'none', that means that the policy was not applied and that the email reached the recipient's inbox, whereas 'quarantine' and 'reject' mean the policy was applied and that the message was either quarantined or rejected</li>
+</ul>
+<p><img src="./img/dr-over-time.png" alt="DMARC Passage Over Time and Message Disposition over Time" /></p>
+<ul>
+<li><strong>Reporting Organizations</strong> - a table with a list of organizations that are sending DMARC reports for the specified domain</li>
+<li><strong>Top 2000 Message Sources by Reverse DNS</strong> - a table with a list of sending servers grouped by the base domain in their reverse DNS</li>
+<li><strong>Message Volume by Header From</strong> - a table with a list of email from domains, sorted by message volume</li>
+</ul>
+<p><img src="./img/dr-orgs-top-2000-volume.png" alt="Reporting Organizations, Top 2000 Message Sources by reverse DNS" /></p>
+<ul>
+<li><strong>Map of Message Source Countries</strong> - a map of the world outlining how many messages were received from each country</li>
+<li><strong>Message Source Countries</strong> - a table with the number of messages received from each country on the map</li>
+</ul>
+<p><img src="./img/dr-map-countries.png" alt="Map of Message Source Countries and Message Source Countries" /></p>
+<ul>
+<li><strong>Top 1000 Message Source IP Addresses</strong> - a table with a breakdown of the top 1000 message source IPs</li>
+</ul>
+<p><img src="./img/dr-top-1000.png" alt="Top 1000 Message Source IP Addresses" /></p>
+<ul>
+<li><strong>Overview</strong> - a table that provides an overall look at the DMARC Report data, including if SPF and/or DKIM passed and if SPF or DKIM passed DMARC authentication</li>
+</ul>
+<p><img src="./img/dr-overview.png" alt="Overview" /></p>
+<ul>
+<li><strong>Published Policies (as reported)</strong> - a table that provides information about which published DMARC Policy was applied</li>
+<li><strong>SPF Alignment Details</strong> - a table with information on SPF, its passage and alignment (did DMARC pass using SPF)</li>
+</ul>
+<p><img src="./img/dr-publised-policies-spf-alignment.png" alt="Published Policies (as reported) and SPF Alignment Details" /></p>
+<ul>
+<li><strong>DKIM Alignment Details</strong> - a table with information on DKIM, its passage and alignment (did DMARC pass using DKIM)</li>
+</ul>
+<p><img src="./img/dr-dkim-alignment.png" alt="DKIM Alignment Details" /></p>
+<div id="admonition-warning" class="admonition warning">
 <div class="admonition-title">
-<p>Example</p>
-<p><a class="admonition-anchor-link" href="#admonition-example"></a></p>
+<p>Warning</p>
+<p><a class="admonition-anchor-link" href="#admonition-warning"></a></p>
 </div>
 <div>
-<p>Find who is sending on behalf of a given <code>tamu.edu</code> subdomain.</p>
+<p>The dashboards do not provide information on the status of specific email messages. Instead, it was designed to provide insight into who is sending mail on behalf of your domain.</p>
+</div>
+</div>
+<h2 id="using-the-site"><a class="header" href="#using-the-site">Using the Site</a></h2>
+<h3 id="login"><a class="header" href="#login">Login</a></h3>
 <ol>
-<li>Login to the <a href="https://dmarc-report.kb.us-central1.gcp.cloud.es.io:9243/">DMARC Reporting website</a></li>
-<li>Select the hamburger menu -&gt; select 'dashboard' -&gt; select 'DMARC Summary'</li>
-<li>Use the 'From Domain' dropdown to select a subdomain.  The dashboards will update based upon the selected 'From Domain'.</li>
-<li>In the 'DMARC Passage' pie chart, select the three dots next to 'false' and select 'filter for'</li>
+<li>Navigate to the <a href="https://dmarc-report.kb.us-central1.gcp.cloud.es.io:9243/">DMARC Reporting website</a></li>
+<li>Login by selecting 'Login with Azure AD'</li>
+<li>From the List of Dashboards -&gt; select 'DMARC Summary'</li>
 </ol>
-<p>By hovering your mouse over a data table value and using the magnifying glass icons, you can filter on different values.</p>
-<p>The dashboards will show data for messages that fail DMARC compliance for the selected &quot;From Domain&quot;.  The data can be filtered further to see specific time periods or messages from specific organizations.</p>
+<h3 id="filter-for-specific-domains"><a class="header" href="#filter-for-specific-domains">Filter for specific domain(s)</a></h3>
+<p>Filtering for specific domain(s) will help you determine who is sending on behalf of a given <code>tamu.edu</code> subdomain.  To filter for specific domain(s), use the 'From Domain' dropdown to search for and select subdomain(s).  The dashboards will update based upon the selected 'From Domain(s)'.</p>
+<h3 id="filter-for-failed-dmarc-results"><a class="header" href="#filter-for-failed-dmarc-results">Filter for failed DMARC results</a></h3>
+<p>The main purpose of the DMARC Reporting dashboard is to determine who is sending no your behalf and is failing DMARC compliance.  To filter by failed DMARC results, navigate to the 'DMARC Passage' pie chart, select the three dots next to 'false' and select 'filter for'.</p>
+<h3 id="filter-for-a-specific-organization"><a class="header" href="#filter-for-a-specific-organization">Filter for a specific Organization</a></h3>
+<p>Filtering which organizations have sent on your behalf can help narrow down services and configuration issues.  To apply this filter, navigate to the 'Reporting Organizations' panel, hover of the name of the organization you want to filter and select the '+' button.</p>
+<h3 id="additional-information"><a class="header" href="#additional-information">Additional Information</a></h3>
+<p>You can filter on different values by hovering your mouse over a data table value and using the magnifying glass icons.  Some additional filters that could be helpful are:</p>
+<div class="table-wrapper"><table><thead><tr><th>Dashboard Panel</th><th>Field(s) to Filter</th></tr></thead><tbody>
+<tr><td>Top 1000 Message Source by IP Address</td><td>IP address</td></tr>
+<tr><td>Overview</td><td>Disposition</td></tr>
+<tr><td>SPF Alignment</td><td>Envelope From, SPF Result, SPF Alignment</td></tr>
+<tr><td>DKIM Alignment</td><td>DKIM Selector, DKIM Domain, DKIM Result, DKIM Alignment</td></tr>
+</tbody></table>
 </div>
-</div>
+<p>In addition, the data can be filtered further to view specific time periods.  To clear a filtered field, scroll to the top and click the 'x' next to the filter you wish to remove.  The selected domain(s) can be cleared by hovering over the 'From Domain' dropdown and clicking the eraser icon.</p>
 
                     </main>
                     <!-- Mobile navigation buttons -->
