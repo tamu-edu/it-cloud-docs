@@ -113,3 +113,21 @@ About delivery errors:
 - Bad or missing PTR record: The sending IP is missing a PTR record.
 
 ![Delivery Errors](./img/pm-delivery-errors.png)
+
+## FAQ
+
+### What if I own multiple domains?
+
+Multiple domains can be added to the postmaster tools, but data is displayed for only one domain at a time.  Domains must be added one domain at a time.
+
+### Do these dashboards provide information on other email providers?
+
+While these dashboards pertain only to email sent to Gmail recipients, the postmaster tools can give insights into your reputation across email platforms.
+
+### Why are some or all of my dashboards empty? Why do I not see any data?
+
+Most of the Postmaster Tools dashboards will only display data when there’s a sizable daily volume of email traffic (up to the order of hundreds) coming from your Authentication Domains and/or certain other conditions, in place to prevent abuse.  You may see a "No data to display" error message on the IP and Domain reputation dashboards. This may happen when your reputation is too low to show a value. To show data, some of the dashboards, like Spam Rate and Feedback Loop, need your emails to be authenticated by DKIM.
+
+### How can I find more information on Google's Postmaster Tools?
+
+For more information on postmaster tools see Google's [Postmaster Tools FAQ](https://support.google.com/a/answer/9983020?hl=en&ref_topic=6259779)
