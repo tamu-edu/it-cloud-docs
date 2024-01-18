@@ -341,10 +341,26 @@
 <li>Once access has been approved, your account will provisioned.</li>
 <li>Start using the service by logging into <a href="https://postmaster.google.com">Postmaster Tools</a>.
 <ol>
-<li>Upon logging in you will see your requested domain(s) listed with a ‘Verified’ status.</li>
-<li>Click the domain you’d like to review the Postmaster dashboards for.</li>
+<li>Upon logging in you will see an empty list.  You will need to add your requested domain(s) one at a time.</li>
+<li>Click the red '+' icon.  A new screen will appear on the website</li>
+<li>Under 'What domain do you use to authenticate your email?' type the domain name and click 'next'.  The domain will be added to the list.</li>
 </ol>
 </li>
+</ol>
+<div id="admonition-warning-1" class="admonition warning">
+<div class="admonition-title">
+<p>Warning</p>
+<p><a class="admonition-anchor-link" href="#admonition-warning-1"></a></p>
+</div>
+<div>
+<pre><code>  If it asks you to verify your domain, please send an email to [security@tamu.edu](mailto:security@tamu.edu) with the domain name to verify your access.
+</code></pre>
+</div>
+</div>
+<ol start="4">
+<li>If you would like to add an additional domain, click 'Add Domain'.</li>
+<li>When all domains have been added you can click 'Done'.  A list of domains should be displayed.</li>
+<li>Click the domain you’d like to review the Postmaster dashboards for.</li>
 </ol>
 <div id="admonition-info-1" class="admonition info">
 <div class="admonition-title">
@@ -417,6 +433,15 @@
 <li>Bad or missing PTR record: The sending IP is missing a PTR record.</li>
 </ul>
 <p><img src="./img/pm-delivery-errors.png" alt="Delivery Errors" /></p>
+<h2 id="faq"><a class="header" href="#faq">FAQ</a></h2>
+<h3 id="what-if-i-own-multiple-domains"><a class="header" href="#what-if-i-own-multiple-domains">What if I own multiple domains?</a></h3>
+<p>Multiple domains can be added to the postmaster tools, but data is displayed for only one domain at a time.  Domains must be added one domain at a time.</p>
+<h3 id="do-these-dashboards-provide-information-on-other-email-providers"><a class="header" href="#do-these-dashboards-provide-information-on-other-email-providers">Do these dashboards provide information on other email providers?</a></h3>
+<p>While these dashboards pertain only to email sent to Gmail recipients, the postmaster tools can give insights into your reputation across email platforms.</p>
+<h3 id="why-are-some-or-all-of-my-dashboards-empty-why-do-i-not-see-any-data"><a class="header" href="#why-are-some-or-all-of-my-dashboards-empty-why-do-i-not-see-any-data">Why are some or all of my dashboards empty? Why do I not see any data?</a></h3>
+<p>Most of the Postmaster Tools dashboards will only display data when there’s a sizable daily volume of email traffic (up to the order of hundreds) coming from your Authentication Domains and/or certain other conditions, in place to prevent abuse.  You may see a &quot;No data to display&quot; error message on the IP and Domain reputation dashboards. This may happen when your reputation is too low to show a value. To show data, some of the dashboards, like Spam Rate and Feedback Loop, need your emails to be authenticated by DKIM.</p>
+<h3 id="how-can-i-find-more-information-on-googles-postmaster-tools"><a class="header" href="#how-can-i-find-more-information-on-googles-postmaster-tools">How can I find more information on Google's Postmaster Tools?</a></h3>
+<p>For more information on postmaster tools see Google's <a href="https://support.google.com/a/answer/9983020?hl=en&amp;ref_topic=6259779">Postmaster Tools FAQ</a></p>
 
                     </main>
                     <!-- Mobile navigation buttons -->
