@@ -17,17 +17,17 @@ Access to Postmaster Tools is reserved for technology professionals who administ
 1) Request access to the postmaster tools, by opening a ServiceNow ticket or email [security@tamu.edu](mailto:security@tamu.edu).  Please include the domain or list of domains that would like to be granted access.
 2) Once access has been approved, your account will provisioned.
 3) Start using the service by logging into [Postmaster Tools](https://postmaster.google.com).
-   1) Upon logging in you will see an empty list.  You will need to add your requested domain(s) one at a time.
-   2) Click the red '+' icon.  A new screen will appear on the website
-   3) Under 'What domain do you use to authenticate your email?' type the domain name and click 'next'.  The domain will be added to the list.
+4) Upon logging in you will see an empty list.  You will need to add your requested domain(s) one at a time.
+5) Click the red '+' icon.  A new screen will appear on the website
+6) Under 'What domain do you use to authenticate your email?' type the domain name and click 'next'.  The domain will be added to the list.
 
 ```admonish warning
 If it asks you to verify your domain, please send an email to [security@tamu.edu](mailto:security@tamu.edu) with the domain name to verify your access.
 ```
 
-   4) If you would like to add an additional domain, click 'Add Domain'.
-   5) When all domains have been added you can click 'Done'.  A list of domains should be displayed.
-   6) Click the domain you’d like to review the Postmaster dashboards for.
+7) If you would like to add an additional domain, click 'Add Domain'.
+8) When all domains have been added you can click 'Done'.  A list of domains should be displayed.
+9) Click the domain you’d like to review the Postmaster dashboards for.
 
 ```admonish info
 Be sure to adjust the Dashboard and Date drop-downs depending on your report/search.
