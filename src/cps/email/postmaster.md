@@ -17,8 +17,17 @@ Access to Postmaster Tools is reserved for technology professionals who administ
 1) Request access to the postmaster tools, by opening a ServiceNow ticket or email [security@tamu.edu](mailto:security@tamu.edu).  Please include the domain or list of domains that would like to be granted access.
 2) Once access has been approved, your account will provisioned.
 3) Start using the service by logging into [Postmaster Tools](https://postmaster.google.com).
-   1) Upon logging in you will see your requested domain(s) listed with a ‘Verified’ status.
-   2) Click the domain you’d like to review the Postmaster dashboards for.
+   1) Upon logging in you will see an empty list.  You will need to add your requested domain(s) one at a time.
+   2) Click the red '+' icon.  A new screen will appear on the website
+   3) Under 'What domain do you use to authenticate your email?' type the domain name and click 'next'.  The domain will be added to the list.
+
+      ```admonish warning
+      If it asks you to verify your domain, please send an email to [security@tamu.edu](mailto:security@tamu.edu) with the domain name to verify your access.
+      ```
+
+   4) If you would like to add an additional domain, click 'Add Domain'.
+   5) When all domains have been added you can click 'Done'.  A list of domains should be displayed.
+   6) Click the domain you’d like to review the Postmaster dashboards for.
 
 ```admonish info
 Be sure to adjust the Dashboard and Date drop-downs depending on your report/search.
@@ -104,3 +113,21 @@ About delivery errors:
 - Bad or missing PTR record: The sending IP is missing a PTR record.
 
 ![Delivery Errors](./img/pm-delivery-errors.png)
+
+## FAQ
+
+### What if I own multiple domains?
+
+Multiple domains can be added to the postmaster tools, but data is displayed for only one domain at a time.  Domains must be added one domain at a time.
+
+### Do these dashboards provide information on other email providers?
+
+While these dashboards pertain only to email sent to Gmail recipients, the postmaster tools can give insights into your reputation across email platforms.
+
+### Why are some or all of my dashboards empty? Why do I not see any data?
+
+Most of the Postmaster Tools dashboards will only display data when there’s a sizable daily volume of email traffic (up to the order of hundreds) coming from your Authentication Domains and/or certain other conditions, in place to prevent abuse.  You may see a "No data to display" error message on the IP and Domain reputation dashboards. This may happen when your reputation is too low to show a value. To show data, some of the dashboards, like Spam Rate and Feedback Loop, need your emails to be authenticated by DKIM.
+
+### How can I find more information on Google's Postmaster Tools?
+
+For more information on postmaster tools see Google's [Postmaster Tools FAQ](https://support.google.com/a/answer/9983020?hl=en&ref_topic=6259779)
