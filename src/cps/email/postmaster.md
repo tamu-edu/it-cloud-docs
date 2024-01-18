@@ -21,9 +21,9 @@ Access to Postmaster Tools is reserved for technology professionals who administ
    2) Click the red '+' icon.  A new screen will appear on the website
    3) Under 'What domain do you use to authenticate your email?' type the domain name and click 'next'.  The domain will be added to the list.
 
-      ```admonish warning
-      If it asks you to verify your domain, please send an email to [security@tamu.edu](mailto:security@tamu.edu) with the domain name to verify your access.
-      ```
+```admonish warning
+If it asks you to verify your domain, please send an email to [security@tamu.edu](mailto:security@tamu.edu) with the domain name to verify your access.
+```
 
    4) If you would like to add an additional domain, click 'Add Domain'.
    5) When all domains have been added you can click 'Done'.  A list of domains should be displayed.
