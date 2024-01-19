@@ -4,7 +4,7 @@ This site is a work in progress and will be updated regularly.  Please check bac
 
 # Bulk Communications
 
-Texas A&M provides a variety of mechanisms to communicate with large groups.  Each tool has its own audience and purpose.
+Texas A&M provides a variety of email services to communicate with large groups.  Each tool has its own audience and purpose. Email sent from these systems should comply with the guidelines set forth by Google and Yahoo outlined in the [FAQ](./faq.md).
 
 ## Bulk Mail
 
@@ -14,13 +14,15 @@ Opt-in recipients to the lists can find more information in this [FAQ](https://i
 
 ## Emma
 
-Emma is a mass email system used to communicate with campus members. Emma is managed by the Division of Marketing & Communications. A separate Emma system is managed by the Texas A&M Foundation to communicate with former students.Emma accounts are only available to marketing and communications professionals to communicate on behalf of the units they support. For more information, please contact the [Digital Experience team].(mailto:group-email@tamu.edu)
+Emma is a mass email system used to communicate with campus members. Emma is managed by the Division of Marketing & Communications. A separate Emma system is managed by the Texas A&M Foundation to communicate with former students.
+
+Emma accounts are only available to marketing and communications professionals to communicate on behalf of the units they support. For more information, please contact the [Digital Experience team].(mailto:group-email@tamu.edu)
 
 For more information see the service offering [page](https://it.tamu.edu/services/email-messaging-and-collaboration/email-tools/emma/) or [EmmaHQ](https://marcomm.tamu.edu/resources/emma-hq/index.html)
 
 ## Listserv
 
-Listserv is a software package designed to create, maintain, and use email mailing lists. It allows someone to email a large number of individuals without manually entering every address for each email. At TAMU, Listserv is used to maximize efficiency of communication between students in a class, members of an organization, or a group of individuals.
+Listserv is a service designed to create, maintain, and use email mailing lists. It allows someone to email a large number of individuals without manually entering every address for each email. At Texas A&M, Listserv is used to maximize efficiency of communication between students in a class, members of an organization, or a group of individuals.
 
 TAMU Listserv can be accessed at <https://listserv.tamu.edu>.  For more information on TAMU Listserv see this [KB article](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0010339) or the [Listserv FAQ](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0010338).
 
@@ -32,7 +34,7 @@ More information on TAMUDirect see these KB articles [TamuDirect - General Use](
 
 ## Exchange Distribution Groups
 
-Texas A&M Exchange Email is a messaging and collaboration service, which features email, calendars, contacts and tasks.  One of the resources exchange supports are distribution groups.  Exchange distribution groups are managed by exchange and departmental email administrators.  These distribution groups are designed to be used when all potential members of the mailing list will have an email account in Texas A&M's Exchange Email.
+Exchange is a messaging and collaboration service, which features email, calendars, contacts and tasks.  One of the resources Exchange supports are distribution groups.  These distribution groups are managed by Exchange and departmental email administrators.  These distribution groups are designed to be used when all potential members of the mailing list will have an email account in Texas A&M's Exchange service.
 
 For more information on Texas A&M Exchange email see the service offering[page](https://it.tamu.edu/services/email-messaging-and-collaboration/campus-email-services/texas-am-exchange/).
 
