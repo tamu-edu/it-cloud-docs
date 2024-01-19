@@ -386,6 +386,12 @@
 <p>For more information, see the <a href="./checker.html">DMARC Check</a> and <a href="./reporting.html">DMARC Report</a> pages.</p>
 </div>
 </div>
+<h2 id="what-if-i-send-mail-from-a-third-party-service-which-has-a-cname-record-in-the-tamuedu-dns-domain"><a class="header" href="#what-if-i-send-mail-from-a-third-party-service-which-has-a-cname-record-in-the-tamuedu-dns-domain">What if I send mail from a third party service which has a CNAME record in the <code>tamu.edu</code> DNS domain?</a></h2>
+<p>In order to ensure the deliverability of your messages, you will need to follow Texas A&amp;M's email security standard.  Specifically, you will need the following:</p>
+<ul>
+<li>An SPF record in the third party's DNS domain</li>
+<li>A DKIM confifguration in the third party sending service, with a selector record in the <code>tamu.edu</code> DNS domain</li>
+</ul>
 <h2 id="what-should-my-spf-record-look-like"><a class="header" href="#what-should-my-spf-record-look-like">What should my SPF record look like?</a></h2>
 <p>All <code>tamu.edu</code> subdomains should be configured to inherit from the root <code>tamu.edu</code> domain and should be set to:</p>
 <p><code>v=spf1 redirect:tamu.edu</code></p>
