@@ -69,6 +69,13 @@ You can use the [DMARC Check Website](https://dmarc-check.itsec.tamu.edu) to che
 For more information, see the [DMARC Check](./checker.md) and [DMARC Report](./reporting.md) pages.
 ```
 
+## What if I send mail from a third party and have CNAME in TAMU's DNS?
+
+In order to ensure delivery of your messages, you will need to follow TAMU's email security standards.  Specifically, you will need to:
+
+- Create an SPF DNS TXT record in the third party's DNS
+- Enable DKIM signing
+
 ## What should my SPF record look like?
 
 All `tamu.edu` subdomains should be configured to inherit from the root `tamu.edu` domain and should be set to:
