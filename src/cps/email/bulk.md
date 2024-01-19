@@ -16,7 +16,7 @@ Opt-in recipients to the lists can find more information in this [FAQ](https://i
 
 Emma is a mass email system used to communicate with campus members. Emma is managed by the Division of Marketing & Communications. A separate Emma system is managed by the Texas A&M Foundation to communicate with former students.
 
-Emma accounts are only available to marketing and communications professionals to communicate on behalf of the units they support. For more information, please contact the [Digital Experience team].(mailto:group-email@tamu.edu)
+Emma accounts are only available to marketing and communications professionals to communicate on behalf of the units they support. For more information, please contact the [Digital Experience team](mailto:group-email@tamu.edu)
 
 For more information see the service offering [page](https://it.tamu.edu/services/email-messaging-and-collaboration/email-tools/emma/) or [EmmaHQ](https://marcomm.tamu.edu/resources/emma-hq/index.html)
 
