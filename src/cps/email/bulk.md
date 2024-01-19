@@ -36,7 +36,7 @@ More information on TAMUDirect see these KB articles [TamuDirect - General Use](
 
 Exchange is a messaging and collaboration service, which features email, calendars, contacts and tasks.  One of the resources Exchange supports are distribution groups.  These distribution groups are managed by Exchange and departmental email administrators.  These distribution groups are designed to be used when all potential members of the mailing list will have an email account in Texas A&M's Exchange service.
 
-For more information on Texas A&M Exchange email see the service offering[page](https://it.tamu.edu/services/email-messaging-and-collaboration/campus-email-services/texas-am-exchange/).
+For more information on Texas A&M Exchange email see the service offering [page](https://it.tamu.edu/services/email-messaging-and-collaboration/campus-email-services/texas-am-exchange/).
 
 ## Google Groups
 
