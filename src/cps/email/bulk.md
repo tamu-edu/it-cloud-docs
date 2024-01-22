@@ -40,6 +40,10 @@ For more information see the service offering [page](https://it.tamu.edu/service
 
 ## Listserv
 
+```admonish warning
+As of December 2018, new mailing lists are no longer created using the Listserv list management system.  All newly requested mailing lists are fulfilled using the Texas A&M Google Groups service.
+```
+
 Listserv is a service designed to create, maintain, and use email mailing lists. It allows someone to email a large number of individuals without manually entering every address for each email. At Texas A&M, Listserv is used to maximize efficiency of communication between students in a class, members of an organization, or a group of individuals.
 
 TAMU Listserv can be accessed at <https://listserv.tamu.edu>.  For more information on TAMU Listserv see this [KB article](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0010339) or the [Listserv FAQ](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0010338).
