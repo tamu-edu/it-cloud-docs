@@ -16,15 +16,9 @@ Opt-in recipients to the lists can find more information in this [FAQ](https://i
 
 Emma is a mass email system used to communicate with campus members. Emma is managed by the Division of Marketing & Communications. A separate Emma system is managed by the Texas A&M Foundation to communicate with former students.
 
-Emma accounts are only available to marketing and communications professionals to communicate on behalf of the units they support. For more information, please contact the [Digital Experience team](mailto:group-email@tamu.edu)
+Emma accounts are only available to marketing and communications professionals to communicate on behalf of the units they support. For more information, please contact the [Digital Experience team](mailto:digitalexperience@tamu.edu)
 
 For more information see the service offering [page](https://it.tamu.edu/services/email-messaging-and-collaboration/email-tools/emma/) or [EmmaHQ](https://marcomm.tamu.edu/resources/emma-hq/index.html)
-
-## Listserv
-
-Listserv is a service designed to create, maintain, and use email mailing lists. It allows someone to email a large number of individuals without manually entering every address for each email. At Texas A&M, Listserv is used to maximize efficiency of communication between students in a class, members of an organization, or a group of individuals.
-
-TAMU Listserv can be accessed at <https://listserv.tamu.edu>.  For more information on TAMU Listserv see this [KB article](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0010339) or the [Listserv FAQ](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0010338).
 
 ## TAMUDirect
 
@@ -43,3 +37,13 @@ For more information on Texas A&M Exchange email see the service offering [page]
 Google Groups is an email service that uses mailing lists of subscribers. Texas A&M units or groups can create mailing lists for users to join or populate the lists themselves by uploading email addresses.  Creation of Texas A&M Google Groups is by-request only.
 
 For more information see the service offering [page](https://it.tamu.edu/services/email-messaging-and-collaboration/email-tools/google-groups/) and this [KB Article](https://servicenow.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0014328)
+
+## Listserv
+
+```admonish warning
+As of December 2018, new mailing lists are no longer created using the Listserv list management system.  All newly requested mailing lists are fulfilled using the Texas A&M Google Groups service.
+```
+
+Listserv is a service designed to create, maintain, and use email mailing lists. It allows someone to email a large number of individuals without manually entering every address for each email. At Texas A&M, Listserv is used to maximize efficiency of communication between students in a class, members of an organization, or a group of individuals.
+
+TAMU Listserv can be accessed at <https://listserv.tamu.edu>.  For more information on TAMU Listserv see this [KB article](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0010339) or the [Listserv FAQ](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0010338).
