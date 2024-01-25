@@ -23,7 +23,7 @@ Once received, the tool will attempt to automatically evaluate your message for 
 If the tool reports a DKIM failure, you can follow the steps below for your specific platform to enable DKIM. If your platform is not listed below and our generic guidelines do not apply, please contact `security@tamu.edu` for assistance.
 
 ```admonish info
-This tool is only useful for email sent from a from a third party mailer as `tamu.edu` or a subdomain.
+This tool is only useful for email sent from a third party mailer as `tamu.edu` or a subdomain.
 
 For additional information see [KB0021277](https://itselfservice.tamu.edu/tamucs?id=tamucs_kb_article&sys_id=KB0021277) for more information on sending messages using third party mailers.
 ```
