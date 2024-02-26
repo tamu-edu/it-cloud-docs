@@ -73,10 +73,9 @@ The dashboards do not provide information on the status of specific email messag
 
 ### Login
 
-1) Navigate to the DMARC Reporting Site (coming soon, reach out to [cloudsecurity@tamu.edu](mailto:cloudsecurity@tamu.edu) for early access)
+1) Navigate to the [DMARC Reporting Site](https://dmarc.kb.us-east-2.aws.elastic-cloud.com)
 2) Login by selecting 'Login with Azure AD'
 3) From the List of Dashboards -> select 'DMARC Summary'
-
 
 ### Filter for specific domain(s)
 

@@ -14,7 +14,7 @@ For more information on this tool see the [DMARC Check](./checker.md) page.
 
 ---
 
-- DMARC Reporting Site (coming soon, reach out to [cloudsecurity@tamu.edu](mailto:cloudsecurity@tamu.edu) for early access) - Technology Services also provides a DMARC reporting site that allows domain custodians to proactively manage their email security, identify potential issues, and take corrective actions to enhance the overall email authentication posture of their domain.
+- [DMARC Reporting Site](https://dmarc.kb.us-east-2.aws.elastic-cloud.com) - Technology Services also provides a DMARC reporting site that allows domain custodians to proactively manage their email security, identify potential issues, and take corrective actions to enhance the overall email authentication posture of their domain.
 
 Available Reports:
 
