@@ -39,7 +39,7 @@
 - Identify savings opportunities by identifying over-provisioned resources that can be reduced in size and cost in the Savings Opportunities Tab. 
 
 ```admonish note
-screenshot pending
+screenshot pending, as the example project does not have any current savings opportunities.
 ```
 
 ## Advanced Features 
