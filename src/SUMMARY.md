@@ -8,6 +8,7 @@
   - [Amazon Web Services (AWS)](./cloud/aws.md)
     - [Networking](./cloud/aws/networking.md)
       - [VPC Policy](./cloud/aws/vpc_policy.md)
+      - [Migration](./cloud/aws/migration.md)
 
 
 - [Email Authentication](./cps/email_auth.md)
