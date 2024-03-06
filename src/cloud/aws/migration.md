@@ -39,3 +39,14 @@ Details for migrating RDS in the same region: [Migrate an Amazon RDS DB instance
 ```admonish info
 Details for migrating RDS to a different region: [Migrate Amazon Aurora and Amazon RDS to a new AWS region](https://aws.amazon.com/blogs/database/migrate-amazon-aurora-and-amazon-rds-to-a-new-aws-region/).
 ```
+
+
+### Redshift Clusters
+
+To move a Redshift cluster to a different subnet group, you can modify the cluster to use the new subnet group. If you need to move to a different VPC, you can create a snapshot of the cluster and restore it in the new VPC.
+
+```admonish info
+Details for migrating Redshift: 
+- [Migrate Amazon Redshift to a new subnet group](https://docs.aws.amazon.com/redshift/latest/mgmt/managing-cluster-subnet-group-console.html)
+- [Migrate Amazon Redshift to a new VPC](https://repost.aws/knowledge-center/move-redshift-cluster-vpcs)
+
