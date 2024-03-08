@@ -17,9 +17,9 @@ For AWS, Kion also supports [short-term access](https://docs.aws.amazon.com/IAM/
 A cloud access role can allow one or more of these access types. For example, a non-admin role might allow web access and short-term access, but not long-term access.
 
 
-## User or Groups Assignments
+## User and Group Assignments
 
-A cloud access role can be assigned to many users or groups. When a user is assigned a role, they can access the cloud account with the permissions granted by the role. Project owners can assign roles to users and groups, and users can request access to roles. 
+A cloud access role can be assigned to one or more users and groups. When a user is assigned a role, either directly or through a group, they can access cloud accounts in the project with the permissions granted by the role. Project owners can assign roles to users and groups, and users can request access to roles.
 
 To assign a role to a user, that user must have logged into Kion at least once to create their account in Kion's database. 
 
