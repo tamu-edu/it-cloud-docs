@@ -26,4 +26,4 @@ Kion is a platform that bundles together access, security, and financial tools w
 
 A [Kion Project](https://support.kion.io/hc/en-us/articles/360034626112-What-is-a-Project) is automatically created for every Cloud Service Provider account that has been [requested and approved](https://it.tamu.edu/cloud/get-started/index.php) by Technology Services. A Kion Project is a collection of accounts, and a user can have access to multiple projects. 
 
-Read more about Kion in our [Getting Started with Kion](./kion/features/getting_started.md) guide.
+Read more about Kion in our [Getting Started with Kion](./features/getting_started.md) guide.
