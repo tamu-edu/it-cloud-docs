@@ -22,7 +22,6 @@ jobs:
             token: ${{secrets.GITHUB_TOKEN}}
             mdbook-version: 'latest'
             use-admonish: true
-            admonish-version: "~1.9.0"
 
 
       - run: mdbook build
