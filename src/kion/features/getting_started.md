@@ -6,7 +6,7 @@ The first thing you will see when you log into Kion is a dashboard. From here, y
 
 ## Access your Cloud Accounts
 
-The most common use for Kion is to access your cloud accounts. You will have one or more cloud access roles assigned to each cloud account. These roles allow you to access the cloud account with various levels of permissions. It is best practice to always use the least-privileged role that allows you to perform the necessary actions.
+The most common use for Kion is to access your cloud accounts. You will have one or more [Cloud Access Roles](./features/access_roles.md) assigned to each cloud account. These roles allow you to access the cloud account with various levels of permissions. It is best practice to always use the least-privileged role that allows you to perform the necessary actions.
 
 You can access your accounts from many places in Kion, including the dashboard, the projects page, and the accounts page. Look for dropbdown menus with a cloud icon to select the account and role you want to access.
 
@@ -42,7 +42,7 @@ When you select a project, you will have several options at the top of the page 
 - **Financials** - This tab shows you the budget and spending status for the project. You can manage your budgets and generate reports and graphs. 
 - **Savings Opportunities** - This tab shows you ways to save money on your cloud spending. It will show you recommendations for Reserved Instances and other cost-saving opportunities.
 - **Enforcements** - This tab shows you and enforcements that are in place for the project. Enforcements are alerts or actions triggered by spending conditions, such as a budget being exceeded.
-- **Cloud Management** - This tab allows you to find more information about the Cloud Rules, Access Roles, and related resources that are applied to the project.
+- **Cloud Management** - This tab allows you to find more information about the Cloud Rules, [Cloud Access Roles](./features/access_roles.md), and related resources that are applied to the project.
 - **Compliance** - This tab shows you the compliance posture of the project. It will show you any findings that are present, and give you recommendations on how to fix or suppress them.
 - **Users** - This tab shows you the users and groups that have access to the project. This access is separate from any Cloud Access Roles that are assigned to the accounts in the project.
 - **Permissions** - This tab shows you the permissions that users and groups have to the project, based on the settings in the Users tab.
