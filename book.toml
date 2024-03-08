@@ -3,7 +3,7 @@ authors = ["Technology Services"]
 language = "en"
 multilingual = false
 src = "src"
-title = "Cloud Documentation"
+title = "Clouds and Platforms"
 
 [preprocessor]
 
