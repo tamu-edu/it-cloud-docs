@@ -11,6 +11,6 @@ Technology Services has pre-created a budget for each project from the dollar am
 
 Kion budgets are simply groups of one or more months that have been given a specific amount of spending. Most commonly, the months in a budget reflect our Fiscal Year, which runs from September 1st to August 31st. If you have a steady workload and spending pattern, you can set a budget for the entire year by allocating the same amount to each month. However, if you have a season workload, you can allocate a different amount each month to reflect the expected spending.
 
-Kion will automatically track both your total spending *and* your spending rate based on the budget you have set. If you are spending too quickly, Kion will show you so that you can take action to slow down your spending or adjust your budget. In the example below, the green bar represents how much your have spent, and the arrow indicate where you should be based on your budget.
+Kion will automatically track both your total spending *and* your spending rate based on the budget you have set. If you are spending too quickly, Kion will show you so that you can take action to slow down your spending or adjust your budget. In the example below, the green bar represents how much you have spent, and the arrow indicates where you should be based on your budget.
 
 ![Budgets Line](./img/budget_line.png){height=50px}
