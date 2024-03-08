@@ -10,8 +10,10 @@ The most common use for Kion is to access your cloud accounts. You will have one
 
 You can access your accounts from many places in Kion, including the dashboard, the projects page, and the accounts page. Look for dropbdown menus with a cloud icon to select the account and role you want to access.
 
-![Cloud Access Role](./img/cloud_access_box_large.png)
-![Cloud Access Role](./img/cloud_access_box_min.png)
+<p align="center">
+  <img src="./img/cloud_access_box_large.png" height="50" />
+  <img src="./img/cloud_access_box_min.png" height="50" />
+</p>
 
 Depending on the type of cloud account, different types of access are available. All cloud accounts will have a *Web Access* type which will take you to the web console for that provider, while AWS, for instance, will also have *Short-Term Access* and *Long-Term Access Key* types for use with the CLI, code, or other automation tools. 
 
