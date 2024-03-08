@@ -71,3 +71,8 @@ Learn more about [AWS Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide
 Azure uses role-based access control (RBAC) to manage access to resources. An Azure role is a collection of permissions that can be assigned at a particular scope or resource.
 
 Like AWS, Azure provides a [set of pre-written roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles) that you can use to manage access to your resources. These roles are already imported into Kion and can be assigned to a cloud access role.
+
+
+#### Custom Roles
+
+If you need to grant a set of permissions that isn't covered by the built-in roles, a custom role definition can be created. These roles will need to be created by an Azure or Kion administrator. Please contact aip@tamu.edu to request a custom role definition.
