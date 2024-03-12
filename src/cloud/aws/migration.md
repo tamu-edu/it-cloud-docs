@@ -49,4 +49,3 @@ To move a Redshift cluster to a different subnet group, you can modify the clust
 Details for migrating Redshift: 
 - [Migrate Amazon Redshift to a new subnet group](https://docs.aws.amazon.com/redshift/latest/mgmt/managing-cluster-subnet-group-console.html)
 - [Migrate Amazon Redshift to a new VPC](https://repost.aws/knowledge-center/move-redshift-cluster-vpcs)
-
