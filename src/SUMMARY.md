@@ -2,7 +2,13 @@
 
 [Home](./index.md)
 
-## Cloud & Platform Security
+- [What is Cloud Computing?](./cloud/what_is_cloud_computing.md)
+
+- [Cloud Computing Providers](./cloud/index.md)
+  - [Amazon Web Services (AWS)](./cloud/aws.md)
+    - [Networking](./cloud/aws/networking.md)
+      - [VPC Policy](./cloud/aws/vpc_policy.md)
+
 
 - [Email Authentication](./cps/email_auth.md)
   - [Email Authentication Protocols](./cps/email/protocols.md)

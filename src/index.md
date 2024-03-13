@@ -2,14 +2,12 @@
 This site is a work in progress and will be updated regularly.  Please check back frequently for updates.
 ```
 
-# Cloud and Platform Security
+This website is a resource for Texas A&M University faculty, and staff to learn about the various infrastructure and platform services available at Texas A&M University. This includes information about cloud services, platform services, and security policies and best practices.
 
-## Email Security
+It is maintained by a distributed team of engineers in Technology Services who contribute information relevant to their area of expertise.
 
-```admonish info class="aggiecustom2" title="Email Authentication" collapsible=true
-* [Email Authentication](./cps/email_auth.md) <Email Authentication>
-```
 
-### Contact Information
+## Contributing
 
-If you have questions regarding the content of this website (such as a request to update specific information), please reach out to [cloudsecurity@tamu.edu](mailto:cloudsecurity@tamu.edu).
+If you are a member of the Texas A&M University community and would like to contribute to this website, please get involved over on [GitHub](https://github.com/tamu-edu/it-cloud-docs).
+
