@@ -21,6 +21,7 @@ Before migrating any resources, you should complete the following steps:
 1. Determine which subnet or subnets you want to move the resource to and note the subnet ID(s).
    1. If your resource is using a public IP address, it will need to use a public subnet.
    2. If your resource is currently connecting to a campus service, it will need to use a campus subnet.
+      1. Email [aip@tamu.edu](mailto:aip@tamu.edu) to request a consultation before getting access to a campus subnet. 
    3. All other resources should use a private subnet.
    4. More information on the network and subnets can be found [here](https://docs.cloud.tamu.edu/cloud/aws/networking.html#reference).
 2. Copy any security groups in use by your resource to the new VPC.

@@ -27,7 +27,7 @@ TAMU has redundant Direct Connect connections to AWS that provide a private, hig
 
 In general, it is recommended to use the internet to access resources in AWS. Use of this private connectivity is not recommended except when architecturally necessary. Instead, consider trying to decouple your resources depending on the campus networks and utilize alternatives that are already in the cloud, or extending that resource into the cloud. This will help to reduce the risk of a single point of failure for your service.
 
-To request access to Campus Subnets, please contact the Cloud Services team.
+To request access to Campus Subnets, please contact the Cloud Services team at [aip@tamu.edu](mailto:aip@tamu.edu).
 
 
 ## Exception Request
