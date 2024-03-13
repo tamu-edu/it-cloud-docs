@@ -14,6 +14,20 @@ For those that wish to migrate themselves, please refer to the [network specific
 - <a href="#rds-databases">RDS Databases</a>
 - <a href="#lambda">Lambda Functions</a>
 
+## Common Prerequisites
+
+Before migrating any resources, you should complete the following steps:
+
+1. Determine which subnet or subnets you want to move the resource to and note the subnet ID(s).
+   1. If your resource is using a public IP address, it will need to use a public subnet.
+   2. If your resource is currently connecting to a campus service, it will need to use a campus subnet.
+   3. All other resources should use a private subnet.
+   4. More information on the network and subnets can be found [here](https://docs.cloud.tamu.edu/cloud/aws/networking.html#reference).
+2. Copy any security groups in use by your resource to the new VPC.
+   1. If you are only moving the resource to a new subnet within one of the TAMU shared VPCs, you can use the same security group.
+   2. If you are having to move regions or VPCs, you will need to copy the security groups. See [copying security groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html#copy-security-group) for instructions.
+   3. Note the new security group ID for use in the migration process.
+
 ### EC2 Instances
 
 It's not possible to move an existing instance to another subnet, Availability Zone, or VPC. Instead, you can create a new Amazon Machine Image (AMI) from the source instance to manually migrate the instance. Next, use the new AMI to launch a new instance in the desired subnet, Availability Zone, or VPC. And finally, reassign any Elastic IP addresses from the source instance to the new instance. Note that if you need to migrate to a supported region, Elastic IP addresses are not portable across regions and will change.
