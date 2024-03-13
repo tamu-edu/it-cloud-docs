@@ -7,6 +7,10 @@ on:
       - reopened
       - synchronize
       - closed
+    paths-ignore:
+      - .devcontainer/**
+      - .github/**
+      - README.md
 
 concurrency: preview-${{ github.ref }}
 
@@ -24,7 +28,7 @@ jobs:
             token: ${{secrets.GITHUB_TOKEN}}
             mdbook-version: 'latest'
             use-admonish: true
-            
+
       - name: Build mdBook site
         run: mdbook build
         if: github.event.action != 'closed'
