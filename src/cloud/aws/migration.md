@@ -54,6 +54,21 @@ Once the automation document has been run, you will need to:
 
 The process for migrating an RDS database depends on whether you are migrating within the same region or to a different region. To move to another set of subnets, Availability Zones, or VPC within the same region, you can simply modify the RDS instance. To move to a different region, you can create a snapshot of the RDS instance and restore it in the new region.
 
+To move within the same region:
+
+1. Complete the [common prerequisites](#common-prerequisites).
+2. Create a DB subnet group in the target VPC. Most databases should use private subnets in their subnet group. More information on creating subnets groups can be found [here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Subnets).
+3. Due to a limitation in the AWS web console when needing to change both the subnet group and security groups, you will need to use the CLI to modify the RDS instance to use the new subnet group. Replace the values in the command below with your own values and run the command in the AWS CLI.
+   
+   ```
+   aws rds modify-db-instance \
+     --db-instance-identifier <instance-name> \
+     --db-subnet-group-name <new-subnet-group-name> \
+     --vpc-security-group-ids "<sg-example-1>" "<sg-example-2>" \
+     --apply-immediately
+   ```
+
+
 ```admonish info
 Details for migrating RDS in the same region: [Migrate an Amazon RDS DB instance to another VPC](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/migrate-an-amazon-rds-db-instance-to-another-vpc-or-account.html).
 ```
