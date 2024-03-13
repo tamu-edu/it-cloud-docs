@@ -34,12 +34,19 @@ It's not possible to move an existing instance to another subnet, Availability Z
 
 There are two methods to migrate the instance:
 
-1. Use the AWS Systems Manager automation document [`AWSSupport-CopyEC2Instance`](https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-awssupport-copyec2instance.html).
-2. Manually copy an instance and launch a new instance from the copy.
+- Use the AWS Systems Manager automation document [`AWSSupport-CopyEC2Instance`](https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-awssupport-copyec2instance.html).
+- Manually create an instance image and launch a new instance from the image. 
 
-```admonish info
-Detailed instructions can be found in the AWS Knowledge Center article [How do I move my EC2 instance to another subnet, Availability Zone, or VPC?](https://repost.aws/knowledge-center/move-ec2-instance).
-```
+We recommend using the AWS Systems Manager automation document to copy the instance. This method is faster and less error-prone than manually copying the instance. Please be sure to complete the common prerequisites before using the automation document. You will need to have the following information available:
+- The instance ID of the source instance.
+- The subnet ID of the destination subnet.
+- The security group ID of the destination security group.
+
+Once the automation document has been run, you will need to:
+- manually reassign any Elastic IP addresses from the source instance to the new instance, if applicable.
+- reassign any EC2 instance roles, if applicable.
+- clean up (delete/terminate) the source instance and any associated resources.
+- update any DNS records or other references to the source instance.
 
 
 ### RDS Databases
