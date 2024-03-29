@@ -9,7 +9,7 @@ The Technology Services Cloud Services team provides all AWS customers with a Vi
 
 The TAMU VPCs are available in the `us-east-1` and `us-east-2` regions with large public, private, and campus-accessible subnets in multiple availability zones.
 
-- **Public Subnets**: These subnets are used for resources that need to be accessible from the internet.
+- **Public Subnets**: These subnets are used for resources that need to be accessible from the internet. Don't get confused that the IP addresses encompassed are not themselves direcly publicly routable. It's about the route table and gateway setup.
 - **Private Subnets**: These subnets are used for resources that should not be accessible from the internet.
 - **Campus Subnets**: These subnets are used for resources that need to access resources on the internal TAMU campus network.
 
@@ -39,7 +39,7 @@ If you have a specific use case that requires a different network design, please
 
 ### Using Subnets
 
-When you create resources in AWS, you will need to select a subnet to place the resource in. You should select the subnet that best fits the requirements of the resource you are creating. A reference table of the subnets and their IDs available in the TAMU VPC is provided below.
+When you create resources in AWS, you will need to select a subnet to place the resource in. You should select the subnet that best fits the requirements of the resource you are creating. A reference table of the subnets and their IDs available in the TAMU VPC is provided below. Note that the following Availability Zones are not available for use due to cost reasons: `use1-az3`, `use1-az5`, `use1-az6`, `use2-az4`, `use2-az5`, `use2-az6`. Be sure any existing resources that are using any of these AZ's get moved to a supported AZ from the list below.
 
 
 `us-east-1` VpcId: `vpc-0c31fe331850b85b5`

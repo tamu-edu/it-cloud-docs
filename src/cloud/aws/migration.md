@@ -29,6 +29,34 @@ Before migrating any resources, you should complete the following steps:
    2. If you are having to move regions or VPCs, you will need to copy the security groups. See [copying security groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html#copy-security-group) for instructions.
    3. Note the new security group ID for use in the migration process.
 
+### General Terraform notes
+
+If you are already managing your AWS resources via Terraform and wish to migrate using Terraform, here are some considerations to keep in mind.
+
+- The overall pattern you will want to follow is to create new resources in your terraform code that are bound to the new, shared VPC (i.e. ALB and associated resources, subnet group for RDS, security groups, etc.) side by side with old version bound to the old VPC. Next, move the resource(s) that depends on these things to use the new resource. Lastly, delete the old resource(s) pointing to the old VPC.
+- You can't update security groups in Terraform if there are resources already depending on them. Instead, create new security groups, point old resources to them, then delete old security groups.
+- When creating security groups, wherever possible, don't rely on CIDR blocks if you are trying to limit access to one resource to another managaed resource. Instead, use `security_groups`. I.e. `security_groups   = [aws_security_group.grafana_ecs_new.id]`. This will allow Amazon to use its knowledge of the resources represented by the other security group to limit access.
+- See below for sample Terraform code to specifically select the subset of subnets that are public. Note that valid choices for the `values = ["public"]` line are `public`, `private` and `campus`.
+
+```admonish info
+    data "aws_vpc" "default" {
+      default = false
+      id = "vpc-0c31fe331850b85b5"
+    }
+
+    data "aws_subnets" "default" {
+      filter {
+        name    = "vpc-id"
+        values  = [data.aws_vpc.default.id]
+      }
+      filter {
+        name = "tag:subnet-type"
+        values = ["public"]
+      }
+    }
+```
+
+
 ### EC2 Instances
 
 It's not possible to move an existing instance to another subnet, Availability Zone, or VPC. Instead, you can create a new Amazon Machine Image (AMI) from the source instance to manually migrate the instance. Next, use the new AMI to launch a new instance in the desired subnet, Availability Zone, or VPC. And finally, reassign any Elastic IP addresses from the source instance to the new instance. Note that if you need to migrate to a supported region, Elastic IP addresses are not portable across regions and will change.
@@ -42,12 +70,24 @@ We recommend using the AWS Systems Manager automation document to copy the insta
 - The instance ID of the source instance.
 - The subnet ID of the destination subnet.
 - The security group ID of the destination security group.
+- (Optionally) the name of the key pair defined for the previous VM for initial login
+
+Additional notes about using the AWS Systems Manager automation document:
+- If you use this automation, you will end up with two identical VM's running at the same time. 
+- Please consider what this will mean for any other systems depending on this VM. 
+- At a minimum, once you are satisfied that the copy is working correctly, you will need to shut the old VM down and eventually remove it. The automation does not clean up the old VM for you.
+- Pay attention to the region that is selected when running the automation document. It may not default to the correct region in which your resources are located. In particular, if the automation can't seem to find any of your resources, this is likely the cause.
 
 Once the automation document has been run, you will need to:
 - manually reassign any Elastic IP addresses from the source instance to the new instance, if applicable.
 - reassign any EC2 instance roles, if applicable.
 - clean up (delete/terminate) the source instance and any associated resources.
 - update any DNS records or other references to the source instance.
+- Potentially update the DNS servers within the VM. Note that the VM's internal DNS servers may be reset to use the default AWS provided DNS server. In particular, if using the campus shared subnet and you have overridden the default DNS servers to point to Infoblox, you will need to set this up again to enable proper DNS resolution for campus resources.
+
+If you were using Terraform to manage the old VM and want to continue using it to manage the new VM resource, you will need to define new resources and then import the copied VM into that. A way to get the correct syntax to use for importing is to run `terraform plan` and see how it defines the resource name. Once you have the name correct, if you were using a module for instance, import with something like `terraform import module.<module_name>.aws_instance.<resource_name> <instance_id>`. Once imported, run `terraform plan` again to see what it says will need to be changed. Observe what it would change, then update your Terraform code so unwanted changes would not occur. Keep doing this loop until the output of `terraform plan` reflects the actual changes (if any) that you want to make. Some common things that you may need to update inclued:
+- AMI - you will need to update to reflect the automatically created AMI from the automation
+- Key pair - set to "" if you didn't specify this when making the copy
 
 
 ### RDS Databases
@@ -69,6 +109,7 @@ To move within the same region:
    ```
 
 
+
 ```admonish info
 Details for migrating RDS in the same region: [Migrate an Amazon RDS DB instance to another VPC](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/migrate-an-amazon-rds-db-instance-to-another-vpc-or-account.html).
 ```
@@ -77,6 +118,9 @@ Details for migrating RDS in the same region: [Migrate an Amazon RDS DB instance
 Details for migrating RDS to a different region: [Migrate Amazon Aurora and Amazon RDS to a new AWS region](https://aws.amazon.com/blogs/database/migrate-amazon-aurora-and-amazon-rds-to-a-new-aws-region/).
 ```
 
+```admonish info
+Details for moving an RDS instance out of an Availability Zone: [How do I move an Amazon RDS instance out of an Availability Zone?](https://repost.aws/knowledge-center/rds-move-availability-zone) Note that you will need to be sure that the AZ that the RDS is moved to is [one of the supported AZ's](https://docs.cloud.tamu.edu/cloud/aws/networking.html#using-subnets)
+```
 
 ### Redshift Clusters
 
