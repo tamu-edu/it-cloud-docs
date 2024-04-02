@@ -28,3 +28,7 @@ Enforcement actions are set up in the Enforcements tab of a project. You can set
 
 For more information on setting up enforcement actions, see [Project Financial Enforcements](https://support.kion.io/hc/en-us/articles/360033984632-Project-Financial-Enforcements).
 
+
+## Savings Opportunities
+
+Kion provides recommendations for saving money on your cloud spending. These recommendations are based on your current spending patterns and the services you are using. We recommend reviewing these recommendations regularly to ensure you are getting the best value for your cloud spending.
