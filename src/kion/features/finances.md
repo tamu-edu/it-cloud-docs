@@ -16,3 +16,6 @@ Kion will automatically track both your total spending *and* your spending rate 
 <p align="center">
   <img src="img/budget_line.png" height="200" />
 </p>
+
+For more information on managing budgets, see [Managing Project Budgets](https://support.kion.io/hc/en-us/articles/9360323155853-Managing-Project-Budgets).
+
