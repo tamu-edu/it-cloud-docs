@@ -8,7 +8,7 @@ The first thing you will see when you log into Kion is a dashboard. From here, y
 
 The most common use for Kion is to access your cloud accounts. You will have one or more [Cloud Access Roles](./features/access_roles.md) assigned to each cloud account. These roles allow you to access the cloud account with various levels of permissions. It is best practice to always use the least-privileged role that allows you to perform the necessary actions.
 
-You can access your accounts from many places in Kion, including the dashboard, the projects page, and the accounts page. Look for dropbdown menus with a cloud icon to select the account and role you want to access.
+You can access your accounts from many places in Kion, including the dashboard, the projects page, and the accounts page. Look for dropdown menus with a cloud icon to select the account and role you want to access.
 
 <p align="center">
   <img src="./img/cloud_access_box_large.png" height="50" />
