@@ -315,7 +315,13 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="accessing-cloud-accounts"><a class="header" href="#accessing-cloud-accounts">Accessing Cloud Accounts</a></h1>
+                        <h1 id="accessing-kion"><a class="header" href="#accessing-kion">Accessing Kion</a></h1>
+<p>There are two sets of permissions that control access to Kion: project permissions and cloud access roles. Project permissions control access to Kion itself, while cloud access roles control access to cloud accounts.</p>
+<h2 id="project-access"><a class="header" href="#project-access">Project Access</a></h2>
+<p>Project permissions control access to Kion itself. There are two main roles in Kion: Project Owner and Project User. Each role has different permissions in Kion.</p>
+<p>A project user can view all information about a project, such as financial and compliance data, but cannot make changes to the project. A project owner can view and edit most information about a project, including adding and removing users, requesting exemptions, creating cloud access roles, and managing project settings.</p>
+<p>For more information on project permissions, see the <a href="https://support.kion.io/hc/en-us/articles/360035054871-Managing-User-Permissions-on-a-Project">Project Permissions</a> article.</p>
+<h2 id="cloud-account-access"><a class="header" href="#cloud-account-access">Cloud Account Access</a></h2>
 <p>Kion grants access to cloud accounts using <a href="https://support.kion.io/hc/en-us/articles/360021623272-What-is-a-Cloud-Access-Role">Cloud Access Roles</a>, which represent a set of permissions (IAM policies or role definitions) that allow a user to perform specific actions in a cloud account.</p>
 <p>A Cloud Access Role has three main components:</p>
 <ul>
@@ -323,22 +329,22 @@
 <li>Users or Groups assigned</li>
 <li>Permission</li>
 </ul>
-<h2 id="access-types"><a class="header" href="#access-types">Access Types</a></h2>
+<h3 id="access-types"><a class="header" href="#access-types">Access Types</a></h3>
 <p>For all cloud providers, Kion supports automatic login to the provider's web console using a trust federation. You only need to sign in once to Kion, and then you can access your cloud accounts without having to sign in again.</p>
 <p>For AWS, Kion also supports <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html">short-term access</a> and long-term access keys. These keys can be used with the AWS CLI, SDKs, and other automation tools. Short-term access keys are valid for four hours, and long-term access keys are valid for 90 days or until they are rotated. Read more about <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/security-creds.html">AWS Access Keys</a>, including best practices and security warnings.</p>
 <p>A cloud access role can allow one or more of these access types. For example, a non-admin role might allow web access and short-term access, but not long-term access.</p>
-<h2 id="user-and-group-assignments"><a class="header" href="#user-and-group-assignments">User and Group Assignments</a></h2>
+<h3 id="user-and-group-assignments"><a class="header" href="#user-and-group-assignments">User and Group Assignments</a></h3>
 <p>A cloud access role can be assigned to one or more users and groups. When a user is assigned a role, either directly or through a group, they can access cloud accounts in the project with the permissions granted by the role. Project owners can assign roles to users and groups, and users can request access to roles.</p>
 <p>To assign a role to a user, that user must have logged into Kion at least once to create their account in Kion's database.</p>
 <p>Project owners can also create groups to use for role assignments. This makes it easier to manage access for a large number of users and projects. A user must have logged into Kion at least once to be added to a group, too.</p>
-<h2 id="permissions"><a class="header" href="#permissions">Permissions</a></h2>
+<h3 id="permissions"><a class="header" href="#permissions">Permissions</a></h3>
 <p>The permissions granted by a cloud access role are defined by IAM policies for AWS and Azure roles for Azure. These policies define what actions a user can perform and what resources they can perform those actions on.</p>
 <p>Cloud Access Roles are intended to be cloud-agnostic and can be used across multiple cloud providers. When creating roles to assign to humans, it is common to make these roles relate to specific job functions, like Database or Server Administrators, then use the cloud-specific policies and roles to grant the necessary permissions.</p>
 <p>When creating roles to assign to applications or services, it is common to make these roles relate to specific tasks, like reading from a specific S3 bucket or writing to a specific database.</p>
-<h3 id="aws-iam-policies"><a class="header" href="#aws-iam-policies">AWS IAM Policies</a></h3>
+<h4 id="aws-iam-policies"><a class="header" href="#aws-iam-policies">AWS IAM Policies</a></h4>
 <p>AWS provides hundreds of pre-written policies that make it convenient for you to assign appropriate permissions to users, groups, and roles. It is faster than writing the policies yourself and includes permissions for many common use cases.</p>
 <p>The AWS-managed policies are already imported into Kion and can be assigned to a cloud access role. These policies are updated by AWS, so you don't have to worry about keeping them up to date.</p>
-<h4 id="customer-managed-policies"><a class="header" href="#customer-managed-policies">Customer Managed Policies</a></h4>
+<h5 id="customer-managed-policies"><a class="header" href="#customer-managed-policies">Customer Managed Policies</a></h5>
 <p>If you need to grant a set of permissions that isn't covered by the AWS-managed policies, you can create your own customer-managed policy. These policies are created in your AWS account, imported into Kion, and then assigned to a cloud access role. An example policy might be to grant access to a specific S3 bucket or to allow a user to create and manage EC2 instances.</p>
 <pre><code class="language-json">{
   "Version": "2012-10-17",
@@ -355,10 +361,10 @@
 </code></pre>
 <p>When you create IAM policies, follow the standard security advice of granting least privilege, or granting only the permissions required to perform a task. Determine what users and roles need to do and then craft policies that allow them to perform only those tasks.</p>
 <p>Learn more about <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html">AWS Policies</a>.</p>
-<h3 id="azure-roles"><a class="header" href="#azure-roles">Azure Roles</a></h3>
-<p>Azure uses role-based access control (RBAC) to manage access to resources. An Azure role is a collection of permissions that can be assigned at a particular scope or resource.</p>
+<h4 id="azure-roles"><a class="header" href="#azure-roles">Azure Roles</a></h4>
+<p>Azure uses role-based access control (RBAC) to manage access to resources. An Azure role is a collection of permissions that can be assigned to a particular scope or resource.</p>
 <p>Like AWS, Azure provides a <a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles">set of pre-written roles</a> that you can use to manage access to your resources. These roles are already imported into Kion and can be assigned to a cloud access role.</p>
-<h4 id="custom-roles"><a class="header" href="#custom-roles">Custom Roles</a></h4>
+<h5 id="custom-roles"><a class="header" href="#custom-roles">Custom Roles</a></h5>
 <p>If you need to grant a set of permissions that isn't covered by the built-in roles, a custom role definition can be created. These roles will need to be created by an Azure or Kion administrator. Please contact aip@tamu.edu to request a custom role definition.</p>
 
                     </main>
