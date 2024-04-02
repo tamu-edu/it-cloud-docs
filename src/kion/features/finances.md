@@ -19,3 +19,12 @@ Kion will automatically track both your total spending *and* your spending rate 
 
 For more information on managing budgets, see [Managing Project Budgets](https://support.kion.io/hc/en-us/articles/9360323155853-Managing-Project-Budgets).
 
+
+### Enforcement Actions
+
+Financial enforcement actions are configurable actions you can set to trigger when a spending limit is surpassed. An enforcement action can be as simple as sending an email to a project owner or as complex as shutting down a cloud account.
+
+Enforcement actions are set up in the Enforcements tab of a project. You can set up multiple actions to trigger at different spending thresholds. For example, you could set up an action to send an email to the project owner when spending reaches 80% of the budget and then shut down the account when spending reaches 100% of the budget.
+
+For more information on setting up enforcement actions, see [Project Financial Enforcements](https://support.kion.io/hc/en-us/articles/360033984632-Project-Financial-Enforcements).
+
