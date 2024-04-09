@@ -1,0 +1,87 @@
+# Advanced Features
+
+GitHub Enterprise includes some features that have metered billing or are a paid add-on feature.
+
+## Free Features
+
+A free tier for the consumption features is being made available to all repositories. Usage beyond the free tier will be pass-through billed to the repository owner.
+
+### Packages
+
+[GitHub Packages](https://github.com/features/packages) is a platform for hosting and managing packages, including containers and other dependencies, and will be made available to all teams and organizations with free allocations outlined below.
+
+| Product | Free tier | Rate (GitHub's) |
+| ------- | --------- | ---- |
+| Storage | 5GB | $0.008 per GB per day |
+| Data transfer out | 15GB | $0.50 per GB |
+| Actions minutes | Unlimited[^1]
+
+> Rates subject to change. See [About Billing for GitHub Packages](https://docs.github.com/en/billing/managing-billing-for-github-packages/about-billing-for-github-packages) for the latest information and rates.<br/>
+
+[^1]: The free tier of actions minutes uses a shared pool of compute, and performance is not guaranteed.
+
+
+### Actions
+
+[GitHub Actions](https://docs.github.com/en/actions) is a continuous integration and continuous delivery (CI/CD) platform that allows you to automate your build, test, and deployment pipeline. The environment in which these workflows execute is called a runner, and can be [GitHub-hosted](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners) or [self-hosted](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners).
+
+The institutional and student organizations each have a shared pool of GitHub Actions runners to use to run their project's jobs. There is no limit to the number of runner minutes that can be consumed, but there may be a queue during times of high demand. Each workflow job execution uses a new, clean, ephemeral environment that is destroyed after execution. These environments are based on the [Ubuntu 20.04 LTS virtual environment](https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-Readme.md) with similar specifications to [GitHub-hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources).
+
+Data transfer out from Packages to Actions is free, but action consumes Packages storage when storing artifacts.
+
+### Large File Storage (LFS)
+
+[Large File Storage (LFS)](https://git-lfs.github.com/) is a file storage service that allows you to store large files in your GitHub repository. LFS is enabled in the Institution organization, but disabled in the student organization. The free tier of LFS for institutional repositories is 1GB of storage and 1GB of transfer. The cost for additional usage will be determined and posted soon, and will be billed to the repository owner.
+
+| Product | Free | Price |
+| ------- | --------- | ---- |
+| LFS Storage | 1GB | TBD |
+| LFS Data transfer out | 1GB | TBD |
+
+However, for both organizations, we strongly encourage the use of [git-annex](https://git-annex.branchable.com/) over git-lfs, with Microsoft OneDrive or Google Drive as the storage backend.
+
+## Metered Features
+
+### Packages
+
+GitHub packages usage consumes storage and data transfer, and usage beyond the free tier will require billing information. Student organization repositories that need to exceed the free tier should relocate their repository to the institutional organization with a faculty or staff sponsor to facilitate a billing agreement.
+
+
+### Codespaces
+
+[Codespaces](https://docs.github.com/en/codespaces) are hosted, configurable development environments for GitHub repositories. Codespaces can be enabled for a repository and/or a specific GitHub user. There is no free tier for codespaces, and billing information will be required for usage.
+
+Codespaces usage is billed according to the units of measure in the following table:
+
+| Product | SKU | Unit of measure | Price |
+| ------- | --- | --------------- | ----- |
+| Codespaces Compute | 2 core  | 1 hour | $0.18
+|                    | 4 core  | 1 hour | $0.36
+|                    | 8 core  | 1 hour | $0.72
+|                    | 16 core | 1 hour | $1.44
+|                    | 32 core | 1 hour | $2.88
+| Codespaces Storage | Storage | 1 GB-month| $0.07
+
+> Rates subject to change. See [About Billing for Codespaces](https://docs.github.com/en/billing/managing-billing-for-github-codespaces/about-billing-for-codespaces) for the latest information and rates.
+
+To enable Codespaces, please [contact us](/contact_us).
+
+
+## Add-on Features
+
+### Actions Runner Pools
+
+If your project requires a specialized virtual environment, such as a different operating system or CPU platform, a private runner pool can be created. You can use your own infrastructure to add a [self-hosted runner](https://docs.github.com/en/actions/hosting-your-own-runners/adding-self-hosted-runners) to a single repository that you own; or, AIP can host a runner pool for you to use to run jobs for multiple repositories that you own.
+
+To get started setting up a self-hosted runner, follow the [self-hosted runners guide](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners), or [contact us](/contact_us) to host them for you.
+
+
+### GitHub Advanced Security
+
+[GitHub Advanced Security](https://docs.github.com/en/get-started/learning-about-github/about-github-advanced-security) is a paid add-on feature that enabled additional security features, such as code and secret scanning. It is free for public repositories, and is available to purchase for use in internal and private repositories.
+
+Billing for GitHub Advanced Security is on a 90-day rolling count of unique committers to a repository with Advanced Security enabled. A committer is only ever counted once, even if they commit to multiple repositories. Billing is done on an annual basis based on a forecast of unique committers, but can be adjusted as needed at any time.
+
+See [About billing for GitHub Advanced Security](https://docs.github.com/en/enterprise-cloud@latest/billing/managing-billing-for-github-advanced-security/about-billing-for-github-advanced-security) for more information.
+
+To purchase GitHub Advanced Security, please [contact us](/contact_us).

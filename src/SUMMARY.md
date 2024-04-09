@@ -32,3 +32,12 @@
     - [Postmaster Tools](./cps/email/postmaster.md)
   - [Bulk Mail](./cps/email/bulk.md)
   - [FAQ](./cps/email/faq.md)
+
+- [GitHub](./github/index.md)
+  - [Guidelines](./github/guidelines.md)
+  - [Organizations](./github/organizations.md)
+  - [Teams](./github/teams.md)
+  - [Advanced Features](./github/advanced_features.md)
+  - [FAQs](./github/faqs.md)
+  - [Migrating to Cloud](./github/migrating.md)
+  - [TAMU Migration Tool](./github/migration_tool.md)
