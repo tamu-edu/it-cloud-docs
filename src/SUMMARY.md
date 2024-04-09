@@ -40,3 +40,4 @@
   - [Advanced Features](./github/advanced_features.md)
   - [FAQs](./github/faqs.md)
   - [Migrating to Cloud](./github/migrating.md)
+  - [TAMU Migration Tool](./github/migration_tool.md)
