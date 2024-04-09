@@ -2,6 +2,14 @@
 
 Kion provides detailed insights into cloud spending, identifies ways to save money, and offers tools to control cloud costs. It helps you track spending and budgets in detail, discover ways to save money by optimizing or removing unused cloud resources, and optionally set spending limits that automatically take action if costs get too high.
 
+## How Cloud Spending Works
+
+Cloud spending is based on the resources you use in the cloud. Each cloud provider has a different pricing model, but most charge based on the resources you use, such as virtual machines, storage, and data transfer, and the time you use them. Technology Services bills you based on the FAMIS account(s) provided for the actual resources you use based on the cloud provider's pricing model, without any markup.
+
+If you have multiple cloud accounts billed to the same FAMIS account, the bill from Technology Services will be an aggregate. You can use Kion to view individual cloud account spending. 
+
+You may see charges on your cloud accounts related to services you did not directly use. For example, you may see charges for data transfer, storage, or other services that are used by other services you are using. These charges are typically small but can add up over time. There are other services that are free up to a certain limit, such as the number of API calls you can make to a service. If you exceed this limit, you will be charged for the additional usage. Finally, there are services related to security, logging, and monitoring that are required for compliance or best practices. These services may have a cost associated with them, but they are necessary for the operation of your cloud resources. Even if you do not directly use these services, you may still be charged for them.
+
 
 ## Budgets
 
@@ -32,3 +40,11 @@ For more information on setting up enforcement actions, see [Project Financial E
 ## Savings Opportunities
 
 Kion provides recommendations for saving money on your cloud spending. These recommendations are based on your current spending patterns and the services you are using. We recommend reviewing these recommendations regularly to ensure you are getting the best value for your cloud spending.
+
+
+## Financial Reports
+
+Kion provides detailed financial reports to help you understand your cloud usage and spending. You can generate reports for specific time periods, services, or projects. Reports can be exported to CSV or PDF for further analysis or sharing.
+
+The Financials tab of the project shows you the budget and spending status for the project, the spending per account, and the spend reporting tool. The spend reporting tool allows you to generate reports for specific time periods, services, or projects. Reports can be exported to CSV or PDF for further analysis or sharing. A spend report by service can be used to reconcile your cloud spending with your internal Technology Services bill.
+
