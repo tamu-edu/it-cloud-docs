@@ -85,3 +85,8 @@ Billing for GitHub Advanced Security is on a 90-day rolling count of unique comm
 See [About billing for GitHub Advanced Security](https://docs.github.com/en/enterprise-cloud@latest/billing/managing-billing-for-github-advanced-security/about-billing-for-github-advanced-security) for more information.
 
 To purchase GitHub Advanced Security, please [contact us](/contact_us).
+
+
+### Repository Templates
+
+Repository templates allow you to have a team automatically assigned to all new repositories in the tamu-edu organization that match a given prefix. This can be useful for setting up a team with the appropriate permissions for a new project, or for automatically adding a specific set of collaborators to a repository. To make a new repository template, add a pull request to the [org-settings](https://github.com/tamu-edu/org-settings/tree/main/repo_settings) repository, following the directions in the README.md file. The code for the app behind this feature can be found at [tamu-edu/it-ae-github-app-org-repo-settings](https://github.com/tamu-edu/it-ae-github-app-org-repo-settings).
