@@ -36,25 +36,8 @@ If you are already managing your AWS resources via Terraform and wish to migrate
 - The overall pattern you will want to follow is to create new resources in your terraform code that are bound to the new, shared VPC (i.e. ALB and associated resources, subnet group for RDS, security groups, etc.) side by side with old version bound to the old VPC. Next, move the resource(s) that depends on these things to use the new resource. Lastly, delete the old resource(s) pointing to the old VPC.
 - You can't update security groups in Terraform if there are resources already depending on them. Instead, create new security groups, point old resources to them, then delete old security groups.
 - When creating security groups, wherever possible, don't rely on CIDR blocks if you are trying to limit access to one resource to another managaed resource. Instead, use `security_groups`. I.e. `security_groups   = [aws_security_group.<resource_name>.id]`. This will allow Amazon to use its knowledge of the resources represented by the other security group to limit access.
-- See below for sample Terraform code to specifically select the subset of subnets that are public. Note that valid choices for the `values = ["public"]` line are `public`, `private` and `campus` (if the campus subnet has been shared with your account).
+- See this page for [details on referencing subnets with Terraform](https://docs.cloud.tamu.edu/cloud/aws/networking.html#using-subnets-with-terraform)
 
-```admonish info
-    data "aws_vpc" "default" {
-      default = false
-      id = "vpc-0c31fe331850b85b5"
-    }
-
-    data "aws_subnets" "default" {
-      filter {
-        name    = "vpc-id"
-        values  = [data.aws_vpc.default.id]
-      }
-      filter {
-        name = "tag:subnet-type"
-        values = ["public"]
-      }
-    }
-```
 
 
 ### EC2 Instances
@@ -73,7 +56,7 @@ We recommend using the AWS Systems Manager automation document to copy the insta
 - (Optionally) the name of the key pair defined for the previous VM for initial login
 
 Additional notes about using the AWS Systems Manager automation document:
-- If you use this automation, you will end up with two identical VM's running at the same time. 
+- If you use this automation, you will end up with two identical VM's. This means that it is recommended to shut down the source VM before initiating the automation to prevent both VM's from running at the same time.
 - Please consider what this will mean for any other systems depending on this VM. 
 - At a minimum, once you are satisfied that the copy is working correctly, you will need to shut the old VM down and eventually remove it. The automation does not clean up the old VM for you.
 - Pay attention to the region that is selected when running the automation document. It may not default to the correct region in which your resources are located. In particular, if the automation can't seem to find any of your resources, this is likely the cause.
