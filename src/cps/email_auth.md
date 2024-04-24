@@ -1,13 +1,10 @@
-```admonish info
-This site is a work in progress and will be updated regularly.  Please check back frequently for updates.
-```
 
-# Email Authentication
+<img src="./Website-moving.webp" alt="We have moved" width="50%" height="50%"/>
 
-Email authentication (or email validation) is the process used to verify the source and legitimacy of an email message.  Utilizing email authentication helps to protect against email threats, such as phishing, fraud and spam.  To understand email authentication, it is important to understand the [protocols](./email/protocols.md) used.
+The email security related documentation on this website has moved!  The new content can be found here:
 
-To increase email deliverability and comply with requirements from email providers such as [Google](https://support.google.com/mail/answer/81126?hl=en#:~:text=1%20Set%20up%20SPF%20and%20DKIM%20email%20authentication,rate%20of%200.30%25%20or%20higher.%20...%20More%20items) and [Yahoo](https://senders.yahooinc.com/best-practices/), Technology Services is expanding the use of these protocols to all ```tamu.edu``` subdomains, sometimes referred to as boutique domains.
+<https://docs.security.tamu.edu/docs/email-security/home>
 
-At minimum, mail sent to external recipients will need to implement both [SPF](./email/spf.md) and [DKIM](./email/dkim.md), and will need to pass [DMARC](./email/dmarc.md). This has already been implemented for the root domain, `tamu.edu`.
+Please bookmark this new site as the primary source for Texas A&M's IT Security & Risk documentation.
 
-For additional requirements, information and frequently asked questions, visit the other pages in this section.
+<https://docs.security.tamu.edu/>
