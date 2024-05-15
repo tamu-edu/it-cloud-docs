@@ -16,6 +16,7 @@ It is a serverless, event-driven application that uses AWS Lambda, S3, and Dynam
 - While the TAMU Migration Tool is designed to migrate most of the data from your repositories, there are some limitations to be aware of. Read more about the type of data that will and will not be migrated in the [GitHub Enterprise Importer](https://docs.github.com/en/migrations/using-github-enterprise-importer/migrating-between-github-products/about-migrations-between-github-products) docs. 
 - Users and Teams are not migrated. You will need to recreate these in the new organization. Migrated repositories will have the migration requestor as the only owner.
 - Only organization-owned repositories are supported. You will need to transfer any personal repositories to an organization before migrating.
+  - See the GitHub documentation on [Transferring a repository](https://docs.github.com/en/enterprise-server@3.11/repositories/creating-and-managing-repositories/transferring-a-repository).
 
 ## Outline
 
