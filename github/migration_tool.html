@@ -318,19 +318,10 @@
                         <h1 id="tamu-migration-tool"><a class="header" href="#tamu-migration-tool">TAMU Migration Tool</a></h1>
 <p>The TAMU Migration Tool is a self-service tool that allows you to migrate your repositories from <code>github.tamu.edu</code> to GitHub Enterprise Cloud. This tool is best for repositories with multiple contributors and a large number of files. The TAMU Migration Tool will automatically migrate your repositories, including commit history, tags and branches, and most GitHub metadata like issues and pull requests, to the <code>tamu-edu</code> or <code>tamu-edu-students</code> organizations on GitHub Enterprise Cloud.</p>
 <p>It is a serverless, event-driven application that uses AWS Lambda, S3, and DynamoDB to manage the migration process using GitHub's APIs.</p>
-<div id="admonition-note" class="admonition admonish-note">
-<div class="admonition-title">
-<p>Note</p>
-<p><a class="admonition-anchor-link" href="#admonition-note"></a></p>
-</div>
-<div>
-<p>The TAMU Migration Tool is currently in a private beta. If you are interested in participating in the beta, please contact us at <a href="mailto:github@tamu.edu">github@tamu.edu</a> or on slack at <a href="https://tamu.slack.com/archives/C05B9JU135E">#github-help</a>.</p>
-</div>
-</div>
 <h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
 <ul>
-<li>This tool only supports migrations from <code>github.tamu.edu</code> to GitHub Enterprise Cloud.</li>
-<li>You must have admin access to the repositories you want to migrate.</li>
+<li>This tool only supports migrations from organization-owned repositories on <code>github.tamu.edu</code> to GitHub Enterprise Cloud.</li>
+<li>You must have admin access to the repositories or organization you want to migrate.</li>
 <li>You must have a GitHub account with access to the <code>tamu-edu</code> or <code>tamu-edu-students</code> organizations on GitHub Enterprise Cloud.</li>
 </ul>
 <h2 id="limitations"><a class="header" href="#limitations">Limitations</a></h2>
@@ -342,7 +333,7 @@
 <h2 id="outline"><a class="header" href="#outline">Outline</a></h2>
 <p>To migrate your repositories using the TAMU Migration Tool, follow these steps:</p>
 <ol>
-<li>Visit the <a href="https://github.cloud.tamu.edu">TAMU GitHub</a> website and select <em>Migrate from GitHub Server</em> in the <strong>Server</strong> card.</li>
+<li>Visit the <a href="https://github.cloud.tamu.edu">TAMU GitHub</a> website, Login, and select <em>Migrate from GitHub Server</em> in the <strong>Server</strong> card.</li>
 <li>Follow the checklist to ensure you have set up all the proper authentication and permissions. Click <em>Next</em> when all items are successful.</li>
 <li>Choose the repositories you want to migrate, the destination organization (<code>tamu-edu</code> or <code>tamu-edu-students</code>) and click <em>Migrate</em>.</li>
 </ol>
