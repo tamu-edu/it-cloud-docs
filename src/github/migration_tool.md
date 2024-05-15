@@ -4,9 +4,6 @@ The TAMU Migration Tool is a self-service tool that allows you to migrate your r
 
 It is a serverless, event-driven application that uses AWS Lambda, S3, and DynamoDB to manage the migration process using GitHub's APIs.
 
-```admonish note
-The TAMU Migration Tool is currently in a private beta. If you are interested in participating in the beta, please contact us at [github@tamu.edu](mailto:github@tamu.edu) or on slack at [#github-help](https://tamu.slack.com/archives/C05B9JU135E).
-```
 
 ## Prerequisites
 
