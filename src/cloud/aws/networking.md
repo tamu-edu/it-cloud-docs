@@ -9,7 +9,7 @@ The Technology Services Cloud Services team provides all AWS customers with a Vi
 
 The TAMU VPCs are available in the `us-east-1` and `us-east-2` regions with large public, private, and campus-accessible subnets in multiple availability zones.
 
-- **Public Subnets**: These subnets are used for resources that need to be accessible from the internet.
+- **Public Subnets**: These subnets are used for resources that need to be accessible from the internet. For more details, please see the [AWS document on subnet types](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html#subnet-types)
 - **Private Subnets**: These subnets are used for resources that should not be accessible from the internet.
 - **Campus Subnets**: These subnets are used for resources that need to access resources on the internal TAMU campus network.
 
@@ -27,7 +27,7 @@ TAMU has redundant Direct Connect connections to AWS that provide a private, hig
 
 In general, it is recommended to use the internet to access resources in AWS. Use of this private connectivity is not recommended except when architecturally necessary. Instead, consider trying to decouple your resources depending on the campus networks and utilize alternatives that are already in the cloud, or extending that resource into the cloud. This will help to reduce the risk of a single point of failure for your service.
 
-To request access to Campus Subnets, please contact the Cloud Services team at [aip@tamu.edu](mailto:aip@tamu.edu).
+To request access to Campus Subnets, please contact the Cloud Services team at [aip@tamu.edu](mailto:aip@tamu.edu). Please note that after this is shared with your account, it takes ~1-2 hours for the human readable name to be applied to the subnets by Kion.
 
 
 ## Exception Request
@@ -39,7 +39,7 @@ If you have a specific use case that requires a different network design, please
 
 ### Using Subnets
 
-When you create resources in AWS, you will need to select a subnet to place the resource in. You should select the subnet that best fits the requirements of the resource you are creating. A reference table of the subnets and their IDs available in the TAMU VPC is provided below.
+When you create resources in AWS, you will need to select a subnet to place the resource in. You should select the subnet that best fits the requirements of the resource you are creating. A reference table of the subnets and their IDs available in the TAMU VPC is provided below. Note that the following Availability Zones are not available for use due to cost reasons: `use1-az3`, `use1-az5`, `use1-az6`, `use2-az4`, `use2-az5`, `use2-az6`. Be sure any existing resources that are using any of these AZ's get moved to a supported AZ from the list below. If you require a service or resource type that is not available in the existing zones, please contact the Cloud Services team at [aip@tamu.edu](mailto:aip@tamu.edu).
 
 
 `us-east-1` VpcId: `vpc-0c31fe331850b85b5`
@@ -74,3 +74,26 @@ When you create resources in AWS, you will need to select a subnet to place the 
 | use2-az1-subnet-campus1	| `subnet-0b1ed0a72f67a55cf` | `10.165.224.0/21` | use2-az1 | Campus |
 |	use2-az2-subnet-campus1	| `subnet-0f0c46736c5ed324a` | `10.165.232.0/21` | use2-az2 | Campus |
 | use2-az3-subnet-campus1	| `subnet-095b24e03fe7d7f98` | `10.165.240.0/21` | use2-az3 | Campus |
+
+
+### Using Subnet with Terraform
+
+- See below for sample Terraform code to specifically select the subset of subnets that are public. Note that valid choices for the `values = ["public"]` line are `public`, `private` and `campus` (if the campus subnet has been shared with your account).
+
+```admonish info
+    data "aws_vpc" "default" {
+      default = false
+      id = "vpc-0c31fe331850b85b5"
+    }
+
+    data "aws_subnets" "default" {
+      filter {
+        name    = "vpc-id"
+        values  = [data.aws_vpc.default.id]
+      }
+      filter {
+        name = "tag:subnet-type"
+        values = ["public"]
+      }
+    }
+```
