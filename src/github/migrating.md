@@ -13,9 +13,11 @@ A timeline for deprecation will be:
 * Jun 2024:
     * Appliance made read-only
     * SSH access is blocked
-* Aug 2024:
-    * Appliance shut down and a final backup is made
-* Aug 2026:
+* Aug 30, 2024:
+    * All data is archived and made read-only
+* Sep 27, 2024:
+    * Appliance is shut down 
+* Sep 2025:
     * Appliance data is deleted
 
 ## Migration Options
