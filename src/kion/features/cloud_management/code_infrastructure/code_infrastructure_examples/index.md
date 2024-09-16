@@ -1,6 +1,6 @@
-> 💡 Below is a curated list of examples of infrastructure as code last compiled on 2024-09-13. You can visit our organization github page and search for `lang: hcl` to see the very latest (see [search hcl](https://github.com/orgs/tamu-edu/repositories?q=lang%3Ahcl+visibility%3Apublic%2Cinternal+archived%3Afalse&type=all)) Terraform repositories.
+> 💡 Below is a curated list of examples of infrastructure as code last compiled on 2024-09-13. You can visit our organization github page (https://github.com/orgs/tamu-edu) and search for `lang: hcl` to see the very latest Terraform repositories (see [search hcl](https://github.com/orgs/tamu-edu/repositories?q=lang%3Ahcl+visibility%3Apublic%2Cinternal+archived%3Afalse&type=all)).
 
-For a general start, check out [dit-cscn-aip-iac-library](#dit-cscn-aip-iac-library) below.
+For a general start, check out [dit-cscn-aip-iac-library](#dit-cscn-aip-iac-library-link) below.
 
 Click into a repository link to see its README and code.
 
@@ -198,7 +198,7 @@ This is a terraform module for initializing a terraform state backend in Azure.
 
 | Author | Language | Created | Updated | Stars | Forks | Visibility |
 | -- | -- | -- | -- | -- | -- | -- |
-| tamu-edu | HCL | 2022-11-20T19:15:11Z | 2022-11-20T19:26:26Z | 1 | 0 | internal |
+| [deigaard](https://github.com/deigaard) | HCL | 2022-11-20T19:15:11Z | 2022-11-20T19:26:26Z | 1 | 0 | internal |
 
 https://github.com/tamu-edu/it-template-lambda-at-edge-static-site
 
