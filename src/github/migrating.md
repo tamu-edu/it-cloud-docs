@@ -20,10 +20,6 @@ A timeline for deprecation will be:
 * Sep 2025:
     * Appliance data is deleted
 
-## Migration Options
+## Migrating off `github.tamu.edu`
 
-There are two primary options for migrating your repositories from `github.tamu.edu` to GitHub Enterprise Cloud:
-
-1. [**TAMU Migration Tool**](./migration_tool.md): The TAMU Migration Tool is a self-service tool that allows you to migrate your repositories from `github.tamu.edu` to GitHub Enterprise Cloud. This tool is best for repositories with multiple contributors and a large number of files. The TAMU Migration Tool will automatically migrate your repositories, including commit history, tags and branches, and most GitHub metadata like issues and pull requests, to the `tamu-edu` or `tamu-edu-students` organizations on GitHub Enterprise Cloud.
-
-2. **Git Remote**: If you don't need issue, pull request, or comment metadata, you can use the Git Remote method to migrate your repositories. This method is best for repositories with a small number of files and contributors. The Git Remote method involves creating a new, empty repository in the `tamu-edu` or `tamu-edu-students` organizations on GitHub Enterprise Cloud and pushing your code to the new repository. Read more about [Pushing commits to a remote repository](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository).
+As of September 27, 2024, `github.tamu.edu` has been shut down. If you have not migrated your repositories to GitHub Enterprise Cloud, please [contact us](/contact_us) for assistance.
