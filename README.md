@@ -4,6 +4,8 @@ Cloud documentation for Technology Services.
 
 ## Adding/Editing Content to this site
 
+The documentation in this book is sourced by the markdown files and structure in `./src` and is rendered to navigable html by [mdbook](https://rust-lang.github.io/mdBook/). Github actions in this repo automatically render committed markdown and publish it.
+
 1. Create a new branch from `main` for your changes
 2. Create/Edit the markdown files in the `src` directory
 3. **IMPORTANT** -- Add/Update links in the `SUMMARY.md` file to include your new content.
@@ -40,7 +42,9 @@ Cloud documentation for Technology Services.
         ---
 
     - Empty links can be used (i.e. `- [Page title]()`) to create a collapsible header for nested pages in the sidebar without a link to a page. This can be used to group pages logically without creating a page for the header.
-4. Optional - Preview your changes before commiting using dev containers.  See [Dev Containers](#dev-containers) for more information.
+
+    - Unfortunately, directories cannot be linked in `SUMMARY.md` plainly. Instead, a topic subdirectory's `index.md` must be linked which renders a link to the generated `index.html` file.
+4. Optional - Preview your changes before commiting and pushing to the repo. This can be done most easily by running `mdbook` locally or by running using dev containers. See [Dev Containers](#dev-containers) for more information.
 5. Commit your changes
 6. Push your changes to GitHub
 7. Create a pull request to merge your changes into the `main` branch
@@ -89,6 +93,17 @@ Images can be added to the `src` directory and referenced in markdown files usin
 Links can be added to markdown files using the following syntax: `[link text](https://www.example.com)`. Internal links are supported using relative pathing, i.e. `[link text](./path/to/file.md)` (if your file is in a different directory, make sure the relative path is correct, i.e. `../../path/to/file.md`).
 
 You can also link to a specific section of a page using the following syntax: `[link text](./path/to/file.md#section-title)` where `#section-title` is the Markdown header of the section you want to link to.
+
+#### Special note on linking topic directories
+
+Directory and subdirectory linking is not supported in `SUMMARY.md`. For instance, if you wanted to link `[cloud](./cloud/)`, you would see an mdbook compile error like:
+```
+2024-09-16 10:18:18 [ERROR] (mdbook::cmd::watch::poller): failed to load book config: Unable to read "Cloud" (/Users/bronius/projects/it-cloud-docs/src/./cloud/)
+
+Caused by:
+    Is a directory (os error 21)
+```
+Instead, create an `index.md` in that subdirectory, and link it directly like `[cloud](./cloud/index.md)`. This will generate an `index.html` file and link to it in the summary sidepanel. Our webserver for this documentation site is configured to serve `index.html` when no file is specified, so the subdirectory link _can be_ specified and shared without the `index.html`.
 
 ### Including other markdown files
 
