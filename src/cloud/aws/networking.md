@@ -39,7 +39,7 @@ If you have a specific use case that requires a different network design, please
 
 ### Using Subnets
 
-When you create resources in AWS, you will need to select a subnet to place the resource in. You should select the subnet that best fits the requirements of the resource you are creating. A reference table of the subnets and their IDs available in the TAMU VPC is provided below. Note that the following Availability Zones are not available for use due to cost reasons: `use1-az3`, `use1-az5`, `use1-az6`, `use2-az4`, `use2-az5`, `use2-az6`. Be sure any existing resources that are using any of these AZ's get moved to a supported AZ from the list below. If you require a service or resource type that is not available in the existing zones, please contact the Cloud Services team at [aip@tamu.edu](mailto:aip@tamu.edu).
+When you create resources in AWS, you will need to select a subnet to place the resource in. You should select the subnet that best fits the requirements of the resource you are creating. A reference table of the subnets and their IDs available in the TAMU VPC is provided below. Note that not all availability zones in `us-east-1` have this network infrastructure. To avoid cross-zone bandwidth changes, avoid deploying resources to `use1-az3`, `use1-az5`, `use1-az6`. If you require a service or resource type that is not available in the existing zones, please contact the Cloud Services team at [cloudops@tamu.edu](mailto:cloudops@tamu.edu).
 
 
 `us-east-1` VpcId: `vpc-0c31fe331850b85b5`
