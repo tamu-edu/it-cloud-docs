@@ -66,7 +66,6 @@ Once the automation document has been run, you will need to:
 - reassign any EC2 instance roles, if applicable.
 - clean up (delete/terminate) the source instance and any associated resources.
 - update any DNS records or other references to the source instance.
-- Potentially update the DNS servers within the VM. Note that the VM's internal DNS servers may be reset to use the default AWS provided DNS server. In particular, if using the campus shared subnet and you have overridden the default DNS servers to point to Infoblox, you will need to set this up again to enable proper DNS resolution for campus resources.
 
 If you were using Terraform to manage the old VM and want to continue using it to manage the new VM resource, you will need to define new resources and then import the copied VM into that. A way to get the correct syntax to use for importing is to run `terraform plan` and see how it defines the resource name. Once you have the name correct, if you were using a module for instance, import with something like `terraform import module.<module_name>.aws_instance.<resource_name> <instance_id>`. Once imported, run `terraform plan` again to see what it says will need to be changed. Observe what it would change, then update your Terraform code so unwanted changes would not occur. Keep doing this loop until the output of `terraform plan` reflects the actual changes (if any) that you want to make. Some common things that you may need to update inclued:
 - AMI - you will need to update to reflect the automatically created AMI from the automation
