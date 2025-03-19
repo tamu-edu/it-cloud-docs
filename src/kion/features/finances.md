@@ -4,12 +4,67 @@ Kion provides detailed insights into cloud spending, identifies ways to save mon
 
 ## How Cloud Spending Works
 
-Cloud spending is based on the resources you use in the cloud. Each cloud provider has a different pricing model, but most charge based on the resources you use, such as virtual machines, storage, and data transfer, and the time you use them. Technology Services bills you based on the FAMIS account(s) provided for the actual resources you use based on the cloud provider's pricing model, without any markup.
+Cloud spending is based on the resources you use in the cloud. Each cloud provider has a different pricing model, but most charge based on:
 
-If you have multiple cloud accounts billed to the same FAMIS account, the bill from Technology Services will be an aggregate. You can use Kion to view individual cloud account spending. 
+- **Resources used**: Virtual machines, storage, data transfer, etc.
+- **Usage time**: The duration for which the resources are used.
 
-You may see charges on your cloud accounts related to services you did not directly use. For example, you may see charges for data transfer, storage, or other services that are used by other services you are using. These charges are typically small but can add up over time. There are other services that are free up to a certain limit, such as the number of API calls you can make to a service. If you exceed this limit, you will be charged for the additional usage. Finally, there are services related to security, logging, and monitoring that are required for compliance or best practices. These services may have a cost associated with them, but they are necessary for the operation of your cloud resources. Even if you do not directly use these services, you may still be charged for them.
+## Billing Process
 
+- **Technology Services Billing**: You are billed based on the FAMIS account(s) provided, reflecting the actual resources used according to the cloud provider's pricing model, with no markup.
+- **Aggregate Billing**: If multiple cloud accounts are billed to the same FAMIS account, the bill from Technology Services will be an aggregate. Use Kion to view individual cloud account spending.
+
+### Understanding Charges
+
+- **Indirect Charges**: You may see charges for services you did not directly use, such as data transfer, storage, or other services utilized by the services you are using. These charges are typically small but can accumulate over time.
+- **Free Services Limits**: Some services are free up to a certain limit (e.g., number of API calls). Exceeding this limit incurs additional charges.
+- **Compliance and Best Practices**: Services related to security, logging, and monitoring, which are necessary for compliance or best practices, may have associated costs. Even if you do not directly use these services, you may still be charged for them.
+
+### Bill Notification
+
+Bills are sent via PCR360 with an email subject titled “Your Technology Services bill is ready to view.” Cloud cost and usage reports can be set up via Kion or the AWS, Azure, and GCP dashboards, depending on what is more appropriate for you to use, but bills are only paid via the PCR360 Customer Center.
+
+### Viewing and Paying Bills
+
+- To log in and view your bills, visit the PCR360 Customer Center. A NetID and password are required.
+- Select "View Bill" under Quick Links in the main menu.
+- Choose the desired bill from the drop-down labeled "Bill Date Range."
+- Download and save your bill as a PDF/CSV file.
+- Refer to the "Anatomy of Cloud Service Charges in PCR360 Technology Services Invoice" section to understand the format of your cloud service charges.
+
+## Itemizing Charges
+
+### Anatomy of Cloud Service Charges in PCR360 Technology Services Invoice
+
+Cloud service bills from Technology Services billing will come from PCR360 and will look something like this:
+
+- **2025-01-AWS-your-subscription-or-account-name**
+- **2025-01-AZ-your-subscription-or-account-name**
+- **2025-01-GCP-your-subscription-or-account-name**
+
+Where:
+
+- The first set of numbers (e.g., 2025-01) represents the year and month of the cost and usage period.
+- The second set of characters (“AWS”, “AZ”, or “GCP”) refers to Amazon Web Services, Microsoft Azure, or Google Cloud Platform, respectively.
+
+### How to Itemize Cloud Service Charges
+
+To itemize your cloud service charges, you can use Kion or the respective Cloud Service Provider (CSP) dashboards (AWS, Azure, GCP). Here’s how you can do it:
+
+- **Using Kion**:
+    
+    - Log in to Kion https://kion.cloud.tamu.edu/login with your credentials.
+    - If you have not used the self-service request form to create a cloud account, you can log into Kion but will need to make a helpdesk ticket to request the minimal privilege access for your itemization or spend report needs.
+    - Review the detailed breakdown of charges for each service and resource used.
+    - Export the data if needed for further analysis or reporting.
+    - For more detailed guidance, refer to the [Kion Spend Reports Documentation](https://support.kion.io/hc/en-us/articles/25335727026061-Spend-Reports).
+- **Using CSP Dashboards**:
+    
+    - **AWS**: Log in to the AWS Management Console and follow the instructions in the [AWS Documentation on Understanding Your Bill](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/getting-viewing-bill.html) to view and analyze your usage and costs.
+    - **Azure**: Log in to the Azure Portal, navigate to "Cost Management + Billing," and use the "Cost Analysis" tool to review and itemize your charges. For more detailed guidance, refer to the [Azure Cost Management Documentation](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/reporting-get-started).
+    - **GCP**: Log in to the Google Cloud Console, go to the "Billing" section, and use the "Reports" or "Cost Table" to view detailed cost information. For more detailed guidance, refer to the [GCP Billing Reports Documentation](https://cloud.google.com/billing/docs/how-to/reports).
+
+By itemizing your charges, you can gain a better understanding of your cloud spending and identify areas where you can optimize costs.
 
 ## Budgets
 
