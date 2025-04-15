@@ -20,7 +20,7 @@ The AWS Management Console is a web-based interface for accessing and managing A
 
 The AWS Command Line Interface (CLI) is a unified tool to manage your AWS services. With just one tool to download and configure, you can control multiple AWS services from the command line and automate them through scripts. The AWS CLI is available for Windows, Mac, and Linux. More information at [AWS CLI](https://aws.amazon.com/cli/).
 
-To set up your AWS CLI automatically, we recommend using our [`aiphelper`](https://github.com/aggie-innovation-platform/aiphelper) tool. This tool will configure your AWS CLI with the correct settings and is especially useful for users who need to access multiple AWS accounts.
+To set up your AWS CLI automatically, we recommend using our [`aiphelper`](https://github.com/tamu-edu/aiphelper) tool. This tool will configure your AWS CLI with the correct settings and is especially useful for users who need to access multiple AWS accounts.
 
 To configure the AWS CLI manually, you will need to add the following to your `~/.aws/config` file for each AWS account you want to access:
 
