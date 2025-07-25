@@ -43,7 +43,7 @@ The [GitHub Security Portal](https://github.com/security) has specific informati
 If you have additional questions, contact us at <github@tamu.edu>
 
 ### Are there size limitations?
-The standard storage guidelines from GitHub are available [here](https://help.github.com/articles/what-is-my-disk-quota).  Additional information about paid services is available [here](/github/advanced_features)
+The standard storage guidelines from GitHub are available [here](https://help.github.com/articles/what-is-my-disk-quota).  Additional information about paid services is available [here](/github/#advanced_features)
 
 ### Why can't I make my repository public?
 New repositories can be made public, but a repo owner cannot change an existing private repo to public. To do so, please follow the instructions in the issue that was created, or contact us with your repo name.
