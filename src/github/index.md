@@ -33,16 +33,6 @@ Educators can apply to join the Global Campus program to join a teachers-only co
 
 Educators can also receive CodeSpaces credit to use in their GitHub Classrooms.
 
-### GitHub Campus Advisor
-
-[GitHub Campus Advisors](https://education.github.com/teachers/advisors) is a community for teachers who share best practices. They have mastered the use of Git and GitHub and champion the use of real-world tools at their institutions. A Campus Advisor:
-
-* Prepares students for the real world
-* Shares best practices with colleagues
-* Interacts with educators beyond their campus
-
-A Campus Advisor benefits from event support on campus or at conferences via the Campus Advisors Professional Development Network (CAPDN), early access to new education features and materials from GitHub Education, and special invitations to educational conferences and meetups around the world.
-
 ## Personal Use
 
 Texas A&M University Enterprise GitHub is only for collaborative projects directly related to one's affiliation with Texas A&M University. Please use a personal GitHub account or organization if your project does not represent Texas A&M University or is not related to your affiliation with the University.
