@@ -40,7 +40,7 @@ The [GitHub Security Portal](https://github.com/security) has specific informati
 * [Cloud Security Alliance (CSA) STAR Registry](https://cloudsecurityalliance.org/star/registry/github-inc/services/github/)
 
 ### I have another question not already covered.  How do I get help?
-If you have additional questions, [contact us](/contact_us)
+If you have additional questions, contact us at <github@tamu.edu>
 
 ### Are there size limitations?
 The standard storage guidelines from GitHub are available [here](https://help.github.com/articles/what-is-my-disk-quota).  Additional information about paid services is available [here](/github/advanced_features)
