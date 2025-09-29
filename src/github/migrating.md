@@ -22,4 +22,4 @@ A timeline for deprecation will be:
 
 ## Migrating off `github.tamu.edu`
 
-As of September 27, 2024, `github.tamu.edu` has been shut down. If you have not migrated your repositories to GitHub Enterprise Cloud, please [contact us](mailto:github@tamu.edu) for assistance.
+As of September 27, 2024, `github.tamu.edu` has been shut down. If you have not migrated your repositories to GitHub Enterprise Cloud, please [contact us](mailto:github@tamu.edu?subject=Additional%20question%20from%20TAMU%20GitHub%20regarding%20migrations) for assistance.
