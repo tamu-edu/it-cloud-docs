@@ -57,4 +57,4 @@ Organization secrets are not enabled. Set secrets that a must be shared between 
 
 Github is exploring Team-level secrets, but the feature has not made it onto their public road map.
 
-[Contact us](/contact_us) if you need assistance updating or managing repository secrets.
+[Contact us](mailto:github@tamu.edu) if you need assistance updating or managing repository secrets.

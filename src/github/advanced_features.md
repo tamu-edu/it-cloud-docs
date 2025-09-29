@@ -4,39 +4,39 @@ GitHub Enterprise includes some features that have metered billing or are a paid
 
 ## Free Features
 
-A free tier for the consumption features is being made available to all repositories. Usage beyond the free tier will be pass-through billed to the repository owner.
+A free tier for the consumption features is being made available to all repositories. Usage beyond the free tier is currently disabled, but will be enabled in the future and will require billing information.
 
 ### Packages
 
 [GitHub Packages](https://github.com/features/packages) is a platform for hosting and managing packages, including containers and other dependencies, and will be made available to all teams and organizations with free allocations outlined below.
 
-| Product | Free tier | Rate (GitHub's) |
-| ------- | --------- | ---- |
-| Storage | 5GB | $0.008 per GB per day |
-| Data transfer out | 15GB | $0.50 per GB |
-| Actions minutes | Unlimited[^1]
+| Product | Free tier |
+| ------- | --------- |
+| Storage | 5 GB |
+| Data transfer out | 15 GB |
+| Actions minutes [^1] | 1,000 min |
 
 > Rates subject to change. See [About Billing for GitHub Packages](https://docs.github.com/en/billing/managing-billing-for-github-packages/about-billing-for-github-packages) for the latest information and rates.<br/>
 
-[^1]: The free tier of actions minutes uses a shared pool of compute, and performance is not guaranteed.
+[^1]: The free tier of actions minutes uses a shared pool of compute; performance and availability is not guaranteed. For guaranteed performance and availability, consider using a self-hosted runner pool.
 
 
 ### Actions
 
 [GitHub Actions](https://docs.github.com/en/actions) is a continuous integration and continuous delivery (CI/CD) platform that allows you to automate your build, test, and deployment pipeline. The environment in which these workflows execute is called a runner, and can be [GitHub-hosted](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners) or [self-hosted](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners).
 
-The institutional and student organizations each have a shared pool of GitHub Actions runners to use to run their project's jobs. There is no limit to the number of runner minutes that can be consumed, but there may be a queue during times of high demand. Each workflow job execution uses a new, clean, ephemeral environment that is destroyed after execution. These environments are based on the [Ubuntu 20.04 LTS virtual environment](https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-Readme.md) with similar specifications to [GitHub-hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources).
+The institutional and student organizations have a pool of GitHub Actions minutes to use to run their project's jobs. There is no limit to the number of runner minutes that can be consumed, but there is a limit to the number of minutes that can be used in a month before billing information is required.
 
 Data transfer out from Packages to Actions is free, but action consumes Packages storage when storing artifacts.
 
 ### Large File Storage (LFS)
 
-[Large File Storage (LFS)](https://git-lfs.github.com/) is a file storage service that allows you to store large files in your GitHub repository. LFS is enabled in the Institution organization, but disabled in the student organization. The free tier of LFS for institutional repositories is 1GB of storage and 1GB of transfer. The cost for additional usage will be determined and posted soon, and will be billed to the repository owner.
+[Large File Storage (LFS)](https://git-lfs.github.com/) is a file storage service that allows you to store large files in your GitHub repository. LFS is enabled in the Institution organization, but disabled in the student organization. The free tier of LFS for institutional repositories is 1GB of storage and 1GB of transfer. The cost for additional usage will be made available in the future and will require billing information.
 
-| Product | Free | Price |
-| ------- | --------- | ---- |
-| LFS Storage | 1GB | TBD |
-| LFS Data transfer out | 1GB | TBD |
+| Product | Free |
+| ------- | --------- |
+| LFS Storage | 1GB |
+| LFS Data transfer out | 1GB |
 
 However, for both organizations, we strongly encourage the use of [git-annex](https://git-annex.branchable.com/) over git-lfs, with Microsoft OneDrive or Google Drive as the storage backend.
 
@@ -67,6 +67,7 @@ Codespaces usage is billed according to the units of measure in the following ta
 To enable Codespaces, please [contact us](mailto:github@tamu.edu?subject=Additional%20question%20from%20TAMU%20GitHub%20regarding%20CodeSpaces)
 
 
+
 ## Add-on Features
 
 ### Actions Runner Pools
@@ -85,6 +86,7 @@ Billing for GitHub Advanced Security is on a 90-day rolling count of unique comm
 See [About billing for GitHub Advanced Security](https://docs.github.com/en/enterprise-cloud@latest/billing/managing-billing-for-github-advanced-security/about-billing-for-github-advanced-security) for more information.
 
 To purchase GitHub Advanced Security, please [contact us](mailto:github@tamu.edu?subject=Additional%20question%20from%20TAMU%20GitHub%20regarding%20Advanced%20Security).
+
 
 
 ### Repository Templates
