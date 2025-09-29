@@ -64,7 +64,7 @@ Codespaces usage is billed according to the units of measure in the following ta
 
 > Rates subject to change. See [About Billing for Codespaces](https://docs.github.com/en/billing/managing-billing-for-github-codespaces/about-billing-for-codespaces) for the latest information and rates.
 
-To enable Codespaces, please [contact us](/contact_us).
+To enable Codespaces, please [contact us](mailto:github@tamu.edu).
 
 
 ## Add-on Features
@@ -73,7 +73,7 @@ To enable Codespaces, please [contact us](/contact_us).
 
 If your project requires a specialized virtual environment, such as a different operating system or CPU platform, a private runner pool can be created. You can use your own infrastructure to add a [self-hosted runner](https://docs.github.com/en/actions/hosting-your-own-runners/adding-self-hosted-runners) to a single repository that you own; or, AIP can host a runner pool for you to use to run jobs for multiple repositories that you own.
 
-To get started setting up a self-hosted runner, follow the [self-hosted runners guide](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners), or [contact us](/contact_us) to host them for you.
+To get started setting up a self-hosted runner, follow the [self-hosted runners guide](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners), or [contact us](mailto:github@tamu.edu) to host them for you.
 
 
 ### GitHub Advanced Security
@@ -84,7 +84,7 @@ Billing for GitHub Advanced Security is on a 90-day rolling count of unique comm
 
 See [About billing for GitHub Advanced Security](https://docs.github.com/en/enterprise-cloud@latest/billing/managing-billing-for-github-advanced-security/about-billing-for-github-advanced-security) for more information.
 
-To purchase GitHub Advanced Security, please [contact us](/contact_us).
+To purchase GitHub Advanced Security, please [contact us](mailto:github@tamu.edu).
 
 
 ### Repository Templates
