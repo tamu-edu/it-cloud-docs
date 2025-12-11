@@ -1,6 +1,13 @@
 # Cloud Documentation
 
-Cloud documentation for Technology Services.
+Cloud documentation for Technology Services published at https://docs.cloud.tamu.edu/.
+
+Related repositories:
+| Repository | Purpose | Production |
+| --- | --- | --- |
+| [it-cloud-docs](https://github.com/tamu-edu/it-cloud-docs) (This repo) | Cloud documentation | https://docs.cloud.tamu.edu/ |
+| [it-cloud-docs-internal](https://github.com/tamu-edu/it-cloud-docs-internal) | Internal docs | https://internal.cloud.tamu.edu/ |
+| [aip-github-auth-app](https://github.com/tamu-edu/aip-github-auth-app) | GitHub Wizard App | https://github.cloud.tamu.edu/ |
 
 ## Adding/Editing Content to this site
 
