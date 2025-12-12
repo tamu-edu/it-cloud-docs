@@ -1,0 +1,44 @@
+/* adding aggie styles for icons*/
+
+/* custom 1 */
+:is(.admonition):is(.aggiecustom) {
+  border-color: #4b0000;
+  box-shadow:  0 0.2rem 1rem 2px rgb(0 0 0 / 10%), 0 0 0.5rem 1px rgb(0 0 0 / 20%);
+}
+
+
+:is(.aggiecustom) > :is(.admonition-title, summary.admonition-title) {
+  background-color: rgb(75 0 0 / 50%);
+}
+
+:is(.aggiecustom) > :is(.admonition-title, summary.admonition-title)::before {
+  background-color: #4b0000;
+}
+
+/* custom 2 */
+:is(.admonition):is(.aggiecustom2) {
+  border-color: var(--sidebar-bg);
+  box-shadow:  0 0.2rem 1rem 2px rgb(0 0 0 / 10%), 0 0 0.5rem 1px rgb(0 0 0 / 20%);
+}
+
+:is(.aggiecustom2) > :is(.admonition-title, summary.admonition-title) {
+  background-color: var(--sidebar-bg);
+  color: var(--sidebar-fg);
+}
+
+:is(.aggiecustom2) > :is(.admonition-title, summary.admonition-title)::before {
+  background-color: var(--sidebar-fg);
+}
+a[href^="http"]:not([href*="tamu.edu"])::after,
+a[href^="https"]:not([href*="tamu.edu"])::after {
+  font-family: FontAwesome;
+  content: " \f08e";
+  font-size: 0.8em;
+  margin-left: 0.2em;
+}
+/*
+.aggie :is(.admonition) {
+  background-color: var(--admo-bg);
+}
+*/
+/* end of aggie custom styles */
