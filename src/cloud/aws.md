@@ -4,7 +4,7 @@ AWS is the largest cloud provider in the world and offers a wide range of servic
 
 ## Requesting an AWS Account
 
-To request an AWS account, please fill out the [AWS Account Request Form](https://itselfservice.tamu.edu/tamucs?id=sc_cat_item&sys_id=5b78c0d7db8a1c10c02e690913961903)
+To learn about and request an AWS account, please visit the [Public Cloud Accounts](https://www.it.tamu.edu/services/services-by-category/it-professional-services/cloud-public.html) resource.
 
 ## Accessing AWS
 
