@@ -6,7 +6,7 @@ GitHub is free for all faculty, researchers, staff, and students for public and 
 
 ## Getting Started
 
-If you're new to git and GitHub or want to refresh or sharpen your skills, see our section on [Using Git and GitHub](/github/guidelines.md#using-git-and-github).
+If you're new to git and GitHub or want to refresh or sharpen your skills, see our section on [Using Git and GitHub](guidelines.md#using-git-and-github).
 
 To start using Texas A&M University's Enterprise GitHub, you first need a personal GitHub account. Reusing an existing account is okay if you already have one, or you can create a new one just for work. Next, you must use that account to join one of Texas A&M's two organizations:
 
@@ -15,9 +15,9 @@ To start using Texas A&M University's Enterprise GitHub, you first need a person
 
 Visit the [Texas A&M University GitHub](https://github.cloud.tamu.edu) site to join, where you can create or link a GitHub account with your NetID when joining an organization.
 
-To read more about working in an organization of Texas A&M University's Enterprise GitHub, visit the [Organizations](/github/organizations.md) document.
+To read more about working in an organization of Texas A&M University's Enterprise GitHub, visit the [Organizations](organizations.md) document.
 
-<em>See [GitHub Migration](/github/migrating.md) for information about how repos were migrated from `github.tamu.edu`</em>
+<em>See [GitHub Migration](migrating.md) for information about how repos were migrated from `github.tamu.edu`</em>
 
 ## Student Developer Pack
 
