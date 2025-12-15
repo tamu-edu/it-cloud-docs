@@ -15,13 +15,13 @@ The Service is appropriate for many academic uses as well as some business and a
 * High Risk Activities such as those involving business records in which loss or inappropriate disclosure would result in large consequences in terms of economic loss, loss of trust, or legal liability.
 
 ### I have a repo that I'd like to migrate to tamu-edu or tamu-edu-students
-Read more about the [Migration Process](/github/server/#migration-process) from github.tamu.edu
+Read more about the [Migration Process](migrating.md#migration-process) from github.tamu.edu
 
 ### Why do I need to move to tamu-edu or tamu-edu-students on github.com?
-Background information may be found [here](/github/#github-overview)
+Background information may be found [here](index.md#github-overview)
 
 ### Where do I go to get access to tamu-edu or tamu-edu-students on github.com?
-Specific details on getting started may be found [here](/github/#getting-started)
+Specific details on getting started may be found [here](index.md#getting-started)
 
 ### Why is two-factor authentication required?
 TAMU's Duo two-factor system only protects services that require NetID authentication, and TAMU Duo protects the TAMU GitHub organizations. However, your personal GitHub - a requirement for using GitHub - is not protected by TAMU Duo. Practicing good security hygiene enables two-factor authentication everywhere, and in our opinion, this should especially include GitHub. It is also the only way to require external collaborators, not subject to TAMU Duo, to use 2FA as required by most security controls.
@@ -44,7 +44,7 @@ If you have additional questions, [contact us](mailto:github@tamu.edu?subject=Ad
 
 
 ### Are there size limitations?
-The standard storage guidelines from GitHub are available [here](https://help.github.com/articles/what-is-my-disk-quota).  Additional information about paid services is available [here](/github/advanced_features)
+The standard storage guidelines from GitHub are available [here](https://help.github.com/articles/what-is-my-disk-quota).  Additional information about paid services is available [here](advanced_features.md)
 
 ### Why can't I make my repository public?
 New repositories can be made public, but a repo owner cannot change an existing private repo to public. To do so, please follow the instructions in the issue that was created, or contact us with your repo name.

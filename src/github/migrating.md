@@ -1,8 +1,14 @@
 # Migrating to Cloud
 
-For many years, `github.tamu.edu` has been the primary location for hosting code repositories for Texas A&M University faculty, staff, and students. However, the service has become redundant with the cloud-hosted version of GitHub Enterprise (GitHub.com) and often lags in feature sets and security patches. Therefore, `github.tamu.edu` is now deprecated in favor of all projects being hosted on Github Enterprise Cloud in the `tamu-edu` and `tamu-edu-students` organizations.
+## Migration off of `github.tamu.edu` to `github.com` complete
 
-A timeline for deprecation will be:
+As of September 27, 2024, `github.tamu.edu` has been shut down. If you have not migrated your repositories to GitHub Enterprise Cloud, please [contact us](mailto:github@tamu.edu?subject=Additional%20question%20from%20TAMU%20GitHub%20regarding%20migrations) for assistance.
+
+## Background
+
+For many years, `github.tamu.edu` had been the primary location for hosting code repositories for Texas A&M University faculty, staff, and students. However, the service became redundant with the cloud-hosted version of GitHub Enterprise (GitHub.com) and often lagged in feature sets and security patches. Therefore, `github.tamu.edu` has been deprecated in favor of all projects being hosted on Github Enterprise Cloud in the `tamu-edu` and `tamu-edu-students` organizations.
+
+## Timeline
 
 * Jun 2022:
     * A documentation website published with information on using GitHub Enterprise cloud and how to migrate to it.
@@ -19,7 +25,3 @@ A timeline for deprecation will be:
     * Appliance is shut down 
 * Sep 2025:
     * Appliance data is deleted
-
-## Migrating off `github.tamu.edu`
-
-As of September 27, 2024, `github.tamu.edu` has been shut down. If you have not migrated your repositories to GitHub Enterprise Cloud, please [contact us](mailto:github@tamu.edu?subject=Additional%20question%20from%20TAMU%20GitHub%20regarding%20migrations) for assistance.
