@@ -4,15 +4,20 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-24.04
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v3
 
@@ -23,12 +28,24 @@ jobs:
             mdbook-version: 'latest'
             use-admonish: true
 
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
-      - run: mdbook build
+      - name: Build with mdBook
+        run: mdbook build
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.6.4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: book
-          branch: gh-pages
-          clean-exclude: pr-preview/
+          path: ./book
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-24.04
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
