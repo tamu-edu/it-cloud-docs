@@ -13,24 +13,33 @@ fi
 BASE_URL="$1"
 BOOK_DIR="$2"
 
+# Remove trailing slash for consistency in replacements
+BASE_URL="${BASE_URL%/}"
+
 # Validate inputs
 if [ ! -d "$BOOK_DIR" ]; then
     echo "Error: Book directory '$BOOK_DIR' does not exist"
     exit 1
 fi
 
-# Find all HTML files and inject/update base tag
+# Find all HTML files and prepend base URL to relative asset paths
 find "$BOOK_DIR" -name "*.html" -type f | while read -r html_file; do
-    # Check if base tag already exists
-    if grep -q '<base href=' "$html_file"; then
-        # Update existing base tag
-        sed -i "s|<base href=\"[^\"]*\">|<base href=\"${BASE_URL}\">|" "$html_file"
-        echo "Updated base URL in $(basename $html_file)"
-    else
-        # Inject base tag after <head> opening tag
-        sed -i "s|<head>|<head>\n        <base href=\"${BASE_URL}\">|" "$html_file"
-        echo "Injected base URL into $(basename $html_file)"
-    fi
+    # Convert ../ relative paths to absolute paths with base URL
+    # This handles paths like: href="../../css/style.css"
+    sed -i -E "s|href=\"(\.\./)+|href=\"${BASE_URL}/|g" "$html_file"
+    sed -i -E "s|src=\"(\.\./)+|src=\"${BASE_URL}/|g" "$html_file"
+    
+    # Convert simple relative paths (no ../) to absolute paths with base URL
+    # This handles paths like: href="css/style.css" or href="index.html" or href="cloud/index.html"
+    # But avoid converting:
+    #   - already absolute paths (starting with /)
+    #   - URLs with schemes (http://, https://, mailto:, etc.) - they contain ":"
+    #   - anchors (starting with #)
+    # Match only paths that start with a letter or number and don't contain a colon
+    sed -i -E "s|href=\"([a-zA-Z0-9][^\":]*)\"|href=\"${BASE_URL}/\1\"|g" "$html_file"
+    sed -i -E "s|src=\"([a-zA-Z0-9][^\":]*)\"|src=\"${BASE_URL}/\1\"|g" "$html_file"
+    
+    echo "Converted paths in $(basename $html_file)"
 done
 
-echo "Done! Injected base URL '${BASE_URL}' into all HTML files in '${BOOK_DIR}'"
+echo "Done! Prepended base URL '${BASE_URL}' to relative paths in '${BOOK_DIR}'"
