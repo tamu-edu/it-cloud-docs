@@ -37,9 +37,8 @@ jobs:
         run: |
           git clone https://github.com/CoralPink/mdbook-admonish.git /tmp/mdbook-admonish
           cd /tmp/mdbook-admonish
-          git checkout mdbook-v0.5.x
-          cargo build --release
-          sudo cp target/release/mdbook-admonish /usr/local/bin/
+          git checkout dbe075cc4ab2c524eb6fca86699d0e367e06364b
+          cargo install --path . --locked
           mdbook-admonish --version
 
       - name: Install mdbook-admonish assets
