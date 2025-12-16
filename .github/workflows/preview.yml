@@ -32,10 +32,12 @@ jobs:
       - name: Build mdBook site
         run: mdbook build
         if: github.event.action != 'closed'
-        env:
-          MDBOOK_OUTPUT__HTML__SITE_URL: /pr-preview/pr-${{ github.event.number }}/
+
+      - name: Inject base URL for PR preview
+        run: ./inject-base-url.sh "/pr-preview/pr-${{ github.event.number }}/" "./book"
+        if: github.event.action != 'closed'
 
       - name: Deploy preview
-        uses: rossjrw/pr-preview-action@v1
+        uses: rossjrw/pr-preview-action@v1.6.3
         with:
           source-dir: ./book/
