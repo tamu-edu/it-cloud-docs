@@ -21,13 +21,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup mdBook (with plugins)
-        uses: jontze/action-mdbook@v2
+      - name: Setup mdBook
+        uses: jontze/action-mdbook@v3
         if: github.event.action != 'closed'
         with:
             token: ${{secrets.GITHUB_TOKEN}}
-            mdbook-version: '0.4.52'
-            use-admonish: true
+            mdbook-version: '0.5.2'
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        if: github.event.action != 'closed'
+
+      - name: Build and install mdbook-admonish with mdBook 0.5 support
+        if: github.event.action != 'closed'
+        run: |
+          git clone https://github.com/CoralPink/mdbook-admonish.git /tmp/mdbook-admonish
+          cd /tmp/mdbook-admonish
+          git checkout mdbook-v0.5.x
+          cargo build --release
+          sudo cp target/release/mdbook-admonish /usr/local/bin/
+          mdbook-admonish --version
+
+      - name: Install mdbook-admonish assets
+        if: github.event.action != 'closed'
+        run: mdbook-admonish install .
 
       - name: Build mdBook site
         run: mdbook build
