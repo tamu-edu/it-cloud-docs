@@ -15,7 +15,7 @@ To create a new user group, click the "Create User Group" button in the top righ
 > Please refer to [Best Practices](./best_practices.md) for more information on appropriate naming schemes for user groups.
 
 <details>
-<summary>User Groups</summary>
+<summary>Create User Group</summary>
 
 ![Create User Group](./img/user_group_creation.png)
 </details>
@@ -30,13 +30,13 @@ To add users to a user group, click on the user group you want to add users to, 
 Once a group has been created, it can be added to a project you own by navigating to the users tab of the project and clicking the 'Manage User Permissions' button. From there, you can add the user group to the project and assign the appropriate permissions.
 
 <details>
-<summary>Project User Permissions</summary>
+<summary>Manage User Permissions</summary>
 
 ![Manage User Permissions](./img/manage_user_permissions.png)
 </details>
 
 <details>
-<summary>Project User Permissions</summary>
+<summary>Add User Group to Project</summary>
 
 ![Add User Group](./img/add_user_groups_to_project.png)
 </details>

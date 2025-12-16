@@ -80,22 +80,20 @@ When you create resources in AWS, you will need to select a subnet to place the 
 
 - See below for sample Terraform code to specifically select the subset of subnets that are public. Note that valid choices for the `values = ["public"]` line are `public`, `private` and `campus` (if the campus subnet has been shared with your account).
 
-> [!NOTE]
-> ```
-> data "aws_vpc" "default" {
->   default = false
->   id = "vpc-0c31fe331850b85b5"
-> }
-> ```
+```terraform
+data "aws_vpc" "default" {
+  default = false
+  id = "vpc-0c31fe331850b85b5"
+}
 
-    data "aws_subnets" "default" {
-      filter {
-        name    = "vpc-id"
-        values  = [data.aws_vpc.default.id]
-      }
-      filter {
-        name = "tag:subnet-type"
-        values = ["public"]
-      }
-    }
+data "aws_subnets" "default" {
+  filter {
+    name    = "vpc-id"
+    values  = [data.aws_vpc.default.id]
+  }
+  filter {
+    name = "tag:subnet-type"
+    values = ["public"]
+  }
+}
 ```
