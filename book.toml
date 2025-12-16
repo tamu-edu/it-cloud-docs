@@ -14,6 +14,8 @@ preferred-dark-theme = "navy"
 additional-css = ["./theme/css/mdbook-admonish.css", "./theme/css/tabbed-code-blocks.css", "./theme/css/aggie-custom.css", "./mdbook-admonish.css"]
 additional-js = ["./theme/js/tabbed-code-blocks.js"]
 edit-url-template = "https://github.com/tamu-edu/it-cloud-docs/edit/main/{path}"
+# mdBook 0.5 options - disable new sidebar header navigation to maintain current look
+sidebar-header-nav = false
 
 [output.html.print]
 enable = false
