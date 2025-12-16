@@ -92,23 +92,20 @@ To move within the same region:
 
 
 
-```admonish info
-Details for migrating RDS in the same region: [Migrate an Amazon RDS DB instance to another VPC](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/migrate-an-amazon-rds-db-instance-to-another-vpc-or-account.html).
-```
+> [!NOTE]
+> Details for migrating RDS in the same region: [Migrate an Amazon RDS DB instance to another VPC](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/migrate-an-amazon-rds-db-instance-to-another-vpc-or-account.html).
 
-```admonish info
-Details for migrating RDS to a different region: [Migrate Amazon Aurora and Amazon RDS to a new AWS region](https://aws.amazon.com/blogs/database/migrate-amazon-aurora-and-amazon-rds-to-a-new-aws-region/).
-```
+> [!NOTE]
+> Details for migrating RDS to a different region: [Migrate Amazon Aurora and Amazon RDS to a new AWS region](https://aws.amazon.com/blogs/database/migrate-amazon-aurora-and-amazon-rds-to-a-new-aws-region/).
 
-```admonish info
-Details for moving an RDS instance out of an Availability Zone: [How do I move an Amazon RDS instance out of an Availability Zone?](https://repost.aws/knowledge-center/rds-move-availability-zone) Note that you will need to be sure that the AZ that the RDS is moved to is [one of the supported AZ's](https://docs.cloud.tamu.edu/cloud/aws/networking.html#using-subnets)
-```
+> [!NOTE]
+> Details for moving an RDS instance out of an Availability Zone: [How do I move an Amazon RDS instance out of an Availability Zone?](https://repost.aws/knowledge-center/rds-move-availability-zone) Note that you will need to be sure that the AZ that the RDS is moved to is [one of the supported AZ's](https://docs.cloud.tamu.edu/cloud/aws/networking.html#using-subnets)
 
 ### Redshift Clusters
 
 To move a Redshift cluster to a different subnet group, you can modify the cluster to use the new subnet group. If you need to move to a different VPC, you can create a snapshot of the cluster and restore it in the new VPC.
 
-```admonish info
-Details for migrating Redshift: 
-- [Migrate Amazon Redshift to a new subnet group](https://docs.aws.amazon.com/redshift/latest/mgmt/managing-cluster-subnet-group-console.html)
-- [Migrate Amazon Redshift to a new VPC](https://repost.aws/knowledge-center/move-redshift-cluster-vpcs)
+> [!NOTE]
+> Details for migrating Redshift: 
+> - [Migrate Amazon Redshift to a new subnet group](https://docs.aws.amazon.com/redshift/latest/mgmt/managing-cluster-subnet-group-console.html)
+> - [Migrate Amazon Redshift to a new VPC](https://repost.aws/knowledge-center/move-redshift-cluster-vpcs)

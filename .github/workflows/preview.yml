@@ -28,23 +28,6 @@ jobs:
             token: ${{secrets.GITHUB_TOKEN}}
             mdbook-version: '0.5.2'
 
-      - name: Setup Rust
-        uses: dtolnay/rust-toolchain@stable
-        if: github.event.action != 'closed'
-
-      - name: Build and install mdbook-admonish with mdBook 0.5 support
-        if: github.event.action != 'closed'
-        run: |
-          git clone https://github.com/CoralPink/mdbook-admonish.git /tmp/mdbook-admonish
-          cd /tmp/mdbook-admonish
-          git checkout dbe075cc4ab2c524eb6fca86699d0e367e06364b
-          cargo install --path . --locked
-          mdbook-admonish --version
-
-      - name: Install mdbook-admonish assets
-        if: github.event.action != 'closed'
-        run: mdbook-admonish install .
-
       - name: Build mdBook site
         run: mdbook build
         if: github.event.action != 'closed'

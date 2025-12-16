@@ -49,6 +49,5 @@ When you select a project, you will have several options at the top of the page 
 - **Notes** - This tab shows any notes that have been added to the project. This section is currently not able to be edited but will be in the future.
 - **Settings** - This tab allows you to change notification settings for the project.
 
-```admonish info
-Detailed descriptions for each of these tabs are available in [Kion's Customer Success Center](https://support.kion.io/hc/en-us/articles/360057133931-Project-Details). 
-```
+> [!NOTE]
+> Detailed descriptions for each of these tabs are available in [Kion's Customer Success Center](https://support.kion.io/hc/en-us/articles/360057133931-Project-Details).

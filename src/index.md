@@ -1,6 +1,5 @@
-```admonish info
-This site is a work in progress and will be updated regularly.  Please check back frequently for updates.
-```
+> [!NOTE]
+> This site is a work in progress and will be updated regularly.  Please check back frequently for updates.
 
 This website is a resource for Texas A&M University faculty, and staff to learn about the various infrastructure and platform services available at Texas A&M University. This includes information about cloud services, platform services, and security policies and best practices.
 

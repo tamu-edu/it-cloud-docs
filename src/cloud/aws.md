@@ -12,9 +12,10 @@ To learn about and request an AWS account, please visit the [Public Cloud Accoun
 
 The AWS Management Console is a web-based interface for accessing and managing AWS services. You can sign in to the console at [https://console.aws.amazon.com/](https://console.aws.amazon.com/) using your NetID.
 
-```admonish info class="aggiecustom2" title="Access AWS"
-[https://console.aws.amazon.com/](https://console.aws.amazon.com/)
-```
+> [!NOTE]
+> **Access AWS**
+> 
+> [https://console.aws.amazon.com/](https://console.aws.amazon.com/)
 
 ### Using the AWS CLI
 
