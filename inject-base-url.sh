@@ -24,12 +24,28 @@ fi
 
 # Find all HTML files and prepend base URL to relative asset paths
 find "$BOOK_DIR" -name "*.html" -type f | while read -r html_file; do
+    # Get the directory of the current HTML file relative to book root
+    # This is needed for resolving ./ paths correctly
+    rel_dir=$(dirname "${html_file#$BOOK_DIR/}")
+    
     # Convert ../ relative paths to absolute paths with base URL
     # This handles paths like: href="../../css/style.css"
     sed -i -E "s|href=\"(\.\./)+|href=\"${BASE_URL}/|g" "$html_file"
     sed -i -E "s|src=\"(\.\./)+|src=\"${BASE_URL}/|g" "$html_file"
     
-    # Convert simple relative paths (no ../) to absolute paths with base URL
+    # Convert ./ relative paths to absolute paths with base URL
+    # This handles paths like: src="./image.png"
+    if [ "$rel_dir" = "." ]; then
+        # File is in root directory
+        sed -i -E "s|href=\"\./|href=\"${BASE_URL}/|g" "$html_file"
+        sed -i -E "s|src=\"\./|src=\"${BASE_URL}/|g" "$html_file"
+    else
+        # File is in subdirectory, need to include the subdirectory path
+        sed -i -E "s|href=\"\./|href=\"${BASE_URL}/${rel_dir}/|g" "$html_file"
+        sed -i -E "s|src=\"\./|src=\"${BASE_URL}/${rel_dir}/|g" "$html_file"
+    fi
+    
+    # Convert simple relative paths (no ../ or ./) to absolute paths with base URL
     # This handles paths like: href="css/style.css" or href="index.html" or href="cloud/index.html"
     # But avoid converting:
     #   - already absolute paths (starting with /)
