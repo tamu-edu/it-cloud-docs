@@ -373,5 +373,42 @@
         <script type="text/javascript" src="/pr-preview/pr-53/theme/js/tabbed-code-blocks.js"></script>
 
 
+        <!-- Navigation active/expanded logic for mdBook 0.4.52 -->
+        <script type="text/javascript">
+        (function() {
+            var current_page = window.location.pathname;
+            if (current_page.endsWith("/")) {
+                current_page += "index.html";
+            }
+            var links = document.querySelectorAll("#sidebar a");
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i];
+                var href = link.getAttribute("href");
+                if (!href) continue;
+                // Normalize the link href to compare with current page
+                var linkPath = href;
+                if (linkPath.startsWith(window.location.origin)) {
+                    linkPath = linkPath.substring(window.location.origin.length);
+                }
+                if (linkPath === current_page || (current_page.endsWith("/index.html") && linkPath === current_page.replace("/index.html", "/"))) {
+                    link.classList.add("active");
+                    var parent = link.parentElement;
+                    if (parent && parent.classList.contains("chapter-item")) {
+                        parent.classList.add("expanded");
+                    }
+                    while (parent) {
+                        if (parent.tagName === "LI" && parent.previousElementSibling) {
+                            if (parent.previousElementSibling.classList.contains("chapter-item")) {
+                                parent.previousElementSibling.classList.add("expanded");
+                            }
+                        }
+                        parent = parent.parentElement;
+                    }
+                    break;
+                }
+            }
+        })();
+        </script>
+
     </body>
 </html>
