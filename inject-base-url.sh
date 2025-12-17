@@ -65,8 +65,13 @@ find "$BOOK_DIR" -name "*.html" -type f | while read -r html_file; do
     sed -i -E "s|href=\"([a-zA-Z0-9][^\":]*)/([^\"]*)\"|href=\"${BASE_URL}/\1/\2\"|g" "$html_file"
     sed -i -E "s|src=\"([a-zA-Z0-9][^\":]*)/([^\"]*)\"|src=\"${BASE_URL}/\1/\2\"|g" "$html_file"
     
+    # Special case: index.html in navigation always points to root, not relative directory
+    # This fixes the "Home" link in sidebar navigation
+    sed -i -E "s|href=\"index\.html\"|href=\"${BASE_URL}/index.html\"|g" "$html_file"
+    
     # Then, handle file-relative paths (simple filenames without /)
     # Match paths that start with a letter or number, don't contain a colon or slash
+    # Exclude index.html as it's already handled above
     if [ "$rel_dir" = "." ]; then
         # File is in root directory
         sed -i -E "s|href=\"([a-zA-Z0-9][^\"/:]*)\"|href=\"${BASE_URL}/\1\"|g" "$html_file"
