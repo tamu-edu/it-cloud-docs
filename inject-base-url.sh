@@ -84,4 +84,24 @@ find "$BOOK_DIR" -name "*.html" -type f | while read -r html_file; do
     echo "Converted paths in $(basename "$html_file")"
 done
 
+# Also process toc.js file which dynamically generates navigation
+if [ -f "$BOOK_DIR/toc.js" ]; then
+    echo "Processing toc.js navigation..."
+    # The hrefs in toc.js are in a JavaScript string, so we need to be careful
+    # We're looking for patterns like: <a href="github/index.html">
+    # And converting them to: <a href="/pr-preview/pr-X/github/index.html">
+    
+    # Convert root-relative paths (paths with /)
+    sed -i -E "s|<a href=\"([a-zA-Z0-9][^\":]*)/([^\"]*)\">|<a href=\"${BASE_URL}/\1/\2\">|g" "$BOOK_DIR/toc.js"
+    
+    # Convert simple file paths (no /)
+    sed -i -E "s|<a href=\"([a-zA-Z0-9][^\"/:]*\.html)\">|<a href=\"${BASE_URL}/\1\">|g" "$BOOK_DIR/toc.js"
+    
+    # Fix the href check in toc.js to skip absolute paths (those starting with /)
+    # We need to add a check for !href.startsWith("/") before the regex test
+    sed -i 's/!href\.startsWith("#")/!href.startsWith("#") \&\& !href.startsWith("\/")/g' "$BOOK_DIR/toc.js"
+    
+    echo "Converted paths in toc.js"
+fi
+
 echo "Done! Prepended base URL '${BASE_URL}' to relative paths in '${BOOK_DIR}'"
