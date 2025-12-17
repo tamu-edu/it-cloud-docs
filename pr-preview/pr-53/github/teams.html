@@ -385,23 +385,67 @@
         <script type="text/javascript" src="/pr-preview/pr-53/theme/js/tabbed-code-blocks.js"></script>
 
 
-        <!-- Navigation active/expanded logic for mdBook 0.4.52 -->
+        <!-- Navigation link fixing and active/expanded logic for mdBook 0.4.52 -->
         <script type="text/javascript">
         (function() {
+            // First, fix all relative navigation links to be absolute
+            // This makes navigation work correctly in mdbook serve without post-build scripts
+            var sidebarLinks = document.querySelectorAll("#sidebar a");
+            for (var i = 0; i < sidebarLinks.length; i++) {
+                var link = sidebarLinks[i];
+                var href = link.getAttribute("href");
+                if (!href) continue;
+                
+                // Skip if already absolute (starts with /, http://, https://, or #)
+                if (href.startsWith("/") || href.startsWith("http://") || href.startsWith("https://") || href.startsWith("#")) {
+                    continue;
+                }
+                
+                // Convert relative path to absolute
+                // Remove any ../ segments and prepend with /
+                var absolutePath = href;
+                
+                // If href contains ../, we need to resolve it relative to current directory
+                if (absolutePath.indexOf("../") !== -1) {
+                    // Get current directory depth from path_to_root
+                    var depth = (path_to_root.match(/\.\.\//g) || []).length;
+                    
+                    // Remove all ../ from href and calculate actual path
+                    var upLevels = (absolutePath.match(/\.\.\//g) || []).length;
+                    absolutePath = absolutePath.replace(/\.\.\//g, "");
+                    
+                    // The remaining path is relative to root if we go up enough levels
+                    absolutePath = "/" + absolutePath;
+                } else if (absolutePath.indexOf("/") !== -1) {
+                    // Path like "cloud/index.html" - already relative to root
+                    absolutePath = "/" + absolutePath;
+                } else {
+                    // Simple filename like "index.html" - point to root
+                    absolutePath = "/" + absolutePath;
+                }
+                
+                // Update the href
+                link.setAttribute("href", absolutePath);
+            }
+            
+            // Now set active/expanded classes based on current page
             var current_page = window.location.pathname;
             if (current_page.endsWith("/")) {
                 current_page += "index.html";
             }
+            
             var links = document.querySelectorAll("#sidebar a");
             for (var i = 0; i < links.length; i++) {
                 var link = links[i];
                 var href = link.getAttribute("href");
                 if (!href) continue;
+                
                 // Normalize the link href to compare with current page
                 var linkPath = href;
                 if (linkPath.startsWith(window.location.origin)) {
                     linkPath = linkPath.substring(window.location.origin.length);
                 }
+                
                 if (linkPath === current_page || (current_page.endsWith("/index.html") && linkPath === current_page.replace("/index.html", "/"))) {
                     link.classList.add("active");
                     var parent = link.parentElement;
