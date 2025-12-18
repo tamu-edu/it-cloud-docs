@@ -439,6 +439,12 @@ ul#searchresults span.teaser em {
     color: var(--sidebar-non-existant);
 }
 
+/* This is a span wrapping the chapter link and the fold chevron. */
+.chapter-link-wrapper {
+    /* Used to position the chevron to the right, allowing the text to wrap before it. */
+    display: flex;
+}
+
 .chapter li a {
     display: block;
     padding: 0;
@@ -468,30 +474,36 @@ ul#searchresults span.teaser em {
     color: var(--sidebar-active);
 }
 
-.chapter li > a.toggle {
+/* Support both old and new toggle structures */
+.chapter li > a.toggle,
+.chapter-fold-toggle {
     cursor: pointer;
     display: block;
     margin-left: auto;
+    margin-inline-start: auto;
     padding: 0 10px;
     user-select: none;
     opacity: 0.68;
 }
 
-.chapter li > a.toggle div {
+.chapter li > a.toggle div,
+.chapter-fold-toggle div {
     transition: transform 0.5s;
 }
 
 /* collapse the section */
-.chapter li:not(.expanded) + li > ol {
+.chapter li:not(.expanded) > ol {
     display: none;
 }
 
 .chapter li.chapter-item {
     line-height: 1.5em;
     margin-top: 0.6em;
+    margin-block-start: 0.6em;
 }
 
-.chapter li.expanded > a.toggle div {
+.chapter li.expanded > a.toggle div,
+.chapter li.expanded > span > .chapter-fold-toggle div {
     transform: rotate(90deg);
 }
 
