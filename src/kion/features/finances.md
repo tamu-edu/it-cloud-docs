@@ -53,7 +53,7 @@ To itemize your cloud service charges, you can use Kion or the respective Cloud 
 
 - **Using Kion**:
     
-    - Log in to Kion ([https://kion.cloud.tamu.edu/login](https://kion.cloud.tamu.edu/login)) with your credentials.
+    - Log in to Kion https://kion.cloud.tamu.edu/login with your credentials.
     - If you have not used the self-service request form to create a cloud account, you can log into Kion but will need to make a helpdesk ticket to request the minimal privilege access for your itemization or spend report needs.
     - Review the detailed breakdown of charges for each service and resource used.
     - Export the data if needed for further analysis or reporting.
