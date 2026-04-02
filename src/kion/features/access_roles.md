@@ -2,6 +2,11 @@
 
 There are two sets of permissions that control access to Kion: project permissions and cloud access roles. Project permissions control access to Kion itself, while cloud access roles control access to cloud accounts.
 
+```admonish info
+Access Kion at [https://kion.cloud.tamu.edu](https://kion.cloud.tamu.edu).
+```
+
+
 ## Project Access
 
 Project permissions control access to Kion itself. There are two main roles in Kion: Project Owner and Project User. Each role has different permissions in Kion. 
