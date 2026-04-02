@@ -3,7 +3,7 @@
 Management of cloud resources is a critical part of making cloud computing successful. Without proper management, cloud resources can become a complex liability rather than an asset. Technology Services has developed a platform called Kion to help manage cloud resources across multiple cloud service providers (CSPs). Beginning in March, 2024, Kion will be available to all TAMU AWS, Azure, and GCP customers.
 
 ```admonish info
-Kion access will be rolled out to TAMU AWS, Azure, and GCP customers starting in March, 2024. 
+Access Kion at [https://kion.cloud.tamu.edu](https://kion.cloud.tamu.edu).
 ```
 
 
