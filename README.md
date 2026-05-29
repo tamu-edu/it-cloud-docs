@@ -1,4 +1,6 @@
-# Cloud Documentation
+# Cloud Documentation (Public)
+
+This repo builds and publishes public cloud documentation. [docs.cloud.tamu.edu](https://docs.cloud.tamu.edu)
 
 Cloud documentation for Technology Services.
 
