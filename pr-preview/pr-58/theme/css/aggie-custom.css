@@ -1,0 +1,49 @@
+/* universal details-based collapsible wrapper for markdown content */
+.mdbook-collapsible {
+  border: 1px solid var(--table-border-color);
+  border-radius: 6px;
+  margin: 0.8rem 0 1.2rem;
+  padding: 0;
+  background: var(--theme-popup-bg);
+}
+
+.mdbook-collapsible > summary {
+  cursor: pointer;
+  padding: 0.65rem 0.9rem;
+  font-weight: 600;
+  list-style-position: inside;
+}
+
+.mdbook-collapsible > summary + * {
+  margin-top: 0;
+}
+
+.mdbook-collapsible > :not(summary) {
+  padding: 0 0.9rem 0.85rem;
+}
+
+/* keep your prior aggiecustom2 visual direction for collapsibles */
+.mdbook-collapsible.aggiecustom2 {
+  border-color: var(--sidebar-bg);
+  box-shadow: 0 0.2rem 1rem 2px rgb(0 0 0 / 10%), 0 0 0.5rem 1px rgb(0 0 0 / 20%);
+}
+
+.mdbook-collapsible.aggiecustom2 > summary {
+  background-color: var(--sidebar-bg);
+  color: var(--sidebar-fg);
+  border-bottom: 1px solid var(--table-border-color);
+}
+
+a[href^="http"]:not([href*="tamu.edu"])::after,
+a[href^="https"]:not([href*="tamu.edu"])::after {
+  font-family: Arial, sans-serif;
+  content: " \2197";
+  font-size: 0.8em;
+  margin-left: 0.2em;
+}
+/*
+.aggie :is(.admonition) {
+  background-color: var(--admo-bg);
+}
+*/
+/* end of aggie custom styles */
