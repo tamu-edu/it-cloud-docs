@@ -46,4 +46,90 @@ a[href^="https"]:not([href*="tamu.edu"])::after {
   background-color: var(--admo-bg);
 }
 */
+
+/* ================================================================
+   Native mdBook 0.5.x admonitions — styled to match mdbook-admonish
+   HTML: <blockquote class="blockquote-tag blockquote-tag-{type}">
+           <p class="blockquote-tag-title"><svg>...</svg>Type</p>
+           <p>content</p>
+         </blockquote>
+   Types: note (blue), tip (teal), important (cyan),
+          warning (orange), caution (red)
+   ================================================================ */
+
+/* Override default blockquote top/bottom borders; apply admonish-style box */
+.blockquote-tag {
+    display: flow-root;
+    margin: 1.5625em 0;
+    padding: 0 1.2rem;
+    color: var(--fg);
+    background-color: var(--bg);
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+    border-inline-start: 0.4rem solid transparent;
+    border-radius: 0.2rem;
+    box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.05), 0 0 0.1rem rgba(0, 0, 0, 0.1);
+}
+
+/* Title row — full-bleed colored header inside the box */
+.blockquote-tag-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-block: 0;
+    margin-inline: -1.2rem;
+    padding: 0.7rem 1.2rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.blockquote-tag-title svg {
+    flex: 0 0 auto;
+    width: 1.1rem;
+    height: 1.1rem;
+}
+
+/* NOTE — blue (#448aff) */
+.blockquote-tag-note { border-inline-start-color: #448aff; }
+.blockquote-tag-note .blockquote-tag-title {
+    background-color: rgba(68, 138, 255, 0.1);
+    color: #448aff;
+}
+.blockquote-tag-note .blockquote-tag-title svg { fill: #448aff; }
+
+/* TIP — teal (#00bfa5) */
+.blockquote-tag-tip { border-inline-start-color: #00bfa5; }
+.blockquote-tag-tip .blockquote-tag-title {
+    background-color: rgba(0, 191, 165, 0.1);
+    color: #00bfa5;
+}
+.blockquote-tag-tip .blockquote-tag-title svg { fill: #00bfa5; }
+
+/* IMPORTANT — cyan (#00b8d4) */
+.blockquote-tag-important { border-inline-start-color: #00b8d4; }
+.blockquote-tag-important .blockquote-tag-title {
+    background-color: rgba(0, 184, 212, 0.1);
+    color: #00b8d4;
+}
+.blockquote-tag-important .blockquote-tag-title svg { fill: #00b8d4; }
+
+/* WARNING — orange (#ff9100) */
+.blockquote-tag-warning { border-inline-start-color: #ff9100; }
+.blockquote-tag-warning .blockquote-tag-title {
+    background-color: rgba(255, 145, 0, 0.1);
+    color: #ff9100;
+}
+.blockquote-tag-warning .blockquote-tag-title svg { fill: #ff9100; }
+
+/* CAUTION — red (#ff1744) */
+.blockquote-tag-caution { border-inline-start-color: #ff1744; }
+.blockquote-tag-caution .blockquote-tag-title {
+    background-color: rgba(255, 23, 68, 0.1);
+    color: #ff1744;
+}
+.blockquote-tag-caution .blockquote-tag-title svg { fill: #ff1744; }
+
 /* end of aggie custom styles */
