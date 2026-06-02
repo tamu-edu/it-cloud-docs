@@ -11,6 +11,7 @@ The Technology Services Cloud Services team provides all Azure customers with th
 
 TAMU customer VNets are provisioned by TAMU Cloud Services with an address space allocated from a global pool assigned to your VNet for your use. Follow Azure best practices for dividing your address space into subnets and assigning resources to those subnets. Work with Cloud Services to ensure your requested VNet address space and proposed subnet design align with your solution's overall network design and best practices for security and performance. It is recommended to use one VNet per Azure Subscription per project per environment, but you can use as many subnets as you need within that VNet to segment your resources as needed.
 
+![TAMU Azure Secure Network Diagram](azure_network_static_diagram.png)
 
 ```mermaid
 flowchart TB
