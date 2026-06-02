@@ -20,12 +20,12 @@ a > .hljs {
 
 /* Menu Bar */
 
-#menu-bar,
-#menu-bar-hover-placeholder {
+#mdbook-menu-bar,
+#mdbook-menu-bar-hover-placeholder {
     z-index: 101;
     margin: auto calc(0px - var(--page-padding));
 }
-#menu-bar {
+#mdbook-menu-bar {
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -34,24 +34,24 @@ a > .hljs {
     border-bottom-width: 1px;
     border-bottom-style: solid;
 }
-#menu-bar.sticky,
-.js #menu-bar-hover-placeholder:hover + #menu-bar,
-.js #menu-bar:hover,
-.js.sidebar-visible #menu-bar {
+#mdbook-menu-bar.sticky,
+.js #mdbook-menu-bar-hover-placeholder:hover + #mdbook-menu-bar,
+.js #mdbook-menu-bar:hover,
+.js.sidebar-visible #mdbook-menu-bar {
     position: -webkit-sticky;
     position: sticky;
     top: 0 !important;
 }
-#menu-bar-hover-placeholder {
+#mdbook-menu-bar-hover-placeholder {
     position: sticky;
     position: -webkit-sticky;
     top: 0;
     height: var(--menu-bar-height);
 }
-#menu-bar.bordered {
+#mdbook-menu-bar.bordered {
     border-bottom-color: var(--table-border-color);
 }
-#menu-bar i, #menu-bar .icon-button {
+#mdbook-menu-bar i, #mdbook-menu-bar .icon-button {
     position: relative;
     padding: 0 8px;
     z-index: 10;
@@ -59,21 +59,8 @@ a > .hljs {
     cursor: pointer;
     transition: color 0.5s;
 }
-
-/* Size and colour the SVG icons produced by the {{fa}} Handlebars helper */
-.fa-svg {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    vertical-align: middle;
-}
-.fa-svg svg {
-    width: 1em;
-    height: 1em;
-    fill: currentColor;
-}
 @media only screen and (max-width: 420px) {
-    #menu-bar i, #menu-bar .icon-button {
+    #mdbook-menu-bar i, #mdbook-menu-bar .icon-button {
         padding: 0 5px;
     }
 }
@@ -100,7 +87,7 @@ a > .hljs {
     margin: 0 5px;
 }
 .no-js .left-buttons {
-    display: flex;
+    display: none;
 }
 
 .menu-title {
@@ -450,19 +437,8 @@ ul#searchresults span.teaser em {
 }
 
 .chapter li {
-    display: block;
-    color: var(--sidebar-non-existant);
-}
-
-.chapter li .chapter-link-wrapper {
     display: flex;
-    align-items: flex-start;
-    width: 100%;
-}
-
-.chapter li .chapter-link-wrapper > a:first-child {
-    flex: 1 1 auto;
-    min-width: 0;
+    color: var(--sidebar-non-existant);
 }
 
 .chapter li a {
@@ -494,24 +470,21 @@ ul#searchresults span.teaser em {
     color: var(--sidebar-active);
 }
 
-.chapter li > a.toggle,
-.chapter li .chapter-link-wrapper > a.chapter-fold-toggle {
+.chapter li > a.toggle {
     cursor: pointer;
     display: block;
     margin-left: auto;
     padding: 0 10px;
     user-select: none;
     opacity: 0.68;
-    flex: 0 0 auto;
 }
 
-.chapter li > a.toggle div,
-.chapter li .chapter-link-wrapper > a.chapter-fold-toggle div {
+.chapter li > a.toggle div {
     transition: transform 0.5s;
 }
 
 /* collapse the section */
-.chapter li:not(.expanded) > ol {
+.chapter li:not(.expanded) + li > ol {
     display: none;
 }
 
@@ -520,8 +493,7 @@ ul#searchresults span.teaser em {
     margin-top: 0.6em;
 }
 
-.chapter li.expanded > a.toggle div,
-.chapter li.expanded > .chapter-link-wrapper > a.chapter-fold-toggle div {
+.chapter li.expanded > a.toggle div {
     transform: rotate(90deg);
 }
 

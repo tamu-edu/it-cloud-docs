@@ -289,9 +289,9 @@ function playground_text(playground) {
     var themePopup = document.getElementById('theme-list');
     var themeColorMetaTag = document.querySelector('meta[name="theme-color"]');
     var stylesheets = {
-        ayuHighlight: document.querySelector("[href*='ayu-highlight']"),
-        tomorrowNight: document.querySelector("[href*='tomorrow-night']"),
-        highlight: document.querySelector("[href*='highlight']"),
+        ayuHighlight: document.querySelector("[href$='ayu-highlight.css']"),
+        tomorrowNight: document.querySelector("[href$='tomorrow-night.css']"),
+        highlight: document.querySelector("[href$='highlight.css']"),
     };
 
     function showThemes() {
@@ -450,18 +450,20 @@ function playground_text(playground) {
         try { localStorage.setItem('mdbook-sidebar', 'visible'); } catch (e) { }
     }
 
-    var sidebarAnchorToggles = document.querySelectorAll('#sidebar a.toggle, #sidebar a.chapter-fold-toggle');
+    var sidebarAnchorToggles = document.querySelectorAll('#sidebar a.toggle');
+    //addition for draft chapter toggle
+    var sidebarDraftToggles = document.querySelectorAll('#sidebar div');
 
     function toggleSection(ev) {
-        ev.preventDefault();
-        var chapterItem = ev.currentTarget.closest('li.chapter-item');
-        if (chapterItem) {
-            chapterItem.classList.toggle('expanded');
-        }
+        ev.currentTarget.parentElement.classList.toggle('expanded');
     }
 
     Array.from(sidebarAnchorToggles).forEach(function (el) {
         el.addEventListener('click', toggleSection);
+    });
+    //addition for draft chapter toggle
+    Array.from(sidebarDraftToggles).forEach(function (el2) {
+        el2.addEventListener('click', toggleSection);
     });
 
     function hideSidebar() {

@@ -1,0 +1,17 @@
+--- theme/css/aggie-custom.css.old	2024-01-01 00:00:00.000000000 +0000
++++ theme/css/aggie-custom.css	2026-06-02 00:00:00.000000000 +0000
+@@ -25,9 +25,11 @@
+   color: var(--sidebar-fg);
+ }
+ 
++/* External link icon: Updated for mdBook 0.5.x */
++/* Previously used FontAwesome v4 \f08e, now using Unicode character */
+ a[href^="http"]:not([href*="tamu.edu"])::after,
+ a[href^="https"]:not([href*="tamu.edu"])::after {
+-  font-family: FontAwesome;
+-  content: " \f08e";
++  font-family: Arial, sans-serif;
++  content: " \2197";  /* ↗ Up-right arrow Unicode character */
+   font-size: 0.8em;
+   margin-left: 0.2em;
+ }

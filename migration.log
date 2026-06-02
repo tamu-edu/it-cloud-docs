@@ -1,0 +1,184 @@
+[2026-06-02 11:29:04] Starting mdBook migration (v0.4.52 → v0.5.3)
+[2026-06-02 11:29:04] DRY_RUN: true
+[2026-06-02 11:29:04] ========== DRY RUN MODE ==========
+[2026-06-02 11:29:04] No changes will be made. Add actual flag changes to proceed.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Checking current mdBook version...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-06-02 11:29:04] Current mdBook version: v0.5.3
+⚠️  WARNING: Already running v0.5.x
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Creating backups...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-06-02 11:29:04] [DRY-RUN] cp -v '/Users/bronius/projects/it-cloud-docs/book.toml' '/Users/bronius/projects/it-cloud-docs/.backups/migration-20260602-112904/book.toml.bak'
+[2026-06-02 11:29:04] [DRY-RUN] cp -r '/Users/bronius/projects/it-cloud-docs/theme' '/Users/bronius/projects/it-cloud-docs/.backups/migration-20260602-112904/theme.bak'
+[2026-06-02 11:29:04] [DRY-RUN] cp -v '/Users/bronius/projects/it-cloud-docs/Makefile' '/Users/bronius/projects/it-cloud-docs/.backups/migration-20260602-112904/Makefile.bak'
+✅ Backups created in: /Users/bronius/projects/it-cloud-docs/.backups/migration-20260602-112904
+[2026-06-02 11:29:04] Restore point: git stash && cp -r /Users/bronius/projects/it-cloud-docs/.backups/migration-20260602-112904/* .
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Installing mdBook v0.5.3...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-06-02 11:29:05] Downloading from: https://github.com/rust-lang/mdBook/releases/download/v0.5.3/mdbook-v0.5.3-aarch64-apple-darwin.tar.gz
+[2026-06-02 11:29:05] [DRY-RUN] curl -sSL 'https://github.com/rust-lang/mdBook/releases/download/v0.5.3/mdbook-v0.5.3-aarch64-apple-darwin.tar.gz' | tar -xz --directory='/var/folders/fx/9b4c3b5x0bq0lmwx94_259200000gq/T/tmp.Atx4uLOYWe'
+✅ mdBook installation verified: mdbook v0.5.3
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Installing mdbook-admonish v1.20.0...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-06-02 11:29:05] [DRY-RUN] cargo install mdbook-admonish@1.20.0
+✅ mdbook-admonish installed: mdbook-admonish 1.20.0
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Updating book.toml...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-06-02 11:29:05] [DRY-RUN] Would update book.toml assetsversionto 1.20.0
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Updating theme files (ID namespace migration)...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-06-02 11:29:05] [DRY-RUN] Would update theme IDs with mdbook- prefix
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Cleaning build cache...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-06-02 11:29:05] [DRY-RUN] Would run: mdbook clean
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Building documentation...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-06-02 11:29:05] [DRY-RUN] Would run: mdbook build
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Migration Complete! 🎉
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+================================================================================
+POST-MIGRATION VALIDATION CHECKLIST
+================================================================================
+
+Before pushing to production, verify these items:
+
+VISUAL RENDERING:
+  [ ] Sidebar navigation renders and collapses properly
+  [ ] Menu bar icons display correctly (hamburger, brush, search)
+  [ ] Theme toggle button functions
+  [ ] Print button appears with correct icon
+  [ ] GitHub edit button appears
+  [ ] Admonitions render with correct styling
+
+FUNCTIONAL TESTING:
+  [ ] Dark/Light theme toggle works
+  [ ] Search functionality operational
+  [ ] Sidebar collapse/expand smooth
+  [ ] Print to PDF generates correctly
+  [ ] Mobile responsive layout intact
+  [ ] Page navigation links work
+  [ ] No 404 errors in browser console
+  [ ] No JavaScript errors on page load
+
+QUICK TEST:
+  1. Run: mdbook serve
+  2. Open: http://localhost:3000
+  3. Check browser DevTools (F12) console for errors
+  4. Test theme toggle (top-right button)
+  5. Test sidebar (top-left hamburger)
+  6. Search for a term
+
+NEXT STEPS:
+  1. Local validation (mdbook serve)
+  2. Git commit: git add . && git commit -m "chore: upgrade mdBook 0.4.52 → 0.5.3"
+  3. Push to staging/production
+
+ROLLBACK (if needed):
+  cp -r ${BACKUP_DIR}/* .
+  mdbook clean && mdbook build
+
+================================================================================
+
+================================================================================
+MIGRATION SUMMARY
+================================================================================
+
+Migration Log: /Users/bronius/projects/it-cloud-docs/migration.log
+Backup Location: /Users/bronius/projects/it-cloud-docs/.backups/migration-20260602-112904
+
+Updates Applied:
+  ✓ mdBook v0.5.3 installed
+  ✓ mdbook-admonish v1.20.0 installed
+  ✓ book.toml updated
+  ✓ Theme ID namespaces migrated (mdbook- prefix)
+  ✓ FontAwesome v4 references removed
+  ✓ Build cache cleaned
+  ✓ Documentation rebuilt
+
+Configuration Changed:
+  • book.toml: assets_version → "1.20.0"
+  • theme/index.hbs: Removed FontAwesome CSS link
+  • theme/index.hbs: Updated sidebar ID references
+  • theme/css/chrome.css: Updated selectors
+  • All #sidebar → #mdbook-sidebar
+  • All #menu-bar → #mdbook-menu-bar
+
+OS/Architecture: Darwin / arm64
+Dry Run: true
+Backups: DISABLED ✓
+
+================================================================================
+✅ Migration completed!
+[2026-06-02 11:29:15] Starting mdBook migration (v0.4.52 → v0.5.3)
+[2026-06-02 11:29:15] DRY_RUN: false
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Checking current mdBook version...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-06-02 11:29:15] Current mdBook version: v0.5.3
+⚠️  WARNING: Already running v0.5.x
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Creating backups...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-06-02 11:29:15] Running: cp -v '/Users/bronius/projects/it-cloud-docs/book.toml' '/Users/bronius/projects/it-cloud-docs/.backups/migration-20260602-112915/book.toml.bak'
+[2026-06-02 11:29:15] Running: cp -r '/Users/bronius/projects/it-cloud-docs/theme' '/Users/bronius/projects/it-cloud-docs/.backups/migration-20260602-112915/theme.bak'
+[2026-06-02 11:29:15] Running: cp -v '/Users/bronius/projects/it-cloud-docs/Makefile' '/Users/bronius/projects/it-cloud-docs/.backups/migration-20260602-112915/Makefile.bak'
+✅ Backups created in: /Users/bronius/projects/it-cloud-docs/.backups/migration-20260602-112915
+[2026-06-02 11:29:15] Restore point: git stash && cp -r /Users/bronius/projects/it-cloud-docs/.backups/migration-20260602-112915/* .
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Installing mdBook v0.5.3...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-06-02 11:29:15] Downloading from: https://github.com/rust-lang/mdBook/releases/download/v0.5.3/mdbook-v0.5.3-aarch64-apple-darwin.tar.gz
+[2026-06-02 11:29:15] Running: curl -sSL 'https://github.com/rust-lang/mdBook/releases/download/v0.5.3/mdbook-v0.5.3-aarch64-apple-darwin.tar.gz' | tar -xz --directory='/var/folders/fx/9b4c3b5x0bq0lmwx94_259200000gq/T/tmp.fSu8taiKfM'
+[2026-06-02 11:29:16] Running: mv '/var/folders/fx/9b4c3b5x0bq0lmwx94_259200000gq/T/tmp.fSu8taiKfM/mdbook' ~/bin/
+✅ mdBook installed to ~/bin/mdbook
+✅ mdBook installation verified: mdbook v0.5.3
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Installing mdbook-admonish v1.20.0...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-06-02 11:29:16] Running: cargo install mdbook-admonish@1.20.0
+✅ mdbook-admonish installed: mdbook-admonish 1.20.0
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Updating book.toml...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Updated book.toml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Updating theme files (ID namespace migration)...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Updated theme files with ID namespace migration
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Cleaning build cache...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-06-02 11:29:16] Running: cd '/Users/bronius/projects/it-cloud-docs' && mdbook clean
+✅ Build cache cleaned
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Building documentation...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-06-02 11:29:16] Running: cd '/Users/bronius/projects/it-cloud-docs' && mdbook build
+❌ ERROR: Command failed: cd '/Users/bronius/projects/it-cloud-docs' && mdbook build

@@ -4,10 +4,14 @@ language = "en"
 src = "src"
 title = "Clouds and Platforms"
 
+[preprocessor.admonish]
+command = "mdbook-admonish"
+assets_version = "1.20.0" # UPDATED: was 3.0.2 - compatible with mdBook 0.5.x
+
 [output.html]
 default-theme = "aggie"
 preferred-dark-theme = "navy"
-additional-css = ["./theme/css/tabbed-code-blocks.css", "./theme/css/aggie-custom.css"]
+additional-css = ["./theme/css/mdbook-admonish.css", "./theme/css/tabbed-code-blocks.css", "./theme/css/aggie-custom.css"]
 additional-js = ["./theme/js/tabbed-code-blocks.js"]
 edit-url-template = "https://github.com/tamu-edu/it-cloud-docs/edit/main/{path}"
 
