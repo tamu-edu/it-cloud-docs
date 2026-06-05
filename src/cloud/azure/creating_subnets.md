@@ -5,14 +5,14 @@ The purpose of this document is to explain how to create and configure subnets i
 
 ## Overview
 
-A Vnet is a logical isolation of the Azure cloud dedicated to your subscription. Subnets are subdivisions of a VNet's address space that allow you to segment your resources for better organization, security, and performance. TAMU Cloud Services will work with you to design, configure, and create the VNet for your solution. This document provides guidance on how to create and configure subnets within your VNet to meet your solution's requirements while adhering to best practices for security and performance. For more information on the overall network design, please see the [Secure Azure Network Design](./azure_network.md) guide.
+A VNet is a logical isolation of the Azure cloud dedicated to your subscription. Subnets are subdivisions of a VNet's address space that allow you to segment your resources for better organization, security, and performance. TAMU Cloud Services will work with you to design, configure, and create the VNet for your solution. This document provides guidance on how to create and configure subnets within your VNet to meet your solution's requirements while adhering to best practices for security and performance. For more information on the overall network design, please see the [Secure Azure Network Design](./azure_network.md) guide.
 
 ## Planning Ahead
 
-While most vnet and subnet modifications do not require destruction and recreation, certain fundamental changes &mdash; particularly relating to IP addressing and naming &mdash; will force a delete-and-recreate action. Certain changes via Terraform may be even less flexible. Deleting a subnet in order to recreate it also requires first detaching or destroying resources associated with it. Therefore, it is helpful to plan your Azure networking resources before deploying. Cloud Services can help.
+While most vnet and subnet modifications do not require destruction and recreation, certain fundamental changes &mdash; particularly relating to IP addressing and naming &mdash; will force a delete-and-recreate action. Certain changes via Terraform may be even less flexible. Deleting a subnet in order to recreate it also requires first detaching, moving, or destroying resources associated with it. To avoid later complications, it is helpful to plan your Azure networking resources before deploying. Cloud Services can help.
 
 * **Subnet Name:** You cannot change the name of an existing subnet (without deleting and recreating it).
-* **Subnet Address Range:** If the subnet is in use (has resources attached or pointing to it), you cannot modify its IP prefix. You must delete all resources in the subnet, change the range, and then recreate the resources.
+* **Subnet Address Range:** If the subnet is in use (has resources attached or pointing to it), you cannot modify its IP prefix. You must detach, move, or delete all resources in the subnet, change the range, and then reattach the resources.
 * **VNet Address Range (Overlapping/Shrinking):** While the range can be expanded (by Cloud Services), an address range in use by a subnet cannot be removed or shrunk.
 
 ## Virtual Network (VNet) and Subnet Design
