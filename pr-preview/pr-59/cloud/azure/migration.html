@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Guidelines - Clouds and Platforms</title>
+        <title>Migration - Clouds and Platforms</title>
 
         <!-- Custom HTML head -->
 
@@ -33,7 +33,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "../";
+            var path_to_root = "../../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "aggie";
         </script>
 
@@ -283,7 +283,7 @@
                     <h1 class="menu-title">Clouds and Platforms</h1>
 
                     <div class="right-buttons">
-                        <a href="https://github.com/tamu-edu/it-cloud-docs/edit/main/src/github/guidelines.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/tamu-edu/it-cloud-docs/edit/main/src/cloud/azure/migration.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.8 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/></svg></span>
                         </a>
 
@@ -312,39 +312,41 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="guidelines-for-github-use"><a class="header" href="#guidelines-for-github-use">Guidelines for GitHub use</a></h1>
-<h2 id="repository-naming-conventions"><a class="header" href="#repository-naming-conventions">Repository Naming Conventions</a></h2>
-<p>Consolidating to single organizations introduces naming competition and potential namespace collisions. Please name every repository to clearly communicate ownership, readability, and consistency within the organization.  We propose everyone conform to the following convention when naming repositories:</p>
+                        <h1 id="azure-network-migration"><a class="header" href="#azure-network-migration">Azure Network Migration</a></h1>
+<p>Over the Summer of 2026, a new network design was implemented for the TAMU Azure Virtual Networks (VNets). This new design includes a hub-and-spoke architecture, which provides improved security and scalability for our Azure environment by centralizing traffic flow through shared Azure Front Door (AFD) with WAF rules and Azure Firewall (FW) for traffic scanning and logging. The changes affecting customers include new Virtual Network (VNet) and address allocation, requirements of securing subnets and resources to private, and directing public resources through the hub gateways for inbound and outbound traffic.</p>
+<p>Existing Azure customers not yet in this new topology need to be migrated. The migration process involves moving existing resources from the old network design to the new one, as well as updating any necessary configurations.</p>
+<h2 id="migration-guide"><a class="header" href="#migration-guide">Migration Guide</a></h2>
+<p>The migration process will be carried out in phases, with each phase focusing on a specific set of resources. The following steps outline the general migration process:</p>
+<ol>
+<li><strong>Assessment</strong>: Identify the resources that need to be migrated and assess their dependencies and configurations.</li>
+<li><strong>Planning</strong>: Develop a migration plan that outlines the sequence of migration steps, including any downtime or service interruptions. Engage Cloud Services early in the planning phase to ensure necessary resources and support are available for migration assistance and any necessary hub resource configuration.</li>
+<li><strong>Preparation</strong>: Prepare the new network environment, including requesting the new VNet to be provisioned, creating and configuring subnets, and planning Private Endpoints, etc. for certain services.</li>
+<li><strong>Migration</strong>: Execute the migration plan, moving resources to the new network design and updating configurations as needed. Work with Cloud Services to prepare identified hub AFD Endpoint and FW rules for the new resources and subnets as needed.</li>
+<li><strong>Validation</strong>: Verify that all resources are functioning correctly in the new network environment and that security policies are enforced.</li>
+<li><strong>Decommissioning</strong>: Decommission the old network environment once the migration is complete and validated.</li>
+</ol>
+<h3 id="app-services"><a class="header" href="#app-services">App Services</a></h3>
 <ul>
-<li>The repository name should use all lowercase letters</li>
-<li>Separate words using dashes (-)</li>
-<li>The first word should describe your college or division, such as your 4-letter abbreviation (i.e. <code>clen-</code>, or <code>arch-</code>)</li>
-<li>The second (or more) word(s) should describe your working group, such as department or research lab (i.e. <code>viz-</code> or <code>chem-</code>)</li>
-<li>Use the rest of the name to describe the repository with high specificity (i.e. <code>-a-very-specific-rest-service</code> vs <code>-rest-service</code>)</li>
+<li><strong>Rule:</strong> App Services may not be exposed to the public internet and must be secured to private access only.</li>
+<li><strong>Action:</strong> This can be achieved by using Private Endpoints to connect App Services to the VNet and ensuring that all inbound and outbound traffic is directed through the hub gateways for security scanning and logging.</li>
 </ul>
-<h2 id="repository-visibility"><a class="header" href="#repository-visibility">Repository Visibility</a></h2>
-<p>GitHub Enterprise has three levels of repository visibility:</p>
 <ul>
-<li>Public repositories are visible to the internet.</li>
-<li>Internal repositories are visible to members of the Enterprise (anyone with a Texas A&amp;M NetID).</li>
-<li>Private repositories are only visible to those with direct access.</li>
+<li>App Service “Public Access” property must be either set to “Disabled” or “Enabled with Limited Access” together with a default Deny rule in order to prevent direct public access.</li>
+<li>App Service must be connected to the VNet via a private subnet with a User Defined Route (UDR) directing outbound traffic to the hub firewall and with no NSG rules allowing inbound traffic from the public internet.</li>
 </ul>
-<p>The student organization allows repositories of any visibility level.</p>
-<p>The institutional organization allows <em>new</em> repositories at any visibility level. Changes to existing repositories from <code>internal</code> or <code>private</code> to <code>public</code> will be blocked and reverted. The owner of a private repository can submit a ticket or pull request to grant their visibility change.</p>
-<h2 id="using-git-and-github"><a class="header" href="#using-git-and-github">Using Git and GitHub</a></h2>
-<p>If you are new to Git or GitHub, the <a href="https://docs.github.com/en/get-started">Get Started with GitHub</a> guide is a great place to start. More advanced users are encouraged to check out the documentation for the advanced features at <a href="https://docs.github.com/en">GitHub Docs</a>.</p>
-<p>Some additional resources to learn Git and GitHub:</p>
+<h2 id="custom-domains"><a class="header" href="#custom-domains">Custom Domains</a></h2>
 <ul>
-<li><a href="https://guides.github.com/introduction/git-handbook/">About Git</a> - Learn about the version control system, Git, and how it works with GitHub.</li>
-<li><a href="https://docs.github.com/en/get-started/quickstart/hello-world">GitHub Hello World</a> - A real example of how to use GitHub.</li>
-<li><a href="https://docs.github.com/en/get-started/quickstart/github-flow">The GitHub Flow</a> - Understand how best to collaborate on projects.</li>
-<li><a href="https://docs.github.com/en">GitHub Guides Index</a></li>
-<li><a href="https://github.com/cli/cli">GitHub CLI Tools</a> and <a href="https://cli.github.com/manual/">GitHub CLI Documentation</a></li>
-<li><a href="https://myoctocat.com">Build Your Own Octocat</a></li>
+<li>Custom domains do not need to be on the App Service (for example) but instead must be configured in the hub by Cloud Services. In response, the customer will be provided an Azure Public DNS zone and records to configure in their spoke environment.</li>
 </ul>
-<h2 id="additional-resources"><a class="header" href="#additional-resources">Additional Resources</a></h2>
+<h3 id="virtual-machines"><a class="header" href="#virtual-machines">Virtual Machines</a></h3>
 <ul>
-<li><a href="https://opensource.com/article/20/2/devops-beginners">General DevOps Culture Constructs</a></li>
+<li><strong>Rule:</strong> Virtual Machines (VMs) must be secured to private access only.</li>
+<li><strong>Action:</strong> This can be achieved by placing VMs in private subnets with User Defined Routes (UDRs) directing outbound traffic to the hub firewall and with no NSG rules allowing inbound traffic from the public internet. If public access is required, it must be directed through the hub.</li>
+</ul>
+<h3 id="database-services"><a class="header" href="#database-services">Database Services</a></h3>
+<ul>
+<li><strong>Rule:</strong> Database services must be secured to private access only.</li>
+<li><strong>Action:</strong> Set “Enable Public Access” to “Disabled” and connect to the VNet via a private subnet. Configure a Private Endpoint to connect to the database service.</li>
 </ul>
 
                     </main>
