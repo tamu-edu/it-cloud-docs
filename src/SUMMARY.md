@@ -12,6 +12,7 @@
   - [Microsoft Azure (Azure)](cloud/azure.md)
     - [Secure Azure Network](cloud/azure/azure_network.md)
     - [Creating Subnets](cloud/azure/creating_subnets.md)
+    - [Migration](cloud/azure/migration.md)
     - [Policy Enforcement](cloud/azure/policy_effects.md)
     - [GitHub Deployment](cloud/azure/github_private.md)
 
