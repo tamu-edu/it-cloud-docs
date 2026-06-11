@@ -26,8 +26,7 @@ jobs:
         if: github.event.action != 'closed'
         with:
             token: ${{secrets.GITHUB_TOKEN}}
-            mdbook-version: '0.4.52'
-            use-admonish: true
+            mdbook-version: '0.5.3'
 
       - name: Build mdBook site
         run: mdbook build
