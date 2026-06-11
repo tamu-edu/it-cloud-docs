@@ -1,6 +1,5 @@
 /* CSS for UI elements (a.k.a. chrome) */
 
-@import 'variables.css';
 
 ::-webkit-scrollbar {
     background: var(--bg);
@@ -59,6 +58,19 @@ a > .hljs {
     cursor: pointer;
     transition: color 0.5s;
 }
+
+/* Size and colour the SVG icons produced by the {{fa}} Handlebars helper */
+.fa-svg {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+}
+.fa-svg svg {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+}
 @media only screen and (max-width: 420px) {
     #menu-bar i, #menu-bar .icon-button {
         padding: 0 5px;
@@ -87,7 +99,7 @@ a > .hljs {
     margin: 0 5px;
 }
 .no-js .left-buttons {
-    display: none;
+    display: flex;
 }
 
 .menu-title {
@@ -437,8 +449,19 @@ ul#searchresults span.teaser em {
 }
 
 .chapter li {
-    display: flex;
+    display: block;
     color: var(--sidebar-non-existant);
+}
+
+.chapter li .chapter-link-wrapper {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.chapter li .chapter-link-wrapper > a:first-child {
+    flex: 1 1 auto;
+    min-width: 0;
 }
 
 .chapter li a {
@@ -470,21 +493,24 @@ ul#searchresults span.teaser em {
     color: var(--sidebar-active);
 }
 
-.chapter li > a.toggle {
+.chapter li > a.toggle,
+.chapter li .chapter-link-wrapper > a.chapter-fold-toggle {
     cursor: pointer;
     display: block;
     margin-left: auto;
     padding: 0 10px;
     user-select: none;
     opacity: 0.68;
+    flex: 0 0 auto;
 }
 
-.chapter li > a.toggle div {
+.chapter li > a.toggle div,
+.chapter li .chapter-link-wrapper > a.chapter-fold-toggle div {
     transition: transform 0.5s;
 }
 
 /* collapse the section */
-.chapter li:not(.expanded) + li > ol {
+.chapter li:not(.expanded) > ol {
     display: none;
 }
 
@@ -493,7 +519,8 @@ ul#searchresults span.teaser em {
     margin-top: 0.6em;
 }
 
-.chapter li.expanded > a.toggle div {
+.chapter li.expanded > a.toggle div,
+.chapter li.expanded > .chapter-link-wrapper > a.chapter-fold-toggle div {
     transform: rotate(90deg);
 }
 
