@@ -5,7 +5,7 @@ The purpose of this document is to explain how to create and configure subnets i
 
 ## Overview
 
-A VNet is a logical isolation of the Azure cloud dedicated to your subscription. Subnets are subdivisions of a VNet's address space that allow you to segment your resources for better organization, security, and performance. TAMU Cloud Services will work with you to design, configure, and create the VNet for your solution. This document provides guidance on how to create and configure subnets within your VNet to meet your solution's requirements while adhering to best practices for security and performance. For more information on the overall network design, please see the [Secure Azure Network Design](./azure_network.md) guide.
+A VNet is a logical isolation of the Azure cloud dedicated to your subscription. Subnets are subdivisions of a VNet's address space that allow you to segment your resources for better organization, security, and performance. TAMU Cloud Services will work with you to design, configure, and create the VNet for your solution. This document provides guidance on how to create and configure subnets within your VNet to meet your solution's requirements while adhering to best practices for security and performance. For more information on the overall network design, please see the [TAMU Secure Azure Network Design](./azure_network.md) guide.
 
 ## Planning Ahead
 
@@ -39,9 +39,40 @@ A Private Endpoint is a network interface that uses a private IP address from yo
 
 Subnets can be associated with route tables and NSGs to control traffic flow and security. Route tables allow you to define custom routes for traffic leaving the subnet, while NSGs allow you to define inbound and outbound security rules to control traffic to and from resources in the subnet. When designing your subnets, consider how you will use route tables and NSGs to secure your resources and control traffic flow.
 
+Recently, Azure began deploying subnets as Private by default, which means that some default outbound access must be defined. For our Secure Azure Network, outbound traffic must flow through the centralized firewall in the hub VNet. See official Microsoft documentation on [default outbound access](https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/default-outbound-access) for further explanation.
+
 <em>It is very possible that you will not need to define any route tables or NSGs for your subnets, as the default routes and security rules provided by Azure and the TAMU network design may be sufficient for your needs. One provided User-Defined Route (UDR) is pre-configured to route all outbound internet traffic from your VNet to the TAMU-managed firewall service in the hub. This ensures that all outbound traffic is inspected and filtered by the firewall, providing an additional layer of security for your resources.</em>
 
 ## Example Subnet Configurations
+
+### Basic Subnet and Default Route to Hub Firewall
+
+The following subnet has a User-Defined Route (UDR) that directs all outbound traffic to the hub firewall.
+
+```hcl
+resource "azurerm_subnet" "workload" {
+  name                 = "workload"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = data.azurerm_virtual_network.spoke.name
+  address_prefixes     = ["10.0.0.0/28"]
+}
+
+resource "azurerm_route_table" "default_to_hub" {
+  name                = "default-to-hub-route-table"
+  resource_group_name = azurerm_resource_group.rg.name
+  route {
+    name                   = "default-route"
+    address_prefix         = "0.0.0.0/0"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = var.hub_firewall_ip_address
+  }
+}
+
+resource "azurerm_subnet_route_table_association" "example" {
+  subnet_id      = azurerm_subnet.workload.id
+  route_table_id = azurerm_route_table.default_to_hub.id
+}
+```
 
 ### Azure App Service and GitHub Private Networking
 
