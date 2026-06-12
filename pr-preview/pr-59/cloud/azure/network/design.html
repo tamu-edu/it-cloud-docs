@@ -314,7 +314,6 @@
                     <main>
                         <h1 id="azure-network-design"><a class="header" href="#azure-network-design">Azure Network Design</a></h1>
 <p>TAMU customer VNets are provisioned by TAMU Cloud Services with an address space allocated from a global pool assigned to your VNet in your subscription for your use. Follow Azure best practices for dividing your address space into subnets and assigning resources to those subnets. Work with Cloud Services to ensure your requested VNet address space and proposed subnet design align with your solution’s overall network design and best practices for security and performance. It is recommended to use one VNet per Azure Subscription per project per environment, but you can use as many subnets as you need within that VNet to segment your resources as needed.</p>
-<p><img src="/pr-preview/pr-59/cloud/azure/network/azure_network_static_diagram.png" alt="TAMU Azure Secure Network Diagram"></p>
 <pre class="mermaid">flowchart TB
     internet_in(["🌐 Internet (ingress)"])
 
