@@ -117,3 +117,10 @@ All subnets will be private with no direct access to or from the public internet
 Resources that need to be accessible from the internet will be connected to private subnets and corresponding configurations applied to the hub services to allow for secure access. This includes Azure PaaS services that normally have a public endpoint, such as App Service, which will need to be connected to the VNet via Private Endpoints and have their public access disabled.
 
 Azure Policies will be put in place to enforce the required configurations for public resources. See [Policies and Enforcement](./policies.md) for more information about the policies that will be applied to the TAMU-managed network in Azure.
+
+## Spoke-to-Spoke Communication
+
+The TAMU-managed Azure network has adopted a zero-trust model, and as such, by default, communication between spoke VNets is not allowed. If you have a use case that requires communication between spoke VNets, there are two options:
+
+- You can request to have the necessary firewall rules added to the shared Azure Firewall instance to allow for secure communication between the spokes, or from all spokes to a specific spoke, if for instance you operate a shared service in your spoke. This is the recommended approach, as it allows for secure communication while still allowing for inspection and control of traffic through the firewall.
+- If both spokes are managed by the same customer, or the other spoke is a trusted partner, you can peer the two spoke VNets together and create NSG rules to allow for communication between them. This bypasses the firewall and should only be done when appropriate.
