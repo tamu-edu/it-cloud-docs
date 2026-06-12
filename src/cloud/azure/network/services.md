@@ -23,7 +23,7 @@ The following is a non-exhaustive list of common Azure services that are in scop
 | [Azure Virtual Machines](https://learn.microsoft.com/en-us/azure/virtual-machines/) | [Connect a VM to the TAMU network](connect_vm.md) |
 | [Azure Load Balancers (public)](https://learn.microsoft.com/en-us/azure/load-balancer/) | [Connect a public load balancer to the TAMU network](connect_public_lb.md) |
 | [Azure Application Gateways](https://learn.microsoft.com/en-us/azure/application-gateway/) | [Connect App Gateway to the TAMU network](connect_app_gateway.md) |
-| [Bastion Hosts](https://learn.microsoft.com/en-us/azure/bastion/) | [Connecting to your private resources](bastion.md) |
+| [Bastion Hosts](https://learn.microsoft.com/en-us/azure/bastion/) | [Accessing your private resources](access_methods.md) |
 | [Azure API Management](https://learn.microsoft.com/en-us/azure/api-management/) | |
 | [Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/azure/aks/) | [Connect AKS to the TAMU network](connect_aks.md) |
 | [Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/) | [Connect App Service to the TAMU network](connect_app_service.md) |

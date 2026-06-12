@@ -14,6 +14,7 @@
     - [Network](cloud/azure/network/network.md)
       - [Design](cloud/azure/network/design.md)
       - [Creating Subnets](cloud/azure/network/creating_subnets.md)
+      - [Access Methods](cloud/azure/network/access_methods.md)
       - [Migration](cloud/azure/network/migration.md)
       - [Policy Enforcement](cloud/azure/network/policy_effects.md)
       - [GitHub Deployment](cloud/azure/network/github_private.md)

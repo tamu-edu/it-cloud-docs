@@ -52,6 +52,16 @@ Different types of resources have different connectivity requirements and option
 
 See [Services Configuration](services.md) for how to connect specific Azure services to the TAMU-managed network.
 
+### Accessing Resources
+
+Resources that are connected to the TAMU-managed network will not be directly accessible from the internet, so you will need to use one of the approved access methods to connect to your resources.
+
+For IaaS resources (such as virtual machines), or PaaS services with private endpoints (such as SQL Server), you can use the campus network or Campus VPN service to connect to your resources securely on their private IP addresses.
+
+See [Access Methods](access_methods.md) for more details on how to access your resources.
+
+When internet access is required, such as for public web applications, you can submit a request to the Cloud Services team to set up Azure Front Door or Azure Firewall to allow secure access to your resources from the internet. See [Services Configuration](services.md) for more details on how to set this up for specific services.
+
 ## Alternatives / Exceptions
 
 If you have a specific use case that requires a different network design or a feature or service that is not yet implemented, please contact the Cloud Engineering team to discuss your requirements. We will work with you to understand and accommodate your needs while maintaining the security and integrity of the TAMU network.
