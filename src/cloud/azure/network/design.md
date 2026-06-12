@@ -101,3 +101,19 @@ Customers can request to have firewall rules added to the shared Azure Firewall 
 The hub network uses ExpressRoute to provide a private, high-speed, low-latency connection between the campus network and Azure network. This allows for secure access to Azure resources without exposing them to the public internet, while still allowing for connectivity to on-premises resources and other cloud environments as needed.
 
 In general, it is recommended to architect your service in a way that minimizes dependencies on services on other networks or locations. This will help reduce the total points of failure of your service and make it more resilient. If this cannot be avoided, consider extending the dependency into the cloud rather than relying on private connectivity back to the campus network, or syncing and caching the data from that service. If you do need to rely on private connectivity back to the campus network, ensure that you have implemented appropriate error handling and/or retry logic in your service to account for potential connectivity issues, and consider the impact of such issues on your overall service availability and performance.
+
+## Provisioning and Configuration
+
+Customer VNets ("spoke networks") are provisioned by Cloud Services with one or more IP address ranges (CIDR) allocated to it from a pool of address space. The default allocation will be 32 IP addresses (27 usable), but can be grown as needed.
+
+Our default Azure region is `South Central US`, as it is closest to the TAMU campus and a majority of our user base and will have the lowest latency, and virtual networks will be provisioned in this region unless otherwise requested. Follow the guidance in [creating subnets](creating_subnets.md) for dividing your address space into subnets and connecting resources to those subnets. If you need to, work with Cloud Services to ensure your VNet address space and subnet design align with your solution's need and recommended best practices.
+
+By default, no subnets will be created in spoke VNets since subnet design can vary greatly based on the types of resources being deployed. The customer is responsible for creating and configuring their own subnets within their VNet, but Cloud Services can provide guidance and best practices for doing so.
+
+All subnets will be private with no direct access to or from the public internet. A user-defined route (UDR) will be created to route outbound internet traffic through the Azure Firewall and NAT Gateway services in the hub VNet and will need to be associated with each subnet. An Azure policy will be put in place to prevent the creation of public subnets, and to attach the default UDR to all subnets missing one.
+
+## Public Resources
+
+Resources that need to be accessible from the internet will be connected to private subnets and corresponding configurations applied to the hub services to allow for secure access. This includes Azure PaaS services that normally have a public endpoint, such as App Service, which will need to be connected to the VNet via Private Endpoints and have their public access disabled.
+
+Azure Policies will be put in place to enforce the required configurations for public resources. See [Policies and Enforcement](./policies.md) for more information about the policies that will be applied to the TAMU-managed network in Azure.
