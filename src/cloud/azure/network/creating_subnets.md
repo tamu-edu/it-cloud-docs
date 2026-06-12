@@ -28,11 +28,13 @@ When planning your subnet design, consider the following:
 
 ## Subnet Delegation, Service Endpoints, and Private Links
 
-Subnet delegation is assigning a given subnet to a specific Azure service (like Azure SQL Managed Instance or App Service Environment). A delegated subnet can host instances only of that specific service, so you cannot add an Azure SQL Managed Instance into a subnet delegated to App Service Environment. Use this when a managed service needs to be deployed into your VNET for private connectivity.
+Some services require a dedicated subnet for their VNet integration feature, called a delegated subnet. This is common with PaaS and fully-managed services, like Azure Managed SQL or App Service Environments. A delegated subnet can host instances only of that specific service, so you cannot add an Azure SQL Managed Instance into a subnet delegated to App Service Environment. Consult the [services configuration](./services.md) document or Azure documentation to determine if this is required.
 
 Service Endpoints and Private Links are two different ways to privately connect to Azure PaaS services from your VNet. Service Endpoints route traffic to Azure services over the Azure backbone network while still using the service's public endpoint. They allow you to restrict service access to your VNet, but traffic still uses the public IP namespace of the service, which has security implications. Private Links provide a private IP address endpoint inside your VNet for an Azure service, allowing you to connect as if the service were a private resource within your network. Private Links are generally more secure and are the recommended approach for most scenarios.
 
 A Private Endpoint is a network interface that uses a private IP address from your subnet to provide private connectivity to an Azure service. Unlike Service Endpoints, Private Endpoints do not require specific subnet configuration and can be placed in any subnet. This is the recommended way to connect to Azure PaaS services from your VNet. For more information on these options, see the [Microsoft documentation](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview).
+
+It is recommended that Endpoints be placed in their own dedicated subnet, separate from other resources. This allows for better security, as you can apply specific security group rules to the endpoint subnet without affecting other resources.
   
 ## Route Tables and Network Security Groups (NSGs)
 
