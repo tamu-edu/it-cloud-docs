@@ -25,11 +25,11 @@ The following is a non-exhaustive list of common Azure services that are in scop
 | [Azure Application Gateways](https://learn.microsoft.com/en-us/azure/application-gateway/) | [Connect App Gateway to the TAMU network](connect_app_gateway.md) |
 | [Bastion Hosts](https://learn.microsoft.com/en-us/azure/bastion/) | [Accessing your private resources](access_methods.md) |
 | [Azure API Management](https://learn.microsoft.com/en-us/azure/api-management/) | |
-| [Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/azure/aks/) | [Connect AKS to the TAMU network](connect_aks.md) |
-| [Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/) | [Connect App Service to the TAMU network](connect_app_service.md) |
-| [Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/) | [Connect Functions to the TAMU network](connect_azure_functions.md) |
-| [Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/) | [Connect Container App to the TAMU network](connect_container_app.md) |
-| [Azure Container Instances](https://learn.microsoft.com/en-us/azure/container-instances/) | [Connect Container Instances to the TAMU network](connect_container_instances.md) |
+| [Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/azure/aks/) | [Connect AKS to the TAMU network](services/connect_aks.md) |
+| [Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/) | [Connect App Service to the TAMU network](services/connect_app_service.md) |
+| [Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/) | [Connect Functions to the TAMU network](services/connect_azure_functions.md) |
+| [Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/) | [Connect Container App to the TAMU network](services/connect_container_app.md) |
+| [Azure Container Instances](https://learn.microsoft.com/en-us/azure/container-instances/) | [Connect Container Instances to the TAMU network](services/connect_container_instances.md) |
 | [Azure Batch](https://learn.microsoft.com/en-us/azure/batch/) | |
 | [Azure Spring Apps](https://learn.microsoft.com/en-us/azure/spring-apps/) | |
 | [Azure Service Fabric](https://learn.microsoft.com/en-us/azure/service-fabric/) | |

@@ -22,6 +22,7 @@
         - [Azure Virtual Machines](cloud/azure/network/services/connect_vm.md)
         - [Azure Load Balancers](cloud/azure/network/services/connect_public_lb.md)
         - [Azure Application Gateways](cloud/azure/network/services/connect_app_gateway.md)
+        - [Bastion Hosts](cloud/azure/network/services/connect_bastion.md)
         - [Azure Kubernetes Service (AKS)](cloud/azure/network/services/connect_aks.md)
         - [Azure App Service](cloud/azure/network/services/connect_app_service.md)
         - [Azure Functions](cloud/azure/network/services/connect_azure_functions.md)

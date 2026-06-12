@@ -2,10 +2,9 @@
 
 Azure is a leading cloud provider in the world and offers a wide range of services to meet the needs of any organization. The TAMU Cloud Services provides a secure and compliant environment for TAMU customers to use Azure services.
 
-* [Secure Azure Network Design](./azure/azure_network.md)
-* [Creating Subnets](./azure/creating_subnets.md)
-* [Understanding Policy Enforcement](./azure/policy_effects.md)
-* [Policy Admin: Managing and Extending Guardrails](./azure/policy_effects.md)
+* [Secure Azure Network Design](./azure/network/network.md)
+* [Creating Subnets](./azure/network/creating_subnets.md)
+* [Understanding Policy Enforcement](./azure/network/policy_effects.md)
 
 ## Requesting an Azure Account
 
