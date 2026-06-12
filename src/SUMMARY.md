@@ -9,12 +9,13 @@
     - [Networking](cloud/aws/networking.md)
       - [VPC Policy](cloud/aws/vpc_policy.md)
       - [Migration](cloud/aws/migration.md)
+  
   - [Microsoft Azure (Azure)](cloud/azure.md)
-    - [Secure Azure Network](cloud/azure/azure_network.md)
-    - [Creating Subnets](cloud/azure/creating_subnets.md)
-    - [Migration](cloud/azure/migration.md)
-    - [Policy Enforcement](cloud/azure/policy_effects.md)
-    - [GitHub Deployment](cloud/azure/github_private.md)
+    - [Secure Azure Network](cloud/azure/network/azure_network.md)
+      - [Creating Subnets](cloud/azure/network/creating_subnets.md)
+      - [Migration](cloud/azure/network/migration.md)
+      - [Policy Enforcement](cloud/azure/network/policy_effects.md)
+      - [GitHub Deployment](cloud/azure/network/github_private.md)
 
 - [Cloud Management](kion/kion.md)
   - [Getting Started](kion/features/getting_started.md)

@@ -2,6 +2,7 @@
 
 The purpose of this document is to explain how to create and configure subnets in a customer "spoke" Virtual Network (VNet).
 
+/* It is important to understand the relationship between the VNet's address space, the subnets created within it, the resources and services planned to be deployed within them, and count of <em>usable</em> IP addresses in each subnet. For more information on Azure IP addressing and subnetting, see [Azure documentation](https://learn.microsoft.com/en-us/azure/virtual-network/concepts-and-best-practices#virtual-network-concepts). */
 
 ## Overview
 
@@ -70,3 +71,25 @@ resource "azurerm_subnet" "github" {
 ```
 
 See [Microsoft documentation](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-subnet) for more information on creating and managing subnets in Azure.
+
+## Referencing Your VNet in Terraform
+
+When creating subnets or other resources that require VNet connectivity, reference the existing spoke VNet using a `data` block rather than hardcoding its values:
+
+```hcl
+# Get reference to existing vnet
+data "azurerm_virtual_network" "spoke" {
+  name                = "<vnet-name-not-resource-id>"
+  resource_group_name = "<resource-group-name>"
+}
+
+# Reference the vnet in another resource
+resource "azurerm_subnet" "workload" {
+  name                 = "workload-subnet"
+  resource_group_name  = data.azurerm_virtual_network.spoke.resource_group_name
+  virtual_network_name = data.azurerm_virtual_network.spoke.name
+  address_prefixes     = ["<cidr-block>"]
+}
+```
+
+This ensures you are using the correct VNet and avoids hardcoding values that may change. A `terraform plan` will fail early if the VNet does not exist or the name is incorrect, catching configuration errors before any resources are created.
