@@ -2,11 +2,11 @@
 
 The purpose of this document is to explain how to create and configure subnets in a customer "spoke" Virtual Network (VNet).
 
-/* It is important to understand the relationship between the VNet's address space, the subnets created within it, the resources and services planned to be deployed within them, and count of <em>usable</em> IP addresses in each subnet. For more information on Azure IP addressing and subnetting, see [Azure documentation](https://learn.microsoft.com/en-us/azure/virtual-network/concepts-and-best-practices#virtual-network-concepts). */
-
 ## Overview
 
-A VNet is a logical isolation of the Azure cloud dedicated to your subscription. Subnets are subdivisions of a VNet's address space that allow you to segment your resources for better organization, security, and performance. TAMU Cloud Services will work with you to design, configure, and create the VNet for your solution. This document provides guidance on how to create and configure subnets within your VNet to meet your solution's requirements while adhering to best practices for security and performance. For more information on the overall network design, please see the [Secure Azure Network Design](./azure_network.md) guide.
+A Virtual Network (VNet) is a logical isolation of the Azure network dedicated to your subscription. Subnets are subdivisions of a VNet's address space that allow you to segment your resources for better organization, security, and performance. This document provides guidance on how to create and configure subnets within your VNet to meet your solution's requirements while adhering to best practices for security and performance. For more information on the overall TAMU managed network design, please see the [Network Design](./design.md).
+
+Consult the Microsoft documentation [Virtual network concepts](https://learn.microsoft.com/en-us/azure/virtual-network/concepts-and-best-practices#virtual-network-concepts) and [Add, change, or delete virtual network subnets](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-subnet) for more information on virtual networks and managing subnets.
 
 ## Planning Ahead
 
@@ -70,7 +70,6 @@ resource "azurerm_subnet" "github" {
 }
 ```
 
-See [Microsoft documentation](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-subnet) for more information on creating and managing subnets in Azure.
 
 ## Referencing Your VNet in Terraform
 
