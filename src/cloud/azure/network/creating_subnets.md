@@ -57,24 +57,27 @@ A Cloud Services policy will automatically apply this route table to any subnet 
 
 Most customers will not need to modify or create any additional routes. If you have specific routing requirements for your workloads, it is recommended to consult with the Cloud Services team to ensure that your routing design is compatible with the overall network architecture and security requirements.
 
-## Referencing Your VNet in Terraform
+## Example Subnet Configurations
 
-When creating subnets or other resources that require VNet connectivity, reference the existing spoke VNet using a `data` block rather than hardcoding its values:
+### Basic Subnet and Default Route to Hub Firewall
+
+The following subnet has a User-Defined Route (UDR) that directs all outbound traffic to the hub firewall.
 
 ```hcl
-# Get reference to existing vnet
-data "azurerm_virtual_network" "spoke" {
-  name                = "<vnet-name-not-resource-id>"
-  resource_group_name = "<resource-group-name>"
+data "azurerm_route_table" "default_egress" {
+  name                = "default-egress-route-table"
+  resource_group_name = "rg-tamu-managed-network"
 }
 
-# Reference the vnet in another resource
 resource "azurerm_subnet" "workload" {
-  name                 = "workload-subnet"
-  resource_group_name  = data.azurerm_virtual_network.spoke.resource_group_name
+  name                 = "workload"
+  resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = data.azurerm_virtual_network.spoke.name
-  address_prefixes     = ["<cidr-block>"]
+  address_prefixes     = ["10.0.0.0/28"]
+}
+
+resource "azurerm_subnet_route_table_association" "example" {
+  subnet_id      = azurerm_subnet.workload.id
+  route_table_id = data.azurerm_route_table.default_egress.id
 }
 ```
-
-This ensures you are using the correct VNet and avoids hardcoding values that may change. A `terraform plan` will fail early if the VNet does not exist or the name is incorrect, catching configuration errors before any resources are created.
