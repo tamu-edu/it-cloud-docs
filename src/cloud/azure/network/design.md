@@ -71,23 +71,33 @@ flowchart TB
 > **Key:**
 > All _inbound_ internet traffic enters through Azure Front Door (HTTP/HTTPS) or Azure Firewall DNAT (TCP/UDP). All _outbound_ internet traffic exits through Azure Firewall and NAT Gateway. Customer spoke VNets have no direct internet path. WAN connectivity (campus networks, other clouds) is provided through the HUB via ExpressRoute or VPN Gateway.
 
-External internet ingress is provided by a highly available Azure Front Door and/or Azure Firewall service that is managed by the Cloud Services team. These services provide security and access control for all resources in the VNet and integrate seamlessly with existing Azure security services, such as Network Security Groups (NSGs). Traffic is routed appropriately based on the type of traffic and the resources being accessed. For example, HTTP/HTTPS traffic is routed through Azure Front Door, while other TCP/UDP traffic is routed through Azure Firewall to the appropriate resources in the spoke VNets.
+## Implementation Details
 
-Pre-configuration, defaults, and Azure Policy help to ensure that your network resources comply with TAMU's security and management guidelines. If you need to claim an exception for your resources, please contact the Cloud Services team for assistance.
+- **Hub-and-Spoke Topology**: The network is designed with a hub-and-spoke topology, where the hub contains shared services (AFD, FW) and the spokes contain customer resources. This allows for centralized management of security and traffic flow while still providing flexibility for customers to manage their own resources in their spoke VNets.
+- **Azure Front Door**: AFD is used for all HTTP/HTTPS traffic, providing global load balancing, SSL termination, and WAF capabilities. This allows for secure and performant access to web applications and services hosted in Azure. AFD is configured with WAF policies that include geo-blocking, bot protection, and OWASP rule sets to protect against common web vulnerabilities.
+- **Azure Firewall**: FW is used for all other TCP/UDP traffic, providing stateful inspection, DNAT for inbound traffic, and egress control for outbound traffic. This allows for secure access to non-web workloads while still allowing for inspection and control of traffic. FW is also used to route traffic between the hub and spoke VNets, ensuring that all traffic is inspected and logged appropriately.
+- **Private Connectivity**: The TAMU-managed network in Azure is connected to the campus network through ExpressRoute, providing a private, high-speed connection for secure access to resources in Azure. This allows for secure access to Azure resources without exposing them to the public internet, while still allowing for connectivity to on-premises resources and other cloud environments as needed.
+- **Pre-configuration and Defaults**: The network is pre-configured with certain defaults and restrictions to ensure that resources are deployed in a secure and compliant manner. For example, public subnets are disallowed, and all subnets are private by default. Additionally, certain services, such as App Service, are configured to require Private Endpoints for connectivity to the VNet, ensuring that they are not exposed to the public internet.
+- **Policy Enforcement**: Azure Policy is used to enforce compliance with the network design and security requirements. This includes policies that restrict the creation of public subnets, require the use of Private Endpoints for certain services, and ensure that all resources are deployed within the TAMU-managed network.
 
-- **Public Subnets**: Directly public subnets are disallowed in this configuration. For resources that need to be accessible from the internet, private subnets are linked to Azure Front Door and Azure Firewall on the hub VNet. Additionally, you can add Azure Private Endpoints to secure inbound access to Azure PaaS services from private subnets.
-- **Private Subnets**: The default state of subnets in this network design. These subnets are used for resources that are not directly accessible from the internet.
-- **Dedicated Subnets**: Subnets should be, and in some cases must be, dedicated to a specific purpose or resource type, such as a subnet for virtual machines, a subnet for databases, etc. This helps to improve security and manageability of your resources. See [Deploying to a Private Subnet with GitHub Actions](./github_private.md) guide for an example.
+### Azure Front Door
 
-See [Creating Subnets](./creating_subnets.md) for more information and guidance on how to create and configure subnets within your TAMU Cloud Services-provisioned VNet.
+Azure Front Door is a global, scalable entry point for web applications and services hosted in Azure. It provides features such as SSL termination, global load balancing, and Web Application Firewall (WAF) capabilities to protect against common web vulnerabilities. In the TAMU-managed network design, AFD is used as the primary entry point for all HTTP/HTTPS traffic, allowing for secure and performant access to web applications and services.
 
-Finally, internet egress is routed from the customer spoke subnets through the same Azure Firewall and NAT Gateway services back to the requesting client.
+Cloud Services operates a shared instance of Azure Front Door that can be used by all customers in the TAMU-managed network. Customers can request to have their web applications or services added as origins to the shared AFD instance, and Cloud Services will configure the necessary routing and WAF policies to ensure secure access. Custom domains are supported and certificates will be managed by AFD and Cloud Services with automatic renewals.
 
-Note: Requests originating from Azure Front Door enter the private subnet via Private Link: responses return via the same path and do not traverse the hub Firewall in order to avoid asymmetric routing.
+Currently, this is a manual request and configuration process, but in the future we plan to automate this through self-service tools and integration with Azure services.
 
+### Azure Firewall
 
-## Private Connectivity to TAMU
+Azure Firewall is a stateful firewall service that provides network and application-level protection for resources in Azure. It is used in the TAMU-managed network design to implement required rules to implement security controls, such as geoblocking and other targeted restrictions, and provide connectivity for non-web workloads that require public access.
 
-TAMU has redundant ExpressRoute connections to Azure that provide a private, high-speed, low-latency connection to the Azure cloud. This connection is used to provide secure, private access between the TAMU campus network and Azure.
+The firewall is also used to route traffic between Azure virtual networks and campus networks.
 
-In general, it is recommended to use the internet to access resources in Azure. Use of this private connectivity is not recommended except when architecturally necessary. Instead, consider trying to decouple your resources depending on the campus networks and utilize alternatives that are already in the cloud, or extending that resource into the cloud. This will also help to reduce the risk of a single point of failure for your service.
+Customers can request to have firewall rules added to the shared Azure Firewall instance to allow for secure access to their resources from the internet or other networks. Currently, this is a manual request and configuration process, but in the future we plan to automate this through self-service tools and integration with Azure services.
+
+### ExpressRoute connectivity
+
+The hub network uses ExpressRoute to provide a private, high-speed, low-latency connection between the campus network and Azure network. This allows for secure access to Azure resources without exposing them to the public internet, while still allowing for connectivity to on-premises resources and other cloud environments as needed.
+
+In general, it is recommended to architect your service in a way that minimizes dependencies on services on other networks or locations. This will help reduce the total points of failure of your service and make it more resilient. If this cannot be avoided, consider extending the dependency into the cloud rather than relying on private connectivity back to the campus network, or syncing and caching the data from that service. If you do need to rely on private connectivity back to the campus network, ensure that you have implemented appropriate error handling and/or retry logic in your service to account for potential connectivity issues, and consider the impact of such issues on your overall service availability and performance.
