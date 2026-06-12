@@ -313,6 +313,92 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="azure-virtual-machines"><a class="header" href="#azure-virtual-machines">Azure Virtual Machines</a></h1>
+<ul>
+<li><strong>Rule:</strong> Virtual Machines may not be directly exposed to the public internet and must be deployed with private-only network connectivity in customer spoke VNets.</li>
+<li><strong>Action:</strong> Deploy VM into a private subnet with default outbound routing through the hub firewall, and work with Cloud Services to ensure ingress through AFD or FW as appropriate for the workload.</li>
+</ul>
+<ul>
+<li>VM network interface must not have a Public IP associated.</li>
+<li>VM subnet must have a User Defined Route (UDR) that sends outbound traffic to the hub-centralized firewall for inspection and logging.</li>
+<li>NSGs should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, or explicitly approved private peer ranges).</li>
+<li>If the VM hosts a workload that must be reachable from the internet, request Cloud Services configuration of hub firewall DNAT rules and any required DNS updates.</li>
+<li>Administrative protocols (RDP, SSH, WinRM, etc.) must not be published to the internet; use private access methods from trusted networks. See <a href="/pr-preview/pr-59/access_methods.html">Access Methods</a> for details.</li>
+</ul>
+<h2 id="implementation-pattern"><a class="header" href="#implementation-pattern">Implementation Pattern</a></h2>
+<p>Use this sequence for both new deployments and updates to existing VM workloads:</p>
+<ol>
+<li>Create or select a private workload subnet and confirm it is associated with the default egress UDR to the hub firewall.</li>
+<li>Deploy the VM NIC into that subnet with no Public IP.</li>
+<li>Attach an NSG (subnet-level or NIC-level) with least-privilege rules for only approved source ranges and required ports.</li>
+<li>Validate private administrative access from approved networks (campus/VPN) before placing the workload in service.</li>
+</ol>
+<p>If internet ingress is required, submit a Cloud Services request for hub AFD, firewall, and/or DNS updates.</p>
+<h2 id="steps-in-azure-portal"><a class="header" href="#steps-in-azure-portal">Steps in Azure Portal</a></h2>
+<p>The steps below are generalized for a new or existing VM.</p>
+<ol>
+<li>From the VM resource view, click <code>Networking &gt; Network settings</code> to see an overview of the attached NIC configuration. If changes need to be made, the VM needs to be shutdown before continuing.</li>
+<li>Click the NIC name (or when creating a new NIC) to make changes:
+<ul>
+<li>Select your VNet and private subnet.</li>
+<li><code>Associate public IP address</code> should be unchecked.</li>
+</ul>
+</li>
+<li>Open the NSG on the NIC/subnet (<em>ex. NIC Overview &gt; Properties: Click the NSG name under <code>Network security group</code></em>) &gt; <code>Inbound security rules</code>, and verify only approved source ranges and required ports are allowed.</li>
+<li>Open the attached NIC -&gt; <code>IP configurations</code> and verify there is no associated Public IP.</li>
+<li>Open the target subnet -&gt; <code>Route table</code> and verify hub FW UDR (see <a href="/pr-preview/pr-59/creating_subnets.html#route-tables">Route Tables</a> in <strong>Creating Subnets</strong> for details) is associated.</li>
+</ol>
+<h2 id="example-terraform-snippets"><a class="header" href="#example-terraform-snippets">Example Terraform Snippets</a></h2>
+<h3 id="private-nic-no-public-ip"><a class="header" href="#private-nic-no-public-ip">Private NIC (No Public IP)</a></h3>
+<pre><code class="language-hcl">resource "azurerm_network_interface" "vm" {
+  name                = "nic-vm-workload"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+  ip_configuration {
+    name                          = "primary"
+    subnet_id                     = azurerm_subnet.vm.id
+    private_ip_address_allocation = "Static"
+    private_ip_address            = "10.0.0.4"
+  }
+}
+</code></pre>
+<h3 id="vm-attached-to-private-nic-with-nsg"><a class="header" href="#vm-attached-to-private-nic-with-nsg">VM Attached to Private NIC with NSG</a></h3>
+<pre><code class="language-hcl">resource "azurerm_network_security_group" "vm" {
+  name                = "nsg-vm-workload"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+  security_rule {
+    name                       = "allow-ssh-from-hub-firewall-only"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = var.hub_firewall_ip
+    destination_address_prefix = "*"
+  }
+}
+
+resource "azurerm_network_interface_security_group_association" "vm" {
+  network_interface_id      = azurerm_network_interface.vm.id
+  network_security_group_id = azurerm_network_security_group.vm.id
+}
+</code></pre>
+<h3 id="vm-attached-to-private-nic"><a class="header" href="#vm-attached-to-private-nic">VM Attached to Private NIC</a></h3>
+<pre><code class="language-hcl">resource "azurerm_linux_virtual_machine" "vm" {
+  name                = "vm-workload-01"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  size                = "Standard_B2s"
+  admin_username      = "azureuser"
+
+  network_interface_ids = [azurerm_network_interface.vm.id]
+
+  ...
+}
+</code></pre>
 
                     </main>
                 </div>
