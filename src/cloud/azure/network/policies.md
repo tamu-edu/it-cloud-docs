@@ -1,8 +1,9 @@
-# Understanding Policy Enforcement in TAMU Secure Azure Network
+# Policies for the TAMU-managed Network in Azure
 
-The overall goal of the TAMU Secure Azure Network initiative is to provide a secure, scalable, and manageable network architecture for TAMU workloads in Azure. To achieve this, we leverage Azure Policy to enforce guardrails that prevent misconfigurations and non-compliant resources in our hub-and-spoke design. This document provides an overview of how policy enforcement works in our environment, the effects we use, and how they impact resource provisioning and management.
+The overall goal of the TAMU managed Azure network initiative is to provide a secure, scalable, and manageable network architecture for TAMU workloads in Azure. To help assure a higher level of compliance and security, we leverage Azure Policy to enforce guardrails that prevent misconfigurations and non-compliant resources in our hub-and-spoke design. This document provides an overview of how policy enforcement works in our environment, the effects we use, and how they impact resource provisioning and management.
 
-A policy is a set of rules that govern the properties and configurations of Azure resources.
+> [!NOTE]
+> A policy is a set of rules that govern the properties and configurations of Azure resources.
 
 ## Policies in Use
 
