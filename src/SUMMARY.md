@@ -12,6 +12,7 @@
   
   - [Microsoft Azure (Azure)](cloud/azure.md)
     - [Network](cloud/azure/network/network.md)
+      - [Design](cloud/azure/network/design.md)
       - [Creating Subnets](cloud/azure/network/creating_subnets.md)
       - [Migration](cloud/azure/network/migration.md)
       - [Policy Enforcement](cloud/azure/network/policy_effects.md)
