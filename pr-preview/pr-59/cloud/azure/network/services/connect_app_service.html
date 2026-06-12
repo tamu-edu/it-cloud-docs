@@ -313,6 +313,14 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="azure-app-service"><a class="header" href="#azure-app-service">Azure App Service</a></h1>
+<ul>
+<li><strong>Rule:</strong> App Services may not be exposed to the public internet and must be secured to private access only.</li>
+<li><strong>Action:</strong> This can be achieved by using Private Endpoints to connect App Services to the VNet and ensuring that all inbound and outbound traffic is directed through the hub gateways for security scanning and logging.</li>
+</ul>
+<ul>
+<li>App Service “Public Access” property must be either set to “Disabled” or “Enabled with Limited Access” together with a default Deny rule in order to prevent direct public access.</li>
+<li>App Service must be connected to the VNet via a private subnet with a User Defined Route (UDR) directing outbound traffic to the hub firewall and with no NSG rules allowing inbound traffic from the public internet.</li>
+</ul>
 
                     </main>
                 </div>
