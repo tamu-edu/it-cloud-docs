@@ -36,40 +36,26 @@ A Private Endpoint is a network interface that uses a private IP address from yo
 
 It is recommended that Endpoints be placed in their own dedicated subnet, separate from other resources. This allows for better security, as you can apply specific security group rules to the endpoint subnet without affecting other resources.
   
-## Route Tables and Network Security Groups (NSGs)
+## Network Security
 
-Subnets can be associated with route tables and NSGs to control traffic flow and security. Route tables allow you to define custom routes for traffic leaving the subnet, while NSGs allow you to define inbound and outbound security rules to control traffic to and from resources in the subnet. When designing your subnets, consider how you will use route tables and NSGs to secure your resources and control traffic flow.
+Network Security Groups (NSGs) are used to allow or deny inbound and outbound traffic to resources in your subnets based on source and destination IP addresses, ports, and protocols. You can use NSGs to create a layered security model for your resources, allowing you to control traffic flow at both the subnet and resource level. See [Network Security groups](https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview) for more information.
 
-<em>It is very possible that you will not need to define any route tables or NSGs for your subnets, as the default routes and security rules provided by Azure and the TAMU network design may be sufficient for your needs. One provided User-Defined Route (UDR) is pre-configured to route all outbound internet traffic from your VNet to the TAMU-managed firewall service in the hub. This ensures that all outbound traffic is inspected and filtered by the firewall, providing an additional layer of security for your resources.</em>
+When an NSG is associated with a subnet, the rules in that NSG apply to all resources within the subnet, and it is commonly used for delegated subnets or other services that do not expose individual network interface resources for more granular control. When an NSG is associated with a network interface, the rules in that NSG apply only to that specific resource.
 
-## Example Subnet Configurations
+Application security groups (ASGs) are a way to group resources together for the purpose of applying NSG rules. ASGs allow you to define a group of resources based on their function or role, and then apply NSG rules to that group instead of individual resources or entire subnets. This can simplify management and improve security by allowing you to apply consistent rules to similar resources. For example, you could create an ASG for all of your web servers, which may be distributed across multiple subnets, and apply NSG rules to them to allow inbound HTTP and HTTPS traffic while blocking other types of traffic. See [Application Security Groups](https://learn.microsoft.com/en-us/azure/virtual-network/application-security-groups) for more information.
 
-### Azure App Service and GitHub Private Networking
+For recommendations on designing security for your network, see the [Best practices for network security](https://learn.microsoft.com/en-us/azure/security/fundamentals/network-best-practices) guide.
 
-In the [GitHub deployment to Private Subnets](./github_private.md) guide, we describe and deploy a subnet design for hosting Azure App Service instances that are integrated with GitHub Private Networking. This design includes a dedicated subnet for App Service instances with the necessary delegation and private endpoint configuration to securely connect to GitHub's private network. In Terraform, these subnets might look like:
+## Route Tables
 
-```hcl
-data "azurerm_virtual_network" "spoke" {
-  name                = "spoke-vnet"
-  resource_group_name = azurerm_resource_group.rg.name
-  # address_space       = ["10.0.0.0/27"]
-}
+Route tables allow you to define custom routes for traffic leaving the subnet. Because all outbound traffic from your VNet must be inspected by the TAMU-managed firewall in the hub, a route table (UDR) is provided that routes all outbound traffic to this firewall.
 
-resource "azurerm_subnet" "workload" {
-  name                 = "app-service-subnet"
-  resource_group_name  = data.azurerm_resource_group.rg.name
-  virtual_network_name = data.azurerm_virtual_network.spoke.name
-  address_prefixes     = ["10.0.0.0/28"]
-}
+>[!IMPORTANT]
+> This route table will not automatically be associated with new subnets, so you must associate it with each subnet you create to ensure that outbound traffic is properly routed through the firewall.
 
-resource "azurerm_subnet" "github" {
-  name                 = "github-subnet"
-  resource_group_name  = data.azurerm_resource_group.rg.name
-  virtual_network_name = data.azurerm_virtual_network.spoke.name
-  address_prefixes     = ["10.0.0.16/29"]
-}
-```
+A Cloud Services policy will automatically apply this route table to any subnet that does not have a route table associated with it, but it is best practice to explicitly associate the route table with your subnets to ensure that your routing configuration is clear and intentional.
 
+Most customers will not need to modify or create any additional routes. If you have specific routing requirements for your workloads, it is recommended to consult with the Cloud Services team to ensure that your routing design is compatible with the overall network architecture and security requirements.
 
 ## Referencing Your VNet in Terraform
 
