@@ -22,11 +22,9 @@ Every spoke VNet is assigned a block of IP addresses by Cloud Services from a ce
 
 When planning your subnet design, consider the following:
 
-* **Azure reserves 5 IP addresses in every subnet** (the first three and the last two). If you create a `/29` subnet (consuming 8 IPs total), you only have 3 <em>usable</em> addresses.
-* It is easier to carve out small subnets from a sufficiently large VNet than it is to expand a spoke VNet. If the address block immediately following yours is already allocated to another customer, you may be forced to use non-contiguous blocks of addresses to expand your VNet, which is more difficult to manage, or be forced to migrate to a newly provisioned VNet.
-* Use larger blocks of addresses for subnets that will host more resources or require more IP addresses, such as virtual machines, and smaller blocks for subnets that will host fewer resources, such as Azure App Service. For example, a subnet for virtual machines might use a `/24` block (256 IPs, 251 usable) while a subnet for App Service might use a `/28` block (16 IPs, 11 usable).
-* Consider auto-scaling and future growth when planning subnet sizes. It is better to have unused IP addresses than to run out of addresses in a subnet.
+* **Azure reserves 5 IP addresses in every subnet** (the first three and the last two). If you create a `/29` subnet (consuming 8 IPs total), you only have 3 *usable* addresses. Plan with room to grow, as expanding a subnet later is more complex than starting with adequate space.
 * Know your Azure services: Some services require specifically-named subnets, some require dedicated subnets that cannot be shared with other services, and some have specific requirements for subnet size.
+* Consider auto-scaling and future growth when planning subnet sizes. It is better to have unused IP addresses than to run out of addresses in a subnet.
 
 ## Subnet Delegation, Service Endpoints, and Private Links
 
