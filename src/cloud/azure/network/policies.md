@@ -21,8 +21,8 @@ Deny-only policies:
 Remediation policies:
 
 - **Enforce UDR on subnets**: This policy automatically applies a user-defined route (UDR) to any subnet that does not have one, ensuring that all outbound traffic is routed through the hub firewalls for inspection and logging. This will help to prevent misconfigurations that could lead to unexpected lack of connectivity.
-- **Enforce NSG rules for public access**: This policy automatically applies NSG rules to subnets hosting public resources to restrict inbound traffic from the public internet, ensuring that only traffic from approved sources, such as Azure Front Door or the campus network, is allowed.
-- **Enforce Private Endpoints for PaaS services**: This policy automatically creates and configures Private Endpoints for Azure PaaS services that require public access, such as App Service, to ensure that they are securely connected to the VNet and not exposed directly to the internet.
+
+We may add additional policies in the future as needed to enforce other security and management guidelines. Any new policies that effect (remediate) existing resources will be communicated to customers in advance with guidance on how to ensure compliance and avoid disruption. If you have any questions about the policies in place or need assistance with compliance, please contact the Cloud Services team for support.
 
 ## How Policies Work
 
