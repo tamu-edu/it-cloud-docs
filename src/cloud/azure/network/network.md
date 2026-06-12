@@ -57,26 +57,3 @@ See [Services Configuration](services.md) for how to connect specific Azure serv
 If you have a specific use case that requires a different network design or a feature or service that is not yet implemented, please contact the Cloud Engineering team to discuss your requirements. We will work with you to understand and accommodate your needs while maintaining the security and integrity of the TAMU network.
 
 In some cases, it may be necessary to request an exception to the managed network. The office of the Chief Information Security Officer of Texas A&M University (CISO) will review your request and work with you to determine if an exception can be granted and what additional controls may be necessary to mitigate any potential risks.
-
-
-## Reference
-
-### Using VNet in Terraform
-
-```hcl
-# Get reference to existing vnet
-data "azurerm_virtual_network" "spoke" {
-  name                = "<vnet-name-not-resource-id>"
-  resource_group_name = "<resource-group-name>"
-}
-
-# Reference the vnet in another resource
-resource "azurerm_subnet" "workload" {
-  name                 = "workload-subnet"
-  resource_group_name  = data.azurerm_virtual_network.spoke.resource_group_name
-  virtual_network_name = data.azurerm_virtual_network.spoke.name
-  address_prefixes     = ["<cidr-block>"]
-}
-```
-
-Note that it is not strictly necessary to reference the vnet in a data block like this, but it is a best practice to do so to ensure that you are using the correct vnet and to avoid hardcoding values that may change in the future. A tfplan will fail early if the vnet does not exist or if the name is incorrect, which can save time and prevent errors later.
