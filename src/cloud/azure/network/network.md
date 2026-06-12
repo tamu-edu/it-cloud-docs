@@ -52,9 +52,11 @@ Different types of resources have different connectivity requirements and option
 
 See [Services Configuration](services.md) for how to connect specific Azure services to the TAMU-managed network.
 
-## Exception Request
+## Alternatives / Exceptions
 
-If you have a specific use case that requires a different network design, please contact the Cloud Services team to discuss your requirements. We will work with you to understand your needs while maintaining the security and integrity of the TAMU network.
+If you have a specific use case that requires a different network design or a feature or service that is not yet implemented, please contact the Cloud Engineering team to discuss your requirements. We will work with you to understand and accommodate your needs while maintaining the security and integrity of the TAMU network.
+
+In some cases, it may be necessary to request an exception to the managed network. The office of the Chief Information Security Officer of Texas A&M University (CISO) will review your request and work with you to determine if an exception can be granted and what additional controls may be necessary to mitigate any potential risks.
 
 
 ## Reference
