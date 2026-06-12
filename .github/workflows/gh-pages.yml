@@ -19,11 +19,12 @@ jobs:
       - name: Setup mdBook (with plugins)
         uses: jontze/action-mdbook@v2
         with:
-            token: ${{secrets.GITHUB_TOKEN}}
-            mdbook-version: '0.5.3'
-
-      - name: Install mdbook-mermaid
-        run: cargo install mdbook-mermaid
+          token: ${{secrets.GITHUB_TOKEN}}
+          mdbook-version: "0.5.3"
+          use-admonish: true
+          admonish-version: "1.20.0"
+          use-mermaid: true
+          mermaid-version: "0.17.0"
 
       - run: mdbook build
 
