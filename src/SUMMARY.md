@@ -17,7 +17,6 @@
       - [Access Methods](cloud/azure/network/access_methods.md)
       - [Migration](cloud/azure/network/migration.md)
       - [Policy Enforcement](cloud/azure/network/policy_effects.md)
-      - [GitHub Deployment](cloud/azure/network/github_private.md)
       - [Services Configuration](cloud/azure/network/services.md)
         - [Azure Virtual Machines](cloud/azure/network/services/connect_vm.md)
         - [Azure Load Balancers](cloud/azure/network/services/connect_public_lb.md)
