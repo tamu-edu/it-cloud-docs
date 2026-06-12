@@ -8,7 +8,7 @@ title = "Clouds and Platforms"
 default-theme = "aggie"
 preferred-dark-theme = "navy"
 additional-css = ["./theme/css/tabbed-code-blocks.css", "./theme/css/aggie-custom.css"]
-additional-js = ["./theme/js/tabbed-code-blocks.js"]
+additional-js = ["./theme/js/tabbed-code-blocks.js", "./theme/js/mermaid.min.js", "./theme/js/mermaid-init.js"]
 edit-url-template = "https://github.com/tamu-edu/it-cloud-docs/edit/main/{path}"
 
 [output.html.print]
@@ -17,3 +17,8 @@ enable = false
 [output.html.fold]
 enable = true    # whether or not to enable section folding
 level = 0         # the depth to start folding
+
+[preprocessor]
+
+[preprocessor.mermaid]
+command = "mdbook-mermaid"
