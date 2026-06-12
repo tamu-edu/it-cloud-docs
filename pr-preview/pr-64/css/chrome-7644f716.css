@@ -446,6 +446,7 @@ ul#searchresults span.teaser em {
 
 .chapter ol {
     width: 100%;
+    box-sizing: border-box;
 }
 
 .chapter li {
