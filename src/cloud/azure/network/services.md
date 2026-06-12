@@ -39,7 +39,7 @@ The following is a non-exhaustive list of common Azure services that are in scop
 
 ### Out-of-Scope Services
 
-Some Azure services may not be directly subject to this policy if they do not host customer code, do not expose a workload endpoint, and do not initiate customer-controlled network traffic. However, they may still require review if they are publicly accessible or connected to in-scope workloads.
+Some Azure services may not be directly subject to this policy if they do not host customer code, do not expose a workload endpoint, and do not initiate customer-controlled network traffic. However, they may still require review if they need to be publicly accessible or connect to in-scope workloads.
 
 Examples that may require separate evaluation include:
 
@@ -57,4 +57,4 @@ Examples that may require separate evaluation include:
 - Azure Logic Apps and Power Automate
 - Azure Monitor and Application Insights
 
-These services are not necessarily "compute" services, but they may still need connectivity to services that are in-scope, public network access restrictions, or access controls depending on the broader security requirements. For example, a public storage account used by an in-scope application may still need network restrictions even if it is not itself a compute workload. Always evaluate the specific requirements and risks of each service in the context of your overall architecture and security posture, and consult with the Cloud Services team if you have any questions about whether a particular service is in scope or how to configure it appropriately.
+Always evaluate the specific requirements and risks of each service in the context of your overall architecture and security posture, and consult with the Cloud Services team if you have any questions about whether a particular service is in scope or how to configure it appropriately.
