@@ -18,11 +18,21 @@ Because of these features and the network design, the process for creating and c
 > [!NOTE]
 > You may be familiar with [our AWS network design](https://docs.cloud.tamu.edu/cloud/aws/networking.html), which shares the same goals, but each has an approach that is unique to its underlying cloud platform.
 
+## Requirements
 
+Not everything in Azure needs to be connected to the TAMU-managed network. Services that are considered "SaaS" (Software as a Service - such as AI Foundry or Fabric) and many fully-managed "PaaS" (Platform as a Service) offerings that won't be publicly accessible from the internet typically do not require integration with the TAMU-managed network. For a more complete list of services that are in scope for this network policy, see [Services Configuration](services.md).
 
+> [!IMPORTANT]
+> Generally, an Azure service must be connected to the TAMU-managed network if it hosts, exposes, executes, or supports a workload that can receive inbound network traffic, initiate outbound network traffic, or run customer-controlled code.
 
+Any resource that meets this criterion must be connected in such a way that all traffic to and from that resource is inspected by the approved security controls. This includes all traffic to and from the internet, as well as traffic between Azure resources and other TAMU networks.
 
+<!-- TODO: decide if we want to keep this level of detail about the inspection points here, or if we want to move it to the Services Configuration page, or leave these details on the design page only -->
+<!-- The required inspection point depends on the service type and traffic pattern:
 
+- **IaaS and VNet-based workloads**: inbound and outbound traffic must be routed through Azure Firewall, including internet egress from virtual networks.
+- **Public web application workloads**: internet-facing HTTP/S traffic must be fronted by Azure Front Door with Web Application Firewall enabled.
+- **Private or internal workloads**: must not be directly accessible from the internet and should use private connectivity options such as Azure Private Link or Service Endpoints to connect to Azure PaaS services. -->
 
 
 
