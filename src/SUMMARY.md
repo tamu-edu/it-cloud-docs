@@ -11,7 +11,7 @@
       - [Migration](cloud/aws/migration.md)
   
   - [Microsoft Azure (Azure)](cloud/azure.md)
-    - [Secure Azure Network](cloud/azure/network/azure_network.md)
+    - [Network](cloud/azure/network/network.md)
       - [Creating Subnets](cloud/azure/network/creating_subnets.md)
       - [Migration](cloud/azure/network/migration.md)
       - [Policy Enforcement](cloud/azure/network/policy_effects.md)
