@@ -314,8 +314,8 @@
                     <main>
                         <h1 id="azure-virtual-machines"><a class="header" href="#azure-virtual-machines">Azure Virtual Machines</a></h1>
 <ul>
-<li><strong>Rule:</strong> Virtual Machines may not be directly exposed to the public internet and must be deployed with private-only network connectivity in customer spoke VNets.</li>
-<li><strong>Action:</strong> Deploy VM into a private subnet with default outbound routing through the hub firewall, and work with Cloud Services to ensure ingress through AFD or FW as appropriate for the workload.</li>
+<li><strong>Rule:</strong> A Virtual Machine (VM) may not be directly exposed to the public internet and must be deployed with private-only network connectivity in a customer spoke virtual network (VNet).</li>
+<li><strong>Action:</strong> Deploy VM into a private subnet with default outbound routing through the hub firewall (FW), and work with Cloud Services to ensure ingress through centralized hub services.</li>
 </ul>
 <ul>
 <li>VM network interface must not have a Public IP associated.</li>
@@ -357,8 +357,7 @@
   ip_configuration {
     name                          = "primary"
     subnet_id                     = azurerm_subnet.vm.id
-    private_ip_address_allocation = "Static"
-    private_ip_address            = "10.0.0.4"
+    private_ip_address_allocation = "Dynamic"
   }
 }
 </code></pre>
@@ -376,7 +375,7 @@
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "22"
-    source_address_prefix      = var.hub_firewall_ip
+    source_address_prefix      = var.hub_firewall_cidr
     destination_address_prefix = "*"
   }
 }
