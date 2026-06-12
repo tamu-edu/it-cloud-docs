@@ -1,13 +1,4 @@
-# Secure Azure Network Design
-
-This section covers the networking services provided by TAMU in Microsoft Azure.
-
-The Technology Services Cloud Services team provides all Azure customers with their own "spoke" Virtual Network (VNet) that is pre-configured and peered with a TAMU "hub" VNet to help you get started quickly with best practices and security controls as well as access to TAMU resources as needed. The shared hub VNet and its associated resources, like Azure Front Door and Azure Firewall, are shared across Azure customers at TAMU in a <em>hub-and-spoke</em> topology to significantly reduce individual cost and to centralize management of security compliance with [SC-7 Boundary Protection](https://docs.security.tamu.edu/docs/security-controls/SC/SC-7/).
-
-> [!NOTE]
-> You may be familiar with [our AWS network design](https://docs.cloud.tamu.edu/cloud/aws/networking.html), which shares the same goals, but each has an approach that is unique to its underlying cloud platform.
-
-## Network Design
+# Azure Network Design
 
 TAMU customer VNets are provisioned by TAMU Cloud Services with an address space allocated from a global pool assigned to your VNet in your subscription for your use. Follow Azure best practices for dividing your address space into subnets and assigning resources to those subnets. Work with Cloud Services to ensure your requested VNet address space and proposed subnet design align with your solution's overall network design and best practices for security and performance. It is recommended to use one VNet per Azure Subscription per project per environment, but you can use as many subnets as you need within that VNet to segment your resources as needed.
 
@@ -97,31 +88,3 @@ Note: Requests originating from Azure Front Door enter the private subnet via Pr
 TAMU has redundant ExpressRoute connections to Azure that provide a private, high-speed, low-latency connection to the Azure cloud. This connection is used to provide secure, private access between the TAMU campus network and Azure.
 
 In general, it is recommended to use the internet to access resources in Azure. Use of this private connectivity is not recommended except when architecturally necessary. Instead, consider trying to decouple your resources depending on the campus networks and utilize alternatives that are already in the cloud, or extending that resource into the cloud. This will also help to reduce the risk of a single point of failure for your service.
-
-
-## Exception Request
-
-If you have a specific use case that requires a different network design, please contact the Cloud Services team to discuss your requirements. We will work with you to understand your needs while maintaining the security and integrity of the TAMU network.
-
-
-## Reference
-
-### Using VNet in Terraform
-
-```hcl
-# Get reference to existing vnet
-data "azurerm_virtual_network" "spoke" {
-  name                = "<vnet-name-not-resource-id>"
-  resource_group_name = "<resource-group-name>"
-}
-
-# Reference the vnet in another resource
-resource "azurerm_subnet" "workload" {
-  name                 = "workload-subnet"
-  resource_group_name  = data.azurerm_virtual_network.spoke.resource_group_name
-  virtual_network_name = data.azurerm_virtual_network.spoke.name
-  address_prefixes     = ["<cidr-block>"]
-}
-```
-
-Note that it is not strictly necessary to reference the vnet in a data block like this, but it is a best practice to do so to ensure that you are using the correct vnet and to avoid hardcoding values that may change in the future. A tfplan will fail early if the vnet does not exist or if the name is incorrect, which can save time and prevent errors later.
