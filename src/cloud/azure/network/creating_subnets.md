@@ -10,15 +10,15 @@ Consult the Microsoft documentation [Virtual network concepts](https://learn.mic
 
 ## Planning Ahead
 
-While most vnet and subnet modifications do not require destruction and recreation, certain fundamental changes &mdash; particularly relating to IP addressing and naming &mdash; will force a delete-and-recreate action. Certain changes via Terraform may be even less flexible. Deleting a subnet in order to recreate it also requires first detaching, moving, or destroying resources associated with it. To avoid later complications, it is helpful to plan your Azure networking resources before deploying. Cloud Services can help.
+While most VNet and subnet modifications do not require destruction and recreation, certain fundamental changes - particularly relating to IP addressing and naming - will force a delete-and-recreate action. Deleting a subnet in order to recreate it also requires first detaching, moving, or destroying resources associated with it. To avoid later complications, it is helpful to plan your Azure networking resources before deploying. The Cloud Services team can help design, plan, and configure your VNet and subnets.
 
 * **Subnet Name:** You cannot change the name of an existing subnet (without deleting and recreating it).
 * **Subnet Address Range:** If the subnet is in use (has resources attached or pointing to it), you cannot modify its IP prefix. You must detach, move, or delete all resources in the subnet, change the range, and then reattach the resources.
-* **VNet Address Range (Overlapping/Shrinking):** While the range can be expanded (by Cloud Services), an address range in use by a subnet cannot be removed or shrunk.
+* **VNet Address Range (Overlapping/Shrinking):** While the range can be expanded (by Cloud Services), an address range in use by a subnet cannot be modified.
 
 ## Virtual Network (VNet) and Subnet Design
 
-Every spoke VNet is assigned a block of IP addresses by TAMU Cloud Services from a centrally managed pool. Customers cannot select or modify the CIDR range allocated to them, so you should plan your subnet design with the assistance of Cloud Services to ensure that enough IP addresses are provided for your needs. It is important to understand the relationship between the VNet's address space, the subnets created within it, the resources and services planned to be deployed within them, and count of <em>usable</em> IP addresses in each subnet. For more information on Azure IP addressing and subnetting, see [Azure documentation](https://learn.microsoft.com/en-us/azure/virtual-network/concepts-and-best-practices#virtual-network-concepts).
+Every spoke VNet is assigned a block of IP addresses by Cloud Services from a centrally managed pool. Customers cannot select or modify the CIDR range allocated to them, so you should plan your subnet design with the assistance of Cloud Services to ensure that enough IP addresses are provided for your needs. It is important to understand the relationship between the VNet's address space, the subnets created within it, the resources and services planned to be deployed within them, and count of *usable* IP addresses in each subnet. For more information on Azure IP addressing and subnetting, see [Azure documentation](https://learn.microsoft.com/en-us/azure/virtual-network/concepts-and-best-practices#virtual-network-concepts).
 
 When planning your subnet design, consider the following:
 
