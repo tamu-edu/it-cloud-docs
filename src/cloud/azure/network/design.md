@@ -1,6 +1,10 @@
 # Azure Network Design
 
-TAMU customer VNets are provisioned by TAMU Cloud Services with an address space allocated from a global pool assigned to your VNet in your subscription for your use. Follow Azure best practices for dividing your address space into subnets and assigning resources to those subnets. Work with Cloud Services to ensure your requested VNet address space and proposed subnet design align with your solution's overall network design and best practices for security and performance. It is recommended to use one VNet per Azure Subscription per project per environment, but you can use as many subnets as you need within that VNet to segment your resources as needed.
+Texas state law and Texas A&M University policies require that all TAMU networks be protected by a secure, managed boundary, and thus resources on those networks may not be directly accessible from the public internet. To meet these requirements, the TAMU-managed network in Azure is designed with a hub-and-spoke topology that centralizes traffic flow through shared Azure Front Door (AFD) with WAF rules and Azure Firewall (FW) for traffic analysis and logging.
+
+## Design Overview
+
+Cloud Services operates and manages the hub network, including the shared AFD and FW services, while customers are responsible for their own spoke networks and resources. The following diagram illustrates the overall network design and traffic flow for the TAMU-managed network in Azure.
 
 
 ```mermaid
