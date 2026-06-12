@@ -34,11 +34,23 @@ Any resource that meets this criterion must be connected in such a way that all 
 - **Public web application workloads**: internet-facing HTTP/S traffic must be fronted by Azure Front Door with Web Application Firewall enabled.
 - **Private or internal workloads**: must not be directly accessible from the internet and should use private connectivity options such as Azure Private Link or Service Endpoints to connect to Azure PaaS services. -->
 
+## Using the Network
 
+When a new Azure subscription is set up, Cloud Services provisions a spoke VNet for you in the South Central US region, or other approved region(s). VNets are allocated a default address space of `/27` (32 IP addresses) from a centrally managed pool — you cannot choose the range yourself. You are responsible for dividing this address space into subnets that fit your workloads.
 
+### Subnets
 
+Subnets are the primary building block you'll work with inside your spoke VNets as they define the lowest layer of organization on your network. All resources that connect to a VNet must do so within a subnet, and some Azure services have specific subnet requirements that must be considered, so careful and intentional planning of your subnet layout is essential. Cloud Services can help you with this planning.
 
+When sizing subnets, keep in mind that **Azure reserves 5 IP addresses in every subnet**, so a `/29` (8 IPs total) leaves only 3 usable addresses. Plan with room to grow, as expanding a VNet later is more complex than starting with adequate space. VNet CIDR allocations can be adjusted by Cloud Services if the default allocation is not enough to accommodate your needs.
 
+See [Creating Subnets](creating_subnets.md) for detailed planning guidance.
+
+### Connecting Resources
+
+Different types of resources have different connectivity requirements and options. Most IaaS resources can be deployed directly into your spoke VNet, while PaaS resources typically require private endpoints or service endpoints to connect securely to your VNet. We have documentation for connecting many common Azure services to the TAMU-managed network, but if you have a service that is not documented or have specific questions about how to connect your resources, please contact the Cloud Services team for assistance.
+
+See [Services Configuration](services.md) for how to connect specific Azure services to the TAMU-managed network.
 
 ## Exception Request
 
