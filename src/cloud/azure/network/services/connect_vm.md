@@ -1,7 +1,7 @@
 # Azure Virtual Machines
 
-- **Rule:** Virtual Machines may not be directly exposed to the public internet and must be deployed with private-only network connectivity in customer spoke VNets.
-- **Action:** Deploy VM into a private subnet with default outbound routing through the hub firewall, and work with Cloud Services to ensure ingress through AFD or FW as appropriate for the workload.
+- **Rule:** A Virtual Machine (VM) may not be directly exposed to the public internet and must be deployed with private-only network connectivity in a customer spoke virtual network (VNet).
+- **Action:** Deploy VM into a private subnet with default outbound routing through the hub firewall (FW), and work with Cloud Services to ensure ingress through centralized hub services.
 
 * VM network interface must not have a Public IP associated.
 * VM subnet must have a User Defined Route (UDR) that sends outbound traffic to the hub-centralized firewall for inspection and logging.
@@ -45,8 +45,7 @@ resource "azurerm_network_interface" "vm" {
   ip_configuration {
     name                          = "primary"
     subnet_id                     = azurerm_subnet.vm.id
-    private_ip_address_allocation = "Static"
-    private_ip_address            = "10.0.0.4"
+    private_ip_address_allocation = "Dynamic"
   }
 }
 ```
@@ -68,7 +67,7 @@ resource "azurerm_network_security_group" "vm" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "22"
-    source_address_prefix      = var.hub_firewall_ip
+    source_address_prefix      = var.hub_firewall_cidr
     destination_address_prefix = "*"
   }
 }
