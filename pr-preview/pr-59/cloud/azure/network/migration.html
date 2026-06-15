@@ -326,16 +326,6 @@
 <p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p>
 <p>The TAMU managed network will only be available in the <strong>South Central US</strong> region at launch. Additional regions may be added.</p>
 </blockquote>
-<h2 id="migration-overview"><a class="header" href="#migration-overview">Migration Overview</a></h2>
-<p>The migration process should be carried out in phases, with each phase focusing on a specific set of resources. The following steps outline the general migration process:</p>
-<ol>
-<li><strong>Assessment</strong>: Identify the resources that need to be migrated and assess their dependencies and configurations. See <a href="/pr-preview/pr-59/services/configuration.html">Services Configuration</a> for information about which services are in scope.</li>
-<li><strong>Planning</strong>: Develop a migration plan that outlines the sequence of migration steps, including any downtime or service interruptions. Engage Cloud Services early in the planning phase to ensure necessary resources and support are available for migration assistance and any necessary hub resource configuration.</li>
-<li><strong>Preparation</strong>: Prepare the new network environment, such as creating and configuring subnets, and planning Private and/or Service Endpoints. Request and stage any necessary resources in the hub, such as AFD endpoints and FW rules, with the help of Cloud Services.</li>
-<li><strong>Migration</strong>: Execute the migration plan, moving resources to the new network design and updating configurations as needed. Work with Cloud Services to enable hub AFD endpoints and FW rules for the new resources and subnets as needed.</li>
-<li><strong>Validation</strong>: Verify that all resources are functioning correctly in the new network environment and that security policies are enforced.</li>
-<li><strong>Decommissioning</strong>: Decommission any previous network resources once the migration is complete and validated.</li>
-</ol>
 <h2 id="migration-considerations"><a class="header" href="#migration-considerations">Migration Considerations</a></h2>
 <p>Many Azure services can be reconfigured to use the TAMU-managed network with minimal disruption, and you should be able to refer to the <a href="/pr-preview/pr-59/cloud/azure/network/services.html">Services Configuration</a> documentation for specific configuration guidance.</p>
 <p>The following sections outline some specific considerations for migrating resources to the new network design.</p>
