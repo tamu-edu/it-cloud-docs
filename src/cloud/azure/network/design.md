@@ -2,10 +2,12 @@
 
 Texas state law and Texas A&M University policies require that all TAMU networks be protected by a secure, managed boundary, and thus resources on those networks may not be directly accessible from the public internet. To meet these requirements, the TAMU-managed network in Azure is designed with a hub-and-spoke topology that centralizes traffic flow through shared Azure Front Door (AFD) with WAF rules and Azure Firewall (FW) for traffic analysis and logging.
 
+> [!IMPORTANT]
+> The TAMU managed network will only be available in the **South Central US** region at launch. Additional regions may be added.
+
 ## Design Overview
 
 Cloud Services operates and manages the hub network, including the shared AFD and FW services, while customers are responsible for their own spoke networks and resources. The following diagram illustrates the overall network design and traffic flow for the TAMU-managed network in Azure.
-
 
 ```mermaid
 flowchart TB
