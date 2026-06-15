@@ -13,17 +13,6 @@ Existing Azure customers not yet in this new topology need to be migrated. The m
 > [!IMPORTANT]
 > The TAMU managed network will only be available in the **South Central US** region at launch. Additional regions may be added.
 
-## Migration Overview
-
-The migration process should be carried out in phases, with each phase focusing on a specific set of resources. The following steps outline the general migration process:
-
-1. **Assessment**: Identify the resources that need to be migrated and assess their dependencies and configurations. See [Services Configuration](../services/configuration.md) for information about which services are in scope.
-2. **Planning**: Develop a migration plan that outlines the sequence of migration steps, including any downtime or service interruptions. Engage Cloud Services early in the planning phase to ensure necessary resources and support are available for migration assistance and any necessary hub resource configuration.
-3. **Preparation**: Prepare the new network environment, such as creating and configuring subnets, and planning Private and/or Service Endpoints. Request and stage any necessary resources in the hub, such as AFD endpoints and FW rules, with the help of Cloud Services.
-4. **Migration**: Execute the migration plan, moving resources to the new network design and updating configurations as needed. Work with Cloud Services to enable hub AFD endpoints and FW rules for the new resources and subnets as needed.
-5. **Validation**: Verify that all resources are functioning correctly in the new network environment and that security policies are enforced.
-6. **Decommissioning**: Decommission any previous network resources once the migration is complete and validated.
-
 ## Migration Considerations
 
 Many Azure services can be reconfigured to use the TAMU-managed network with minimal disruption, and you should be able to refer to the [Services Configuration](./services.md) documentation for specific configuration guidance.
