@@ -313,6 +313,82 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="azure-functions"><a class="header" href="#azure-functions">Azure Functions</a></h1>
+<ul>
+<li><strong>Rule:</strong> A Function App that hosts customer workload code must be connected privately to the customer spoke virtual network (VNet), with internet ingress handled through centralized hub services when required.</li>
+<li><strong>Action:</strong> Configure private inbound access for the Function App, use VNet integration for outbound traffic through the hub firewall, and work with Cloud Services for any required internet-facing entrypoint.</li>
+</ul>
+<ul>
+<li>Function App inbound access should be private-only (Private Endpoint) or otherwise restricted to approved private paths.</li>
+<li>Function App outbound connectivity should use VNet integration to a private subnet associated with the default egress User Defined Route (UDR) to the hub-centralized firewall.</li>
+<li>Public network access should be disabled or tightly restricted to avoid direct public exposure.</li>
+<li>NSGs should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, or explicitly approved private peer ranges).</li>
+<li>If the Function App must be reachable from the internet, work with Cloud Services to configure hub-managed ingress (AFD for HTTP/S workloads or firewall DNAT for non-HTTP/S workloads).</li>
+</ul>
+<p>Generally speaking, your Function App triggers, bindings, deployment workflow, and runtime settings are configured as usual. The key TAMU-network differences are private inbound access, VNet-integrated outbound routing, and hub-managed internet ingress.</p>
+<h2 id="implementation-pattern"><a class="header" href="#implementation-pattern">Implementation Pattern</a></h2>
+<p>Use this sequence for both new Function App deployments and updates to existing Function Apps:</p>
+<ol>
+<li>Create or select the required private subnets:
+<ul>
+<li>One subnet for Function App VNet integration (delegated as required).</li>
+<li>One subnet for private endpoints, if used.</li>
+</ul>
+</li>
+<li>Confirm VNet integration subnet has the default egress UDR associated to route outbound traffic through the hub firewall.</li>
+<li>Create or update the Function App and enable VNet integration to the designated subnet.</li>
+<li>Configure private inbound access (for example, Private Endpoint) and disable or restrict public network access.</li>
+<li>Validate private connectivity to triggers/dependencies and runtime health from approved networks.</li>
+</ol>
+<p>If internet ingress is required, submit a Cloud Services request for hub AFD, firewall, and/or DNS updates.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>If your Function App needs to be run from the Dashboard in Azure Portal, it may require temporary public access during development and testing.</p>
+</blockquote>
+<h2 id="steps-in-azure-portal"><a class="header" href="#steps-in-azure-portal">Steps in Azure Portal</a></h2>
+<p>The steps below are generalized for new or existing Function Apps.</p>
+<ol>
+<li>Azure Portal &gt; Function App &gt; Networking.</li>
+<li>Under <code>Outbound traffic</code>, configure VNet integration to the designated private subnet.</li>
+<li>Under <code>Inbound traffic</code>, configure private inbound access (for example, Private Endpoint).</li>
+<li>In Function App <code>Configuration</code>, set public network access to disabled or apply default <code>Deny</code> access restrictions.</li>
+<li>Open target subnet(s) &gt; Route table and verify the hub firewall UDR is associated. See <a href="/pr-preview/pr-68/creating_subnets.html#route-tables">Route Tables</a> for details.</li>
+<li>Review NSGs and verify only required ports and approved source ranges are allowed.</li>
+</ol>
+<h2 id="example-terraform-snippets"><a class="header" href="#example-terraform-snippets">Example Terraform Snippets</a></h2>
+<h3 id="function-app-with-vnet-integration-outbound-and-access-restrictions-inbound"><a class="header" href="#function-app-with-vnet-integration-outbound-and-access-restrictions-inbound">Function App with VNet Integration (Outbound) and Access Restrictions (Inbound)</a></h3>
+<pre><code class="language-hcl">resource "azurerm_linux_function_app" "workload" {
+	...
+
+	storage_account_name       = azurerm_storage_account.sa.name
+	storage_account_access_key = azurerm_storage_account.sa.primary_access_key
+
+	virtual_network_subnet_id = azurerm_subnet.func_integration.id
+
+	site_config {
+		ip_restriction_default_action = "Deny"
+
+		ip_restriction {
+			name       = "allow-hub"
+			action     = "Allow"
+			priority   = 100
+			ip_address = var.hub_ingress_cidr
+		}
+	}
+	...
+}
+</code></pre>
+<h3 id="private-endpoint-for-function-app-inbound"><a class="header" href="#private-endpoint-for-function-app-inbound">Private Endpoint for Function App (Inbound)</a></h3>
+<pre><code class="language-hcl">resource "azurerm_private_endpoint" "func" {
+  ...
+
+	private_service_connection {
+		name                           = "psc-func-workload"
+		private_connection_resource_id = azurerm_linux_function_app.workload.id
+		subresource_names              = ["sites"]
+		is_manual_connection           = false
+	}
+}
+</code></pre>
 
                     </main>
                 </div>
