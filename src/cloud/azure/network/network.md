@@ -22,10 +22,12 @@ Because of these features and the network design, the process for creating and c
 
 Not everything in Azure needs to be connected to the TAMU-managed network. Services that are considered "SaaS" (Software as a Service - such as AI Foundry or Fabric) and many fully-managed "PaaS" (Platform as a Service) offerings that won't be publicly accessible from the internet typically do not require integration with the TAMU-managed network. For a more complete list of services that are in scope for this network policy, see [Services Configuration](services.md).
 
-> [!IMPORTANT]
-> Generally, an Azure service must be connected to the TAMU-managed network if it hosts, exposes, executes, or supports a workload that can receive inbound network traffic, initiate outbound network traffic, or run customer-controlled code.
+Generally, an Azure service must be connected to the TAMU-managed network if it hosts, exposes, executes, or supports a workload that can receive inbound network traffic, initiate outbound network traffic, or run customer-controlled code.
 
 Any resource that meets this criterion must be connected in such a way that all traffic to and from that resource is inspected by the approved security controls. This includes all traffic to and from the internet, as well as traffic between Azure resources and other TAMU networks.
+
+> [!IMPORTANT]
+> The TAMU managed network will only be available in the **South Central US** region at launch. Additional regions may be added.
 
 <!-- TODO: decide if we want to keep this level of detail about the inspection points here, or if we want to move it to the Services Configuration page, or leave these details on the design page only -->
 <!-- The required inspection point depends on the service type and traffic pattern:

@@ -6,7 +6,7 @@ Resources that are connected to the TAMU-managed network will not be directly ac
 
 These access methods will vary based on the type of resource and the connectivity options it supports, but may include:
 
-- **Campus Network**: You can connect to most resources securely on their private IP addresses from the campus network or via the Campus VPN service. 
+- **Campus Network**: You can connect to most resources securely on their private IP addresses from the campus network or via the Campus VPN service.
 - **Azure Front Door**: For web applications or static web content that need to be accessible from the internet, Azure Front Door can be used to provide secure, global access with features like SSL termination, Web Application Firewall, and DDoS protection. This is the recommended access method for public web content.
 - **Azure Firewall**: For other types of resources that need to be accessible from the internet, Azure Firewall can be used to provide secure access while still allowing for inspection and control of traffic.
 
