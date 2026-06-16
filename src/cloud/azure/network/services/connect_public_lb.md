@@ -1,15 +1,13 @@
-# Azure Load Balancers
+# Azure Load Balancer
 
-- **Rule:** A customer workload Load Balancer (LB) must be set as internal/private and with, if required, internet ingress provided by centralized hub services.
-- **Action:** Deploy the LB as "Internal" into a private subnet, and work with Cloud Services to configure ingress through the centralized hub services.
+- **Rule:** An Azure Load Balancer may not be deployed as a public/external load balancer directly exposing a public IP to the internet. It must be internal/private, and any required internet ingress must be routed through the centralized hub services.
+- **Action:** Deploy the LB as `Internal` into a private subnet, and work with Cloud Services to configure ingress through the centralized hub services.
 
-* LB must be attached to a <em>private</em> IP. (Resource options are for public or private, and public is disallowed.)
-* LB subnet must have a User Defined Route (UDR) that sends outbound traffic to the hub-centralized firewall for inspection and logging.
-* NSGs should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, or explicitly approved private peer ranges).
-* Administrative ports and management protocols must not be internet-exposed; Use approved private access methods. See [Access Methods](../access_methods.md) for details.
-* For internet-facing application traffic, work with Cloud Services to configure hub-managed ingress (AFD for HTTP/S or firewall DNAT for non-HTTP/S workloads).
-
-The load balancer works and is configured just the same for target resources. The key difference is that the LB frontend must be private/internal, and any required internet ingress must be configured through the hub.
+- Load balancer frontends must only be private/internal.
+- The subnet selected for the load balancer frontend must have a User Defined Route (UDR) in order to be accessible from outside the VNet.
+- Security groups should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, or explicitly approved private peer ranges).
+- Administrative ports and management protocols won't be internet-exposed if requested. See [Access Methods](../access_methods.md) for details.
+- For internet-facing application traffic, work with Cloud Services to configure hub-managed ingress (AFD for HTTP/S or firewall DNAT for non-HTTP/S workloads).
 
 ## Implementation Pattern
 
