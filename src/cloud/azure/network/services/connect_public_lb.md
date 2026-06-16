@@ -11,23 +11,16 @@
 
 ## Implementation Pattern
 
-Use this sequence for both new deployments and updates to existing load balancers:
+You may follow the Microsoft example guide [Create an internal load balancer](https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-internal-portal#create-load-balancer), skipping the sections on creating NAT Gateway, VNet, and Bastion - which are provided for you in the centralized hub services.
 
-1. Create or select a private subnet for the Load Balancer (LB) frontend.
-1. Confirm the subnet has the default egress UDR associated to route outbound traffic through the hub firewall.
-1. Deploy the LB as `"Internal"` with a private frontend IP.
+The important points to note are:
 
-If internet ingress is required, submit a Cloud Services request for hub AFD, firewall, and/or DNS updates.
+1. You have created a private subnet for the Load Balancer (LB) in your spoke VNet.
+2. Select same region for the Load Balancer as your spoke VNet.
+3. Select `Internal` as the load balancer type.
+4. Select the spoke VNet and the private subnet for the Load Balancer frontend.
 
-## Steps in Azure Portal
-
-The steps below are generalized for new or existing load-balanced services.
-
-1. On Frontend IP configuration:
-	 - Select your customer spoke VNet and private subnet.
-	 - Set frontend type to private (internal).
-	 - Do not associate a Public IP.
-1. Configure backend pool reference, health probe, and load-balancing rules for your workload ports.
+To expose the Load Balancer to the internet, it must be done through the centralized hub services. Submit a Cloud Services request specifying the required internet ingress configuration.
 
 ## Example Terraform Snippets
 
