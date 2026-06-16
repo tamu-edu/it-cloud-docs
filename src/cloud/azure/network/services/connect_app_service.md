@@ -53,24 +53,6 @@ To convert an existing public App Service to private:
 
 ## Example Terraform Snippets
 
-### Private Endpoint for App Service
-
-```hcl
-resource "azurerm_private_endpoint" "app_service" {
-  name                = "pe-app-service-workload"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  subnet_id           = azurerm_subnet.private_endpoint.id
-
-  private_service_connection {
-    name                           = "psc-app-service-workload"
-    private_connection_resource_id = azurerm_linux_web_app.workload.id
-    subresource_names              = ["sites"]
-    is_manual_connection           = false
-  }
-}
-```
-
 ### VNet Integration Subnet (Delegated)
 
 ```hcl
@@ -106,10 +88,29 @@ resource "azurerm_linux_web_app" "workload" {
   location                  = azurerm_resource_group.rg.location
   resource_group_name       = azurerm_resource_group.rg.name
   service_plan_id           = azurerm_service_plan.workload.id
-  public_network_access_enabled = false
 
-  virtual_network_subnet_id = azurerm_subnet.app_service_integration.id
+  # This configuration enables private access. Subnet referenced is the delegated subnet created above.
+  public_network_access_enabled = false
+  virtual_network_subnet_id     = azurerm_subnet.app_service_integration.id
 
   site_config {}
+}
+```
+
+### Private Endpoint for App Service
+
+```hcl
+resource "azurerm_private_endpoint" "app_service" {
+  name                = "pe-app-service-workload"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  subnet_id           = azurerm_subnet.private_endpoint.id
+
+  private_service_connection {
+    name                           = "psc-app-service-workload"
+    private_connection_resource_id = azurerm_linux_web_app.workload.id
+    subresource_names              = ["sites"]
+    is_manual_connection           = false
+  }
 }
 ```
