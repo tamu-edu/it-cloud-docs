@@ -106,6 +106,24 @@ The steps below are generalized for new or existing Function Apps.
 5. Open the target subnet(s) > `Route table` and verify the hub firewall UDR is associated. See [Route Tables](../creating_subnets.md#route-tables) for details.
 6. Review NSGs on the private endpoint subnet and verify only required ports and approved source ranges are allowed.
 
+## Migrating
+
+To migrate an existing public Function App to the managed network:
+
+1. Create the VNet integration and private endpoint subnets if they do not already exist.
+2. Enable VNet Integration on the Function App using the delegated integration subnet.
+3. Review all HTTP triggers and identify their `authLevel`:
+   - **`function`-level**: The trigger may remain publicly accessible. No further network change is required for inbound traffic, though adding a Private Endpoint for campus/VPN access is still recommended.
+   - **`anonymous`**: The trigger must be moved behind hub AFD. Continue with steps 4–7 below.
+4. Add a Private Endpoint to the Function App targeting the private endpoint subnet.
+5. Validate connectivity from within the VNet (e.g. from a VM or via campus VPN) before disabling public access.
+6. Submit a Cloud Services request to configure an AFD origin and endpoint for any anonymous HTTP triggers that need to remain publicly accessible.
+7. Once AFD is configured and validated, set `Public network access` to `Disabled`.
+8. Update any DNS records or application configurations that previously pointed to the public Function App hostname to use the new AFD endpoint.
+
+> [!NOTE]
+> Disabling public network access will immediately block all direct inbound traffic to the Function App. Ensure the Private Endpoint and any hub-side AFD configuration are validated before making this change in production.
+
 ## Example Terraform Snippets
 
 ### Function App with VNet Integration (Outbound) and Access Restrictions (Inbound)
