@@ -126,28 +126,49 @@ To migrate an existing public Function App to the managed network:
 
 ## Example Terraform Snippets
 
-### Function App with VNet Integration (Outbound) and Access Restrictions (Inbound)
+### Function App with VNet Integration and Private Endpoint
 
 ```hcl
+resource "azurerm_service_plan" "workload" {
+  name                = "asp-func-workload"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  os_type             = "Linux"
+  sku_name            = "EP1"
+}
+
 resource "azurerm_linux_function_app" "workload" {
-	...
+  name                = "func-workload"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  service_plan_id     = azurerm_service_plan.workload.id
 
-	storage_account_name       = azurerm_storage_account.sa.name
-	storage_account_access_key = azurerm_storage_account.sa.primary_access_key
+  storage_account_name       = azurerm_storage_account.sa.name
+  storage_account_access_key = azurerm_storage_account.sa.primary_access_key
 
-	virtual_network_subnet_id = azurerm_subnet.func_integration.id
+  public_network_access_enabled = false
+  virtual_network_subnet_id     = azurerm_subnet.func_integration.id
 
-	site_config {
-		ip_restriction_default_action = "Deny"
+  site_config {}
+}
+```
 
-		ip_restriction {
-			name       = "allow-hub"
-			action     = "Allow"
-			priority   = 100
-			ip_address = var.hub_ingress_cidr
-		}
-	}
-	...
+### VNet Integration Subnet (Delegated)
+
+```hcl
+resource "azurerm_subnet" "func_integration" {
+  name                 = "snet-func-integration"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.spoke.name
+  address_prefixes     = ["10.x.x.x/28"]
+
+  delegation {
+    name = "delegation"
+    service_delegation {
+      name    = "Microsoft.Web/serverFarms"
+      actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
+    }
+  }
 }
 ```
 
@@ -155,13 +176,16 @@ resource "azurerm_linux_function_app" "workload" {
 
 ```hcl
 resource "azurerm_private_endpoint" "func" {
-  ...
+  name                = "pe-func-workload"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  subnet_id           = azurerm_subnet.private_endpoint.id
 
-	private_service_connection {
-		name                           = "psc-func-workload"
-		private_connection_resource_id = azurerm_linux_function_app.workload.id
-		subresource_names              = ["sites"]
-		is_manual_connection           = false
-	}
+  private_service_connection {
+    name                           = "psc-func-workload"
+    private_connection_resource_id = azurerm_linux_function_app.workload.id
+    subresource_names              = ["sites"]
+    is_manual_connection           = false
+  }
 }
 ```
