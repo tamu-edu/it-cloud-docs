@@ -9,7 +9,7 @@
 - NSGs on the private endpoint subnet should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, or the hub firewall).
 - For internet-facing application traffic, work with Cloud Services to configure hub-managed ingress via the shared Azure Front Door (AFD) instance.
 - Administrative access must not be internet-exposed. See [Access Methods](../access_methods.md) for details.
-- App Service Plan must be on a Standard (S1) SKU or higher to support both Private Endpoints and VNet Integration.
+- App Service Plan must be on a Basic SKU or higher to support both Private Endpoints and VNet Integration.
 
 ## Implementation Pattern
 
@@ -28,7 +28,7 @@ You may follow the Microsoft documentation for [using Private Endpoints with App
 1. Create two subnets in your spoke VNet:
    - A **private endpoint subnet** for the App Service Private Endpoint.
    - A **VNet Integration subnet** delegated to `Microsoft.Web/serverFarms` for outbound traffic. This subnet must have the UDR to the hub firewall associated.
-2. Deploy the App Service Plan at Standard SKU or higher, in the same region as your spoke VNet.
+2. Deploy the App Service Plan at Basic SKU or higher, in the same region as your spoke VNet.
 3. Create a **Private Endpoint** targeting the App Service, placing it in the private endpoint subnet. Select `No` when prompted to `Integrate with private DNS zone`. DNS records will be created automatically in private DNS zone in the hub VNet.
 4. Enable **VNet Integration** on the App Service, selecting the delegated integration subnet.
 5. Set `Public network access` to `Disabled` on the App Service (or configure access restrictions with a default Deny rule if needed).
