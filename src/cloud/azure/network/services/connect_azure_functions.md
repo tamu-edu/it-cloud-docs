@@ -1,15 +1,17 @@
 # Azure Functions
 
-- **Rule:** A Function App that hosts customer workload code must be connected privately to the customer spoke virtual network (VNet), with internet ingress handled through centralized hub services when required.
-- **Action:** Configure private inbound access for the Function App, use VNet integration for outbound traffic through the hub firewall, and work with Cloud Services for any required internet-facing entrypoint.
+- **Rule:** A Function App that hosts customer workload code must be connected privately to the customer spoke virtual network (VNet). HTTP triggers using anonymous authorization must have internet ingress handled through centralized hub services. HTTP triggers using function-level authorization may be directly exposed to the internet.
+- **Action:** Enable VNet Integration for outbound traffic through the hub firewall. For anonymous HTTP triggers, disable public network access and use a Private Endpoint for inbound access, routing public traffic through hub AFD. For function-key-authenticated HTTP triggers, public network access may be enabled with access restrictions enforcing the function key requirement.
 
-* Function App inbound access should be private-only (Private Endpoint) or otherwise restricted to approved private paths.
-* Function App outbound connectivity should use VNet integration to a private subnet associated with the default egress User Defined Route (UDR) to the hub-centralized firewall.
-* Public network access should be disabled or tightly restricted to avoid direct public exposure.
-* NSGs should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, or explicitly approved private peer ranges).
-* If the Function App must be reachable from the internet, work with Cloud Services to configure hub-managed ingress (AFD for HTTP/S workloads or firewall DNAT for non-HTTP/S workloads).
+- Function App outbound connectivity must use VNet Integration to a dedicated delegated subnet (`Microsoft.Web/serverFarms`) with a User Defined Route (UDR) directing outbound traffic to the hub firewall.
+- HTTP triggers with `anonymous` authorization must not be directly accessible from the internet. Public network access must be disabled, and internet ingress must go through hub-managed AFD.
+- HTTP triggers with `function`-level authorization may be directly internet-accessible, as the function key provides authentication. Public network access may be enabled for this case.
+- HTTP triggers with `admin`-level authorization must not be directly exposed to the internet under any circumstances.
+- NSGs should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, or the hub firewall).
+- Administrative access must not be internet-exposed. See [Access Methods](../access_methods.md) for details.
+- Function App Plan must be on a Flex Consumption, Premium, or Dedicated (App Service Plan) SKU to support both Private Endpoints and VNet Integration. Consumption plan does not support VNet Integration.
 
-Generally speaking, your Function App triggers, bindings, deployment workflow, and runtime settings are configured as usual. The key TAMU-network differences are private inbound access, VNet-integrated outbound routing, and hub-managed internet ingress.
+With the exception of anonymous HTTP triggers, your Function App triggers, bindings, deployment workflow, and runtime settings are configured as usual. The key TAMU-network differences are private inbound access and VNet-integrated outbound routing.
 
 ## Implementation Pattern
 
@@ -23,10 +25,74 @@ Use this sequence for both new Function App deployments and updates to existing 
 4. Configure private inbound access (for example, Private Endpoint) and disable or restrict public network access.
 5. Validate private connectivity to triggers/dependencies and runtime health from approved networks.
 
-If internet ingress is required, submit a Cloud Services request for hub AFD, firewall, and/or DNS updates.
+## Exposing HTTP Triggers Publicly
 
-> [!NOTE]
-> If your Function App needs to be run from the Dashboard in Azure Portal, it may require temporary public access during development and testing.
+The correct approach depends on the `authLevel` of the HTTP trigger.
+
+### `function`-level auth — direct public exposure permitted
+
+HTTP triggers that require a function key (`authLevel: function`) may be directly exposed to the internet, since the key provides authentication. In this case:
+
+- Public network access on the Function App **may remain enabled**.
+- No hub AFD or firewall configuration is required for inbound traffic.
+- Callers must supply the function key as an `x-functions-key` header or `code` query parameter:
+
+  ```sh
+  curl -X POST "https://<func-name>.azurewebsites.net/api/<function-name>?code=<function-key>" \
+    -H "Content-Type: application/json" \
+    -d '{"key": "value"}'
+  ```
+
+> [!TIP]
+> Store function keys in Azure Key Vault and reference them from your Function App's application settings. This allows keys to be rotated without redeployment and audited via Key Vault access logs.
+
+> [!WARNING]
+> `admin`-level authorization uses the host master key and must never be directly exposed to the internet.
+
+### `anonymous`-level auth — hub ingress required
+
+HTTP triggers with no authentication (`authLevel: anonymous`) must not be directly accessible from the internet. The Function App itself remains fully private with public network access disabled. All public traffic must be routed through the hub Azure Front Door, which provides WAF protection and traffic inspection. The traffic path is:
+
+```
+Internet → Azure Front Door (hub) → Private Link → Function App Private Endpoint
+```
+
+#### What to request from Cloud Services
+
+Submit a Cloud Services request and include the following information:
+
+- The **private FQDN** of your Function App (e.g. `func-workload.azurewebsites.net`)
+- The **HTTP trigger path(s)** to be routed (e.g. `/api/my-function`, or `/api/*` for all functions)
+- The desired **public hostname or custom domain** (e.g. `api.example.tamu.edu`)
+- Any required **WAF exclusions or routing rules** (e.g. allowed HTTP methods, rate limits)
+
+#### Testing the AFD-routed path
+
+Once Cloud Services has configured the AFD origin and endpoint, test the public path from any network:
+
+```sh
+curl -X POST "https://<afd-endpoint>/api/<function-name>" \
+  -H "Content-Type: application/json" \
+  -d '{"key": "value"}'
+```
+
+## Testing and Running Functions Securely
+
+With public network access disabled, functions must be invoked and monitored through private, approved channels. The following methods are all supported:
+
+- **Local development with Azure Functions Core Tools**: Run and test functions entirely on your local machine using the [Azure Functions Core Tools CLI](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local) (`func start`). This requires no network access to Azure and is the recommended approach during active development.
+- **VS Code or IDE with Azurite**: Use the [Azure Functions extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions) along with the [Azurite storage emulator](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azurite) to run and debug functions locally, including trigger simulation for queue, blob, and timer triggers.
+- **Campus network or VPN**: Once deployed, invoke functions directly via their private FQDN from the campus network or via the Campus VPN. The private endpoint makes the Function App reachable at its private IP from any host on the managed network.
+- **Azure CLI (from campus/VPN)**: Use `az functionapp` commands to invoke functions, stream logs, and inspect configuration from any host with campus or VPN connectivity.
+
+  ```sh
+  az rest --method post \
+    --url "https://<func-name>.azurewebsites.net/api/<function-name>" \
+    --headers "x-functions-key=<key>"
+  ```
+
+- **Azure Portal "Test/Run" tab**: The Portal's built-in test tab works when your browser is on the campus network or VPN, since the request is proxied through the Portal to the private endpoint.
+- **Deployment from CI/CD**: Deployments via GitHub Actions or Azure DevOps pipelines do not require public access to the Function App; use the [Azure Functions GitHub Action](https://github.com/Azure/functions-action) or `az functionapp deployment` CLI commands. If the pipeline needs to reach resources inside the VNet (e.g. a private storage account), configure GitHub Actions private networking per the [CI/CD Access](../access_methods.md#cicd-access) guidance.
 
 ## Steps in Azure Portal
 
