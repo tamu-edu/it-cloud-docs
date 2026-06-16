@@ -357,7 +357,7 @@
 </ul>
 </li>
 <li>Deploy the App Service Plan at Standard SKU or higher, in the same region as your spoke VNet.</li>
-<li>Create a <strong>Private Endpoint</strong> targeting the App Service, placing it in the private endpoint subnet.</li>
+<li>Create a <strong>Private Endpoint</strong> targeting the App Service, placing it in the private endpoint subnet. Select <code>No</code> when prompted to <code>Integrate with private DNS zone</code>. DNS records will be created automatically in private DNS zone in the hub VNet.</li>
 <li>Enable <strong>VNet Integration</strong> on the App Service, selecting the delegated integration subnet.</li>
 <li>Set <code>Public network access</code> to <code>Disabled</code> on the App Service (or configure access restrictions with a default Deny rule if needed).</li>
 <li>Verify the Private DNS zone <code>privatelink.azurewebsites.net</code> is updated with the appropriate DNS records for the Private Endpoint by performing a DNS lookup for your App Service’s private FQDN and confirming it resolves to the private endpoint IP. Contact Cloud Services if it does not update.</li>
