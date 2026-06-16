@@ -8,6 +8,7 @@
 - Security groups should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, or explicitly approved private peer ranges).
 - Administrative ports and management protocols won't be internet-exposed if requested. See [Access Methods](../access_methods.md) for details.
 - For internet-facing application traffic, work with Cloud Services to configure hub-managed ingress (AFD for HTTP/S or firewall DNAT for non-HTTP/S workloads).
+- Load Balancers are regional and cannot be migrated across regions.
 
 ## Implementation Pattern
 
@@ -21,6 +22,16 @@ The important points to note are:
 4. Select the spoke VNet and the private subnet for the Load Balancer frontend.
 
 To expose the Load Balancer to the internet, it must be done through the centralized hub services. Submit a Cloud Services request specifying the required internet ingress configuration.
+
+## Migrating
+
+To convert an existing public Load Balancer to private, you can add a new frontend configuration with a private subnet and update the backend pool and rules to use the new private frontend. Once the private frontend is configured and tested, the public frontend can be removed.
+
+If the Public IP that was associated with the public Load Balancer is desired to be preserved, contact Cloud Services to coordinate the reassignment of the Public IP to the centralized hub ingress point. This may not be available if also changing regions.
+
+It is important to plan for potential downtime and update any DNS records or application configurations that reference the public IP, as they will need to point to the new private IP or the centralized hub ingress point.
+
+If you also need to migrate regions, you will need to recreate the Load Balancer in the new region. This involves creating a new Load Balancer in the target region, configuring the frontend, backend pools, and rules, and then updating any DNS records or application configurations to point to the new Load Balancer.
 
 ## Example Terraform Snippets
 
