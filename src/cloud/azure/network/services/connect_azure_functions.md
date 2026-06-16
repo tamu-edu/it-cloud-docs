@@ -4,7 +4,7 @@
 - **Action:** Enable VNet Integration for outbound traffic through the hub firewall. For anonymous HTTP triggers, disable public network access and use a Private Endpoint for inbound access, routing public traffic through hub AFD. For function-key-authenticated HTTP triggers, public network access may be enabled with access restrictions enforcing the function key requirement.
 
 - Function App outbound connectivity must use VNet Integration to a dedicated delegated subnet (`Microsoft.Web/serverFarms`) with a User Defined Route (UDR) directing outbound traffic to the hub firewall.
-- HTTP triggers with `anonymous` authorization must not be directly accessible from the internet. Public network access must be disabled, and internet ingress must go through hub-managed AFD.
+- HTTP triggers with `anonymous` authorization must not be directly accessible from the internet. Public network access must be disabled, and internet ingress must go through hub-managed Azure Front Door.
 - HTTP triggers with `function`-level authorization may be directly internet-accessible, as the function key provides authentication. Public network access may be enabled for this case.
 - HTTP triggers with `admin`-level authorization must not be directly exposed to the internet under any circumstances.
 - NSGs should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, or the hub firewall).
@@ -14,6 +14,16 @@
 With the exception of anonymous HTTP triggers, your Function App triggers, bindings, deployment workflow, and runtime settings are configured as usual. The key TAMU-network differences are private inbound access and VNet-integrated outbound routing.
 
 ## Implementation Pattern
+
+### Azure Front Door
+
+If you intend to publish your Function App to the internet, the recommended approach is to do so through the hub-managed Azure Front Door (AFD). Using this method, a private endpoint for inbound access is created and managed by AFD, and do you do not have to create the private endpoint yourself.
+
+However, when using AFD-managed private endpoints, only AFD can access your application, and all traffic must go through AFD. Internal/Private traffic from other resources or networks will require a private endpoint in your spoke VNet.
+
+For more information, see [Access Methods](../access_methods.md).
+
+### Private Endpoint for Internal/Private Access
 
 You may follow the Microsoft documentation for [using Private Endpoints with Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-create-vnet) as a reference. The key points for the TAMU managed network are:
 
