@@ -312,49 +312,60 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="azure-load-balancers"><a class="header" href="#azure-load-balancers">Azure Load Balancers</a></h1>
+                        <h1 id="azure-load-balancer"><a class="header" href="#azure-load-balancer">Azure Load Balancer</a></h1>
 <ul>
-<li><strong>Rule:</strong> A customer workload Load Balancer (LB) must be set as internal/private and with, if required, internet ingress provided by centralized hub services.</li>
-<li><strong>Action:</strong> Deploy the LB as “Internal” into a private subnet, and work with Cloud Services to configure ingress through the centralized hub services.</li>
-</ul>
-<ul>
-<li>LB must be attached to a <em>private</em> IP. (Resource options are for public or private, and public is disallowed.)</li>
-<li>LB subnet must have a User Defined Route (UDR) that sends outbound traffic to the hub-centralized firewall for inspection and logging.</li>
-<li>NSGs should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, or explicitly approved private peer ranges).</li>
-<li>Administrative ports and management protocols must not be internet-exposed; Use approved private access methods. See <a href="/pr-preview/pr-66/access_methods.html">Access Methods</a> for details.</li>
-<li>For internet-facing application traffic, work with Cloud Services to configure hub-managed ingress (AFD for HTTP/S or firewall DNAT for non-HTTP/S workloads).</li>
-</ul>
-<p>The load balancer works and is configured just the same for target resources. The key difference is that the LB frontend must be private/internal, and any required internet ingress must be configured through the hub.</p>
-<h2 id="implementation-pattern"><a class="header" href="#implementation-pattern">Implementation Pattern</a></h2>
-<p>Use this sequence for both new deployments and updates to existing load balancers:</p>
-<ol>
-<li>Create or select a private subnet for the Load Balancer (LB) frontend.</li>
-<li>Confirm the subnet has the default egress UDR associated to route outbound traffic through the hub firewall.</li>
-<li>Deploy the LB as <code>"Internal"</code> with a private frontend IP.</li>
-</ol>
-<p>If internet ingress is required, submit a Cloud Services request for hub AFD, firewall, and/or DNS updates.</p>
-<h2 id="steps-in-azure-portal"><a class="header" href="#steps-in-azure-portal">Steps in Azure Portal</a></h2>
-<p>The steps below are generalized for new or existing load-balanced services.</p>
-<ol>
-<li>On Frontend IP configuration:
-<ul>
-<li>Select your customer spoke VNet and private subnet.</li>
-<li>Set frontend type to private (internal).</li>
-<li>Do not associate a Public IP.</li>
-</ul>
+<li>
+<p><strong>Rule:</strong> An Azure Load Balancer may not be deployed as a public/external load balancer directly exposing a public IP to the internet. It must be internal/private, and any required internet ingress must be routed through the centralized hub services.</p>
 </li>
-<li>Configure backend pool reference, health probe, and load-balancing rules for your workload ports.</li>
+<li>
+<p><strong>Action:</strong> Deploy the LB as <code>Internal</code> into a private subnet, and work with Cloud Services to configure ingress through the centralized hub services.</p>
+</li>
+<li>
+<p>Load balancer frontends must only be private/internal.</p>
+</li>
+<li>
+<p>The subnet selected for the load balancer frontend must have a User Defined Route (UDR) in order to be accessible from outside the VNet.</p>
+</li>
+<li>
+<p>Security groups should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, or explicitly approved private peer ranges).</p>
+</li>
+<li>
+<p>Administrative ports and management protocols won’t be internet-exposed if requested. See <a href="/pr-preview/pr-66/access_methods.html">Access Methods</a> for details.</p>
+</li>
+<li>
+<p>For internet-facing application traffic, work with Cloud Services to configure hub-managed ingress (AFD for HTTP/S or firewall DNAT for non-HTTP/S workloads).</p>
+</li>
+<li>
+<p>Load Balancers are regional and cannot be migrated across regions.</p>
+</li>
+</ul>
+<h2 id="implementation-pattern"><a class="header" href="#implementation-pattern">Implementation Pattern</a></h2>
+<p>You may follow the Microsoft example guide <a href="https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-internal-portal#create-load-balancer">Create an internal load balancer</a>, skipping the sections on creating NAT Gateway, VNet, and Bastion - which are provided for you in the centralized hub services.</p>
+<p>The important points to note are:</p>
+<ol>
+<li>You have created a private subnet for the Load Balancer (LB) in your spoke VNet.</li>
+<li>Select same region for the Load Balancer as your spoke VNet.</li>
+<li>Select <code>Internal</code> as the load balancer type.</li>
+<li>Select the spoke VNet and the private subnet for the Load Balancer frontend.</li>
 </ol>
+<p>To expose the Load Balancer to the internet, it must be done through the centralized hub services. Submit a Cloud Services request specifying the required internet ingress configuration.</p>
+<h2 id="migrating"><a class="header" href="#migrating">Migrating</a></h2>
+<p>To convert an existing public Load Balancer to private, you can add a new frontend configuration with a private subnet and update the backend pool and rules to use the new private frontend. Once the private frontend is configured and tested, the public frontend can be removed.</p>
+<p>If the Public IP that was associated with the public Load Balancer is desired to be preserved, contact Cloud Services to coordinate the reassignment of the Public IP to the centralized hub ingress point. This may not be available if also changing regions.</p>
+<p>It is important to plan for potential downtime and update any DNS records or application configurations that reference the public IP, as they will need to point to the new private IP or the centralized hub ingress point.</p>
+<p>If you also need to migrate regions, you will need to recreate the Load Balancer in the new region. This involves creating a new Load Balancer in the target region, configuring the frontend, backend pools, and rules, and then updating any DNS records or application configurations to point to the new Load Balancer.</p>
 <h2 id="example-terraform-snippets"><a class="header" href="#example-terraform-snippets">Example Terraform Snippets</a></h2>
-<h3 id="internal-standard-load-balancer-private-frontend"><a class="header" href="#internal-standard-load-balancer-private-frontend">Internal Standard Load Balancer (Private Frontend)</a></h3>
-<pre><code class="language-hcl">resource "azurerm_lb" "workload" {
-  ...
+<h3 id="internal-standard-load-balancer"><a class="header" href="#internal-standard-load-balancer">Internal Standard Load Balancer</a></h3>
+<pre><code class="language-hcl">resource "azurerm_lb" "workload_a" {
+  name     = "lbi-workload-a"
+  sku      = "Standard"
+  location = azurerm_resource_group.workload.location
 
-	frontend_ip_configuration {
-		name                          = "private-frontend"
-		subnet_id                     = azurerm_subnet.workload.id
-		private_ip_address_allocation = "Dynamic"
-	}
+  frontend_ip_configuration {
+    name                          = "internal-frontend"
+    subnet_id                     = azurerm_subnet.private.id
+    private_ip_address_allocation = "Dynamic"
+  }
 }
 </code></pre>
 
