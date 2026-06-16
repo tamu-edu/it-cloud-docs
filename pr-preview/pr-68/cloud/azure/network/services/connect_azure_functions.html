@@ -324,7 +324,7 @@
 <p>Function App outbound connectivity must use VNet Integration to a dedicated delegated subnet (<code>Microsoft.Web/serverFarms</code>) with a User Defined Route (UDR) directing outbound traffic to the hub firewall.</p>
 </li>
 <li>
-<p>HTTP triggers with <code>anonymous</code> authorization must not be directly accessible from the internet. Public network access must be disabled, and internet ingress must go through hub-managed AFD.</p>
+<p>HTTP triggers with <code>anonymous</code> authorization must not be directly accessible from the internet. Public network access must be disabled, and internet ingress must go through hub-managed Azure Front Door.</p>
 </li>
 <li>
 <p>HTTP triggers with <code>function</code>-level authorization may be directly internet-accessible, as the function key provides authentication. Public network access may be enabled for this case.</p>
@@ -344,6 +344,11 @@
 </ul>
 <p>With the exception of anonymous HTTP triggers, your Function App triggers, bindings, deployment workflow, and runtime settings are configured as usual. The key TAMU-network differences are private inbound access and VNet-integrated outbound routing.</p>
 <h2 id="implementation-pattern"><a class="header" href="#implementation-pattern">Implementation Pattern</a></h2>
+<h3 id="azure-front-door"><a class="header" href="#azure-front-door">Azure Front Door</a></h3>
+<p>If you intend to publish your Function App to the internet, the recommended approach is to do so through the hub-managed Azure Front Door (AFD). Using this method, a private endpoint for inbound access is created and managed by AFD, and do you do not have to create the private endpoint yourself.</p>
+<p>However, when using AFD-managed private endpoints, only AFD can access your application, and all traffic must go through AFD. Internal/Private traffic from other resources or networks will require a private endpoint in your spoke VNet.</p>
+<p>For more information, see <a href="/pr-preview/pr-68/access_methods.html">Access Methods</a>.</p>
+<h3 id="private-endpoint-for-internalprivate-access"><a class="header" href="#private-endpoint-for-internalprivate-access">Private Endpoint for Internal/Private Access</a></h3>
 <p>You may follow the Microsoft documentation for <a href="https://learn.microsoft.com/en-us/azure/azure-functions/functions-create-vnet">using Private Endpoints with Azure Functions</a> as a reference. The key points for the TAMU managed network are:</p>
 <ol>
 <li>Create two subnets in your spoke VNet:
