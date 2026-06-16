@@ -24,16 +24,18 @@ To expose the Load Balancer to the internet, it must be done through the central
 
 ## Example Terraform Snippets
 
-### Internal Standard Load Balancer (Private Frontend)
+### Internal Standard Load Balancer
 
 ```hcl
-resource "azurerm_lb" "workload" {
-  ...
+resource "azurerm_lb" "workload_a" {
+  name     = "lbi-workload-a"
+  sku      = "Standard"
+  location = azurerm_resource_group.workload.location
 
-	frontend_ip_configuration {
-		name                          = "private-frontend"
-		subnet_id                     = azurerm_subnet.workload.id
-		private_ip_address_allocation = "Dynamic"
-	}
+  frontend_ip_configuration {
+    name                          = "internal-frontend"
+    subnet_id                     = azurerm_subnet.private.id
+    private_ip_address_allocation = "Dynamic"
+  }
 }
 ```
