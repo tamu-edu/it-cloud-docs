@@ -379,21 +379,6 @@
 <p>Disabling public network access will immediately block all direct inbound traffic to the App Service. Ensure the Private Endpoint and any hub-side AFD configuration are validated before making this change in production.</p>
 </blockquote>
 <h2 id="example-terraform-snippets"><a class="header" href="#example-terraform-snippets">Example Terraform Snippets</a></h2>
-<h3 id="private-endpoint-for-app-service"><a class="header" href="#private-endpoint-for-app-service">Private Endpoint for App Service</a></h3>
-<pre><code class="language-hcl">resource "azurerm_private_endpoint" "app_service" {
-  name                = "pe-app-service-workload"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  subnet_id           = azurerm_subnet.private_endpoint.id
-
-  private_service_connection {
-    name                           = "psc-app-service-workload"
-    private_connection_resource_id = azurerm_linux_web_app.workload.id
-    subresource_names              = ["sites"]
-    is_manual_connection           = false
-  }
-}
-</code></pre>
 <h3 id="vnet-integration-subnet-delegated"><a class="header" href="#vnet-integration-subnet-delegated">VNet Integration Subnet (Delegated)</a></h3>
 <pre><code class="language-hcl">resource "azurerm_subnet" "app_service_integration" {
   name                 = "snet-appservice-integration"
@@ -424,11 +409,27 @@ resource "azurerm_linux_web_app" "workload" {
   location                  = azurerm_resource_group.rg.location
   resource_group_name       = azurerm_resource_group.rg.name
   service_plan_id           = azurerm_service_plan.workload.id
-  public_network_access_enabled = false
 
-  virtual_network_subnet_id = azurerm_subnet.app_service_integration.id
+  # This configuration enables private access. Subnet referenced is the delegated subnet created above.
+  public_network_access_enabled = false
+  virtual_network_subnet_id     = azurerm_subnet.app_service_integration.id
 
   site_config {}
+}
+</code></pre>
+<h3 id="private-endpoint-for-app-service"><a class="header" href="#private-endpoint-for-app-service">Private Endpoint for App Service</a></h3>
+<pre><code class="language-hcl">resource "azurerm_private_endpoint" "app_service" {
+  name                = "pe-app-service-workload"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  subnet_id           = azurerm_subnet.private_endpoint.id
+
+  private_service_connection {
+    name                           = "psc-app-service-workload"
+    private_connection_resource_id = azurerm_linux_web_app.workload.id
+    subresource_names              = ["sites"]
+    is_manual_connection           = false
+  }
 }
 </code></pre>
 
