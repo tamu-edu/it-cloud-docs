@@ -20,6 +20,16 @@ Generally speaking, AGW behavior for backend pools, probes, listeners, and routi
 
 ## Implementation Pattern
 
+### Azure Front Door
+
+If you intend to publish your application to the internet, the recommended approach is to do so through the hub-managed Azure Front Door (AFD). Using this method, a private endpoint for inbound access is created and managed by AFD, and do you do not have to create the private endpoint yourself.
+
+However, when using AFD-managed private endpoints, only AFD can access your application, and all traffic must go through AFD. Internal/Private traffic from other resources or networks will require a private endpoint in your spoke VNet.
+
+For more information, see [Access Methods](../access_methods.md).
+
+### Private Endpoint for Internal/Private Access
+
 Use this sequence for both new AGW deployments and updates to existing AGW workloads:
 
 1. Confirm AGW is required (for example, advanced layer-7 routing/rewrites/TLS features not already met by centralized AFD + WAF).
