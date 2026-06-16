@@ -128,6 +128,40 @@ To migrate an existing public Function App to the managed network:
 
 ### Function App with VNet Integration and Private Endpoint
 
+#### Flex Consumption Plan (recommended)
+
+```hcl
+resource "azurerm_service_plan" "workload" {
+  name                = "asp-func-workload"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  os_type             = "Linux"
+  sku_name            = "FC1"
+}
+
+resource "azurerm_function_app_flex_consumption" "workload" {
+  name                = "func-workload"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  service_plan_id     = azurerm_service_plan.workload.id
+
+  storage_account_name       = azurerm_storage_account.sa.name
+  storage_account_access_key = azurerm_storage_account.sa.primary_access_key
+
+  public_network_access_enabled = false
+  virtual_network_subnet_id     = azurerm_subnet.func_integration.id
+
+  runtime_name                = "node"
+  runtime_version             = "20"
+  maximum_instance_count      = 50
+  instance_memory_in_mb       = 2048
+
+  site_config {}
+}
+```
+
+#### Elastic Premium SKU
+
 ```hcl
 resource "azurerm_service_plan" "workload" {
   name                = "asp-func-workload"
@@ -152,6 +186,8 @@ resource "azurerm_linux_function_app" "workload" {
   site_config {}
 }
 ```
+
+
 
 ### VNet Integration Subnet (Delegated)
 
