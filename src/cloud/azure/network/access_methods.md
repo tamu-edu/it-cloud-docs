@@ -31,6 +31,10 @@ If your resource is a web application, static web content, or other HTTP/S-based
 
 Use the [Services Configuration](services.md) guide to set up your origin service, such as App Service, App Gateway, or internal Load Balancer, then contact the Cloud Services team to configure Azure Front Door.
 
+Azure Front Door will create a managed private endpoint for your origin service using Private Link, which must be accepted by you in your origin configuration before traffic can flow from Azure Front Door to your origin service.
+
+See the [Supported Origins](https://learn.microsoft.com/en-us/azure/frontdoor/private-link#supported-origins) for Azure Front Door Private Link for more information on which types of origin services can be used with Azure Front Door and Private Link and how to accept the private link connection request for your origin services.
+
 ## Azure Firewall
 
 For other types of resources that need to be accessible from the internet, Azure Firewall can be used to provide secure access while still allowing for inspection and control of traffic. This is typically used for non-web workloads that still require some level of public accessibility. Use the [Services Configuration](services.md) guide to set up your resource then contact the Cloud Services team to configure Azure Firewall for secure access.
