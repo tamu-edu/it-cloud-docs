@@ -29,7 +29,7 @@ You may follow the Microsoft documentation for [using Private Endpoints with App
    - A **private endpoint subnet** for the App Service Private Endpoint.
    - A **VNet Integration subnet** delegated to `Microsoft.Web/serverFarms` for outbound traffic. This subnet must have the UDR to the hub firewall associated.
 2. Deploy the App Service Plan at Standard SKU or higher, in the same region as your spoke VNet.
-3. Create a **Private Endpoint** targeting the App Service, placing it in the private endpoint subnet.
+3. Create a **Private Endpoint** targeting the App Service, placing it in the private endpoint subnet. Select `No` when prompted to `Integrate with private DNS zone`. DNS records will be created automatically in private DNS zone in the hub VNet.
 4. Enable **VNet Integration** on the App Service, selecting the delegated integration subnet.
 5. Set `Public network access` to `Disabled` on the App Service (or configure access restrictions with a default Deny rule if needed).
 6. Verify the Private DNS zone `privatelink.azurewebsites.net` is updated with the appropriate DNS records for the Private Endpoint by performing a DNS lookup for your App Service's private FQDN and confirming it resolves to the private endpoint IP. Contact Cloud Services if it does not update.
