@@ -25,7 +25,7 @@
         - [Container Instances](cloud/azure/network/services/connect_container_instances.md)
         - [Functions](cloud/azure/network/services/connect_azure_functions.md)
         - [Kubernetes Service (AKS)](cloud/azure/network/services/connect_aks.md)
-        - [Load Balancers](cloud/azure/network/services/connect_public_lb.md)
+        - [Load Balancers](cloud/azure/network/services/connect_load_balancer.md)
         - [Virtual Machines](cloud/azure/network/services/connect_vm.md)
 
 - [Cloud Management](kion/kion.md)
