@@ -12,6 +12,14 @@
 
 ## Implementation Pattern
 
+### Azure Front Door
+
+If your load balanced application is a web or other HTTP/S application and you intend to publish the application behind your load balancer to the internet, the recommended approach is to do so through the hub-managed Azure Front Door (AFD). Using this method, a private endpoint for inbound access is created and managed by AFD, and do you do not have to create or manage private DNS records or private endpoints yourself.
+
+For more information, see [Access Methods](../access_methods.md).
+
+### Private Endpoint for Internal/Private Access
+
 You may follow the Microsoft example guide [Create an internal load balancer](https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-internal-portal#create-load-balancer), skipping the sections on creating NAT Gateway, VNet, and Bastion - which are provided for you in the centralized hub services.
 
 The important points to note are:
