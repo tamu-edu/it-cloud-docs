@@ -13,6 +13,16 @@
 
 ## Implementation Pattern
 
+### Azure Front Door
+
+If you intend to publish your application to the internet, the recommended approach is to do so through the hub-managed Azure Front Door (AFD). Using this method, a private endpoint for inbound access is created and managed by AFD, and do you do not have to create the private endpoint yourself.
+
+However, when using AFD-managed private endpoints, only AFD can access your application, and all traffic must go through AFD. Internal/Private traffic from other resources or networks will require a private endpoint in your spoke VNet.
+
+For more information, see [Access Methods](../access_methods.md).
+
+### Private Endpoint for Internal/Private Access
+
 You may follow the Microsoft documentation for [using Private Endpoints with App Service](https://learn.microsoft.com/en-us/azure/app-service/networking/private-endpoint) and [VNet Integration](https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration) as references. The key points for the TAMU managed network are:
 
 1. Create two subnets in your spoke VNet:
