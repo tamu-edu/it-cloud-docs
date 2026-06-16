@@ -15,15 +15,16 @@ With the exception of anonymous HTTP triggers, your Function App triggers, bindi
 
 ## Implementation Pattern
 
-Use this sequence for both new Function App deployments and updates to existing Function Apps:
+You may follow the Microsoft documentation for [using Private Endpoints with Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-create-vnet) as a reference. The key points for the TAMU managed network are:
 
-1. Create or select the required private subnets:
-	 - One subnet for Function App VNet integration (delegated as required).
-	 - One subnet for private endpoints, if used.
-2. Confirm VNet integration subnet has the default egress UDR associated to route outbound traffic through the hub firewall.
-3. Create or update the Function App and enable VNet integration to the designated subnet.
-4. Configure private inbound access (for example, Private Endpoint) and disable or restrict public network access.
-5. Validate private connectivity to triggers/dependencies and runtime health from approved networks.
+1. Create two subnets in your spoke VNet:
+   - A **private endpoint subnet** for the Function App Private Endpoint.
+   - A **VNet Integration subnet** delegated to `Microsoft.Web/serverFarms` for outbound traffic. This subnet must have the UDR to the hub firewall associated.
+2. Deploy the Function App on an Elastic Premium or Dedicated App Service Plan in the same region as your spoke VNet.
+3. Create a **Private Endpoint** targeting the Function App, placing it in the private endpoint subnet.
+4. Enable **VNet Integration** on the Function App, selecting the delegated integration subnet.
+5. Set `Public network access` to `Disabled` on the Function App (or configure access restrictions with a default Deny rule if needed).
+6. Verify the Private DNS zone `privatelink.azurewebsites.net` is updated with the appropriate DNS records for the Private Endpoint by performing a DNS lookup for your Function App's private FQDN from a machine inside the TAMU firewall and confirming it resolves to the private endpoint IP. Contact Cloud Services if it does not update.
 
 ## Exposing HTTP Triggers Publicly
 
@@ -98,12 +99,12 @@ With public network access disabled, functions must be invoked and monitored thr
 
 The steps below are generalized for new or existing Function Apps.
 
-1. Azure Portal > Function App > Networking.
-1. Under `Outbound traffic`, configure VNet integration to the designated private subnet.
-1. Under `Inbound traffic`, configure private inbound access (for example, Private Endpoint).
-1. In Function App `Configuration`, set public network access to disabled or apply default `Deny` access restrictions.
-1. Open target subnet(s) > Route table and verify the hub firewall UDR is associated. See [Route Tables](../creating_subnets.md#route-tables) for details.
-1. Review NSGs and verify only required ports and approved source ranges are allowed.
+1. Azure Portal > Function App > `Networking`.
+2. Under `Outbound traffic`, configure VNet Integration to the designated delegated subnet.
+3. Under `Inbound traffic`, configure a Private Endpoint targeting the private endpoint subnet.
+4. In Function App `Settings` > `Configuration` (or `Environment variables`), set `Public network access` to `Disabled`.
+5. Open the target subnet(s) > `Route table` and verify the hub firewall UDR is associated. See [Route Tables](../creating_subnets.md#route-tables) for details.
+6. Review NSGs on the private endpoint subnet and verify only required ports and approved source ranges are allowed.
 
 ## Example Terraform Snippets
 
