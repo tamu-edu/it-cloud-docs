@@ -340,6 +340,10 @@
 </li>
 </ul>
 <h2 id="implementation-pattern"><a class="header" href="#implementation-pattern">Implementation Pattern</a></h2>
+<h3 id="azure-front-door"><a class="header" href="#azure-front-door">Azure Front Door</a></h3>
+<p>If your load balanced application is a web or other HTTP/S application and you intend to publish the application behind your load balancer to the internet, the recommended approach is to do so through the hub-managed Azure Front Door (AFD). Using this method, a private endpoint for inbound access is created and managed by AFD, and do you do not have to create or manage private DNS records or private endpoints yourself.</p>
+<p>For more information, see <a href="/pr-preview/pr-66/access_methods.html">Access Methods</a>.</p>
+<h3 id="private-endpoint-for-internalprivate-access"><a class="header" href="#private-endpoint-for-internalprivate-access">Private Endpoint for Internal/Private Access</a></h3>
 <p>You may follow the Microsoft example guide <a href="https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-internal-portal#create-load-balancer">Create an internal load balancer</a>, skipping the sections on creating NAT Gateway, VNet, and Bastion - which are provided for you in the centralized hub services.</p>
 <p>The important points to note are:</p>
 <ol>
