@@ -314,15 +314,27 @@
                     <main>
                         <h1 id="azure-virtual-machines"><a class="header" href="#azure-virtual-machines">Azure Virtual Machines</a></h1>
 <ul>
-<li><strong>Rule:</strong> A Virtual Machine (VM) may not be directly exposed to the public internet and must be deployed with private-only network connectivity in a customer spoke virtual network (VNet).</li>
-<li><strong>Action:</strong> Deploy VM into a private subnet with default outbound routing through the hub firewall (FW), and work with Cloud Services to ensure ingress through centralized hub services.</li>
-</ul>
-<ul>
-<li>VM network interface must not have a Public IP associated.</li>
-<li>VM subnet must have a User Defined Route (UDR) that sends outbound traffic to the hub-centralized firewall for inspection and logging.</li>
-<li>NSGs should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, or explicitly approved private peer ranges).</li>
-<li>If the VM hosts a workload that must be reachable from the internet, request Cloud Services configuration of hub firewall DNAT rules and any required DNS updates.</li>
-<li>Administrative protocols (RDP, SSH, WinRM, etc.) must not be published to the internet; use private access methods from trusted networks. See <a href="/pr-preview/pr-67/access_methods.html">Access Methods</a> for details.</li>
+<li>
+<p><strong>Rule:</strong> A Virtual Machine (VM) may not be directly exposed to the public internet and must be deployed with private-only network connectivity in a customer spoke virtual network (VNet).</p>
+</li>
+<li>
+<p><strong>Action:</strong> Deploy VM into a private subnet with default outbound routing through the hub firewall (FW), and work with Cloud Services to ensure ingress through centralized hub services.</p>
+</li>
+<li>
+<p>VM network interface must not have a Public IP associated.</p>
+</li>
+<li>
+<p>VM subnet must have a User Defined Route (UDR) that sends outbound traffic to the hub-centralized firewall for inspection and logging.</p>
+</li>
+<li>
+<p>NSGs should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, or explicitly approved private peer ranges).</p>
+</li>
+<li>
+<p>If the VM hosts a workload that must be reachable from the internet, request Cloud Services configuration of hub firewall DNAT rules and any required DNS updates.</p>
+</li>
+<li>
+<p>Administrative protocols (RDP, SSH, WinRM, etc.) must not be published to the internet; use private access methods from trusted networks. See <a href="/pr-preview/pr-67/access_methods.html">Access Methods</a> for details.</p>
+</li>
 </ul>
 <h2 id="implementation-pattern"><a class="header" href="#implementation-pattern">Implementation Pattern</a></h2>
 <p>Use this sequence for both new deployments and updates to existing VM workloads:</p>
