@@ -45,9 +45,9 @@ If internet ingress is required, submit a Cloud Services request for hub AFD, fi
 The steps below are generalized for new or existing AGW-backed services.
 
 1. On Application Gateway: Frontends/Networking:
-	 - Select your customer spoke VNet.
-	 - Select or create a dedicated subnet for AGW.
-	 - For Frontend IP Address Type, select Private (see [below](#creating-new-agw-and-encountering-error-public-frontend-ip-configuration-is-not-allowed)).
+    1. Select your customer spoke VNet.
+    1. Select or create a dedicated subnet for AGW.
+    1. For Frontend IP Address Type, select Private (see [below](#creating-new-agw-and-encountering-error-public-frontend-ip-configuration-is-not-allowed)).
 1. Configure backend pools, listeners, health probes, and routing rules as required by your application.
 1. Open AGW/backend subnets > Route table and verify the hub firewall UDR is associated. See [Route Tables](../creating_subnets.md#route-tables) for details.
 1. Review subnet NSGs and verify only required ports and approved source ranges are allowed.
