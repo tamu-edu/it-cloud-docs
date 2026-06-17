@@ -330,7 +330,7 @@
 <li>AGW requires a dedicated subnet and should not share that subnet with unrelated workloads.</li>
 <li>AGW subnet and backend subnets must have a User Defined Route (UDR) that sends outbound traffic to the hub-centralized firewall for inspection and logging.</li>
 <li>NSGs should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, or explicitly approved private peer ranges).</li>
-<li>Administrative ports and management protocols must not be internet-exposed; use approved private access methods. See <a href="/pr-preview/pr-71/access_methods.html">Access Methods</a> for details.</li>
+<li>Administrative ports and management protocols must not be internet-exposed; use approved private access methods. See <a href="/cloud/azure/network/access_methods.html">Access Methods</a> for details.</li>
 <li>For internet-facing application traffic, work with Cloud Services to configure hub-managed ingress (typically AFD for HTTP/S and firewall DNAT for non-HTTP/S workloads).</li>
 </ul>
 <p>Generally speaking, AGW behavior for backend pools, probes, listeners, and routing rules is configured as usual. The key TAMU-network differences are private placement, dedicated subnetting, and hub-managed internet ingress.</p>
@@ -338,7 +338,7 @@
 <h3 id="azure-front-door"><a class="header" href="#azure-front-door">Azure Front Door</a></h3>
 <p>If you intend to publish your application to the internet, the recommended approach is to do so through the hub-managed Azure Front Door (AFD). Using this method, a private endpoint for inbound access is created and managed by AFD, and do you do not have to create the private endpoint yourself.</p>
 <p>However, when using AFD-managed private endpoints, only AFD can access your application, and all traffic must go through AFD. Internal/Private traffic from other resources or networks will require a private endpoint in your spoke VNet.</p>
-<p>For more information, see <a href="/pr-preview/pr-71/access_methods.html">Access Methods</a>.</p>
+<p>For more information, see <a href="/cloud/azure/network/access_methods.html">Access Methods</a>.</p>
 <h3 id="private-endpoint-for-internalprivate-access"><a class="header" href="#private-endpoint-for-internalprivate-access">Private Endpoint for Internal/Private Access</a></h3>
 <p>Use this sequence for both new AGW deployments and updates to existing AGW workloads:</p>
 <ol>
@@ -360,7 +360,7 @@
 </ol>
 </li>
 <li>Configure backend pools, listeners, health probes, and routing rules as required by your application.</li>
-<li>Open AGW/backend subnets &gt; Route table and verify the hub firewall UDR is associated. See <a href="/pr-preview/pr-71/creating_subnets.html#route-tables">Route Tables</a> for details.</li>
+<li>Open AGW/backend subnets &gt; Route table and verify the hub firewall UDR is associated. See <a href="/cloud/azure/network/creating_subnets.html#route-tables">Route Tables</a> for details.</li>
 <li>Review subnet NSGs and verify only required ports and approved source ranges are allowed.</li>
 </ol>
 <h2 id="example-terraform-snippets"><a class="header" href="#example-terraform-snippets">Example Terraform Snippets</a></h2>

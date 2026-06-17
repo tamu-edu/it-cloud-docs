@@ -333,7 +333,7 @@
 <p>If the VM hosts a workload that must be reachable from the internet, request Cloud Services configuration of hub firewall DNAT rules and any required DNS updates.</p>
 </li>
 <li>
-<p>Administrative protocols (RDP, SSH, WinRM, etc.) must not be published to the internet; use private access methods from trusted networks. See <a href="/pr-preview/pr-71/access_methods.html">Access Methods</a> for details.</p>
+<p>Administrative protocols (RDP, SSH, WinRM, etc.) must not be published to the internet; use private access methods from trusted networks. See <a href="/cloud/azure/network/access_methods.html">Access Methods</a> for details.</p>
 </li>
 </ul>
 <h2 id="implementation-pattern"><a class="header" href="#implementation-pattern">Implementation Pattern</a></h2>
@@ -357,7 +357,7 @@
 </li>
 <li>Open the NSG on the NIC/subnet (<em>ex. NIC Overview &gt; Properties: Click the NSG name under <code>Network security group</code></em>) &gt; <code>Inbound security rules</code>, and verify only approved source ranges and required ports are allowed.</li>
 <li>Open the attached NIC -&gt; <code>IP configurations</code> and verify there is no associated Public IP.</li>
-<li>Open the target subnet -&gt; <code>Route table</code> and verify hub FW UDR (see <a href="/pr-preview/pr-71/creating_subnets.html#route-tables">Route Tables</a> in <strong>Creating Subnets</strong> for details) is associated.</li>
+<li>Open the target subnet -&gt; <code>Route table</code> and verify hub FW UDR (see <a href="/cloud/azure/network/creating_subnets.html#route-tables">Route Tables</a> in <strong>Creating Subnets</strong> for details) is associated.</li>
 </ol>
 <h2 id="example-terraform-snippets"><a class="header" href="#example-terraform-snippets">Example Terraform Snippets</a></h2>
 <h3 id="private-nic-no-public-ip"><a class="header" href="#private-nic-no-public-ip">Private NIC (No Public IP)</a></h3>

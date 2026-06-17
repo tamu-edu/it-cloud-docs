@@ -336,7 +336,7 @@
 <p>For internet-facing application traffic, work with Cloud Services to configure hub-managed ingress via the shared Azure Front Door (AFD) instance, fronted by an internal Load Balancer or Application Gateway in your spoke VNet that targets the container group’s private IP.</p>
 </li>
 <li>
-<p>Administrative access (e.g. <code>az container exec</code>) traverses the Azure control plane and does not require public network exposure on the container group itself. See <a href="/pr-preview/pr-71/access_methods.html">Access Methods</a> for details.</p>
+<p>Administrative access (e.g. <code>az container exec</code>) traverses the Azure control plane and does not require public network exposure on the container group itself. See <a href="/cloud/azure/network/access_methods.html">Access Methods</a> for details.</p>
 </li>
 <li>
 <p>Container groups must use a SKU and OS type that supports VNet integration. Confirm support at <a href="https://learn.microsoft.com/en-us/azure/container-instances/container-instances-virtual-network-concepts">Virtual network scenarios for ACI</a>.</p>
@@ -361,7 +361,7 @@
 <li>Deploy an internal-only Application Gateway or internal Load Balancer in your spoke VNet that targets the private IP(s) of your container group(s).</li>
 <li>Submit a Cloud Services request to configure AFD with the App Gateway / Load Balancer as the origin via Private Link.</li>
 </ol>
-<p>For more information, see <a href="/pr-preview/pr-71/access_methods.html">Access Methods</a>.</p>
+<p>For more information, see <a href="/cloud/azure/network/access_methods.html">Access Methods</a>.</p>
 <h2 id="migrating"><a class="header" href="#migrating">Migrating</a></h2>
 <p>To convert an existing public ACI deployment to private:</p>
 <ol>

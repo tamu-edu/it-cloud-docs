@@ -336,7 +336,7 @@
 <p>For internet-facing application traffic, work with Cloud Services to configure hub-managed ingress via the shared Azure Front Door (AFD) instance.</p>
 </li>
 <li>
-<p>Administrative access must not be internet-exposed. See <a href="/pr-preview/pr-71/access_methods.html">Access Methods</a> for details.</p>
+<p>Administrative access must not be internet-exposed. See <a href="/cloud/azure/network/access_methods.html">Access Methods</a> for details.</p>
 </li>
 <li>
 <p>App Service Plan must be on a Basic SKU or higher to support both Private Endpoints and VNet Integration.</p>
@@ -346,7 +346,7 @@
 <h3 id="azure-front-door"><a class="header" href="#azure-front-door">Azure Front Door</a></h3>
 <p>If you intend to publish your application to the internet, the recommended approach is to do so through the hub-managed Azure Front Door (AFD). Using this method, a private endpoint for inbound access is created and managed by AFD, and do you do not have to create the private endpoint yourself.</p>
 <p>However, when using AFD-managed private endpoints, only AFD can access your application, and all traffic must go through AFD. Internal/Private traffic from other resources or networks will require a private endpoint in your spoke VNet.</p>
-<p>For more information, see <a href="/pr-preview/pr-71/access_methods.html">Access Methods</a>.</p>
+<p>For more information, see <a href="/cloud/azure/network/access_methods.html">Access Methods</a>.</p>
 <h3 id="private-endpoint-for-internalprivate-access"><a class="header" href="#private-endpoint-for-internalprivate-access">Private Endpoint for Internal/Private Access</a></h3>
 <p>You may follow the Microsoft documentation for <a href="https://learn.microsoft.com/en-us/azure/app-service/networking/private-endpoint">using Private Endpoints with App Service</a> and <a href="https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration">VNet Integration</a> as references. The key points for the TAMU managed network are:</p>
 <ol>
