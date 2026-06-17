@@ -30,7 +30,7 @@ Any resources with custom domain names will need to have their custom domain mov
 Any resources that currently have static public IP addresses, such as VMs or Application Gateways, will need to be reconfigured to be private and have their public entry point moved to the hub firewall. This may involve changing the IP address of the resource and updating any DNS records accordingly.
 
 - If downtime can be tolerated, the existing public IP address can be disassociated from the resource then moved to the hub where it can be re-associated with the hub firewall. DNS records would not need to be changed.
-- If downtime cannot be tolerated, a new public IP address will be created and configured to forward traffic to your resource, and then the DNS records can be updated to point to the new IP address.
+- If downtime cannot be tolerated, a new public IP address will be created and configured to forward traffic to your resource, and then the DNS records can be updated to point to the new IP address before removing the previous one.
 
 ### Migrating Regions
 
