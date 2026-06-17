@@ -1,6 +1,6 @@
 # Accessing Resources
 
-Resources that are connected to the TAMU-managed network will not be directly accessible from the internet, so you will need to use one of the approved access methods to connect to your resources.
+Resources that are connected to the TAMU-managed network will not be directly accessible from the internet, so you will need to use one of the approved access methods to connect to your resources. For administrative access to virtual machines specifically, a shared Azure Bastion service is provided in the hub VNet and is available to all spokes by default.
 
 ## Access Methods
 
@@ -9,6 +9,7 @@ These access methods will vary based on the type of resource and the connectivit
 - **Campus Network**: You can connect to most resources securely on their private IP addresses from the campus network or via the Campus VPN service.
 - **Azure Front Door**: For web applications or static web content that need to be accessible from the internet, Azure Front Door can be used to provide secure, global access with features like SSL termination, Web Application Firewall, and DDoS protection. This is the recommended access method for public web content.
 - **Azure Firewall**: For other types of resources that need to be accessible from the internet, Azure Firewall can be used to provide secure access while still allowing for inspection and control of traffic.
+- **Azure Bastion**: For administrative access (RDP/SSH) to virtual machines, the shared hub-managed Azure Bastion service provides secure, browser-based connectivity without requiring public IPs on your VMs or a VPN connection.
 
 ## Private Link & Private Endpoint
 
@@ -68,7 +69,7 @@ See the [Supported Origins](https://learn.microsoft.com/en-us/azure/frontdoor/pr
 For other types of resources that need to be accessible from the internet, Azure Firewall can be used to provide secure access while still allowing for inspection and control of traffic. This is typically used for non-web workloads that still require some level of public accessibility. Use the [Services Configuration](services.md) guide to set up your resource then contact the Cloud Services team to configure Azure Firewall for secure access.
 
 > [!WARNING]
-> Administrative protocols, such as RDP, SSH, or any protocols without TLS encryption, will not be opened to the internet through Azure Firewall. You will need to use the campus network or VPN to access over these protocols. If you have a specific use case that requires administrative access from the internet, please contact the Cloud Services team to discuss your requirements and potential solutions.
+> Administrative protocols, such as RDP, SSH, or any protocols without TLS encryption, will not be opened to the internet through Azure Firewall. For administrative access to virtual machines, use the shared hub Azure Bastion service (see [Azure Bastion](#azure-bastion) below). For other administrative access, use the campus network or VPN. If you have a specific use case that requires administrative access from the internet, please contact the Cloud Services team to discuss your requirements and potential solutions.
 
 ## CI/CD Access
 
@@ -123,3 +124,32 @@ jobs:
 ### Other CI/CD Platforms
 
 If you are using a different CI/CD platform, such as Azure DevOps, Jenkins, or CircleCI, you can still connect to your VNet securely using a similar approach with a private endpoint. Consult the documentation for your platform or Cloud Services for assistance with configuring your VNet and CI/CD platform for this connectivity.
+
+## Azure Bastion
+
+For administrative access (RDP/SSH) to virtual machines in your spoke VNet, Cloud Services operates a shared Azure Bastion instance in the hub VNet. This is the approved method for administrative access to VMs and removes the need to assign public IPs to VMs or rely solely on the campus VPN.
+
+Because spoke VNets are peered to the hub, the shared Bastion is automatically available to any VM in your spoke. When you open a VM in the Azure portal and select **Connect → Bastion**, the hub Bastion will appear as the connection option — no per-spoke Bastion deployment, `AzureBastionSubnet`, or additional peering configuration is required.
+
+### Requirements
+
+- The VM must be in a spoke VNet peered to the hub (the default for managed spokes).
+- Your account must have at least `Reader` role on the VM, its NIC, and the hub Bastion resource. Contact Cloud Services if the Bastion option does not appear when attempting to connect.
+- The VM's NSG must allow inbound RDP (3389) and/or SSH (22) from the hub `AzureBastionSubnet` range.
+- VMs should not have public IP addresses assigned for administrative access.
+
+### Connecting
+
+1. Navigate to your VM in the Azure portal.
+2. Select **Connect**, then choose the **Bastion** tab.
+3. The shared hub Bastion will appear automatically.
+4. Enter your VM credentials and select **Connect** to open a browser-based RDP/SSH session.
+
+For native client (local RDP/SSH) access through Bastion tunneling, see [Connect using a native client](https://learn.microsoft.com/en-us/azure/bastion/connect-native-client-windows). The hub Bastion name and resource group can be obtained from Cloud Services.
+
+### References
+
+- [What is Azure Bastion?](https://learn.microsoft.com/en-us/azure/bastion/bastion-overview)
+- [Connect to a Windows VM using Bastion](https://learn.microsoft.com/en-us/azure/bastion/bastion-connect-vm-rdp-windows)
+- [Connect to a Linux VM using Bastion](https://learn.microsoft.com/en-us/azure/bastion/bastion-connect-vm-ssh-linux)
+- [Bastion and VNet peering](https://learn.microsoft.com/en-us/azure/bastion/vnet-peering)
