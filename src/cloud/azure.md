@@ -12,17 +12,15 @@ To learn about and request an Azure account, please visit the [Public Cloud Acco
 
 ## Accessing Azure
 
-### Using the web console
+### Using Kion
 
-The Azure Management Console is a web-based interface for accessing and managing Azure services. You can sign in to the console at [https://portal.azure.com/](https://portal.azure.com/) using your NetID.
+Use our cloud management tool, Kion, to access the Azure portal. See [Getting Started With Kion](/kion/features/getting_started) for more information.
 
 > [!NOTE]
-> **Access Azure**
->
-> [https://portal.azure.com/](https://portal.azure.com/)
+> Azure portal access is provided through Kion at [https://kion.cloud.tamu.edu](https://kion.cloud.tamu.edu)
 
 ### Using the Azure CLI
 
 The Azure Command Line Interface (CLI) is a unified tool to manage your Azure services. With just one tool to download and configure, you can control multiple Azure services from the command line and automate them through scripts. The Azure CLI is available for Windows, Mac, and Linux. More information at [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/).
 
-Issue `az login` to log in to Azure and follow the prompts to authenticate with your NetID and select from among your authorized subscriptions.
+To use the Azure CLI, first access your Azure Subscription through the Kion app, then return to your terminal and issue `az login` to log in to Entra ID and gain access to Azure.
