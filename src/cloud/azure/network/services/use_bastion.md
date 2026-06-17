@@ -7,7 +7,7 @@
 - NSGs on VM subnets should permit inbound RDP (3389) and/or SSH (22) traffic from the hub Bastion subnet (`AzureBastionSubnet`) address range for administrative access via Azure Bastion.
 - The shared Bastion is available to all spokes peered to the hub. Because spokes are peered to the hub VNet, the hub Bastion automatically appears as a connection option in the Azure portal when connecting to any VM in a peered spoke — no additional configuration is required by the customer.
 - Bastion access is governed by Azure RBAC. Users must have at least `Reader` on the VM, the VM's NIC, and the Bastion resource to initiate a session. Request access through Cloud Services if your account does not see the hub Bastion as an option.
-- See [Access Methods](../access_methods.md) for the full list of approved administrative access patterns.
+- See [Access Methods](/cloud/azure/network/access_methods.md) for the full list of approved administrative access patterns.
 
 ## Implementation Pattern
 

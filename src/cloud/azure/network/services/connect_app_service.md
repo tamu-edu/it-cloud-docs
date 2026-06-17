@@ -8,7 +8,7 @@
 - App Service must be connected to the VNet via VNet Integration using a dedicated delegated subnet (`Microsoft.Web/serverFarms`) with a User Defined Route (UDR) directing outbound traffic to the hub firewall.
 - NSGs on the private endpoint subnet should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, or the hub firewall).
 - For internet-facing application traffic, work with Cloud Services to configure hub-managed ingress via the shared Azure Front Door (AFD) instance.
-- Administrative access must not be internet-exposed. See [Access Methods](../access_methods.md) for details.
+- Administrative access must not be internet-exposed. See [Access Methods](/cloud/azure/network/access_methods.md) for details.
 - App Service Plan must be on a Basic SKU or higher to support both Private Endpoints and VNet Integration.
 
 ## Implementation Pattern
@@ -19,7 +19,7 @@ If you intend to publish your application to the internet, the recommended appro
 
 However, when using AFD-managed private endpoints, only AFD can access your application, and all traffic must go through AFD. Internal/Private traffic from other resources or networks will require a private endpoint in your spoke VNet.
 
-For more information, see [Access Methods](../access_methods.md).
+For more information, see [Access Methods](/cloud/azure/network/access_methods.md).
 
 ### Private Endpoint for Internal/Private Access
 

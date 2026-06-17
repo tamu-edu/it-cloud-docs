@@ -8,7 +8,7 @@
 - HTTP triggers with `function`-level authorization may be directly internet-accessible, as the function key provides authentication. Public network access may be enabled for this case.
 - HTTP triggers with `admin`-level authorization must not be directly exposed to the internet under any circumstances.
 - NSGs should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, or the hub firewall).
-- Administrative access must not be internet-exposed. See [Access Methods](../access_methods.md) for details.
+- Administrative access must not be internet-exposed. See [Access Methods](/cloud/azure/network/access_methods.md) for details.
 - Function App Plan must be on a Flex Consumption, Premium, or Dedicated (App Service Plan) SKU to support both Private Endpoints and VNet Integration. Consumption plan does not support VNet Integration.
 
 With the exception of anonymous HTTP triggers, your Function App triggers, bindings, deployment workflow, and runtime settings are configured as usual. The key TAMU-network differences are private inbound access and VNet-integrated outbound routing.
@@ -21,7 +21,7 @@ If you intend to publish your Function App to the internet, the recommended appr
 
 However, when using AFD-managed private endpoints, only AFD can access your application, and all traffic must go through AFD. Internal/Private traffic from other resources or networks will require a private endpoint in your spoke VNet.
 
-For more information, see [Access Methods](../access_methods.md).
+For more information, see [Access Methods](/cloud/azure/network/access_methods.md).
 
 ### Private Endpoint for Internal/Private Access
 
@@ -103,7 +103,7 @@ With public network access disabled, functions must be invoked and monitored thr
   ```
 
 - **Azure Portal "Test/Run" tab**: The Portal's built-in test tab works when your browser is on the campus network or VPN, since the request is proxied through the Portal to the private endpoint.
-- **Deployment from CI/CD**: Deployments via GitHub Actions or Azure DevOps pipelines do not require public access to the Function App; use the [Azure Functions GitHub Action](https://github.com/Azure/functions-action) or `az functionapp deployment` CLI commands. If the pipeline needs to reach resources inside the VNet (e.g. a private storage account), configure GitHub Actions private networking per the [CI/CD Access](../access_methods.md#cicd-access) guidance.
+- **Deployment from CI/CD**: Deployments via GitHub Actions or Azure DevOps pipelines do not require public access to the Function App; use the [Azure Functions GitHub Action](https://github.com/Azure/functions-action) or `az functionapp deployment` CLI commands. If the pipeline needs to reach resources inside the VNet (e.g. a private storage account), configure GitHub Actions private networking per the [CI/CD Access](/cloud/azure/network/access_methods.md#cicd-access) guidance.
 
 ## Steps in Azure Portal
 
@@ -114,6 +114,7 @@ The steps below are generalized for new or existing Function Apps.
 3. Under `Inbound traffic`, configure a Private Endpoint targeting the private endpoint subnet.
 4. In Function App `Settings` > `Configuration` (or `Environment variables`), set `Public network access` to `Disabled`.
 5. Open the target subnet(s) > `Route table` and verify the hub firewall UDR is associated. See [Route Tables](/cloud/azure/network/creating_subnets.md#route-tables) for details.
+/cloud/aws/network.html#using-subnets
 6. Review NSGs on the private endpoint subnet and verify only required ports and approved source ranges are allowed.
 
 ## Migrating

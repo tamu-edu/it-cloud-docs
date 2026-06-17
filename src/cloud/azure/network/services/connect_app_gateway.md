@@ -13,7 +13,7 @@
 * AGW requires a dedicated subnet and should not share that subnet with unrelated workloads.
 * AGW subnet and backend subnets must have a User Defined Route (UDR) that sends outbound traffic to the hub-centralized firewall for inspection and logging.
 * NSGs should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, or explicitly approved private peer ranges).
-* Administrative ports and management protocols must not be internet-exposed; use approved private access methods. See [Access Methods](../access_methods.md) for details.
+* Administrative ports and management protocols must not be internet-exposed; use approved private access methods. See [Access Methods](/cloud/azure/network/access_methods.md) for details.
 * For internet-facing application traffic, work with Cloud Services to configure hub-managed ingress (typically AFD for HTTP/S and firewall DNAT for non-HTTP/S workloads).
 
 Generally speaking, AGW behavior for backend pools, probes, listeners, and routing rules is configured as usual. The key TAMU-network differences are private placement, dedicated subnetting, and hub-managed internet ingress.
@@ -26,7 +26,7 @@ If you intend to publish your application to the internet, the recommended appro
 
 However, when using AFD-managed private endpoints, only AFD can access your application, and all traffic must go through AFD. Internal/Private traffic from other resources or networks will require a private endpoint in your spoke VNet.
 
-For more information, see [Access Methods](../access_methods.md).
+For more information, see [Access Methods](/cloud/azure/network/access_methods.md).
 
 ### Private Endpoint for Internal/Private Access
 
@@ -49,7 +49,7 @@ The steps below are generalized for new or existing AGW-backed services.
     1. Select or create a dedicated subnet for AGW.
     1. For Frontend IP Address Type, select Private (see [below](#creating-new-agw-and-encountering-error-public-frontend-ip-configuration-is-not-allowed)).
 1. Configure backend pools, listeners, health probes, and routing rules as required by your application.
-1. Open AGW/backend subnets > Route table and verify the hub firewall UDR is associated. See [Route Tables](../creating_subnets.md#route-tables) for details.
+1. Open AGW/backend subnets > Route table and verify the hub firewall UDR is associated. See [Route Tables](/cloud/azure/network/creating_subnets.md#route-tables) for details.
 1. Review subnet NSGs and verify only required ports and approved source ranges are allowed.
 
 ## Example Terraform Snippets

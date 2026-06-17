@@ -12,7 +12,7 @@
 - NSGs on AKS subnets must permit the platform traffic AKS requires plus your application traffic from approved sources. Avoid blocking intra-cluster traffic between the node subnet and pod subnet.
 - For internet-facing application traffic, expose workloads through an **internal** ingress controller or internal load balancer service (`service.beta.kubernetes.io/azure-load-balancer-internal: "true"`) and front it with the shared hub-managed Azure Front Door via Private Link.
 - Container images must be pulled from a private Azure Container Registry with a Private Endpoint where possible. Public registry pulls will traverse the hub firewall and may be subject to filtering.
-- Administrative access (`kubectl`, `az aks command invoke`) must use private networking. Use Azure Bastion to a jump host in the VNet, the campus VPN, or `az aks command invoke` (which tunnels through the Azure control plane) — see [Access Methods](../access_methods.md).
+- Administrative access (`kubectl`, `az aks command invoke`) must use private networking. Use Azure Bastion to a jump host in the VNet, the campus VPN, or `az aks command invoke` (which tunnels through the Azure control plane) — see [Access Methods](/cloud/azure/network/access_methods.md).
 - The cluster identity must have appropriate RBAC on the spoke VNet, node subnet, pod subnet, and any private DNS zones used for the private API server. Use a user-assigned managed identity to keep these role assignments stable across cluster lifecycle operations.
 
 ## Implementation Pattern
@@ -95,7 +95,7 @@ AKS workloads must not be exposed via public load balancer services. Two support
 1. **Internal load balancer service / internal ingress controller** — Annotate `Service` resources of type `LoadBalancer` with `service.beta.kubernetes.io/azure-load-balancer-internal: "true"`, or deploy an ingress controller (NGINX, Traefik, AGIC, etc.) configured to use an internal LB. The resulting private IP is reachable from anywhere in the managed network and from the campus network.
 2. **AFD-fronted public ingress** — For workloads that must be reachable from the internet, the internal load balancer / ingress controller from pattern 1 becomes the AFD origin. Submit a Cloud Services request with the custom domain (if any), the internal hostname or IP, and any required WAF or routing rules. AFD will create a managed Private Endpoint to the load balancer, which you must approve.
 
-For more information, see [Access Methods](../access_methods.md).
+For more information, see [Access Methods](/cloud/azure/network/access_methods.md).
 
 ### Image Pulls and Azure Container Registry
 
@@ -111,7 +111,7 @@ The private API server is not reachable from the public internet. Approved admin
 - **Campus network / VPN** — Run `kubectl` and `az aks` commands from a workstation on the campus network or connected via Campus VPN, since the spoke VNet is reachable on its private IPs from those networks.
 - **`az aks command invoke`** — Tunnels commands through the Azure control plane to the cluster, requires no direct network reachability to the API server, and is useful for break-glass access. See [Use `command invoke` to access a private cluster](https://learn.microsoft.com/en-us/azure/aks/access-private-cluster).
 
-See [Access Methods](../access_methods.md) for the full list of approved administrative access patterns.
+See [Access Methods](/cloud/azure/network/access_methods.md) for the full list of approved administrative access patterns.
 
 ## Migrating
 

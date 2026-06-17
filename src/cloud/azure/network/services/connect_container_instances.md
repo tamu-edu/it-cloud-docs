@@ -8,7 +8,7 @@
 - NSGs on the container group subnet should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, internal load balancers, or other spoke resources).
 - Container images should be pulled from a private registry (such as Azure Container Registry with a Private Endpoint) rather than public registries where possible. Outbound pulls from public registries will traverse the hub firewall and may be subject to filtering.
 - For internet-facing application traffic, work with Cloud Services to configure hub-managed ingress via the shared Azure Front Door (AFD) instance, fronted by an internal Load Balancer or Application Gateway in your spoke VNet that targets the container group's private IP.
-- Administrative access (e.g. `az container exec`) traverses the Azure control plane and does not require public network exposure on the container group itself. See [Access Methods](../access_methods.md) for details.
+- Administrative access (e.g. `az container exec`) traverses the Azure control plane and does not require public network exposure on the container group itself. See [Access Methods](/cloud/azure/network/access_methods.md) for details.
 - Container groups must use a SKU and OS type that supports VNet integration. Confirm support at [Virtual network scenarios for ACI](https://learn.microsoft.com/en-us/azure/container-instances/container-instances-virtual-network-concepts).
 
 ## Implementation Pattern
@@ -35,7 +35,7 @@ ACI does not natively support Azure Front Door Private Link as an origin. To pub
 1. Deploy an internal-only Application Gateway or internal Load Balancer in your spoke VNet that targets the private IP(s) of your container group(s).
 2. Submit a Cloud Services request to configure AFD with the App Gateway / Load Balancer as the origin via Private Link.
 
-For more information, see [Access Methods](../access_methods.md).
+For more information, see [Access Methods](/cloud/azure/network/access_methods.md).
 
 ## Migrating
 
