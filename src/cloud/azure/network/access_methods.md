@@ -11,33 +11,11 @@ These access methods will vary based on the type of resource and the connectivit
 - **Azure Firewall**: For other types of resources that need to be accessible from the internet, Azure Firewall can be used to provide secure access while still allowing for inspection and control of traffic.
 - **Azure Bastion**: For administrative access (RDP/SSH) to virtual machines, the shared hub-managed Azure Bastion service provides secure, browser-based connectivity without requiring public IPs on your VMs or a VPN connection.
 
-## Private Link & Private Endpoint
+## Private Link, Private Endpoints, and Private DNS
 
-Private Link and Private Endpoint provide a way to securely connect to Azure services and your own services over a private network connection. A Private Endpoint is a network interface that connects you privately and securely to a service powered by Private Link. Private Endpoints are most commonly used for Azure PaaS services, such as Azure Storage, Azure SQL Database, and Azure Key Vault.
+Private Link and Private Endpoints allow you to access the service over a private IP address within your virtual network, rather than over the public internet, and enable many of the access methods described below. Private DNS is an important part of ensure this service works as expected.
 
-This allows you to access the service over a private IP address within your virtual network, rather than over the public internet, and enables many of the access methods described below.
-
-### Private DNS
-
-Private Link requires proper DNS resolution to function correctly. When you create a Private Endpoint, a corresponding DNS record needs to be created in a Private DNS Zone linked to the virtual networks and remote networks that need to resolve the endpoint.
-
-In the TAMU-managed network, these Private Link DNS Zones are created and linked in the hub virtual network, and the DNS records in them are managed automatically. When you create a Private Endpoint, the corresponding DNS record group will be automatically created in the appropriate Private Link DNS Zone after a short delay. Changes to your Private Endpoints, such as the private IP address, will be synchronized automatically in the DNS records.
-
-> [!NOTE]
-> The Private Link DNS Zones and their records are managed automatically in the TAMU-managed network. You do not need to create any Private DNS zones or manage  DNS records for Private Endpoints.
-
-If Private Link is not available or cannot be used for a particular service, a Private DNS zone will be provided specifically for your spoke virtual network for you to create and manage the necessary DNS records to enable private network access to the service.
-
-Both the Private Link DNS Zones and any Private DNS zones provided for spoke virtual networks are resolvable from other virtual networks within the TAMU-managed Azure network and other networks when using the Infoblox DNS service. Similarly, DNS queries from the TAMU-managed Azure network will use the internal DNS view from the campus Infoblox DNS service.
-
-The following services are enabled for Private DNS within the TAMU-managed network:
-
-- Azure Storage
-- Azure SQL Database
-- Azure Key Vault
-- TODO: check the forwarding rules in Infoblox and complete this list. Ensure they're added to the Private DNS DINE policy.
-
-Contact the Cloud Services team to request additional services to be enabled for Private DNS.
+See the [Private Endpoints & DNS](private_endpoints_dns.md) documentation for more information on how Private DNS is used to enable private network access to services via Private Link and Private Endpoints.
 
 ## Campus Network Access
 

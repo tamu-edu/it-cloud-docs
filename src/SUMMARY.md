@@ -15,6 +15,7 @@
       - [Design](cloud/azure/network/design.md)
       - [Access Methods](cloud/azure/network/access_methods.md)
       - [Creating Subnets](cloud/azure/network/creating_subnets.md)
+      - [Private Endpoints & DNS](cloud/azure/network/private_endpoints_dns.md)
       - [Migration](cloud/azure/network/migration.md)
       - [Policies](cloud/azure/network/policies.md)
       - [Service Configuration](cloud/azure/network/services.md)
