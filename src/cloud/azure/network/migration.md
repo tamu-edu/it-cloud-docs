@@ -48,7 +48,7 @@ Cloud Services can provide help and support for cross-region migrations.
 
 Consult the [Service Configuration](./services.md) documentation to identify which of your resources need to be migrated to the managed network and what specific configuration changes are required for each resource type. In general, any services which need network connectivity to make outbound connections or handle inbound connections will need to be reconfigured to use private networking and route traffic through the hub.
 
-In some cases, you may not need to use a service any longer if its functionality can be replaced by Azure Front Door or Azure Firewall.
+In some cases, you may not need to use a service any longer if its functionality can be replaced by the centralized Azure Front Door or Azure Firewall in the hub.
 
 An important part of this migration will also be to consolidate resources into approved Azure regions where the managed network infrastructure exists.
 

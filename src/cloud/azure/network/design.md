@@ -112,7 +112,7 @@ Our default Azure region is `South Central US`, as it is closest to the TAMU cam
 
 By default, no subnets will be created in spoke VNets since subnet design can vary greatly based on the types of resources being deployed. The customer is responsible for creating and configuring their own subnets within their VNet, but Cloud Services can provide guidance and best practices for doing so.
 
-All subnets will be private with no direct access to or from the public internet. A user-defined route (UDR) will be created to route outbound internet traffic through the Azure Firewall and NAT Gateway services in the hub VNet and will need to be associated with each subnet. An Azure policy will be put in place to prevent the creation of public subnets, and to attach the default UDR to all subnets missing one.
+All subnets shall be private with no direct access to or from the public internet. A user-defined route (UDR) shall be created to route outbound internet traffic through the Azure Firewall and NAT Gateway services in the hub VNet and will need to be associated with each subnet. An Azure policy will be put in place to prevent the creation of public subnets, and to ensure that all subnets have the default UDR attached.
 
 ## Public Resources
 
