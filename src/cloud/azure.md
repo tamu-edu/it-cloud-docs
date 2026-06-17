@@ -4,7 +4,7 @@ Azure is a leading cloud provider in the world and offers a wide range of servic
 
 * [Secure Azure Network Design](./azure/network/network.md)
 * [Creating Subnets](./azure/network/creating_subnets.md)
-* [Understanding Policy Enforcement](./azure/network/policy_effects.md)
+* [Understanding Policy Enforcement](./azure/network/policies.md)
 
 ## Requesting an Azure Account
 
