@@ -22,7 +22,7 @@ The following is a non-exhaustive list of common Azure services that are in scop
 | --- | --- |
 | [Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/) | [Connect App Service to the TAMU network](services/connect_app_service.md) |
 | [Azure Application Gateways](https://learn.microsoft.com/en-us/azure/application-gateway/) | [Connect App Gateway to the TAMU network](services/connect_app_gateway.md) |
-| [Bastion Hosts](https://learn.microsoft.com/en-us/azure/bastion/) | [Connect a Bastion Host to the TAMU network](services/connect_bastion.md) |
+| [Bastion](https://learn.microsoft.com/en-us/azure/bastion/) | [Use Bastion with the TAMU network](services/use_bastion.md) |
 | [Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/) | [Connect Container App to the TAMU network](services/connect_container_app.md) |
 | [Azure Container Instances](https://learn.microsoft.com/en-us/azure/container-instances/) | [Connect Container Instances to the TAMU network](services/connect_container_instances.md) |
 | [Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/) | [Connect Functions to the TAMU network](services/connect_azure_functions.md) |

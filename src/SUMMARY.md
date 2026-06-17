@@ -20,7 +20,7 @@
       - [Service Configuration](cloud/azure/network/services.md)
         - [App Service](cloud/azure/network/services/connect_app_service.md)
         - [Application Gateways](cloud/azure/network/services/connect_app_gateway.md)
-        - [Bastion Hosts](cloud/azure/network/services/connect_bastion.md)
+        - [Bastion](cloud/azure/network/services/use_bastion.md)
         - [Container Apps](cloud/azure/network/services/connect_container_app.md)
         - [Container Instances](cloud/azure/network/services/connect_container_instances.md)
         - [Functions](cloud/azure/network/services/connect_azure_functions.md)
