@@ -317,33 +317,15 @@
 <h2 id="requesting-an-aws-account"><a class="header" href="#requesting-an-aws-account">Requesting an AWS Account</a></h2>
 <p>To learn about and request an AWS account, please visit the <a href="https://www.it.tamu.edu/services/services-by-category/it-professional-services/cloud-public.html">Public Cloud Accounts</a> resource.</p>
 <h2 id="accessing-aws"><a class="header" href="#accessing-aws">Accessing AWS</a></h2>
-<h3 id="using-the-web-console"><a class="header" href="#using-the-web-console">Using the web console</a></h3>
-<p>The AWS Management Console is a web-based interface for accessing and managing AWS services. You can sign in to the console at <a href="https://console.aws.amazon.com/">https://console.aws.amazon.com/</a> using your NetID.</p>
+<h3 id="using-kion"><a class="header" href="#using-kion">Using Kion</a></h3>
+<p>Use our cloud management tool, Kion, to access the AWS console. See <a href="/kion/features/getting_started">Getting Started With Kion</a> for more information.</p>
 <blockquote class="blockquote-tag blockquote-tag-note">
 <p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
-<p><strong>Access AWS</strong></p>
-<p><a href="https://console.aws.amazon.com/">https://console.aws.amazon.com/</a></p>
+<p>AWS Access is provided through Kion at <a href="https://kion.cloud.tamu.edu">https://kion.cloud.tamu.edu</a></p>
 </blockquote>
 <h3 id="using-the-aws-cli"><a class="header" href="#using-the-aws-cli">Using the AWS CLI</a></h3>
 <p>The AWS Command Line Interface (CLI) is a unified tool to manage your AWS services. With just one tool to download and configure, you can control multiple AWS services from the command line and automate them through scripts. The AWS CLI is available for Windows, Mac, and Linux. More information at <a href="https://aws.amazon.com/cli/">AWS CLI</a>.</p>
-<p>To set up your AWS CLI automatically, we recommend using our <a href="https://github.com/tamu-edu/aiphelper"><code>aiphelper</code></a> tool. This tool will configure your AWS CLI with the correct settings and is especially useful for users who need to access multiple AWS accounts.</p>
-<p>To configure the AWS CLI manually, you will need to add the following to your <code>~/.aws/config</code> file for each AWS account you want to access:</p>
-<pre><code class="language-ini">[profile {profileName}]
-sso_start_url = https://aggie-innovation-platform.awsapps.com/start
-sso_region = us-east-2
-sso_account_id = {accountId}
-sso_role_name = {roleName}
-region = us-east-1
-output = json
-</code></pre>
-<p>Replace <code>{profileName}</code> with the name of your profile, which can be anything you want to name it, <code>{accountId}</code> with your AWS account ID, and <code>{roleName}</code> with the name of the role you want to assume, typically <code>AdministratorAccess</code>.</p>
-<p>Once you have created profiles, either with <code>aiphelper</code> or manually, you can use the following command to log in to AWS:</p>
-<pre><code class="language-bash">aws sso login --profile {profileName}
-</code></pre>
-<h4 id="granted"><a class="header" href="#granted">Granted</a></h4>
-<p>If you often work with AWS from the CLI, we recommend using a third-party CLI tool <a href="https://www.granted.dev/"><code>granted</code></a> to help speed up your workflow. This tool allows you to easily switch between AWS accounts and roles, and provides a number of other useful features.</p>
-<h2 id="collaboration-and-access-control"><a class="header" href="#collaboration-and-access-control">Collaboration and Access Control</a></h2>
-<p>We use Microsoft Entra ID for SSO access to AWS and create an Entra ID group to grant Admin access for each account. If you are an account owner, and wish to grant access to other users, please use the <a href="https://myaccount.microsoft.com/groups">Microsoft My Groups portal</a> to add users to the appropriate group. If you want to grant another role than Admin, please contact the Cloud Services team for assistance.</p>
+<p>Kion provides a companion <a href="https://support.kion.io/hc/en-us/articles/36238311015437-Kion-CLI-Tool">CLI tool</a> that can help get AWS credentials in your terminal to use the AWS CLI.</p>
 
                     </main>
                 </div>
