@@ -59,6 +59,6 @@ When internet access is required, such as for public web applications, you can s
 
 ## Alternatives / Exceptions
 
-If you have a specific use case that requires a different network design or a feature or service that is not yet implemented, please contact the Cloud Engineering team to discuss your requirements. We will work with you to understand and accommodate your needs while maintaining the security and integrity of the TAMU network.
+If you have a specific use case that requires a different network design or a feature or service that is not yet implemented, please contact the Cloud Services team to discuss your requirements. We will work with you to understand and accommodate your needs while maintaining the security and integrity of the TAMU network.
 
 In some cases, it may be necessary to request an exception to the managed network. The office of the Chief Information Security Officer of Texas A&M University (CISO) will review your request and work with you to determine if an exception can be granted and what additional controls may be necessary to mitigate any potential risks.
