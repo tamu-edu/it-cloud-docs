@@ -336,7 +336,7 @@
 <p>Any resources that currently have static public IP addresses, such as VMs or Application Gateways, will need to be reconfigured to be private and have their public entry point moved to the hub firewall. This may involve changing the IP address of the resource and updating any DNS records accordingly.</p>
 <ul>
 <li>If downtime can be tolerated, the existing public IP address can be disassociated from the resource then moved to the hub where it can be re-associated with the hub firewall. DNS records would not need to be changed.</li>
-<li>If downtime cannot be tolerated, a new public IP address will be created and configured to forward traffic to your resource, and then the DNS records can be updated to point to the new IP address.</li>
+<li>If downtime cannot be tolerated, a new public IP address will be created and configured to forward traffic to your resource, and then the DNS records can be updated to point to the new IP address before removing the previous one.</li>
 </ul>
 <h3 id="migrating-regions"><a class="header" href="#migrating-regions">Migrating Regions</a></h3>
 <p>The TAMU managed network will only be available in specific Azure regions, and resources that need to connect to the managed network need to be located in these regions and may need to be redeployed or migrated across regions.</p>
