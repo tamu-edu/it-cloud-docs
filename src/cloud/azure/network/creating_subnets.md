@@ -48,12 +48,12 @@ For recommendations on designing security for your network, see the [Best practi
 
 ## Route Tables
 
-Route tables allow you to define custom routes for traffic leaving the subnet. Because all outbound traffic from your VNet must be inspected by the TAMU-managed firewall in the hub, a route table (UDR) is provided that routes all outbound traffic to this firewall.
+Route tables allow you to define custom routes for traffic leaving the subnet. Because all outbound traffic from your VNet must be inspected by the TAMU-managed firewall in the hub, a route table (UDR) named `routetable-outbound-{region}` is provided that routes all outbound traffic to the firewall.
 
->[!IMPORTANT]
-> This route table will not automatically be associated with new subnets, so you must associate it with each subnet you create to ensure that outbound traffic is properly routed through the firewall.
+This route table will not automatically be *pre-associated* with new subnets, and it is best practice to intentionally associate the route table with any new subnets.
 
-A Cloud Services policy will automatically apply this route table to any subnet that does not have a route table associated with it, but it is best practice to explicitly associate the route table with your subnets to ensure that your routing configuration is clear and intentional.
+> [!IMPORTANT]
+> As a safeguard, Cloud Services has deployed a policy that will find subnets without a route table association and automatically apply this route table. There can be a varied and sometimes significant delay before this remediation occurs.
 
 Most customers will not need to modify or create any additional routes. If you have specific routing requirements for your workloads, it is recommended to consult with the Cloud Services team to ensure that your routing design is compatible with the overall network architecture and security requirements.
 
