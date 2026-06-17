@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Home - Clouds and Platforms</title>
+        <title>Kubernetes Service (AKS) - Clouds and Platforms</title>
 
         <!-- Custom HTML head -->
 
@@ -33,7 +33,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "";
+            var path_to_root = "../../../../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "aggie";
         </script>
 
@@ -283,7 +283,7 @@
                     <h1 class="menu-title">Clouds and Platforms</h1>
 
                     <div class="right-buttons">
-                        <a href="https://github.com/tamu-edu/it-cloud-docs/edit/main/src/index.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/tamu-edu/it-cloud-docs/edit/main/src/cloud/azure/network/services/connect_aks.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.8 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/></svg></span>
                         </a>
 
@@ -312,14 +312,232 @@
 
                 <div id="content" class="content">
                     <main>
-                        <blockquote class="blockquote-tag blockquote-tag-note">
+                        <h1 id="azure-kubernetes-service-aks"><a class="header" href="#azure-kubernetes-service-aks">Azure Kubernetes Service (AKS)</a></h1>
+<ul>
+<li><strong>Rule:</strong> AKS clusters may not expose the API server or workload ingress directly to the public internet, and must be deployed with VNet integration into the spoke VNet with outbound traffic routed through the hub firewall.</li>
+<li><strong>Action:</strong> Deploy AKS as a <strong>private cluster</strong> with the API server reachable only via private networking, use a CNI mode that integrates pods with the spoke VNet, set the cluster’s outbound type to <code>userDefinedRouting</code> so egress flows through the hub firewall, and expose workloads using an internal load balancer fronted by hub-managed AFD where public access is required.</li>
+</ul>
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
+<ul>
+<li>The AKS API server must be private. Use either <strong>API Server VNet Integration</strong> (recommended) or a <strong>private cluster</strong> with a private endpoint. Public API server endpoints are not permitted.</li>
+<li>The cluster must use a CNI plugin that integrates with the VNet — <strong>Azure CNI Overlay</strong> (recommended for most workloads) or <strong>Azure CNI with dynamic IP allocation / pod subnet</strong>. <code>kubenet</code> is not recommended due to its UDR/route table limitations and deprecation trajectory. Azure CNI requires a large amount of IPs - coordinate with Cloud Services to have additional IPs allocated to your spoke VNet.</li>
+<li>The cluster must be configured with <code>outbound_type = "userDefinedRouting"</code> so all egress flows through the hub firewall via the spoke’s UDR. The default <code>loadBalancer</code> outbound type provisions a public IP and is not permitted.</li>
+<li>A dedicated subnet must be provided for the cluster’s nodes. If using Azure CNI with a pod subnet (dynamic IP allocation), an additional dedicated pod subnet must also be provided. Subnets must be sized for the maximum expected node and pod counts.</li>
+<li>NSGs on AKS subnets must permit the platform traffic AKS requires plus your application traffic from approved sources. Avoid blocking intra-cluster traffic between the node subnet and pod subnet.</li>
+<li>For internet-facing application traffic, expose workloads through an <strong>internal</strong> ingress controller or internal load balancer service (<code>service.beta.kubernetes.io/azure-load-balancer-internal: "true"</code>) and front it with the shared hub-managed Azure Front Door via Private Link.</li>
+<li>Container images must be pulled from a private Azure Container Registry with a Private Endpoint where possible. Public registry pulls will traverse the hub firewall and may be subject to filtering.</li>
+<li>Administrative access (<code>kubectl</code>, <code>az aks command invoke</code>) must use private networking. Use Azure Bastion to a jump host in the VNet, the campus VPN, or <code>az aks command invoke</code> (which tunnels through the Azure control plane) — see <a href="/access_methods.html">Access Methods</a>.</li>
+<li>The cluster identity must have appropriate RBAC on the spoke VNet, node subnet, pod subnet, and any private DNS zones used for the private API server. Use a user-assigned managed identity to keep these role assignments stable across cluster lifecycle operations.</li>
+</ul>
+<h2 id="implementation-pattern"><a class="header" href="#implementation-pattern">Implementation Pattern</a></h2>
+<h3 id="networking-model"><a class="header" href="#networking-model">Networking Model</a></h3>
+<p>AKS networking is more involved than other PaaS services because the cluster manages both control plane connectivity and pod-to-pod / pod-to-external traffic. Three decisions drive the network design:</p>
+<ol>
+<li><strong>API server exposure</strong> — How clients reach the Kubernetes API.</li>
+<li><strong>CNI mode</strong> — How pods get IP addresses and how they communicate with the VNet.</li>
+<li><strong>Outbound type</strong> — How pods reach the internet and other Azure services.</li>
+</ol>
+<p>For the TAMU managed network, the recommended combination is:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Decision</th><th>Recommended</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>API server</td><td>API Server VNet Integration</td><td>Lower latency, simpler than legacy private clusters, no separate private endpoint to manage. Private cluster with private endpoint is also acceptable.</td></tr>
+<tr><td>CNI mode</td><td>Azure CNI Overlay</td><td>Pods get IPs from a separate overlay CIDR not consumed from the VNet, which avoids large VNet subnet allocations. Choose Azure CNI with pod subnet if pods must be directly addressable from the VNet (e.g., for some service mesh or Private Link scenarios).</td></tr>
+<tr><td>Outbound type</td><td><code>userDefinedRouting</code></td><td>Forces egress through the hub firewall via the spoke UDR. Required.</td></tr>
+<tr><td>Load balancer SKU</td><td>Standard</td><td>Required by <code>userDefinedRouting</code>. Internal-only LBs are used for service exposure.</td></tr>
+</tbody>
+</table>
+</div>
+<p>Refer to the Microsoft documentation for the authoritative details:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/aks/concepts-network">Concepts – Networking in AKS</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/aks/api-server-vnet-integration">API Server VNet Integration</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/aks/private-clusters">Create a private AKS cluster</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/aks/azure-cni-overlay">Azure CNI Overlay networking</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/aks/configure-azure-cni-dynamic-ip-allocation">Configure Azure CNI with dynamic IP allocation</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/aks/egress-outboundtype">Customize cluster egress with <code>userDefinedRouting</code></a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/aks/limit-egress-traffic">Limit network traffic with Azure Firewall in AKS</a></li>
+</ul>
+<h3 id="subnet-layout"><a class="header" href="#subnet-layout">Subnet Layout</a></h3>
+<p>At minimum, allocate the following subnets in your spoke VNet for AKS:</p>
+<ul>
+<li><strong>Node subnet</strong> — Hosts the AKS node VMs. Size for the maximum node count plus headroom for upgrades (a <code>/24</code> is a reasonable starting point for small/medium clusters; size up for larger clusters).</li>
+<li><strong>Pod subnet</strong> (only when using Azure CNI with dynamic IP allocation) — Hosts pod IPs allocated from the VNet. Must be significantly larger than the node subnet because each node pre-allocates a block of pod IPs.</li>
+<li><strong>API Server subnet</strong> (only when using API Server VNet Integration) — A small dedicated subnet (typically <code>/28</code>) delegated to <code>Microsoft.ContainerService/managedClusters</code> for the integrated API server.</li>
+<li><strong>Internal ingress subnet</strong> (optional) — A subnet that internal load balancer services / ingress controllers can use via the <code>service.beta.kubernetes.io/azure-load-balancer-ipv4</code> and subnet annotations, kept separate from the node subnet for cleaner NSG scoping.</li>
+</ul>
+<p>All of these subnets must be associated with the spoke’s UDR (routing <code>0.0.0.0/0</code> to the hub firewall) except where Microsoft documentation explicitly requires otherwise. The API server delegated subnet has its own routing requirements — follow the Microsoft documentation for that subnet specifically.</p>
+<h3 id="private-api-server-with-vnet-integration"><a class="header" href="#private-api-server-with-vnet-integration">Private API Server with VNet Integration</a></h3>
+<p>The recommended pattern is to use API Server VNet Integration so the API server is reachable on a private IP allocated from a dedicated subnet in your spoke VNet, without the legacy private cluster’s separate private endpoint and private DNS zone management.</p>
+<p>Key points for the TAMU managed network:</p>
+<ol>
+<li>Create the API server delegated subnet in your spoke VNet (typically <code>/28</code>), delegated to <code>Microsoft.ContainerService/managedClusters</code>.</li>
+<li>Create the cluster with <code>--enable-api-server-vnet-integration</code> and <code>--apiserver-subnet-id</code> referencing the delegated subnet.</li>
+<li>Set <code>--outbound-type userDefinedRouting</code> and confirm the spoke UDR routes <code>0.0.0.0/0</code> to the hub firewall.</li>
+<li>Use a user-assigned managed identity for the cluster and pre-assign the required roles on the VNet, node subnet, pod subnet (if applicable), and API server subnet before cluster creation. This avoids needing <code>Owner</code> on the VNet during cluster creation.</li>
+</ol>
+<p>If your scenario requires the legacy <strong>private cluster</strong> model instead (for example, for tooling that assumes a private endpoint to the API server), follow the <a href="https://learn.microsoft.com/en-us/azure/aks/private-clusters">private cluster documentation</a> and select <code>No</code> when prompted to integrate with a private DNS zone — DNS records will be created automatically in the appropriate private DNS zone in the hub VNet. Contact Cloud Services if records do not appear.</p>
+<h3 id="cni-mode-selection"><a class="header" href="#cni-mode-selection">CNI Mode Selection</a></h3>
+<ul>
+<li><strong>Azure CNI Overlay</strong> — Pods receive IPs from a cluster-internal overlay CIDR (e.g., <code>10.244.0.0/16</code>) that is not consumed from the VNet. Pod-to-VNet and pod-to-internet traffic is SNATed to the node IP. This is the recommended mode for most workloads because it avoids consuming large VNet address ranges and simplifies subnet sizing. Use this unless you have a specific requirement for pods to be directly VNet-addressable.</li>
+<li><strong>Azure CNI with dynamic IP allocation (pod subnet)</strong> — Pods receive IPs from a dedicated pod subnet in the VNet, and each pod is directly addressable from the VNet. Required for some Private Link, service mesh, or workload identity scenarios that need pod-level VNet addressability. Plan for a much larger pod subnet than node subnet.</li>
+<li><strong>kubenet</strong> — Not recommended. Limited UDR support, scaling limits, and on Microsoft’s deprecation path.</li>
+</ul>
+<h3 id="outbound-traffic-via-the-hub-firewall"><a class="header" href="#outbound-traffic-via-the-hub-firewall">Outbound Traffic via the Hub Firewall</a></h3>
+<p>Setting <code>outbound_type = "userDefinedRouting"</code> forces AKS to rely on the spoke UDR for egress. Microsoft publishes a <a href="https://learn.microsoft.com/en-us/azure/aks/outbound-rules-control-egress">list of required outbound FQDNs and network rules</a> that the hub firewall must permit for the cluster to function — including the AKS control plane, MCR, package mirrors, and Azure Monitor endpoints. Submit a Cloud Services request before cluster creation listing:</p>
+<ul>
+<li>The cluster’s region.</li>
+<li>The Kubernetes version(s) you intend to run.</li>
+<li>Any add-ons in use (Azure Monitor, Azure Policy, Defender, Workload Identity, etc.).</li>
+<li>Any third-party FQDNs your workloads require (Helm chart repos, vendor APIs, etc.).</li>
+</ul>
+<p>Cloud Services will add the required FQDN and network rules to the hub firewall policy.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
 <p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
-<p>This site is a work in progress and will be updated regularly.  Please check back frequently for updates.</p>
+<p>Cluster creation will fail or hang if the hub firewall does not permit the required AKS control plane traffic before <code>az aks create</code> is run. Coordinate firewall rule additions with Cloud Services as a prerequisite, not as a follow-up.</p>
 </blockquote>
-<p>This website is a resource for Texas A&amp;M University faculty, and staff to learn about the various infrastructure and platform services available at Texas A&amp;M University. This includes information about cloud services, platform services, and security policies and best practices.</p>
-<p>It is maintained by a distributed team of engineers in Technology Services who contribute information relevant to their area of expertise.</p>
-<h2 id="contributing"><a class="header" href="#contributing">Contributing</a></h2>
-<p>If you are a member of the Texas A&amp;M University community and would like to contribute to this website, please get involved over on <a href="https://github.com/tamu-edu/it-cloud-docs">GitHub</a>.</p>
+<h3 id="workload-ingress"><a class="header" href="#workload-ingress">Workload Ingress</a></h3>
+<p>AKS workloads must not be exposed via public load balancer services. Two supported patterns:</p>
+<ol>
+<li><strong>Internal load balancer service / internal ingress controller</strong> — Annotate <code>Service</code> resources of type <code>LoadBalancer</code> with <code>service.beta.kubernetes.io/azure-load-balancer-internal: "true"</code>, or deploy an ingress controller (NGINX, Traefik, AGIC, etc.) configured to use an internal LB. The resulting private IP is reachable from anywhere in the managed network and from the campus network.</li>
+<li><strong>AFD-fronted public ingress</strong> — For workloads that must be reachable from the internet, the internal load balancer / ingress controller from pattern 1 becomes the AFD origin. Submit a Cloud Services request with the custom domain (if any), the internal hostname or IP, and any required WAF or routing rules. AFD will create a managed Private Endpoint to the load balancer, which you must approve.</li>
+</ol>
+<p>For more information, see <a href="/access_methods.html">Access Methods</a>.</p>
+<h3 id="image-pulls-and-azure-container-registry"><a class="header" href="#image-pulls-and-azure-container-registry">Image Pulls and Azure Container Registry</a></h3>
+<p>Configure your cluster to pull images from a private Azure Container Registry with a Private Endpoint in the spoke VNet (or another reachable VNet). Attach the ACR to the cluster either by granting the kubelet identity <code>AcrPull</code> on the registry or by using <code>--attach-acr</code> at cluster creation. Ensure the ACR’s Private DNS zone (<code>privatelink.azurecr.io</code>) resolves correctly from the cluster — DNS records are managed automatically in the hub Private DNS zones; contact Cloud Services if resolution fails.</p>
+<p>If your workloads must pull from public registries (Docker Hub, quay.io, gcr.io, etc.), submit a Cloud Services request to permit the required FQDNs through the hub firewall. Consider mirroring critical public images into your private ACR to reduce dependency on internet-hosted registries and to avoid Docker Hub pull rate limits.</p>
+<h3 id="administrative-access"><a class="header" href="#administrative-access">Administrative Access</a></h3>
+<p>The private API server is not reachable from the public internet. Approved administrative access methods:</p>
+<ul>
+<li><strong>Azure Bastion + jump host</strong> — Deploy or use an existing jump VM in the spoke VNet and connect via the shared hub Bastion. Run <code>kubectl</code> and <code>az aks</code> commands from the jump host.</li>
+<li><strong>Campus network / VPN</strong> — Run <code>kubectl</code> and <code>az aks</code> commands from a workstation on the campus network or connected via Campus VPN, since the spoke VNet is reachable on its private IPs from those networks.</li>
+<li><strong><code>az aks command invoke</code></strong> — Tunnels commands through the Azure control plane to the cluster, requires no direct network reachability to the API server, and is useful for break-glass access. See <a href="https://learn.microsoft.com/en-us/azure/aks/access-private-cluster">Use <code>command invoke</code> to access a private cluster</a>.</li>
+</ul>
+<p>See <a href="/access_methods.html">Access Methods</a> for the full list of approved administrative access patterns.</p>
+<h2 id="migrating"><a class="header" href="#migrating">Migrating</a></h2>
+<p>To convert an existing public AKS cluster to a privately networked configuration:</p>
+<ol>
+<li>Plan a side-by-side migration. Most networking attributes — API server exposure, CNI mode, outbound type, and infrastructure subnets — cannot be changed in place on an existing cluster. A new cluster is generally required.</li>
+<li>Coordinate with Cloud Services in advance to ensure the hub firewall permits the required AKS egress FQDNs and any workload-specific FQDNs before cluster creation.</li>
+<li>Create the required subnets in your spoke VNet (node, pod if applicable, API server delegated, and optional ingress) and associate the spoke UDR and NSGs.</li>
+<li>Pre-create a user-assigned managed identity for the cluster and assign the required roles on the VNet, subnets, and any private DNS zones.</li>
+<li>Create the new private cluster with API Server VNet Integration, your chosen CNI mode, and <code>outbound_type = "userDefinedRouting"</code>.</li>
+<li>Validate cluster bring-up: confirm nodes register, system pods reach <code>Running</code>, image pulls from ACR succeed, and egress to required FQDNs works through the hub firewall.</li>
+<li>Redeploy workloads to the new cluster, switching <code>Service</code> and <code>Ingress</code> resources to internal load balancers / internal ingress controllers.</li>
+<li>Validate workload connectivity from within the VNet (via a jump host through Bastion, or via campus VPN) before cutover.</li>
+<li>Submit a Cloud Services request to configure AFD origins and endpoints for any workloads that must remain publicly accessible. Approve the AFD-managed private endpoint connection on the internal load balancer when prompted.</li>
+<li>Update DNS records and application configurations to point at the new AFD endpoints or internal hostnames as appropriate.</li>
+<li>Decommission the original public cluster once the new cluster is fully validated.</li>
+</ol>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>Cluster creation will fail if the hub firewall does not permit the required AKS control plane FQDNs at the time <code>az aks create</code> runs. Treat firewall rule additions as a hard prerequisite, not a follow-up step.</p>
+</blockquote>
+<h2 id="example-terraform-snippets"><a class="header" href="#example-terraform-snippets">Example Terraform Snippets</a></h2>
+<h3 id="subnets"><a class="header" href="#subnets">Subnets</a></h3>
+<pre><code class="language-hcl">resource "azurerm_subnet" "aks_nodes" {
+  name                 = "snet-aks-nodes"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.spoke.name
+  address_prefixes     = ["10.x.x.x/24"]
+}
+
+resource "azurerm_subnet" "aks_pods" {
+  # Only required for Azure CNI with dynamic IP allocation (pod subnet).
+  name                 = "snet-aks-pods"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.spoke.name
+  address_prefixes     = ["10.x.x.x/22"]
+}
+
+resource "azurerm_subnet" "aks_apiserver" {
+  # Only required for API Server VNet Integration.
+  name                 = "snet-aks-apiserver"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.spoke.name
+  address_prefixes     = ["10.x.x.x/28"]
+
+  delegation {
+    name = "delegation"
+    service_delegation {
+      name    = "Microsoft.ContainerService/managedClusters"
+      actions = ["Microsoft.Network/virtualNetworks/subnets/join/action"]
+    }
+  }
+}
+</code></pre>
+<h3 id="cluster-identity"><a class="header" href="#cluster-identity">Cluster Identity</a></h3>
+<pre><code class="language-hcl">resource "azurerm_user_assigned_identity" "aks" {
+  name                = "id-aks-workload"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+}
+
+resource "azurerm_role_assignment" "aks_network_contributor" {
+  scope                = azurerm_virtual_network.spoke.id
+  role_definition_name = "Network Contributor"
+  principal_id         = azurerm_user_assigned_identity.aks.principal_id
+}
+</code></pre>
+<h3 id="private-aks-cluster-with-api-server-vnet-integration-and-azure-cni-overlay"><a class="header" href="#private-aks-cluster-with-api-server-vnet-integration-and-azure-cni-overlay">Private AKS Cluster with API Server VNet Integration and Azure CNI Overlay</a></h3>
+<pre><code class="language-hcl">resource "azurerm_kubernetes_cluster" "workload" {
+  name                = "aks-workload"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  dns_prefix          = "aks-workload"
+  kubernetes_version  = "1.30.0"
+
+  # Use API Server VNet Integration; the API server gets a private IP in the delegated subnet.
+  api_server_access_profile {
+    vnet_integration_enabled = true
+    subnet_id                = azurerm_subnet.aks_apiserver.id
+  }
+
+  network_profile {
+    network_plugin      = "azure"
+    network_plugin_mode = "overlay"
+    network_policy      = "azure"
+    pod_cidr            = "10.244.0.0/16"
+    service_cidr        = "10.245.0.0/16"
+    dns_service_ip      = "10.245.0.10"
+    load_balancer_sku   = "standard"
+    outbound_type       = "userDefinedRouting"
+  }
+
+  default_node_pool {
+    name           = "system"
+    vm_size        = "Standard_D4s_v5"
+    node_count     = 3
+    vnet_subnet_id = azurerm_subnet.aks_nodes.id
+  }
+
+  identity {
+    type         = "UserAssigned"
+    identity_ids = [azurerm_user_assigned_identity.aks.id]
+  }
+
+  depends_on = [azurerm_role_assignment.aks_network_contributor]
+}
+</code></pre>
+<h3 id="internal-load-balancer-service-workload-ingress"><a class="header" href="#internal-load-balancer-service-workload-ingress">Internal Load Balancer Service (Workload Ingress)</a></h3>
+<pre><code class="language-yaml">apiVersion: v1
+kind: Service
+metadata:
+  name: workload
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  selector:
+    app: workload
+  ports:
+    - port: 443
+      targetPort: 8443
+</code></pre>
+<p>The resulting internal load balancer IP is reachable from the managed network and the campus network, and can be used as the origin for an AFD endpoint configured by Cloud Services.</p>
 
                     </main>
                 </div>

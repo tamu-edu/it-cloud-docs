@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Home - Clouds and Platforms</title>
+        <title>Migration - Clouds and Platforms</title>
 
         <!-- Custom HTML head -->
 
@@ -33,7 +33,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "";
+            var path_to_root = "../../../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "aggie";
         </script>
 
@@ -283,7 +283,7 @@
                     <h1 class="menu-title">Clouds and Platforms</h1>
 
                     <div class="right-buttons">
-                        <a href="https://github.com/tamu-edu/it-cloud-docs/edit/main/src/index.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/tamu-edu/it-cloud-docs/edit/main/src/cloud/azure/network/migration.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.8 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/></svg></span>
                         </a>
 
@@ -312,14 +312,80 @@
 
                 <div id="content" class="content">
                     <main>
-                        <blockquote class="blockquote-tag blockquote-tag-note">
-<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
-<p>This site is a work in progress and will be updated regularly.  Please check back frequently for updates.</p>
+                        <h1 id="azure-network-migration"><a class="header" href="#azure-network-migration">Azure Network Migration</a></h1>
+<p>Over the Summer of 2026, a new network design was implemented for the TAMU managed network in Azure. This new design provides improved security and compliance for our Azure environment by centralizing traffic flow through shared Azure Front Door (AFD) with WAF rules and Azure Firewall (FW) for traffic analysis and logging. Existing Azure customers will be impacted in one or more of the following ways:</p>
+<ul>
+<li>Public resources will need to be reconfigured to be private, and the public entrypoint moved to the hub firewalls</li>
+<li>Connecting resources previously not connected to a VNet to the TAMU-managed network</li>
+<li>IP address changes, both public and private</li>
+<li>DNS record changes</li>
+<li>Outbound traffic will now be routed through the hub firewalls, which may require updates to NSG rules and route tables</li>
+</ul>
+<p>Existing Azure customers not yet in this new topology need to be migrated. The migration process involves moving existing resources to a new network and/or region, as well as updating any necessary configurations.</p>
+<blockquote class="blockquote-tag blockquote-tag-important">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p>
+<p>The TAMU managed network will only be available in the <strong>South Central US</strong> region at launch. Additional regions may be added.</p>
 </blockquote>
-<p>This website is a resource for Texas A&amp;M University faculty, and staff to learn about the various infrastructure and platform services available at Texas A&amp;M University. This includes information about cloud services, platform services, and security policies and best practices.</p>
-<p>It is maintained by a distributed team of engineers in Technology Services who contribute information relevant to their area of expertise.</p>
-<h2 id="contributing"><a class="header" href="#contributing">Contributing</a></h2>
-<p>If you are a member of the Texas A&amp;M University community and would like to contribute to this website, please get involved over on <a href="https://github.com/tamu-edu/it-cloud-docs">GitHub</a>.</p>
+<h2 id="migration-considerations"><a class="header" href="#migration-considerations">Migration Considerations</a></h2>
+<p>Many Azure services can be reconfigured to use the TAMU-managed network with minimal disruption, and you should be able to refer to the <a href="/cloud/azure/network/services.html">Services Configuration</a> documentation for specific configuration guidance.</p>
+<p>The following sections outline some specific considerations for migrating resources to the new network design.</p>
+<h3 id="public-websites-and-web-apps"><a class="header" href="#public-websites-and-web-apps">Public Websites and Web Apps</a></h3>
+<p>Public-facing websites and web applications, such as those served by App Service, Container Apps, or Static Web Apps, will need to be reconfigured to be private following the guidance in the <a href="/cloud/azure/network/services.html">Service Configuration</a> documentation for that service. The public entry point for these services will now be a shared, managed Azure Front Door in the hub, rather than directly on the service itself.</p>
+<p>Any resources with custom domain names will need to have their custom domain moved to the hub and configured by Cloud Services. The DNS records for the custom domain will also need to be updated to point to the new Azure Front Door endpoint.</p>
+<h3 id="resources-with-static-public-ips"><a class="header" href="#resources-with-static-public-ips">Resources with static public IPs</a></h3>
+<p>Any resources that currently have static public IP addresses, such as VMs or Application Gateways, will need to be reconfigured to be private and have their public entry point moved to the hub firewall. This may involve changing the IP address of the resource and updating any DNS records accordingly.</p>
+<ul>
+<li>If downtime can be tolerated, the existing public IP address can be disassociated from the resource then moved to the hub where it can be re-associated with the hub firewall. DNS records would not need to be changed.</li>
+<li>If downtime cannot be tolerated, a new public IP address will be created and configured to forward traffic to your resource, and then the DNS records can be updated to point to the new IP address before removing the previous one.</li>
+</ul>
+<h3 id="migrating-regions"><a class="header" href="#migrating-regions">Migrating Regions</a></h3>
+<p>The TAMU managed network will only be available in specific Azure regions, and resources that need to connect to the managed network need to be located in these regions and may need to be redeployed or migrated across regions.</p>
+<p>Resources that are stateless, or can be redeployed via Infrastructure as Code (IaC) tools or other pipelines, will be the easiest to migrate. Services that are stateful, such as those that include storage like Virtual Machines and SQL Servers, will be among the more challenging to move.</p>
+<p>Azure provides the <a href="https://learn.microsoft.com/en-us/azure/resource-mover/overview">Azure Resource Mover</a> that can help automate the process of moving resources between Azure regions. This tool can be particularly useful for migrating these stateful resources to a region where the managed network infrastructure exists.</p>
+<p>Cloud Services can provide help and support for cross-region migrations.</p>
+<h2 id="migration-procedure"><a class="header" href="#migration-procedure">Migration Procedure</a></h2>
+<h3 id="1-assess-which-resources-need-to-be-migrated-to-the-managed-network"><a class="header" href="#1-assess-which-resources-need-to-be-migrated-to-the-managed-network">1. Assess which resources need to be migrated to the managed network</a></h3>
+<p>Consult the <a href="/cloud/azure/network/services.html">Service Configuration</a> documentation to identify which of your resources need to be migrated to the managed network and what specific configuration changes are required for each resource type. In general, any services which need network connectivity to make outbound connections or handle inbound connections will need to be reconfigured to use private networking and route traffic through the hub.</p>
+<p>In some cases, you may not need to use a service any longer if its functionality can be replaced by the centralized Azure Front Door or Azure Firewall in the hub.</p>
+<p>An important part of this migration will also be to consolidate resources into approved Azure regions where the managed network infrastructure exists.</p>
+<h3 id="2-plan-the-migration"><a class="header" href="#2-plan-the-migration">2. Plan the migration</a></h3>
+<p>Once you know which resources need to be migrated, create a detailed migration plan that outlines the steps for each resource, the order of operations, and any dependencies between resources. This plan should include both network configuration changes and resource-specific migration steps.</p>
+<p>Specifically, it should detail:</p>
+<ul>
+<li><strong>Subnet configuration for your spoke VNet</strong>: Ensure that all subnets that will be required by your resources are accounted for and properly configured according to the new network design. This includes verifying subnet sizes, addressing any overlapping IP ranges, and ensuring that subnet-level settings align with the managed network requirements. See <a href="/cloud/azure/network/creating_subnets.html">creating subnets</a> for guidance.</li>
+<li><strong>Data migration to an approved Azure region</strong>: Plan and execute the migration of data to an approved Azure region where the managed network infrastructure exists. This includes moving databases, storage accounts, and any other data resources to ensure compliance with the managed network’s regional requirements.</li>
+<li><strong>Application and service configuration changes</strong>: Identify the specific configuration changes required for each resource to connect to the managed network. This may include updating connection strings, endpoint configurations, and any other settings necessary for the resource to function correctly within the new network design.</li>
+<li><strong>Hub-side configuration changes</strong>: Identify any configuration changes required on the hub side to support the migrated resources. This may include updating Azure Firewall rules, configuring Azure Front Door origins/endpoints, and managing Private DNS zone links to ensure proper name resolution within the managed network. Ensure these are approved and staged with Cloud Services.</li>
+</ul>
+<h3 id="3-migrate-resources-to-private-networking"><a class="header" href="#3-migrate-resources-to-private-networking">3. Migrate resources to private networking</a></h3>
+<p>It is recommended to migrate resources in a phased approach, starting with creating replica instances of your resources in the new network configuration whenever possible. This allows you to validate the configuration and connectivity of the resources within the managed network before fully cutting over. Once the replicas are verified, you can proceed with migrating the primary instances and decommissioning the old ones.</p>
+<ul>
+<li><strong>PaaS services</strong> (App Service, Storage Accounts, Key Vault, SQL, etc.): Configure Private Endpoints and/or Service Endpoints per the <a href="/cloud/azure/network/services.html">Services Configuration</a> guidance. Disable public network access on the resource once the private endpoint is validated.</li>
+<li><strong>VMs and IaaS resources</strong>: Remove any public IP addresses from NICs. If the VM required a public IP for inbound access, work with Cloud Services to configure an inbound NAT rule or DNAT rule on the hub firewall pointing to the VM’s private IP.</li>
+<li><strong>Application Gateways or Load Balancers with public IPs</strong>: Follow the guidance in <a href="#resources-with-static-public-ips">Resources with static public IPs</a> above to move the public IP to the hub, or request a new hub-managed entry point.</li>
+<li><strong>Resources using VNET integration</strong> (e.g. App Service VNet Integration, Azure Functions): Ensure the delegated integration subnet also has the UDR applied so outbound traffic routes correctly through the hub firewall.</li>
+</ul>
+<h3 id="4-update-dns-configuration"><a class="header" href="#4-update-dns-configuration">4. Update DNS configuration</a></h3>
+<p>The new design relies on Azure Private DNS zones managed by the hub:</p>
+<ul>
+<li>If your resource uses a private endpoint, the endpoint will be automatically registered in the corresponding Private DNS zone in the hub and will be resolvable by any internal DNS queries within the managed network, including campus.</li>
+<li>If your resource does not use a private endpoint, such as a VM or a resource with VNet integration, use the provided private DNS zone in your spoke VNet to create the necessary DNS records so that the resource can be resolved by its private FQDN within the managed network.</li>
+</ul>
+<p>Although this is the default configuration, it is important to verify that your spoke VNet is configured to forward DNS queries to the hub resolver so that the private FQDN can be resolved correctly within the spoke VNet.</p>
+<h4 id="5-validate-and-cut-over"><a class="header" href="#5-validate-and-cut-over">5. Validate and cut over</a></h4>
+<ul>
+<li>Coordinate with Cloud Services to deploy Firewall and Front Door configuration changes, and initiate public DNS changes, if necessary for your service.</li>
+<li>If using an existing spoke VNet and subnet, verify that it is properly configured as a private subnets with a user-defined route (UDR) pointing to the hub firewall. Confirm that outbound internet traffic is correctly routing after changing the subnet configuration.</li>
+<li>Test end-to-end connectivity for each resource from within the VNet (e.g. from a VM or using Azure Network Watcher).</li>
+<li>Confirm that public endpoints are no longer accessible where they have been disabled.</li>
+</ul>
+<h4 id="6-decommission-legacy-configuration"><a class="header" href="#6-decommission-legacy-configuration">6. Decommission legacy configuration</a></h4>
+<p>Once all resources are validated, remove any leftover resources no longer needed, such as old VNets, subnets, or other network components that were part of the previous configuration.</p>
+<blockquote class="blockquote-tag blockquote-tag-important">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p>
+<p>If you are using an existing spoke VNet, ensure that the subnets are properly configured as private subnets with a user-defined route (UDR) pointing to the hub firewall, and that DNS queries are forwarded to the hub resolver. This is crucial for maintaining correct routing and name resolution within the managed network.
+Failure to do so may result in loss of connectivity and unresolved DNS queries once a strict enforcement policy is applied.</p>
+</blockquote>
 
                     </main>
                 </div>

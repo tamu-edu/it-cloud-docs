@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Home - Clouds and Platforms</title>
+        <title>Container Instances - Clouds and Platforms</title>
 
         <!-- Custom HTML head -->
 
@@ -33,7 +33,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "";
+            var path_to_root = "../../../../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "aggie";
         </script>
 
@@ -283,7 +283,7 @@
                     <h1 class="menu-title">Clouds and Platforms</h1>
 
                     <div class="right-buttons">
-                        <a href="https://github.com/tamu-edu/it-cloud-docs/edit/main/src/index.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/tamu-edu/it-cloud-docs/edit/main/src/cloud/azure/network/services/connect_container_instances.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.8 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/></svg></span>
                         </a>
 
@@ -312,14 +312,117 @@
 
                 <div id="content" class="content">
                     <main>
-                        <blockquote class="blockquote-tag blockquote-tag-note">
+                        <h1 id="azure-container-instances"><a class="header" href="#azure-container-instances">Azure Container Instances</a></h1>
+<ul>
+<li>
+<p><strong>Rule:</strong> Azure Container Instances (ACI) may not be exposed directly to the public internet and must be deployed into a private subnet within the spoke VNet.</p>
+</li>
+<li>
+<p><strong>Action:</strong> Deploy ACI container groups into a delegated subnet (<code>Microsoft.ContainerInstance/containerGroups</code>) in the spoke VNet with no public IP, routing outbound traffic through the hub firewall via UDR.</p>
+</li>
+<li>
+<p>Container groups must be deployed with VNet integration into a dedicated delegated subnet in the spoke VNet. Public IP assignment is not permitted.</p>
+</li>
+<li>
+<p>The delegated subnet must have a User Defined Route (UDR) directing outbound traffic (<code>0.0.0.0/0</code>) to the hub firewall.</p>
+</li>
+<li>
+<p>NSGs on the container group subnet should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, internal load balancers, or other spoke resources).</p>
+</li>
+<li>
+<p>Container images should be pulled from a private registry (such as Azure Container Registry with a Private Endpoint) rather than public registries where possible. Outbound pulls from public registries will traverse the hub firewall and may be subject to filtering.</p>
+</li>
+<li>
+<p>For internet-facing application traffic, work with Cloud Services to configure hub-managed ingress via the shared Azure Front Door (AFD) instance, fronted by an internal Load Balancer or Application Gateway in your spoke VNet that targets the container group’s private IP.</p>
+</li>
+<li>
+<p>Administrative access (e.g. <code>az container exec</code>) traverses the Azure control plane and does not require public network exposure on the container group itself. See <a href="/access_methods.html">Access Methods</a> for details.</p>
+</li>
+<li>
+<p>Container groups must use a SKU and OS type that supports VNet integration. Confirm support at <a href="https://learn.microsoft.com/en-us/azure/container-instances/container-instances-virtual-network-concepts">Virtual network scenarios for ACI</a>.</p>
+</li>
+</ul>
+<h2 id="implementation-pattern"><a class="header" href="#implementation-pattern">Implementation Pattern</a></h2>
+<h3 id="private-container-group-with-vnet-integration"><a class="header" href="#private-container-group-with-vnet-integration">Private Container Group with VNet Integration</a></h3>
+<p>The standard pattern for ACI in the TAMU managed network is a container group deployed into a delegated subnet of the spoke VNet, with outbound traffic forced through the hub firewall and inbound access provided either by direct private IP access from within the VNet or via an internal load balancer for higher availability.</p>
+<p>You may follow the Microsoft documentation for <a href="https://learn.microsoft.com/en-us/azure/container-instances/container-instances-vnet">deploying container instances into an Azure virtual network</a> as a reference. The key points for the TAMU managed network are:</p>
+<ol>
+<li>Create a dedicated subnet in your spoke VNet delegated to <code>Microsoft.ContainerInstance/containerGroups</code>. This subnet cannot host other resource types.</li>
+<li>Associate the spoke’s UDR (which routes <code>0.0.0.0/0</code> to the hub firewall) with the delegated subnet.</li>
+<li>Apply an NSG to the delegated subnet that permits only the inbound traffic your application requires from approved sources.</li>
+<li>Deploy the container group with <code>ip_address_type = "Private"</code> and reference the delegated subnet.</li>
+<li>Pull container images from a private Azure Container Registry where possible. If using a private ACR, ensure the ACR has a Private Endpoint in the spoke VNet (or another reachable VNet) and that the ACI managed identity or admin credentials have pull rights.</li>
+<li>Verify outbound connectivity by reviewing hub firewall logs to confirm traffic from the container group is being inspected as expected.</li>
+</ol>
+<p>To expose the container group to the internet, it must be done through the centralized hub services. Submit a Cloud Services request specifying the custom domain (if any), origin hostname (typically an internal load balancer or App Gateway in your spoke fronting the container group), and any required WAF or routing rules for the AFD configuration.</p>
+<h3 id="internet-facing-ingress"><a class="header" href="#internet-facing-ingress">Internet-Facing Ingress</a></h3>
+<p>ACI does not natively support Azure Front Door Private Link as an origin. To publish a containerized workload to the internet:</p>
+<ol>
+<li>Deploy an internal-only Application Gateway or internal Load Balancer in your spoke VNet that targets the private IP(s) of your container group(s).</li>
+<li>Submit a Cloud Services request to configure AFD with the App Gateway / Load Balancer as the origin via Private Link.</li>
+</ol>
+<p>For more information, see <a href="/access_methods.html">Access Methods</a>.</p>
+<h2 id="migrating"><a class="header" href="#migrating">Migrating</a></h2>
+<p>To convert an existing public ACI deployment to private:</p>
+<ol>
+<li>Create the delegated subnet in your spoke VNet if it does not already exist, and associate the hub firewall UDR.</li>
+<li>Redeploy the container group into the delegated subnet with <code>ip_address_type = "Private"</code>. ACI does not support converting an existing container group’s network configuration in place — a redeploy is required.</li>
+<li>Update any DNS records or application configurations that previously pointed to the public ACI FQDN/IP to use the new private IP or the internal load balancer fronting the container group.</li>
+<li>Validate connectivity from within the VNet (e.g. from a VM, via Azure Bastion, or via campus VPN) before decommissioning the public container group.</li>
+<li>Submit a Cloud Services request to configure an AFD origin and endpoint if the workload needs to remain publicly accessible.</li>
+</ol>
+<blockquote class="blockquote-tag blockquote-tag-note">
 <p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
-<p>This site is a work in progress and will be updated regularly.  Please check back frequently for updates.</p>
+<p>ACI container groups are immutable with respect to network configuration. Plan for a redeploy and a brief outage when migrating from public to private networking.</p>
 </blockquote>
-<p>This website is a resource for Texas A&amp;M University faculty, and staff to learn about the various infrastructure and platform services available at Texas A&amp;M University. This includes information about cloud services, platform services, and security policies and best practices.</p>
-<p>It is maintained by a distributed team of engineers in Technology Services who contribute information relevant to their area of expertise.</p>
-<h2 id="contributing"><a class="header" href="#contributing">Contributing</a></h2>
-<p>If you are a member of the Texas A&amp;M University community and would like to contribute to this website, please get involved over on <a href="https://github.com/tamu-edu/it-cloud-docs">GitHub</a>.</p>
+<h2 id="example-terraform-snippets"><a class="header" href="#example-terraform-snippets">Example Terraform Snippets</a></h2>
+<h3 id="delegated-subnet-for-aci"><a class="header" href="#delegated-subnet-for-aci">Delegated Subnet for ACI</a></h3>
+<pre><code class="language-hcl">resource "azurerm_subnet" "aci" {
+  name                 = "snet-aci"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.spoke.name
+  address_prefixes     = ["10.x.x.x/28"]
+
+  delegation {
+    name = "delegation"
+    service_delegation {
+      name = "Microsoft.ContainerInstance/containerGroups"
+      actions = [
+        "Microsoft.Network/virtualNetworks/subnets/action",
+      ]
+    }
+  }
+}
+</code></pre>
+<h3 id="container-group-with-private-ip"><a class="header" href="#container-group-with-private-ip">Container Group with Private IP</a></h3>
+<pre><code class="language-hcl">resource "azurerm_container_group" "workload" {
+  name                = "ci-workload"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  os_type             = "Linux"
+
+  ip_address_type = "Private"
+  subnet_ids      = [azurerm_subnet.aci.id]
+
+  container {
+    name   = "app"
+    image  = "myregistry.azurecr.io/workload:latest"
+    cpu    = "1.0"
+    memory = "1.5"
+
+    ports {
+      port     = 8080
+      protocol = "TCP"
+    }
+  }
+
+  image_registry_credential {
+    server   = "myregistry.azurecr.io"
+    username = var.acr_username
+    password = var.acr_password
+  }
+}
+</code></pre>
 
                     </main>
                 </div>

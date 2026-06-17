@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Home - Clouds and Platforms</title>
+        <title>Service Configuration - Clouds and Platforms</title>
 
         <!-- Custom HTML head -->
 
@@ -33,7 +33,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "";
+            var path_to_root = "../../../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "aggie";
         </script>
 
@@ -283,7 +283,7 @@
                     <h1 class="menu-title">Clouds and Platforms</h1>
 
                     <div class="right-buttons">
-                        <a href="https://github.com/tamu-edu/it-cloud-docs/edit/main/src/index.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/tamu-edu/it-cloud-docs/edit/main/src/cloud/azure/network/services.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.8 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/></svg></span>
                         </a>
 
@@ -312,14 +312,61 @@
 
                 <div id="content" class="content">
                     <main>
-                        <blockquote class="blockquote-tag blockquote-tag-note">
-<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
-<p>This site is a work in progress and will be updated regularly.  Please check back frequently for updates.</p>
+                        <h1 id="azure-services-configuration"><a class="header" href="#azure-services-configuration">Azure Services Configuration</a></h1>
+<p>In this section, you will find documentation on how to configure and deploy specific Azure services in a way that is compatible with the TAMU-managed network design and meets the requirements outlined in the <a href="/cloud/azure/network/design.html">Network Design</a> page.</p>
+<p>A pre-requisite for deploying resources to the TAMU-managed network in Azure is understanding the network design and creating the necessary subnets in your spoke VNets. See the <a href="/cloud/azure/network/design.html">Network Design</a> and <a href="/cloud/azure/network/creating_subnets.html">Creating Subnets</a> pages.</p>
+<h2 id="scope"><a class="header" href="#scope">Scope</a></h2>
+<h3 id="in-scope-services"><a class="header" href="#in-scope-services">In-Scope Services</a></h3>
+<p>A service is generally required to be connected to the TAMU-managed network if it is a workload-hosting, compute, or application-facing Azure service that either:</p>
+<ul>
+<li>Is accessible from the public internet,</li>
+<li>Can initiate outbound network connections,</li>
+<li>Runs customer-controlled code, scripts, containers, or jobs,</li>
+<li>Provides interactive access to an execution environment, or</li>
+<li>Is deployed into, or integrated with, a customer-managed virtual network.</li>
+</ul>
+<p>The following is a non-exhaustive list of common Azure services that are in scope for this network policy:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Service</th><th>Documentation</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="https://learn.microsoft.com/en-us/azure/app-service/">Azure App Service</a></td><td><a href="/cloud/azure/network/services/connect_app_service.html">Connect App Service to the TAMU network</a></td></tr>
+<tr><td><a href="https://learn.microsoft.com/en-us/azure/application-gateway/">Azure Application Gateways</a></td><td><a href="/cloud/azure/network/services/connect_app_gateway.html">Connect App Gateway to the TAMU network</a></td></tr>
+<tr><td><a href="https://learn.microsoft.com/en-us/azure/bastion/">Bastion Hosts</a></td><td><a href="/cloud/azure/network/services/use_bastion.html">Use Bastion with the TAMU network</a></td></tr>
+<tr><td><a href="https://learn.microsoft.com/en-us/azure/container-apps/">Azure Container Apps</a></td><td><a href="/cloud/azure/network/services/connect_container_app.html">Connect Container Apps to the TAMU network</a></td></tr>
+<tr><td><a href="https://learn.microsoft.com/en-us/azure/container-instances/">Azure Container Instances</a></td><td><a href="/cloud/azure/network/services/connect_container_instances.html">Connect Container Instances to the TAMU network</a></td></tr>
+<tr><td><a href="https://learn.microsoft.com/en-us/azure/azure-functions/">Azure Functions</a></td><td><a href="/cloud/azure/network/services/connect_azure_functions.html">Connect Functions to the TAMU network</a></td></tr>
+<tr><td><a href="https://learn.microsoft.com/en-us/azure/aks/">Azure Kubernetes Service (AKS)</a></td><td><a href="/cloud/azure/network/services/connect_aks.html">Connect AKS to the TAMU network</a></td></tr>
+<tr><td><a href="https://learn.microsoft.com/en-us/azure/load-balancer/">Azure Load Balancers</a></td><td><a href="/cloud/azure/network/services/connect_load_balancer.html">Connect a load balancer to the TAMU network</a></td></tr>
+<tr><td><a href="https://learn.microsoft.com/en-us/azure/virtual-machines/">Azure Virtual Machines</a></td><td><a href="/cloud/azure/network/services/connect_vm.html">Connect a VM to the TAMU network</a></td></tr>
+</tbody>
+</table>
+</div>
+<blockquote class="blockquote-tag blockquote-tag-tip">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p>
+<p>Missing connection docs for your service? Contact the Cloud Services team to request documentation for connecting your service to the TAMU-managed network. Or, if you have already figured it out, contribute your documentation and share it with the team!</p>
 </blockquote>
-<p>This website is a resource for Texas A&amp;M University faculty, and staff to learn about the various infrastructure and platform services available at Texas A&amp;M University. This includes information about cloud services, platform services, and security policies and best practices.</p>
-<p>It is maintained by a distributed team of engineers in Technology Services who contribute information relevant to their area of expertise.</p>
-<h2 id="contributing"><a class="header" href="#contributing">Contributing</a></h2>
-<p>If you are a member of the Texas A&amp;M University community and would like to contribute to this website, please get involved over on <a href="https://github.com/tamu-edu/it-cloud-docs">GitHub</a>.</p>
+<h3 id="out-of-scope-services"><a class="header" href="#out-of-scope-services">Out-of-Scope Services</a></h3>
+<p>Some Azure services may not be directly subject to this policy if they do not host customer code, do not expose a workload endpoint, and do not initiate customer-controlled network traffic. However, they may still require review if they need to be publicly accessible or connect to in-scope workloads.</p>
+<p>Examples that may require separate evaluation include:</p>
+<ul>
+<li>Storage accounts</li>
+<li>Key Vaults</li>
+<li>Azure SQL Database</li>
+<li>Cosmos DB</li>
+<li>Event Hubs</li>
+<li>Service Bus</li>
+<li>Log Analytics workspaces</li>
+<li>Managed identity and Azure control-plane services</li>
+<li>Azure DevOps and GitHub-hosted agents</li>
+<li>Azure AI services (e.g., Azure OpenAI, Cognitive Services)</li>
+<li>Azure Data Factory and Synapse Analytics</li>
+<li>Azure Logic Apps and Power Automate</li>
+<li>Azure Monitor and Application Insights</li>
+</ul>
+<p>Always evaluate the specific requirements and risks of each service in the context of your overall architecture and security posture, and consult with the Cloud Services team if you have any questions about whether a particular service is in scope or how to configure it appropriately.</p>
 
                     </main>
                 </div>

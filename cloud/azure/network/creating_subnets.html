@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Home - Clouds and Platforms</title>
+        <title>Creating Subnets - Clouds and Platforms</title>
 
         <!-- Custom HTML head -->
 
@@ -33,7 +33,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "";
+            var path_to_root = "../../../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "aggie";
         </script>
 
@@ -283,7 +283,7 @@
                     <h1 class="menu-title">Clouds and Platforms</h1>
 
                     <div class="right-buttons">
-                        <a href="https://github.com/tamu-edu/it-cloud-docs/edit/main/src/index.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/tamu-edu/it-cloud-docs/edit/main/src/cloud/azure/network/creating_subnets.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.8 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/></svg></span>
                         </a>
 
@@ -312,14 +312,64 @@
 
                 <div id="content" class="content">
                     <main>
-                        <blockquote class="blockquote-tag blockquote-tag-note">
-<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
-<p>This site is a work in progress and will be updated regularly.  Please check back frequently for updates.</p>
+                        <h1 id="creating-subnets"><a class="header" href="#creating-subnets">Creating Subnets</a></h1>
+<p>The purpose of this document is to explain how to create and configure subnets in a customer “spoke” Virtual Network (VNet).</p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>A Virtual Network (VNet) is a logical isolation of the Azure network dedicated to your subscription. Subnets are subdivisions of a VNet’s address space that allow you to segment your resources for better organization, security, and performance. This document provides guidance on how to create and configure subnets within your VNet to meet your solution’s requirements while adhering to best practices for security and performance. For more information on the overall TAMU managed network design, please see the <a href="/cloud/azure/network/design.html">Network Design</a>.</p>
+<p>Consult the Microsoft documentation <a href="https://learn.microsoft.com/en-us/azure/virtual-network/concepts-and-best-practices#virtual-network-concepts">Virtual network concepts</a> and <a href="https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-subnet">Add, change, or delete virtual network subnets</a> for more information on virtual networks and managing subnets.</p>
+<h2 id="planning-ahead"><a class="header" href="#planning-ahead">Planning Ahead</a></h2>
+<p>While most VNet and subnet modifications do not require destruction and recreation, certain fundamental changes - particularly relating to IP addressing and naming - will force a delete-and-recreate action. Deleting a subnet in order to recreate it also requires first detaching, moving, or destroying resources associated with it. To avoid later complications, it is helpful to plan your Azure networking resources before deploying. The Cloud Services team can help design, plan, and configure your VNet and subnets.</p>
+<ul>
+<li><strong>Subnet Name:</strong> You cannot change the name of an existing subnet (without deleting and recreating it).</li>
+<li><strong>Subnet Address Range:</strong> If the subnet is in use (has resources attached or pointing to it), you cannot modify its IP prefix. You must detach, move, or delete all resources in the subnet, change the range, and then reattach the resources.</li>
+<li><strong>VNet Address Range (Overlapping/Shrinking):</strong> While the range can be expanded (by Cloud Services), an address range in use by a subnet cannot be modified.</li>
+</ul>
+<h2 id="virtual-network-vnet-and-subnet-design"><a class="header" href="#virtual-network-vnet-and-subnet-design">Virtual Network (VNet) and Subnet Design</a></h2>
+<p>Every spoke VNet is assigned a block of IP addresses by Cloud Services from a centrally managed pool. Customers cannot select or modify the CIDR range allocated to them, so you should plan your subnet design with the assistance of Cloud Services to ensure that enough IP addresses are provided for your needs. It is important to understand the relationship between the VNet’s address space, the subnets created within it, the resources and services planned to be deployed within them, and count of <em>usable</em> IP addresses in each subnet. For more information on Azure IP addressing and subnetting, see <a href="https://learn.microsoft.com/en-us/azure/virtual-network/concepts-and-best-practices#virtual-network-concepts">Azure documentation</a>.</p>
+<p>When planning your subnet design, consider the following:</p>
+<ul>
+<li><strong>Azure reserves 5 IP addresses in every subnet</strong> (the first three and the last two). If you create a <code>/29</code> subnet (consuming 8 IPs total), you only have 3 <em>usable</em> addresses. Plan with room to grow, as expanding a subnet later is more complex than starting with adequate space.</li>
+<li>Know your Azure services: Some services require specifically-named subnets, some require dedicated subnets that cannot be shared with other services, and some have specific requirements for subnet size.</li>
+<li>Consider auto-scaling and future growth when planning subnet sizes. It is better to have unused IP addresses than to run out of addresses in a subnet.</li>
+</ul>
+<h2 id="subnet-delegation-service-endpoints-and-private-links"><a class="header" href="#subnet-delegation-service-endpoints-and-private-links">Subnet Delegation, Service Endpoints, and Private Links</a></h2>
+<p>Some services require a dedicated subnet for their VNet integration feature, called a delegated subnet. This is common with PaaS and fully-managed services, like Azure Managed SQL or App Service Environments. A delegated subnet can host instances only of that specific service, so you cannot add an Azure SQL Managed Instance into a subnet delegated to App Service Environment. Consult the <a href="/cloud/azure/network/services.html">services configuration</a> document or Azure documentation to determine if this is required.</p>
+<p>Service Endpoints and Private Links are two different ways to privately connect to Azure PaaS services from your VNet. Service Endpoints route traffic to Azure services over the Azure backbone network while still using the service’s public endpoint. They allow you to restrict service access to your VNet, but traffic still uses the public IP namespace of the service, which has security implications. Private Links provide a private IP address endpoint inside your VNet for an Azure service, allowing you to connect as if the service were a private resource within your network. Private Links are generally more secure and are the recommended approach for most scenarios.</p>
+<p>A Private Endpoint is a network interface that uses a private IP address from your subnet to provide private connectivity to an Azure service. Unlike Service Endpoints, Private Endpoints do not require specific subnet configuration and can be placed in any subnet. This is the recommended way to connect to Azure PaaS services from your VNet. For more information on these options, see the <a href="https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview">Microsoft documentation</a>.</p>
+<p>It is recommended that Endpoints be placed in their own dedicated subnet, separate from other resources. This allows for better security, as you can apply specific security group rules to the endpoint subnet without affecting other resources.</p>
+<h2 id="network-security"><a class="header" href="#network-security">Network Security</a></h2>
+<p>Network Security Groups (NSGs) are used to allow or deny inbound and outbound traffic to resources in your subnets based on source and destination IP addresses, ports, and protocols. You can use NSGs to create a layered security model for your resources, allowing you to control traffic flow at both the subnet and resource level. See <a href="https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview">Network Security groups</a> for more information.</p>
+<p>When an NSG is associated with a subnet, the rules in that NSG apply to all resources within the subnet, and it is commonly used for delegated subnets or other services that do not expose individual network interface resources for more granular control. When an NSG is associated with a network interface, the rules in that NSG apply only to that specific resource.</p>
+<p>Application security groups (ASGs) are a way to group resources together for the purpose of applying NSG rules. ASGs allow you to define a group of resources based on their function or role, and then apply NSG rules to that group instead of individual resources or entire subnets. This can simplify management and improve security by allowing you to apply consistent rules to similar resources. For example, you could create an ASG for all of your web servers, which may be distributed across multiple subnets, and apply NSG rules to them to allow inbound HTTP and HTTPS traffic while blocking other types of traffic. See <a href="https://learn.microsoft.com/en-us/azure/virtual-network/application-security-groups">Application Security Groups</a> for more information.</p>
+<p>For recommendations on designing security for your network, see the <a href="https://learn.microsoft.com/en-us/azure/security/fundamentals/network-best-practices">Best practices for network security</a> guide.</p>
+<h2 id="route-tables"><a class="header" href="#route-tables">Route Tables</a></h2>
+<p>Route tables allow you to define custom routes for traffic leaving the subnet. Because all outbound traffic from your VNet must be inspected by the TAMU-managed firewall in the hub, a route table (UDR) named <code>routetable-outbound-{region}</code> is provided that routes all outbound traffic to the firewall.</p>
+<p>This route table will not automatically be <em>pre-associated</em> with new subnets, and it is best practice to intentionally associate the route table with any new subnets.</p>
+<blockquote class="blockquote-tag blockquote-tag-important">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p>
+<p>As a safeguard, Cloud Services has deployed a policy that will find subnets without a route table association and automatically apply this route table. There can be a varied and sometimes significant delay before this remediation occurs.</p>
 </blockquote>
-<p>This website is a resource for Texas A&amp;M University faculty, and staff to learn about the various infrastructure and platform services available at Texas A&amp;M University. This includes information about cloud services, platform services, and security policies and best practices.</p>
-<p>It is maintained by a distributed team of engineers in Technology Services who contribute information relevant to their area of expertise.</p>
-<h2 id="contributing"><a class="header" href="#contributing">Contributing</a></h2>
-<p>If you are a member of the Texas A&amp;M University community and would like to contribute to this website, please get involved over on <a href="https://github.com/tamu-edu/it-cloud-docs">GitHub</a>.</p>
+<p>Most customers will not need to modify or create any additional routes. If you have specific routing requirements for your workloads, it is recommended to consult with the Cloud Services team to ensure that your routing design is compatible with the overall network architecture and security requirements.</p>
+<h2 id="example-subnet-configurations"><a class="header" href="#example-subnet-configurations">Example Subnet Configurations</a></h2>
+<h3 id="basic-subnet-and-default-route-to-hub-firewall"><a class="header" href="#basic-subnet-and-default-route-to-hub-firewall">Basic Subnet and Default Route to Hub Firewall</a></h3>
+<p>The following subnet has a User-Defined Route (UDR) that directs all outbound traffic to the hub firewall.</p>
+<pre><code class="language-hcl">data "azurerm_route_table" "default_egress" {
+  name                = "default-egress-route-table"
+  resource_group_name = "rg-tamu-managed-network"
+}
+
+resource "azurerm_subnet" "workload" {
+  name                 = "workload"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = data.azurerm_virtual_network.spoke.name
+  address_prefixes     = ["10.0.0.0/28"]
+}
+
+resource "azurerm_subnet_route_table_association" "example" {
+  subnet_id      = azurerm_subnet.workload.id
+  route_table_id = data.azurerm_route_table.default_egress.id
+}
+</code></pre>
 
                     </main>
                 </div>

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Home - Clouds and Platforms</title>
+        <title>Design - Clouds and Platforms</title>
 
         <!-- Custom HTML head -->
 
@@ -33,7 +33,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "";
+            var path_to_root = "../../../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "aggie";
         </script>
 
@@ -283,7 +283,7 @@
                     <h1 class="menu-title">Clouds and Platforms</h1>
 
                     <div class="right-buttons">
-                        <a href="https://github.com/tamu-edu/it-cloud-docs/edit/main/src/index.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/tamu-edu/it-cloud-docs/edit/main/src/cloud/azure/network/design.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.8 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/></svg></span>
                         </a>
 
@@ -312,14 +312,112 @@
 
                 <div id="content" class="content">
                     <main>
-                        <blockquote class="blockquote-tag blockquote-tag-note">
-<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
-<p>This site is a work in progress and will be updated regularly.  Please check back frequently for updates.</p>
+                        <h1 id="azure-network-design"><a class="header" href="#azure-network-design">Azure Network Design</a></h1>
+<p>Texas state law and Texas A&amp;M University policies require that all TAMU networks be protected by a secure, managed boundary, and thus resources on those networks may not be directly accessible from the public internet. To meet these requirements, the TAMU-managed network in Azure is designed with a hub-and-spoke topology that centralizes traffic flow through shared Azure Front Door (AFD) with WAF rules and Azure Firewall (FW) for traffic analysis and logging.</p>
+<blockquote class="blockquote-tag blockquote-tag-important">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p>
+<p>The TAMU managed network will only be available in the <strong>South Central US</strong> region at launch. Additional regions may be added.</p>
 </blockquote>
-<p>This website is a resource for Texas A&amp;M University faculty, and staff to learn about the various infrastructure and platform services available at Texas A&amp;M University. This includes information about cloud services, platform services, and security policies and best practices.</p>
-<p>It is maintained by a distributed team of engineers in Technology Services who contribute information relevant to their area of expertise.</p>
-<h2 id="contributing"><a class="header" href="#contributing">Contributing</a></h2>
-<p>If you are a member of the Texas A&amp;M University community and would like to contribute to this website, please get involved over on <a href="https://github.com/tamu-edu/it-cloud-docs">GitHub</a>.</p>
+<h2 id="design-overview"><a class="header" href="#design-overview">Design Overview</a></h2>
+<p>Cloud Services operates and manages the hub network, including the shared AFD and FW services, while customers are responsible for their own spoke networks and resources. The following diagram illustrates the overall network design and traffic flow for the TAMU-managed network in Azure.</p>
+<pre class="mermaid">flowchart TB
+    internet_in(["🌐 Internet (ingress)"])
+
+    subgraph afd["Azure Front Door (Global)"]
+        direction TB
+        fd_waf["WAF Policy&lt;br&gt;(Geo-block · Bot · OWASP)"]
+        fd_lb["Layer-7 LB&lt;br&gt;(Hostname + Path Routing&lt;br&gt;TLS Termination)"]
+        fd_waf --&gt; fd_lb
+    end
+
+    %% Ingress: HTTP/HTTPS via Front Door
+    internet_in --&gt;|"HTTP/HTTPS"| afd
+    fd_lb -- Private origin&lt;br&gt;(HTTPS) --&gt; svc_a1
+    fd_lb -- Private origin&lt;br&gt;(HTTPS) --&gt; svc_b1
+
+    %% Ingress: TCP/UDP via Firewall DNAT
+    internet_in --&gt;|"TCP/UDP"| fw
+    fw --&gt;|"DNAT private IP"| svc_a2
+    fw --&gt;|"DNAT private IP"| svc_b2
+
+
+    subgraph hub["HUB VNet - Cloud Team"]
+        direction TB
+        fw["Azure Firewall&lt;br&gt;(Inspection · DNAT · Egress)"]
+        nat["NAT Gateway"]
+        gw["ExpressRoute"]
+        fw --&gt; nat
+        fw ~~~ gw
+    end
+
+    subgraph spoke_a["Spoke VNet — Customer A"]
+        svc_a1["Private Service&lt;br&gt;(App Service / App Gateway)"]
+        svc_a2["Private Service&lt;br&gt;(VM / Container)"]
+    end
+
+    subgraph spoke_b["Spoke VNet — Customer B"]
+        svc_b1["Private Service&lt;br&gt;(App Service / App Gateway)"]
+        svc_b2["Private Service&lt;br&gt;(VM / Container)"]
+    end
+    
+    wan(["🏛️ Campus / WAN"])
+    internet_out(["🌐 Internet (egress)"])
+
+
+    %% Spoke → HUB peering (egress / response)
+    %% svc_a1 &amp; svc_a2 &lt;-- VNet Peering --&gt; fw
+    %% svc_b1 &amp; svc_b2 &lt;-- VNet Peering --&gt; fw
+    
+    %% Egress to internet
+    spoke_a --&gt;|"Default Route"| fw
+    nat --&gt;|"Outbound internet"| internet_out
+    spoke_b --&gt;|"Default Route"| fw
+
+    %% WAN connectivity
+    gw &lt;--&gt; wan
+    spoke_a &lt;--&gt; gw
+    spoke_b &lt;--&gt; gw
+</pre>
+
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Key:</strong>
+All <em>inbound</em> internet traffic enters through Azure Front Door (HTTP/HTTPS) or Azure Firewall DNAT (TCP/UDP). All <em>outbound</em> internet traffic exits through Azure Firewall and NAT Gateway. Customer spoke VNets have no direct internet path. WAN connectivity (campus networks, other clouds) is provided through the HUB via ExpressRoute or VPN Gateway.</p>
+</blockquote>
+<h2 id="implementation-details"><a class="header" href="#implementation-details">Implementation Details</a></h2>
+<ul>
+<li><strong>Hub-and-Spoke Topology</strong>: The network is designed with a hub-and-spoke topology, where the hub contains shared services (AFD, FW) and the spokes contain customer resources. This allows for centralized management of security and traffic flow while still providing flexibility for customers to manage their own resources in their spoke VNets.</li>
+<li><strong>Azure Front Door</strong>: AFD is used for all HTTP/HTTPS traffic, providing global load balancing, SSL termination, and WAF capabilities. This allows for secure and performant access to web applications and services hosted in Azure. AFD is configured with WAF policies that include geo-blocking, bot protection, and OWASP rule sets to protect against common web vulnerabilities.</li>
+<li><strong>Azure Firewall</strong>: FW is used for all other TCP/UDP traffic, providing stateful inspection, DNAT for inbound traffic, and egress control for outbound traffic. This allows for secure access to non-web workloads while still allowing for inspection and control of traffic. FW is also used to route traffic between the hub and spoke VNets, ensuring that all traffic is inspected and logged appropriately.</li>
+<li><strong>Private Connectivity</strong>: The TAMU-managed network in Azure is connected to the campus network through ExpressRoute, providing a private, high-speed connection for secure access to resources in Azure. This allows for secure access to Azure resources without exposing them to the public internet, while still allowing for connectivity to on-premises resources and other cloud environments as needed.</li>
+<li><strong>Pre-configuration and Defaults</strong>: The network is pre-configured with certain defaults and restrictions to ensure that resources are deployed in a secure and compliant manner. For example, public subnets are disallowed, and all subnets are private by default. Additionally, certain services, such as App Service, are configured to require Private Endpoints for connectivity to the VNet, ensuring that they are not exposed to the public internet.</li>
+<li><strong>Policy Enforcement</strong>: Azure Policy is used to enforce compliance with the network design and security requirements. This includes policies that restrict the creation of public subnets, require the use of Private Endpoints for certain services, and ensure that all resources are deployed within the TAMU-managed network.</li>
+</ul>
+<h3 id="azure-front-door"><a class="header" href="#azure-front-door">Azure Front Door</a></h3>
+<p>Azure Front Door is a global, scalable entry point for web applications and services hosted in Azure. It provides features such as SSL termination, global load balancing, and Web Application Firewall (WAF) capabilities to protect against common web vulnerabilities. In the TAMU-managed network design, AFD is used as the primary entry point for all HTTP/HTTPS traffic, allowing for secure and performant access to web applications and services.</p>
+<p>Cloud Services operates a shared instance of Azure Front Door that can be used by all customers in the TAMU-managed network. Customers can request to have their web applications or services added as origins to the shared AFD instance, and Cloud Services will configure the necessary routing and WAF policies to ensure secure access. Custom domains are supported and certificates will be managed by AFD and Cloud Services with automatic renewals.</p>
+<p>Currently, this is a manual request and configuration process, but in the future we plan to automate this through self-service tools and integration with Azure services.</p>
+<h3 id="azure-firewall"><a class="header" href="#azure-firewall">Azure Firewall</a></h3>
+<p>Azure Firewall is a stateful firewall service that provides network and application-level protection for resources in Azure. It is used in the TAMU-managed network design to implement required rules to implement security controls, such as geoblocking and other targeted restrictions, and provide connectivity for non-web workloads that require public access.</p>
+<p>The firewall is also used to route traffic between Azure virtual networks.</p>
+<p>Customers can request to have their non-HTTP/S services opened through the firewall. Currently, this is a manual request and configuration process, and is subject to review by IT Security &amp; Risk, but in the future we plan to automate this through self-service tools and integration with Azure services.</p>
+<h3 id="expressroute-connectivity"><a class="header" href="#expressroute-connectivity">ExpressRoute connectivity</a></h3>
+<p>The hub network uses ExpressRoute to provide a private, high-speed, low-latency connection between the campus network and Azure network. This allows for secure access to Azure resources without exposing them to the public internet, while still allowing for connectivity to on-premises resources and other cloud environments as needed.</p>
+<p>In general, it is recommended to architect your service in a way that minimizes dependencies on services on other networks or locations. This will help reduce the total points of failure of your service and make it more resilient. If this cannot be avoided, consider extending the dependency into the cloud rather than relying on private connectivity back to the campus network, or syncing and caching the data from that service. If you do need to rely on private connectivity back to the campus network, ensure that you have implemented appropriate error handling and/or retry logic in your service to account for potential connectivity issues, and consider the impact of such issues on your overall service availability and performance.</p>
+<h2 id="provisioning-and-configuration"><a class="header" href="#provisioning-and-configuration">Provisioning and Configuration</a></h2>
+<p>Customer VNets (“spoke networks”) are provisioned by Cloud Services with one or more IP address ranges (CIDR) allocated to it from a pool of address space. The default allocation will be 32 IP addresses (27 usable), but can be grown as needed.</p>
+<p>Our default Azure region is <code>South Central US</code>, as it is closest to the TAMU campus and a majority of our user base and will have the lowest latency, and virtual networks will be provisioned in this region unless otherwise requested. Follow the guidance in <a href="/cloud/azure/network/creating_subnets.html">creating subnets</a> for dividing your address space into subnets and connecting resources to those subnets. If you need to, work with Cloud Services to ensure your VNet address space and subnet design align with your solution’s need and recommended best practices.</p>
+<p>By default, no subnets will be created in spoke VNets since subnet design can vary greatly based on the types of resources being deployed. The customer is responsible for creating and configuring their own subnets within their VNet, but Cloud Services can provide guidance and best practices for doing so.</p>
+<p>All subnets shall be private with no direct access to or from the public internet. A user-defined route (UDR) shall be created to route outbound internet traffic through the Azure Firewall and NAT Gateway services in the hub VNet and will need to be associated with each subnet. An Azure policy will be put in place to prevent the creation of public subnets, and to ensure that all subnets have the default UDR attached.</p>
+<h2 id="public-resources"><a class="header" href="#public-resources">Public Resources</a></h2>
+<p>Resources that need to be accessible from the internet will be connected to private subnets and corresponding configurations applied to the hub services to allow for secure access. This includes Azure PaaS services that normally have a public endpoint, such as App Service, which will need to be connected to the VNet via Private Endpoints and have their public access disabled.</p>
+<p>Azure Policies will be put in place to enforce the required configurations for public resources. See <a href="/cloud/azure/network/policies.html">Policies and Enforcement</a> for more information about the policies that will be applied to the TAMU-managed network in Azure.</p>
+<h2 id="spoke-to-spoke-communication"><a class="header" href="#spoke-to-spoke-communication">Spoke-to-Spoke Communication</a></h2>
+<p>The TAMU-managed Azure network has adopted a zero-trust model, and as such, by default, communication between spoke VNets is not allowed. If you have a use case that requires communication between spoke VNets, there are two options:</p>
+<ul>
+<li>You can request to have the necessary firewall rules added to the shared Azure Firewall instance to allow for secure communication between the spokes, or from all spokes to a specific spoke, if for instance you operate a shared service in your spoke. This is the recommended approach, as it allows for secure communication while still allowing for inspection and control of traffic through the firewall.</li>
+<li>If both spokes are managed by the same customer, or the other spoke is a trusted partner, you can peer the two spoke VNets together and create NSG rules to allow for communication between them. This bypasses the firewall and should only be done when appropriate.</li>
+</ul>
 
                     </main>
                 </div>
