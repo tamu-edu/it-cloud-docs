@@ -51,9 +51,9 @@ For other types of resources that need to be accessible from the internet, Azure
 
 ## CI/CD Access
 
-Some customers are using CI/CD workflows or other automated processes to deploy resources to Azure. The Azure Resource Manager (ARM) API is accessible from the internet, so you can deploy resources to your Azure subscription and VNet from any location with internet access, including from GitHub Actions or other CI/CD platforms. No additional access is required for this.
+Some customers use CI/CD workflows or other automation to deploy Azure resources by sending requests to Azure Resource Manager (ARM). ARM is the Azure **control plane** API and is reachable from the internet, so a pipeline running in GitHub Actions (or any internet-connected runner) can create, update, or delete resources in your subscription without private network access.
 
-However, if your CI/CD workflow needs to access resources in your VNet (for example, to publish or test a web application to a private App Service, or to access a private database), you will need additional configuration to connect to those resources securely.
+However, if your CI/CD workflow needs to connect to resources in your VNet (for example, to publish or test a web application to a private App Service, or to access a private database), you will a connection path into the TAMU managed network, or **data plane**.
 
 ### GitHub Actions
 
