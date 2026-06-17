@@ -29,13 +29,6 @@ Any resource that meets this criterion must be connected in such a way that all 
 > [!IMPORTANT]
 > The TAMU managed network will only be available in the **South Central US** region at launch. Additional regions may be added.
 
-<!-- TODO: decide if we want to keep this level of detail about the inspection points here, or if we want to move it to the Services Configuration page, or leave these details on the design page only -->
-<!-- The required inspection point depends on the service type and traffic pattern:
-
-- **IaaS and VNet-based workloads**: inbound and outbound traffic must be routed through Azure Firewall, including internet egress from virtual networks.
-- **Public web application workloads**: internet-facing HTTP/S traffic must be fronted by Azure Front Door with Web Application Firewall enabled.
-- **Private or internal workloads**: must not be directly accessible from the internet and should use private connectivity options such as Azure Private Link or Service Endpoints to connect to Azure PaaS services. -->
-
 ## Using the Network
 
 When a new Azure subscription is set up, Cloud Services provisions a spoke VNet for you in the South Central US region, or other approved region(s). VNets are allocated a default address space of `/27` (32 IP addresses) from a centrally managed pool — you cannot choose the range yourself. You are responsible for dividing this address space into subnets that fit your workloads.
