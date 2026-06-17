@@ -335,7 +335,7 @@
 </ol>
 </li>
 <li>All other resources should use a private subnet.</li>
-<li>More information on the network and subnets can be found <a href="https://docs.cloud.tamu.edu/cloud/aws/networking.html#reference">here</a>.</li>
+<li>More information on the network and subnets can be found <a href="/cloud/aws/network.html#using-subnets">here</a>.</li>
 </ol>
 </li>
 <li>Copy any security groups in use by your resource to the new VPC.
@@ -352,7 +352,7 @@
 <li>The overall pattern you will want to follow is to create new resources in your terraform code that are bound to the new, shared VPC (i.e. ALB and associated resources, subnet group for RDS, security groups, etc.) side by side with old version bound to the old VPC. Next, move the resource(s) that depends on these things to use the new resource. Lastly, delete the old resource(s) pointing to the old VPC.</li>
 <li>You can’t update security groups in Terraform if there are resources already depending on them. Instead, create new security groups, point old resources to them, then delete old security groups.</li>
 <li>When creating security groups, wherever possible, don’t rely on CIDR blocks if you are trying to limit access to one resource to another managaed resource. Instead, use <code>security_groups</code>. I.e. <code>security_groups   = [aws_security_group.&lt;resource_name&gt;.id]</code>. This will allow Amazon to use its knowledge of the resources represented by the other security group to limit access.</li>
-<li>See this page for <a href="https://docs.cloud.tamu.edu/cloud/aws/networking.html#using-subnets-with-terraform">details on referencing subnets with Terraform</a></li>
+<li>See this page for <a href="/cloud/aws/network.html#using-subnet-with-terraform">details on referencing subnets with Terraform</a></li>
 </ul>
 <h3 id="ec2-instances"><a class="header" href="#ec2-instances">EC2 Instances</a></h3>
 <p>It’s not possible to move an existing instance to another subnet, Availability Zone, or VPC. Instead, you can create a new Amazon Machine Image (AMI) from the source instance to manually migrate the instance. Next, use the new AMI to launch a new instance in the desired subnet, Availability Zone, or VPC. And finally, reassign any Elastic IP addresses from the source instance to the new instance. Note that if you need to migrate to a supported region, Elastic IP addresses are not portable across regions and will change.</p>
@@ -417,7 +417,7 @@
 </blockquote>
 <blockquote class="blockquote-tag blockquote-tag-note">
 <p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
-<p>Details for moving an RDS instance out of an Availability Zone: <a href="https://repost.aws/knowledge-center/rds-move-availability-zone">How do I move an Amazon RDS instance out of an Availability Zone?</a> Note that you will need to be sure that the AZ that the RDS is moved to is <a href="https://docs.cloud.tamu.edu/cloud/aws/networking.html#using-subnets">one of the supported AZ’s</a></p>
+<p>Details for moving an RDS instance out of an Availability Zone: <a href="https://repost.aws/knowledge-center/rds-move-availability-zone">How do I move an Amazon RDS instance out of an Availability Zone?</a> Note that you will need to be sure that the AZ that the RDS is moved to is <a href="/cloud/aws/network.html#using-subnets">one of the supported AZ’s</a></p>
 </blockquote>
 <h3 id="redshift-clusters"><a class="header" href="#redshift-clusters">Redshift Clusters</a></h3>
 <p>To move a Redshift cluster to a different subnet group, you can modify the cluster to use the new subnet group. If you need to move to a different VPC, you can create a snapshot of the cluster and restore it in the new VPC.</p>

@@ -326,7 +326,7 @@
 <li>NSGs on AKS subnets must permit the platform traffic AKS requires plus your application traffic from approved sources. Avoid blocking intra-cluster traffic between the node subnet and pod subnet.</li>
 <li>For internet-facing application traffic, expose workloads through an <strong>internal</strong> ingress controller or internal load balancer service (<code>service.beta.kubernetes.io/azure-load-balancer-internal: "true"</code>) and front it with the shared hub-managed Azure Front Door via Private Link.</li>
 <li>Container images must be pulled from a private Azure Container Registry with a Private Endpoint where possible. Public registry pulls will traverse the hub firewall and may be subject to filtering.</li>
-<li>Administrative access (<code>kubectl</code>, <code>az aks command invoke</code>) must use private networking. Use Azure Bastion to a jump host in the VNet, the campus VPN, or <code>az aks command invoke</code> (which tunnels through the Azure control plane) — see <a href="/access_methods.html">Access Methods</a>.</li>
+<li>Administrative access (<code>kubectl</code>, <code>az aks command invoke</code>) must use private networking. Use Azure Bastion to a jump host in the VNet, the campus VPN, or <code>az aks command invoke</code> (which tunnels through the Azure control plane) — see <a href="/cloud/azure/network/access_methods.html">Access Methods</a>.</li>
 <li>The cluster identity must have appropriate RBAC on the spoke VNet, node subnet, pod subnet, and any private DNS zones used for the private API server. Use a user-assigned managed identity to keep these role assignments stable across cluster lifecycle operations.</li>
 </ul>
 <h2 id="implementation-pattern"><a class="header" href="#implementation-pattern">Implementation Pattern</a></h2>
@@ -405,7 +405,7 @@
 <li><strong>Internal load balancer service / internal ingress controller</strong> — Annotate <code>Service</code> resources of type <code>LoadBalancer</code> with <code>service.beta.kubernetes.io/azure-load-balancer-internal: "true"</code>, or deploy an ingress controller (NGINX, Traefik, AGIC, etc.) configured to use an internal LB. The resulting private IP is reachable from anywhere in the managed network and from the campus network.</li>
 <li><strong>AFD-fronted public ingress</strong> — For workloads that must be reachable from the internet, the internal load balancer / ingress controller from pattern 1 becomes the AFD origin. Submit a Cloud Services request with the custom domain (if any), the internal hostname or IP, and any required WAF or routing rules. AFD will create a managed Private Endpoint to the load balancer, which you must approve.</li>
 </ol>
-<p>For more information, see <a href="/access_methods.html">Access Methods</a>.</p>
+<p>For more information, see <a href="/cloud/azure/network/access_methods.html">Access Methods</a>.</p>
 <h3 id="image-pulls-and-azure-container-registry"><a class="header" href="#image-pulls-and-azure-container-registry">Image Pulls and Azure Container Registry</a></h3>
 <p>Configure your cluster to pull images from a private Azure Container Registry with a Private Endpoint in the spoke VNet (or another reachable VNet). Attach the ACR to the cluster either by granting the kubelet identity <code>AcrPull</code> on the registry or by using <code>--attach-acr</code> at cluster creation. Ensure the ACR’s Private DNS zone (<code>privatelink.azurecr.io</code>) resolves correctly from the cluster — DNS records are managed automatically in the hub Private DNS zones; contact Cloud Services if resolution fails.</p>
 <p>If your workloads must pull from public registries (Docker Hub, quay.io, gcr.io, etc.), submit a Cloud Services request to permit the required FQDNs through the hub firewall. Consider mirroring critical public images into your private ACR to reduce dependency on internet-hosted registries and to avoid Docker Hub pull rate limits.</p>
@@ -416,7 +416,7 @@
 <li><strong>Campus network / VPN</strong> — Run <code>kubectl</code> and <code>az aks</code> commands from a workstation on the campus network or connected via Campus VPN, since the spoke VNet is reachable on its private IPs from those networks.</li>
 <li><strong><code>az aks command invoke</code></strong> — Tunnels commands through the Azure control plane to the cluster, requires no direct network reachability to the API server, and is useful for break-glass access. See <a href="https://learn.microsoft.com/en-us/azure/aks/access-private-cluster">Use <code>command invoke</code> to access a private cluster</a>.</li>
 </ul>
-<p>See <a href="/access_methods.html">Access Methods</a> for the full list of approved administrative access patterns.</p>
+<p>See <a href="/cloud/azure/network/access_methods.html">Access Methods</a> for the full list of approved administrative access patterns.</p>
 <h2 id="migrating"><a class="header" href="#migrating">Migrating</a></h2>
 <p>To convert an existing public AKS cluster to a privately networked configuration:</p>
 <ol>
