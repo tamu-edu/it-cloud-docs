@@ -113,7 +113,7 @@ The steps below are generalized for new or existing Function Apps.
 2. Under `Outbound traffic`, configure VNet Integration to the designated delegated subnet.
 3. Under `Inbound traffic`, configure a Private Endpoint targeting the private endpoint subnet.
 4. In Function App `Settings` > `Configuration` (or `Environment variables`), set `Public network access` to `Disabled`.
-5. Open the target subnet(s) > `Route table` and verify the hub firewall UDR is associated. See [Route Tables](/cloud/azure/network/creating_subnets.md#route-tables) for details.
+5. Open the target subnet(s) > `Route table` and verify the hub firewall UDR is associated. See [Route Tables](../creating_subnets.md#route-tables) for details.
 6. Review NSGs on the private endpoint subnet and verify only required ports and approved source ranges are allowed.
 
 ## Migrating
