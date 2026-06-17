@@ -335,12 +335,6 @@
 <p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p>
 <p>The TAMU managed network will only be available in the <strong>South Central US</strong> region at launch. Additional regions may be added.</p>
 </blockquote>
-<!-- TODO: decide if we want to keep this level of detail about the inspection points here, or if we want to move it to the Services Configuration page, or leave these details on the design page only -->
-<!-- The required inspection point depends on the service type and traffic pattern:
-
-- **IaaS and VNet-based workloads**: inbound and outbound traffic must be routed through Azure Firewall, including internet egress from virtual networks.
-- **Public web application workloads**: internet-facing HTTP/S traffic must be fronted by Azure Front Door with Web Application Firewall enabled.
-- **Private or internal workloads**: must not be directly accessible from the internet and should use private connectivity options such as Azure Private Link or Service Endpoints to connect to Azure PaaS services. -->
 <h2 id="using-the-network"><a class="header" href="#using-the-network">Using the Network</a></h2>
 <p>When a new Azure subscription is set up, Cloud Services provisions a spoke VNet for you in the South Central US region, or other approved region(s). VNets are allocated a default address space of <code>/27</code> (32 IP addresses) from a centrally managed pool — you cannot choose the range yourself. You are responsible for dividing this address space into subnets that fit your workloads.</p>
 <h3 id="subnets"><a class="header" href="#subnets">Subnets</a></h3>
