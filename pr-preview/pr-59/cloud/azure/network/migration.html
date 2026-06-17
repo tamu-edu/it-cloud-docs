@@ -346,7 +346,7 @@
 <h2 id="migration-procedure"><a class="header" href="#migration-procedure">Migration Procedure</a></h2>
 <h3 id="1-assess-which-resources-need-to-be-migrated-to-the-managed-network"><a class="header" href="#1-assess-which-resources-need-to-be-migrated-to-the-managed-network">1. Assess which resources need to be migrated to the managed network</a></h3>
 <p>Consult the <a href="/pr-preview/pr-59/cloud/azure/network/services.html">Service Configuration</a> documentation to identify which of your resources need to be migrated to the managed network and what specific configuration changes are required for each resource type. In general, any services which need network connectivity to make outbound connections or handle inbound connections will need to be reconfigured to use private networking and route traffic through the hub.</p>
-<p>In some cases, you may not need to use a service any longer if its functionality can be replaced by Azure Front Door or Azure Firewall.</p>
+<p>In some cases, you may not need to use a service any longer if its functionality can be replaced by the centralized Azure Front Door or Azure Firewall in the hub.</p>
 <p>An important part of this migration will also be to consolidate resources into approved Azure regions where the managed network infrastructure exists.</p>
 <h3 id="2-plan-the-migration"><a class="header" href="#2-plan-the-migration">2. Plan the migration</a></h3>
 <p>Once you know which resources need to be migrated, create a detailed migration plan that outlines the steps for each resource, the order of operations, and any dependencies between resources. This plan should include both network configuration changes and resource-specific migration steps.</p>
