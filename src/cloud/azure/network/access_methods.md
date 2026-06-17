@@ -13,7 +13,7 @@ These access methods will vary based on the type of resource and the connectivit
 
 ## Private Link, Private Endpoints, and Private DNS
 
-Private Link and Private Endpoints allow you to access the service over a private IP address within your virtual network, rather than over the public internet, and enable many of the access methods described below. Private DNS is an important part of ensure this service works as expected.
+Private Link and Private Endpoints allow you to access a resource over a private IP address within your virtual network, rather than over the public internet, and enable many of the access methods described below. Private DNS is an important part of ensure this service works as expected.
 
 See the [Private Endpoints & DNS](private_endpoints_dns.md) documentation for more information on how Private DNS is used to enable private network access to services via Private Link and Private Endpoints.
 
