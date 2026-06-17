@@ -94,9 +94,9 @@ Currently, this is a manual request and configuration process, but in the future
 
 Azure Firewall is a stateful firewall service that provides network and application-level protection for resources in Azure. It is used in the TAMU-managed network design to implement required rules to implement security controls, such as geoblocking and other targeted restrictions, and provide connectivity for non-web workloads that require public access.
 
-The firewall is also used to route traffic between Azure virtual networks and campus networks.
+The firewall is also used to route traffic between Azure virtual networks.
 
-Customers can request to have firewall rules added to the shared Azure Firewall instance to allow for secure access to their resources from the internet or other networks. Currently, this is a manual request and configuration process, but in the future we plan to automate this through self-service tools and integration with Azure services.
+Customers can request to have their non-HTTP/S services opened through the firewall. Currently, this is a manual request and configuration process, and is subject to review by IT Security & Risk, but in the future we plan to automate this through self-service tools and integration with Azure services.
 
 ### ExpressRoute connectivity
 
