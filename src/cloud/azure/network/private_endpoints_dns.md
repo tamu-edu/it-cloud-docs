@@ -1,4 +1,4 @@
-# Private Link
+# Private Link, Private Endpoints, and Private DNS
 
 Private Link and Private Endpoint provide a way to securely connect to Azure services and your own services over a private network connection. A Private Endpoint is a network interface that connects you privately and securely to a service powered by Private Link. Private Endpoints are most commonly used for Azure PaaS services, such as Azure Storage, Azure SQL Database, and Azure Key Vault.
 
