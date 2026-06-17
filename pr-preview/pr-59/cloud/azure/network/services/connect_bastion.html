@@ -312,7 +312,87 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="bastion-hosts"><a class="header" href="#bastion-hosts">Bastion Hosts</a></h1>
+                        <h1 id="azure-bastion"><a class="header" href="#azure-bastion">Azure Bastion</a></h1>
+<ul>
+<li>
+<p><strong>Rule:</strong> Direct RDP/SSH access to virtual machines from the public internet is not permitted. Administrative access to VMs in spoke VNets must be performed through the centrally managed Azure Bastion service in the hub VNet.</p>
+</li>
+<li>
+<p><strong>Action:</strong> Use the shared hub-managed Azure Bastion instance to connect to your VMs over RDP/SSH via the Azure portal. No per-spoke Bastion deployment is required or permitted.</p>
+</li>
+<li>
+<p>VMs must not have public IP addresses assigned for administrative access.</p>
+</li>
+<li>
+<p>NSGs on VM subnets should permit inbound RDP (3389) and/or SSH (22) traffic from the hub Bastion subnet (<code>AzureBastionSubnet</code>) address range for administrative access via Azure Bastion.</p>
+</li>
+<li>
+<p>The shared Bastion is available to all spokes peered to the hub. Because spokes are peered to the hub VNet, the hub Bastion automatically appears as a connection option in the Azure portal when connecting to any VM in a peered spoke — no additional configuration is required by the customer.</p>
+</li>
+<li>
+<p>Bastion access is governed by Azure RBAC. Users must have at least <code>Reader</code> on the VM, the VM’s NIC, and the Bastion resource to initiate a session. Request access through Cloud Services if your account does not see the hub Bastion as an option.</p>
+</li>
+<li>
+<p>See <a href="/pr-preview/pr-59/access_methods.html">Access Methods</a> for the full list of approved administrative access patterns.</p>
+</li>
+</ul>
+<h2 id="implementation-pattern"><a class="header" href="#implementation-pattern">Implementation Pattern</a></h2>
+<h3 id="shared-hub-bastion"><a class="header" href="#shared-hub-bastion">Shared Hub Bastion</a></h3>
+<p>Cloud Services operates a single Azure Bastion instance in the hub VNet that is shared across all customer spokes. Because your spoke VNet is peered to the hub, the Bastion service is reachable from any VM in your spoke without any additional networking configuration on your part.</p>
+<p>When you open a VM in the Azure portal and select <strong>Connect → Bastion</strong>, the portal will automatically detect and offer the hub Bastion instance. You do not need to deploy your own Bastion, create an <code>AzureBastionSubnet</code> in your spoke, or configure peering specifically for Bastion - it is handled centrally.</p>
+<p>For background and feature details, see the Microsoft documentation:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/bastion/bastion-overview">What is Azure Bastion?</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/bastion/bastion-connect-vm-rdp-windows">Connect to a VM using Bastion (Windows)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/bastion/bastion-connect-vm-ssh-linux">Connect to a VM using Bastion (Linux)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/bastion/vnet-peering">Bastion and VNet peering</a></li>
+</ul>
+<h3 id="connecting-to-a-vm"><a class="header" href="#connecting-to-a-vm">Connecting to a VM</a></h3>
+<p>Follow the Microsoft how-to for <a href="https://learn.microsoft.com/en-us/azure/bastion/bastion-connect-vm-rdp-windows#connect">connecting to a VM via Bastion from the Azure portal</a>. The key points for the TAMU managed network are:</p>
+<ol>
+<li>Navigate to your VM in the Azure portal.</li>
+<li>Select <strong>Connect</strong>, then choose the <strong>Bastion</strong> tab.</li>
+<li>The shared hub Bastion will appear automatically as the available Bastion host. You will not be prompted to create a new one.</li>
+<li>Enter your VM credentials (username/password, SSH key, or Azure AD login if configured) and select <strong>Connect</strong>.</li>
+<li>A browser-based RDP or SSH session will open in a new tab.</li>
+</ol>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>If the Bastion option does not appear, or you receive a permissions error, confirm that:</p>
+<ul>
+<li>Your spoke VNet is peered to the hub (this is the default for managed spokes).</li>
+<li>Your account has at least <code>Reader</code> role on the VM, its NIC, and the hub Bastion resource.</li>
+<li>The VM’s NSG permits RDP/SSH from the <code>AzureBastionSubnet</code> range in the hub.</li>
+</ul>
+<p>Contact Cloud Services if any of the above need to be addressed.</p>
+</blockquote>
+<h3 id="native-client-access-optional"><a class="header" href="#native-client-access-optional">Native Client Access (Optional)</a></h3>
+<p>For users who prefer to use a native RDP or SSH client (rather than the browser), Azure Bastion supports tunneling through the Azure CLI. This requires the Bastion instance to be on the Standard SKU or higher, which the hub Bastion provides.</p>
+<p>See the Microsoft documentation for <a href="https://learn.microsoft.com/en-us/azure/bastion/connect-native-client-windows">connecting using a native client</a>. Example:</p>
+<pre><code class="language-bash">az network bastion ssh \
+  --name &lt;hub-bastion-name&gt; \
+  --resource-group &lt;hub-resource-group&gt; \
+  --target-resource-id &lt;your-vm-resource-id&gt; \
+  --auth-type ssh-key \
+  --username azureuser \
+  --ssh-key ~/.ssh/id_rsa
+</code></pre>
+<p>The hub Bastion name and resource group can be obtained from Cloud Services.</p>
+<h2 id="file-transfer"><a class="header" href="#file-transfer">File Transfer</a></h2>
+<p>The shared hub Bastion is provisioned at a SKU that supports file upload/download during browser-based sessions. See <a href="https://learn.microsoft.com/en-us/azure/bastion/vm-upload-download-native">Upload and download files using Bastion</a> for details. If you require file transfer functionality and it is not available in your session, contact Cloud Services.</p>
+<h2 id="migrating"><a class="header" href="#migrating">Migrating</a></h2>
+<p>If you currently rely on a public IP and direct RDP/SSH for VM administration:</p>
+<ol>
+<li>Confirm your VM is in a spoke VNet peered to the hub (managed spokes already are).</li>
+<li>Update the VM’s NSG to allow inbound RDP/SSH from the hub <code>AzureBastionSubnet</code> range and remove rules permitting RDP/SSH from the public internet.</li>
+<li>Test connectivity by opening the VM in the Azure portal and selecting <strong>Connect → Bastion</strong>. Confirm the shared hub Bastion is offered and that you can establish a session.</li>
+<li>Once validated, remove the public IP from the VM’s NIC.</li>
+<li>Update any operational runbooks or documentation referencing the previous public IP-based access pattern.</li>
+</ol>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>Removing the public IP will immediately end any active RDP/SSH sessions established over the public internet. Validate Bastion access first before removing public IPs in production.</p>
+</blockquote>
 
                     </main>
                 </div>
