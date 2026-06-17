@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Container Apps - Clouds and Platforms</title>
+        <title>Private Endpoints &amp; DNS - Clouds and Platforms</title>
 
         <!-- Custom HTML head -->
 
@@ -33,7 +33,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "../../../../";
+            var path_to_root = "../../../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "aggie";
         </script>
 
@@ -283,7 +283,7 @@
                     <h1 class="menu-title">Clouds and Platforms</h1>
 
                     <div class="right-buttons">
-                        <a href="https://github.com/tamu-edu/it-cloud-docs/edit/main/src/cloud/azure/network/services/connect_container_app.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/tamu-edu/it-cloud-docs/edit/main/src/cloud/azure/network/private_endpoints_dns.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.8 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/></svg></span>
                         </a>
 
@@ -312,148 +312,25 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="azure-container-apps"><a class="header" href="#azure-container-apps">Azure Container Apps</a></h1>
-<ul>
-<li>
-<p><strong>Rule:</strong> Azure Container Apps environments may not be exposed directly to the public internet and must be deployed in <strong>internal-only</strong> mode within the spoke VNet.</p>
-</li>
-<li>
-<p><strong>Action:</strong> Deploy a Container Apps environment with VNet integration in <strong>internal</strong> mode using a dedicated subnet in the spoke VNet, with outbound traffic routed through the hub firewall, and use a Private Endpoint or hub-managed AFD for ingress.</p>
-</li>
-<li>
-<p>The Container Apps environment must be created with <code>internal_load_balancer_enabled = true</code> (the <strong>internal</strong> networking mode) so the environment receives a private IP only.</p>
-</li>
-<li>
-<p>A dedicated subnet must be provided for the environment. The minimum subnet size depends on the workload profile type — see <a href="https://learn.microsoft.com/en-us/azure/container-apps/networking">Networking in Container Apps</a> for current minimums (typically <code>/27</code> for Consumption-only and <code>/23</code> for workload profiles environments).</p>
-</li>
-<li>
-<p>The environment subnet must have a User Defined Route (UDR) directing outbound traffic (<code>0.0.0.0/0</code>) to the hub firewall. Container Apps supports UDR on workload profiles environments; verify your environment type supports the UDR configuration you require.</p>
-</li>
-<li>
-<p>NSGs on the environment subnet must permit the platform traffic required by Container Apps (see <a href="https://learn.microsoft.com/en-us/azure/container-apps/firewall-integration">NSG allow rules</a>) in addition to your application’s inbound traffic from approved sources.</p>
-</li>
-<li>
-<p>For inbound private access from within the managed network, use a Private Endpoint targeting the managed environment, or rely on the environment’s internal load balancer IP if Private Endpoint is not required.</p>
-</li>
-<li>
-<p>For internet-facing application traffic, work with Cloud Services to configure hub-managed ingress via the shared Azure Front Door (AFD) instance using a Private Endpoint to the Container Apps environment.</p>
-</li>
-<li>
-<p>Container images should be pulled from a private Azure Container Registry with a Private Endpoint where possible.</p>
-</li>
-<li>
-<p>Administrative access (console, log streaming) traverses the Azure control plane and does not require public network exposure on the environment itself. See <a href="/pr-preview/pr-59/access_methods.html">Access Methods</a> for details.</p>
-</li>
-</ul>
-<h2 id="implementation-pattern"><a class="header" href="#implementation-pattern">Implementation Pattern</a></h2>
-<h3 id="azure-front-door"><a class="header" href="#azure-front-door">Azure Front Door</a></h3>
-<p>If you intend to publish your container app to the internet, the recommended approach is to do so through the hub-managed Azure Front Door (AFD). AFD supports Container Apps environments as a Private Link origin, so a managed private endpoint will be created by AFD and must be approved by you on the environment before traffic flows.</p>
-<p>When using AFD-managed private endpoints, only AFD can access your environment over that private endpoint, and internet-facing traffic must go through AFD. Internal/private traffic from other resources or networks will continue to use the environment’s internal load balancer IP or a separately provisioned Private Endpoint.</p>
-<p>For more information, see <a href="/pr-preview/pr-59/access_methods.html">Access Methods</a>.</p>
-<h3 id="internal-container-apps-environment-with-private-endpoint"><a class="header" href="#internal-container-apps-environment-with-private-endpoint">Internal Container Apps Environment with Private Endpoint</a></h3>
-<p>The standard pattern in the TAMU managed network is a Container Apps environment created in <strong>internal</strong> mode in a dedicated subnet of the spoke VNet, with outbound traffic forced through the hub firewall, and inbound access provided either by the environment’s internal load balancer IP or via a Private Endpoint.</p>
-<p>You may follow the Microsoft documentation for <a href="https://learn.microsoft.com/en-us/azure/container-apps/networking">networking in Azure Container Apps</a> and <a href="https://learn.microsoft.com/en-us/azure/container-apps/vnet-custom-internal">providing a virtual network to an internal Container Apps environment</a> as references. The key points for the TAMU managed network are:</p>
-<ol>
-<li>Create a dedicated subnet in your spoke VNet sized appropriately for the environment type (workload profiles or Consumption-only). Refer to the Microsoft documentation for current minimum sizes.</li>
-<li>Associate the spoke’s UDR (which routes <code>0.0.0.0/0</code> to the hub firewall) with the environment subnet. Confirm the environment type supports UDR for your scenario.</li>
-<li>Apply an NSG to the environment subnet that permits the <a href="https://learn.microsoft.com/en-us/azure/container-apps/firewall-integration">required Container Apps platform traffic</a> plus the inbound traffic your application requires from approved sources.</li>
-<li>Create the managed environment with <code>internal_load_balancer_enabled = true</code> and reference the dedicated subnet via <code>infrastructure_subnet_id</code>.</li>
-<li>Deploy your container apps into the environment. Apps with <code>ingress { external_enabled = false }</code> are reachable only from within the VNet via the environment’s internal load balancer; apps with <code>external_enabled = true</code> are still only reachable on the environment’s private IP because the environment is internal.</li>
-<li>(Optional but recommended) Create a Private Endpoint targeting the managed environment for cleaner DNS-based private access. Select <code>No</code> when prompted to integrate with a private DNS zone — DNS records will be created automatically in the private DNS zone in the hub VNet.</li>
-<li>Verify the Private DNS zone for Container Apps is updated with the appropriate DNS records by performing a DNS lookup for your app’s FQDN and confirming it resolves to the private IP. Contact Cloud Services if it does not update.</li>
-</ol>
-<p>To expose a container app to the internet, it must be done through the centralized hub services. Submit a Cloud Services request specifying the custom domain (if any), the Container Apps environment, the target app’s FQDN, and any required WAF or routing rules for the AFD configuration. AFD will create a managed Private Endpoint to the environment which you must approve.</p>
-<h2 id="migrating"><a class="header" href="#migrating">Migrating</a></h2>
-<p>To convert an existing public/external Container Apps environment to private:</p>
-<ol>
-<li>Create the dedicated environment subnet in your spoke VNet if it does not already exist, and associate the hub firewall UDR and required NSG.</li>
-<li>Deploy a new Container Apps environment in <strong>internal</strong> mode (<code>internal_load_balancer_enabled = true</code>) referencing the new subnet. Container Apps environments cannot be converted between external and internal modes in place — a new environment is required.</li>
-<li>Redeploy your container apps into the new internal environment. Reuse your existing container images and revision configuration where possible.</li>
-<li>Validate connectivity from within the VNet (e.g. from a VM, via Azure Bastion, or via campus VPN) before decommissioning the original environment.</li>
-<li>Submit a Cloud Services request to configure an AFD origin and endpoint for the new environment if the workload needs to remain publicly accessible. Approve the AFD-managed private endpoint connection on the new environment when prompted.</li>
-<li>Update any DNS records or application configurations that previously pointed to the original environment’s public FQDN to use the new AFD endpoint or the new internal FQDN as appropriate.</li>
-<li>Decommission the original external environment once the new internal environment is fully validated.</li>
-</ol>
+                        <h1 id="private-link"><a class="header" href="#private-link">Private Link</a></h1>
+<p>Private Link and Private Endpoint provide a way to securely connect to Azure services and your own services over a private network connection. A Private Endpoint is a network interface that connects you privately and securely to a service powered by Private Link. Private Endpoints are most commonly used for Azure PaaS services, such as Azure Storage, Azure SQL Database, and Azure Key Vault.</p>
+<p>This allows you to access the service over a private IP address within your virtual network, rather than over the public internet, and enables many of the access methods described below.</p>
+<h2 id="private-dns"><a class="header" href="#private-dns">Private DNS</a></h2>
+<p>Private Link requires proper DNS resolution to function correctly. When you create a Private Endpoint, a corresponding DNS record needs to be created in a Private DNS Zone linked to the virtual networks and remote networks that need to resolve the endpoint.</p>
+<p>In the TAMU-managed network, these Private Link DNS Zones are created and linked in the hub virtual network, and the DNS records in them are managed automatically. When you create a Private Endpoint, the corresponding DNS record group will be automatically created in the appropriate Private Link DNS Zone after a short delay. Changes to your Private Endpoints, such as the private IP address, will be synchronized automatically in the DNS records.</p>
 <blockquote class="blockquote-tag blockquote-tag-note">
 <p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
-<p>Container Apps environments are immutable with respect to networking mode (internal vs. external) and the infrastructure subnet. Plan for a side-by-side migration rather than an in-place change, and coordinate cutover timing with Cloud Services if AFD reconfiguration is required.</p>
+<p>The Private Link DNS Zones and their records are managed automatically in the TAMU-managed network. You do not need to create any Private DNS zones or manage  DNS records for Private Endpoints.</p>
 </blockquote>
-<h2 id="example-terraform-snippets"><a class="header" href="#example-terraform-snippets">Example Terraform Snippets</a></h2>
-<h3 id="environment-subnet"><a class="header" href="#environment-subnet">Environment Subnet</a></h3>
-<pre><code class="language-hcl">resource "azurerm_subnet" "container_apps" {
-  name                 = "snet-containerapps"
-  resource_group_name  = azurerm_resource_group.rg.name
-  virtual_network_name = azurerm_virtual_network.spoke.name
-  address_prefixes     = ["10.x.x.x/23"] # /23 for workload profiles, /27 for Consumption-only
-}
-</code></pre>
-<h3 id="internal-container-apps-environment"><a class="header" href="#internal-container-apps-environment">Internal Container Apps Environment</a></h3>
-<pre><code class="language-hcl">resource "azurerm_log_analytics_workspace" "workload" {
-  name                = "law-containerapps-workload"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  sku                 = "PerGB2018"
-  retention_in_days   = 30
-}
-
-resource "azurerm_container_app_environment" "workload" {
-  name                       = "cae-workload"
-  location                   = azurerm_resource_group.rg.location
-  resource_group_name        = azurerm_resource_group.rg.name
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.workload.id
-
-  infrastructure_subnet_id       = azurerm_subnet.container_apps.id
-  internal_load_balancer_enabled = true
-
-  workload_profile {
-    name                  = "Consumption"
-    workload_profile_type = "Consumption"
-  }
-}
-</code></pre>
-<h3 id="container-app-with-internal-ingress"><a class="header" href="#container-app-with-internal-ingress">Container App with Internal Ingress</a></h3>
-<pre><code class="language-hcl">resource "azurerm_container_app" "workload" {
-  name                         = "ca-workload"
-  container_app_environment_id = azurerm_container_app_environment.workload.id
-  resource_group_name          = azurerm_resource_group.rg.name
-  revision_mode                = "Single"
-
-  template {
-    container {
-      name   = "app"
-      image  = "myregistry.azurecr.io/workload:latest"
-      cpu    = 0.5
-      memory = "1.0Gi"
-    }
-  }
-
-  ingress {
-    external_enabled = false # Reachable only via the environment's internal LB
-    target_port      = 8080
-    transport        = "auto"
-
-    traffic_weight {
-      latest_revision = true
-      percentage      = 100
-    }
-  }
-}
-</code></pre>
-<h3 id="private-endpoint-for-the-managed-environment-optional"><a class="header" href="#private-endpoint-for-the-managed-environment-optional">Private Endpoint for the Managed Environment (Optional)</a></h3>
-<pre><code class="language-hcl">resource "azurerm_private_endpoint" "container_apps" {
-  name                = "pe-cae-workload"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  subnet_id           = azurerm_subnet.private_endpoint.id
-
-  private_service_connection {
-    name                           = "psc-cae-workload"
-    private_connection_resource_id = azurerm_container_app_environment.workload.id
-    subresource_names              = ["managedEnvironments"]
-    is_manual_connection           = false
-  }
-}
-</code></pre>
+<p>If Private Link is not available or cannot be used for a particular service, a Private DNS zone will be provided specifically for your spoke virtual network for you to create and manage the necessary DNS records to enable private network access to the service.</p>
+<p>Both the Private Link DNS Zones and any Private DNS zones provided for spoke virtual networks are resolvable from other virtual networks within the TAMU-managed Azure network and other networks when using the Infoblox DNS service. Similarly, DNS queries from the TAMU-managed Azure network will use the internal DNS view from the campus Infoblox DNS service.</p>
+<p>The following services are currently fully supported for Private Endpoints and Private DNS within the TAMU-managed network:</p>
+<ul>
+<li><code>privatelink.database.windows.net</code> - Azure SQL</li>
+<li><code>privatelink.file.core.windows.net</code> - Azure File</li>
+<li><code>privatelink.southcentralus.azmk8s.io</code> - Azure Kubernetes Service</li>
+</ul>
+<p>Additional services will be added over time. Contact the Cloud Services team to request a specific service be added to the support list.</p>
 
                     </main>
                 </div>
