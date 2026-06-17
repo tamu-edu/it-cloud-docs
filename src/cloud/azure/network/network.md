@@ -16,7 +16,7 @@ To achieve these goals, the Azure network is designed with the following key fea
 Because of these features and the network design, the process for creating and configuring resources in your Azure environment will be different than what you may be used to in other Azure environments without a managed network. Refer to the [Azure Network Design](design.md) page for more details about the network design and how to work with it when deploying your resources. If you have any questions or need assistance with designing your network architecture, please contact the Cloud Services team for guidance and support.
 
 > [!NOTE]
-> You may be familiar with [our AWS network design](../../aws/networking.md), which shares the same goals, but each has an approach that is unique to its underlying cloud platform.
+> You may be familiar with [our AWS network design](/cloud/aws/network.md), which shares the same goals, but each has an approach that is unique to its underlying cloud platform.
 
 ## Requirements
 

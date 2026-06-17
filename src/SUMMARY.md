@@ -5,7 +5,7 @@
 - [What is Cloud Computing?](cloud/what_is_cloud_computing.md)
 
 - [Amazon Web Services (AWS)](cloud/aws.md)
-  - [Networking](cloud/aws/networking.md)
+  - [Network](cloud/aws/network.md)
     - [VPC Policy](cloud/aws/vpc_policy.md)
     - [Migration](cloud/aws/migration.md)
 

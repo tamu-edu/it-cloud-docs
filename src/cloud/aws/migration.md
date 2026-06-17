@@ -6,7 +6,7 @@ Existing AWS accounts may or may not be impacted by this change depending on the
  
 Technology Services will be available to help all account owners migrate impacted resources, up to and including performing the migration.
 
-For those that wish to migrate themselves, please refer to the [network specifications](./networking.md) for the new VPC design and details, and consult the guides below for specific resource types.
+For those that wish to migrate themselves, please refer to the [network specifications](./network.md) for the new VPC design and details, and consult the guides below for specific resource types.
 
 ## Migration Guides
 
