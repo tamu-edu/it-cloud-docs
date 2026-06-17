@@ -10,7 +10,7 @@
 - For inbound private access from within the managed network, use a Private Endpoint targeting the managed environment, or rely on the environment's internal load balancer IP if Private Endpoint is not required.
 - For internet-facing application traffic, work with Cloud Services to configure hub-managed ingress via the shared Azure Front Door (AFD) instance using a Private Endpoint to the Container Apps environment.
 - Container images should be pulled from a private Azure Container Registry with a Private Endpoint where possible.
-- Administrative access (console, log streaming) traverses the Azure control plane and does not require public network exposure on the environment itself. See [Access Methods](../access_methods.md) for details.
+- Administrative access (console, log streaming) traverses the Azure control plane and does not require public network exposure on the environment itself. See [Access Methods](/cloud/azure/network/access_methods.md) for details.
 
 ## Implementation Pattern
 
@@ -20,7 +20,7 @@ If you intend to publish your container app to the internet, the recommended app
 
 When using AFD-managed private endpoints, only AFD can access your environment over that private endpoint, and internet-facing traffic must go through AFD. Internal/private traffic from other resources or networks will continue to use the environment's internal load balancer IP or a separately provisioned Private Endpoint.
 
-For more information, see [Access Methods](../access_methods.md).
+For more information, see [Access Methods](/cloud/azure/network/access_methods.md).
 
 ### Internal Container Apps Environment with Private Endpoint
 

@@ -36,8 +36,7 @@ If you are already managing your AWS resources via Terraform and wish to migrate
 - The overall pattern you will want to follow is to create new resources in your terraform code that are bound to the new, shared VPC (i.e. ALB and associated resources, subnet group for RDS, security groups, etc.) side by side with old version bound to the old VPC. Next, move the resource(s) that depends on these things to use the new resource. Lastly, delete the old resource(s) pointing to the old VPC.
 - You can't update security groups in Terraform if there are resources already depending on them. Instead, create new security groups, point old resources to them, then delete old security groups.
 - When creating security groups, wherever possible, don't rely on CIDR blocks if you are trying to limit access to one resource to another managaed resource. Instead, use `security_groups`. I.e. `security_groups   = [aws_security_group.<resource_name>.id]`. This will allow Amazon to use its knowledge of the resources represented by the other security group to limit access.
-- See this page for [details on referencing subnets with Terraform](./network.md#using-subnet-with-terraform)
-
+- See this page for [details on referencing subnets with Terraform](/cloud/aws/network.md#using-subnet-with-terraform)
 
 
 ### EC2 Instances
@@ -99,7 +98,7 @@ To move within the same region:
 > Details for migrating RDS to a different region: [Migrate Amazon Aurora and Amazon RDS to a new AWS region](https://aws.amazon.com/blogs/database/migrate-amazon-aurora-and-amazon-rds-to-a-new-aws-region/).
 
 > [!NOTE]
-> Details for moving an RDS instance out of an Availability Zone: [How do I move an Amazon RDS instance out of an Availability Zone?](https://repost.aws/knowledge-center/rds-move-availability-zone) Note that you will need to be sure that the AZ that the RDS is moved to is [one of the supported AZ's](./network.md#using-subnets)
+> Details for moving an RDS instance out of an Availability Zone: [How do I move an Amazon RDS instance out of an Availability Zone?](https://repost.aws/knowledge-center/rds-move-availability-zone) Note that you will need to be sure that the AZ that the RDS is moved to is [one of the supported AZ's](/cloud/aws/network.md#using-subnets)
 
 ### Redshift Clusters
 

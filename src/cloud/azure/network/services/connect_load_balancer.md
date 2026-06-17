@@ -6,7 +6,7 @@
 - Load balancer frontends must only be private/internal.
 - The subnet selected for the load balancer frontend must have a User Defined Route (UDR) in order to be accessible from outside the VNet.
 - Security groups should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, or explicitly approved private peer ranges).
-- Administrative ports and management protocols won't be internet-exposed if requested. See [Access Methods](../access_methods.md) for details.
+- Administrative ports and management protocols won't be internet-exposed if requested. See [Access Methods](/cloud/azure/network/access_methods.md) for details.
 - For internet-facing application traffic, work with Cloud Services to configure hub-managed ingress (AFD for HTTP/S or firewall DNAT for non-HTTP/S workloads).
 - Load Balancers are regional and cannot be migrated across regions.
 
@@ -16,7 +16,7 @@
 
 If your load balanced application is a web or other HTTP/S application and you intend to publish the application behind your load balancer to the internet, the recommended approach is to do so through the hub-managed Azure Front Door (AFD). Using this method, a private endpoint for inbound access is created and managed by AFD, and do you do not have to create or manage private DNS records or private endpoints yourself.
 
-For more information, see [Access Methods](../access_methods.md).
+For more information, see [Access Methods](/cloud/azure/network/access_methods.md).
 
 ### Private Endpoint for Internal/Private Access
 
