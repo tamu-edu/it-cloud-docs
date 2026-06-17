@@ -2,7 +2,7 @@
 authors = ["Technology Services"]
 language = "en"
 src = "src"
-title = "Clouds and Platforms"
+title = "Cloud Platforms"
 
 [output.html]
 default-theme = "aggie"
