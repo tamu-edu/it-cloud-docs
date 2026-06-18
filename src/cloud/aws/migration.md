@@ -6,7 +6,7 @@ Existing AWS accounts may or may not be impacted by this change depending on the
  
 Technology Services will be available to help all account owners migrate impacted resources, up to and including performing the migration.
 
-For those that wish to migrate themselves, please refer to the [network specifications](./networking.md) for the new VPC design and details, and consult the guides below for specific resource types.
+For those that wish to migrate themselves, please refer to the [network specifications](./network.md) for the new VPC design and details, and consult the guides below for specific resource types.
 
 ## Migration Guides
 
@@ -23,7 +23,7 @@ Before migrating any resources, you should complete the following steps:
    2. If your resource is currently connecting to a campus service, it will need to use a campus subnet.
       1. Email [aip@tamu.edu](mailto:aip@tamu.edu) to request a consultation before getting access to a campus subnet. 
    3. All other resources should use a private subnet.
-   4. More information on the network and subnets can be found [here](https://docs.cloud.tamu.edu/cloud/aws/networking.html#reference).
+   4. More information on the network and subnets can be found [here](./network.md#using-subnets).
 2. Copy any security groups in use by your resource to the new VPC.
    1. If you are only moving the resource to a new subnet within one of the TAMU shared VPCs, you can use the same security group.
    2. If you are having to move regions or VPCs, you will need to copy the security groups. See [copying security groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html#copy-security-group) for instructions.
@@ -36,8 +36,7 @@ If you are already managing your AWS resources via Terraform and wish to migrate
 - The overall pattern you will want to follow is to create new resources in your terraform code that are bound to the new, shared VPC (i.e. ALB and associated resources, subnet group for RDS, security groups, etc.) side by side with old version bound to the old VPC. Next, move the resource(s) that depends on these things to use the new resource. Lastly, delete the old resource(s) pointing to the old VPC.
 - You can't update security groups in Terraform if there are resources already depending on them. Instead, create new security groups, point old resources to them, then delete old security groups.
 - When creating security groups, wherever possible, don't rely on CIDR blocks if you are trying to limit access to one resource to another managaed resource. Instead, use `security_groups`. I.e. `security_groups   = [aws_security_group.<resource_name>.id]`. This will allow Amazon to use its knowledge of the resources represented by the other security group to limit access.
-- See this page for [details on referencing subnets with Terraform](https://docs.cloud.tamu.edu/cloud/aws/networking.html#using-subnets-with-terraform)
-
+- See this page for [details on referencing subnets with Terraform](/cloud/aws/network.md#using-subnet-with-terraform)
 
 
 ### EC2 Instances
@@ -92,23 +91,20 @@ To move within the same region:
 
 
 
-```admonish info
-Details for migrating RDS in the same region: [Migrate an Amazon RDS DB instance to another VPC](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/migrate-an-amazon-rds-db-instance-to-another-vpc-or-account.html).
-```
+> [!NOTE]
+> Details for migrating RDS in the same region: [Migrate an Amazon RDS DB instance to another VPC](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/migrate-an-amazon-rds-db-instance-to-another-vpc-or-account.html).
 
-```admonish info
-Details for migrating RDS to a different region: [Migrate Amazon Aurora and Amazon RDS to a new AWS region](https://aws.amazon.com/blogs/database/migrate-amazon-aurora-and-amazon-rds-to-a-new-aws-region/).
-```
+> [!NOTE]
+> Details for migrating RDS to a different region: [Migrate Amazon Aurora and Amazon RDS to a new AWS region](https://aws.amazon.com/blogs/database/migrate-amazon-aurora-and-amazon-rds-to-a-new-aws-region/).
 
-```admonish info
-Details for moving an RDS instance out of an Availability Zone: [How do I move an Amazon RDS instance out of an Availability Zone?](https://repost.aws/knowledge-center/rds-move-availability-zone) Note that you will need to be sure that the AZ that the RDS is moved to is [one of the supported AZ's](https://docs.cloud.tamu.edu/cloud/aws/networking.html#using-subnets)
-```
+> [!NOTE]
+> Details for moving an RDS instance out of an Availability Zone: [How do I move an Amazon RDS instance out of an Availability Zone?](https://repost.aws/knowledge-center/rds-move-availability-zone) Note that you will need to be sure that the AZ that the RDS is moved to is [one of the supported AZ's](/cloud/aws/network.md#using-subnets)
 
 ### Redshift Clusters
 
 To move a Redshift cluster to a different subnet group, you can modify the cluster to use the new subnet group. If you need to move to a different VPC, you can create a snapshot of the cluster and restore it in the new VPC.
 
-```admonish info
-Details for migrating Redshift: 
-- [Migrate Amazon Redshift to a new subnet group](https://docs.aws.amazon.com/redshift/latest/mgmt/managing-cluster-subnet-group-console.html)
-- [Migrate Amazon Redshift to a new VPC](https://repost.aws/knowledge-center/move-redshift-cluster-vpcs)
+> [!NOTE]
+> Details for migrating Redshift:
+> - [Migrate Amazon Redshift to a new subnet group](https://docs.aws.amazon.com/redshift/latest/mgmt/managing-cluster-subnet-group-console.html)
+> - [Migrate Amazon Redshift to a new VPC](https://repost.aws/knowledge-center/move-redshift-cluster-vpcs)

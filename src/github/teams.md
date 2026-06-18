@@ -8,15 +8,17 @@ To learn more about teams, please see [About teams](https://docs.github.com/en/o
 
 GitHub teams are created and synchronized from the Texas A&M University directory. Create a team every time a unique set of people need to collaborate on a project or repository.
 
-Teams can be requested using the team creation link for an organization from the [Texas A&M University GitHub](https://github.cloud.tamu.edu) site. A NetID login is required to create a team, and an API endpoint will be available in the future for automated and programmatic team creation.
+Teams can be requested using the team creation link for an organization from the [Texas A&M University GitHub portal](https://github.cloud.tamu.edu). A NetID login is required to create a team, and an API endpoint will be available in the future for automated and programmatic team creation.
+
+<em>External collaborators (non-Texas A&M University members with no NetId) cannot be added to teams. External collaborators can only be added individually, directly to repositories.</em>
 
 ## Managing Team Members
 
 We synchronize team members from groups in the Texas A&M University directory using Azure Active Directory. Team owners can add, remove, and manage members and other owners from the Azure portal.
 
-You can find a list of teams you own on the [Texas A&M University GitHub](https://github.cloud.tamu.edu) site. This list will contain direct links to the Azure portal for managing team members.
+You can find a list of teams you own on the [Texas A&M University GitHub portal](https://github.cloud.tamu.edu). This list will contain direct links to the Azure portal for managing team members.
 
-Users added in Azure won't be synchronized to their respective GitHub teams unless they are direct members of the organization. Instruct and encourage them to join the organization on the [Texas A&M University GitHub](https://github.cloud.tamu.edu) site. After joining the organization, their team member status should synchronize within one hour.
+Users added in Azure won't be synchronized to their respective GitHub teams unless they are direct members of the organization. Instruct and encourage them to join the organization on the [Texas A&M University GitHub portal](https://github.cloud.tamu.edu). After joining the organization, their team member status should synchronize within one hour.
 
 ## Course- and Enrollment-based teams
 

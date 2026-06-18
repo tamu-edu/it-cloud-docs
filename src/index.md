@@ -1,13 +1,36 @@
-```admonish info
-This site is a work in progress and will be updated regularly.  Please check back frequently for updates.
-```
+## Start Here
 
-This website is a resource for Texas A&M University faculty, and staff to learn about the various infrastructure and platform services available at Texas A&M University. This includes information about cloud services, platform services, and security policies and best practices.
+- **New to cloud?** → [*What is Cloud Computing?*](cloud/what_is_cloud_computing.md)
+- **Building on Azure?** → [*Microsoft Azure*](cloud/azure.md)
+- **Building on AWS?** → [*Amazon Web Services*](cloud/aws.md)
+- **Operating a workload?** → [*Cloud Management*](kion/kion.md)
+- **Working with TAMU GitHub?** → [*GitHub*](github/index.md)
 
-It is maintained by a distributed team of engineers in Technology Services who contribute information relevant to their area of expertise.
+## What's Covered
 
+- **Cloud Providers** — Network design, access, migration, and service-by-service configuration for AWS and Azure.
+- **Cloud Management** — Access, budgets, compliance, troubleshooting, and CLI tooling.
+- **Email Authentication** — University standards and configuration.
+- **GitHub** — Guidelines, organizations, teams, and migration tooling.
+
+## How Pages Are Organized
+
+Service configuration pages follow a consistent format:
+
+- **Rules** — What must be true for a deployment to be compliant.
+- **Implementation patterns** — The approved way to deploy the service.
+- **Migration guidance** — How to bring existing deployments into compliance.
+- **Terraform examples** — Copy-pasteable starting points.
+
+
+If something looks out of date or unclear, let us know.
 
 ## Contributing
 
-If you are a member of the Texas A&M University community and would like to contribute to this website, please get involved over on [GitHub](https://github.com/tamu-edu/it-cloud-docs).
+This site is maintained by the Cloud Services team in Technology Services and covers the standards, patterns, and operational guidance for the university's supported cloud platforms.
 
+Contributions of any size are welcome on [GitHub](https://github.com/tamu-edu/it-cloud-docs).
+
+## Getting Help
+
+If you can't find what you need, or your scenario doesn't fit the documented patterns, reach out to the Cloud Services team.

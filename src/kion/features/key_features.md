@@ -4,62 +4,87 @@
 
 - Access your cloud accounts via the Overview tab: 
 
-```admonish collapsible=true class="aggiecustom2" title="Kion Overview"
+<details class="mdbook-collapsible aggiecustom2">
+<summary>Kion Overview</summary>
+
 ![Kion Overview](./img/cloud_access.png)
-```
+
+</details>
 
 - Track budgets, monthly spending, and get estimated spend (based on current usage) for all accounts associated with a project in the Financials tab. 
 
-```admonish collapsible=true class="aggiecustom2" title="Kion Financials"
+<details class="mdbook-collapsible aggiecustom2">
+<summary>Kion Financials</summary>
+
 ![Kion Financials](./img/project_spending.png)
-```
+
+</details>
 
 
 - In the Compliance tab, Track compliance posture against several industry standards, including CIS 1.2.0 for AWS and 1.3.0 for Azure, and against Texas A&M University’s Security Controls catalog for the varying degrees of data classification. 
 
-```admonish collapsible=true class="aggiecustom2" title="Kion Compliance"
+<details class="mdbook-collapsible aggiecustom2">
+<summary>Kion Compliance</summary>
+
 ![Kion Compliance](./img/compliance_tab.png)
-```
 
-```admonish collapsible=true class="aggiecustom2" title="Compliance Findings"
+</details>
+
+<details class="mdbook-collapsible aggiecustom2">
+<summary>Compliance Findings</summary>
+
 ![Compliance Standards](./img/compliance_checks.png)
-```
 
-```admonish collapsible=true class="aggiecustom2" title="Finding Details"
+</details>
+
+<details class="mdbook-collapsible aggiecustom2">
+<summary>Finding Details</summary>
+
 ![Compliance findings](./img/compliance_details.png)
-```
+
+</details>
 
 
 - Grant access to your projects or individual accounts after the user receiving access to the accounts has already logged into Kion. 
 
-```admonish collapsible=true class="aggiecustom2" title="Project Access"
+<details class="mdbook-collapsible aggiecustom2">
+<summary>Project Access</summary>
+
 ![Project Access](./img/project_user_groups.png)
-```
+
+</details>
 
 - Identify savings opportunities by identifying over-provisioned resources that can be reduced in size and cost in the Savings Opportunities Tab. 
 
-```admonish note
-screenshot pending, as the example project does not have any current savings opportunities.
-```
+> [!NOTE]
+> screenshot pending, as the example project does not have any current savings opportunities.
 
 ## Advanced Features 
 
 - In the Enforcements tab, configure actions you can set to trigger on an project when a spending limit is surpassed. See Kion’s documentation on Project Financial Enforcements for more information.
 
-```admonish collapsible=true class="aggiecustom2" title="Budget Enforcements"
-![Budget Enforcements](./img/budget_enforcements.png)
-```
+<details class="mdbook-collapsible aggiecustom2">
+<summary>Budget Enforcements</summary>
 
-```admonish collapsible=true class="aggiecustom2" title="Enforcement Example"
+![Budget Enforcements](./img/budget_enforcements.png)
+
+</details>
+
+<details class="mdbook-collapsible aggiecustom2">
+<summary>Enforcement Example</summary>
+
 ![Enforcement Example](./img/enforcement_example.png)
-```
+
+</details>
 
 - In the Cloud Management tab, you can create customized permissions for users or service accounts and apply new compliance standards. See Kion’s documentation on Cloud Access Roles and Cloud Rules for more information. 
 
-```admonish collapsible=true class="aggiecustom2" title="Cloud Access"
-![Cloud Access](./img/example_car.png)
-```
+<details class="mdbook-collapsible aggiecustom2">
+<summary>Cloud Access</summary>
 
-```admonish note
-for more information on Cloud Access Roles and Cloud Rules, please refer to [User Group Management](./user_group_management.md)
-```
+![Cloud Access](./img/example_car.png)
+
+</details>
+
+> [!NOTE]
+> for more information on Cloud Access Roles and Cloud Rules, please refer to [User Group Management](./user_group_management.md)

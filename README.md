@@ -1,4 +1,6 @@
-# Cloud Documentation
+# Cloud Documentation (Public)
+
+This repo builds and publishes public cloud documentation. [docs.cloud.tamu.edu](https://docs.cloud.tamu.edu)
 
 Cloud documentation for Technology Services.
 
@@ -160,50 +162,38 @@ where `language` is the language of the code block. For example, to add a code b
 
 code blocks are copiable, meaning you can house code snippets in markdown files that users can copy and paste into their own code.
 
-### Mdbook-admonish
+### Native mdBook admonitions and collapsibles
 
-This site uses the `mdbook-admonish` addon to add warning, note, and tip blocks to markdown files. For more information on `mdbook-admonish` formatting, see [the documentation](https://tommilligan.github.io/mdbook-admonish/).
+This site now uses native mdBook admonitions (mdBook 0.5+).
 
-The syntax for adding these blocks is as follows:
-
-```markdown
-    ```admonish <type>
-    content
-    ```
-```
-
-where `<type>` is one of `warning`, `note`, or `tip`.  See [directives](https://tommilligan.github.io/mdbook-admonish/reference.html#directives) for a complete list. For example:
+Use one of these tags in blockquote form:
 
 ```markdown
-    ```admonish warning
-    This is a warning
-    ```
+> [!NOTE]
+> General information.
+
+> [!TIP]
+> Helpful suggestion.
+
+> [!IMPORTANT]
+> Key information.
+
+> [!WARNING]
+> Potential risk.
+
+> [!CAUTION]
+> Use caution.
 ```
 
-**Unlike normal codeblocks**, the content within admonish codeblocks will **keep** markdown formatting. For example:
+For collapsible sections, use a universal HTML details wrapper:
 
 ```markdown
-    ```admonish warning
-    This is a **warning**
-    ```
+<details class="mdbook-collapsible aggiecustom2">
+<summary>Your custom title</summary>
+
+Markdown content here, including images, lists, and tables.
+
+</details>
 ```
 
-will display warning as **warning**.
-
-Admonish blocks are collapsible by adding `collapsible=true` to the opening tag. For example:
-
-```markdown
-    ```admonish warning collapsible=true
-    This is a warning
-    ```
-```
-
-There is a custom style created for admonish blocks called `class=aggiecustom2` that is used to match the style of the rest of the site. You can also use `title=""` in the tag to generate a custom title to the collapsible block. For example:
-
-```markdown
-    ```admonish collapsible=true class=aggiecustom2 title="Your custom title"
-    content
-    ```
-```
-
-This is useful for creating a collapsible block to house tables or other content that you want to keep formatted in markdown, but don't want to display by default.
+This keeps collapsible behavior while staying independent of third-party admonition preprocessors.
