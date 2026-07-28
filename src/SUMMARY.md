@@ -10,6 +10,8 @@
     - [Migration](cloud/aws/migration.md)
 
 - [Microsoft Azure (Azure)](cloud/azure.md)
+  - [Personal Subscriptions](cloud/azure/personal_subscriptions.md)
+  - [Student Subscriptions](cloud/azure/student_subscriptions.md)
   - [Network](cloud/azure/network/network.md)
     - [Design](cloud/azure/network/design.md)
     - [Access Methods](cloud/azure/network/access_methods.md)
