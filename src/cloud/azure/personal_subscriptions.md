@@ -22,6 +22,12 @@ If you created a personal subscription with your TAMU NetID, transfer it to a pe
 - Make sure you have a personal Microsoft account. Create one at [https://signup.live.com](https://signup.live.com) if needed.
 - If you have never used the personal account with Azure, create a personal Azure subscription with it first. This enables the account to receive the subscription transfer. Create one at [https://azure.microsoft.com/en-us/free/](https://azure.microsoft.com/en-us/free/).
 
+> [!Important]
+> If you do not create a personal subscription first, your account will not be fully registered with Azure and cannot receive the subscription transfer.
+
+> [!NOTE]
+> A personal subscription requires a payment method (such as a credit card), but you can cancel and delete the subscription after the transfer is complete to avoid  unintended charges.
+
 ### Transfer the subscription
 
 1. **Find your personal tenant ID.** Sign in to the Azure portal with your personal Microsoft account.
