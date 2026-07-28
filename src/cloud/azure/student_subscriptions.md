@@ -32,3 +32,7 @@ To enroll:
 5. Review the offer terms and complete enrollment.
 
 After enrollment, sign in to the [Azure portal](https://portal.azure.com) with your personal Microsoft account. Your Azure for Students subscription should appear under **Subscriptions**.
+
+## Transfer an existing Azure for Students subscription
+
+If you created an Azure for Students subscription with your TAMU NetID, transfer it to a personal Microsoft account. The transfer removes the subscription from the TAMU Azure tenant and associates it with your personal Microsoft account. For instructions, see [Transfer an existing personal subscription](/cloud/azure/personal_subscriptions.md#transfer-an-existing-personal-subscription).
