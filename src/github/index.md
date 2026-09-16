@@ -23,17 +23,27 @@ To read more about working in an organization of Texas A&M University's Enterpri
 
 If you're a student, you can sign-up for the [GitHub Student Developer Pack](https://education.github.com/pack) to get GitHub Pro features, free training, and lots of free services and software from GitHub partners.
 
-## Educators
+## GitHub Resources for Education
 
-[GitHub Educations](https://education.github.com) has many programs specifically for educators.
+_GitHub Education_ has many programs specifically for educators. Educators can apply to join the GitHub Education program to join a teachers-only community on GitHub Discussions, request swag for their classroom, manage classrooms, and access educational resources from GitHub and other community members.
 
-### GitHub Global Campus Program
+See the [Education](education.md) page for more information.
 
-Educators can apply to join the Global Campus program to join a teachers-only community on GitHub Discussions, request swag for their classroom, manage classrooms, and access educational resources from GitHub and other community members.
+## Third-Party GitHub Applications
 
-Educators can also receive CodeSpaces credit to use in their GitHub Classrooms.
+Not all third-party applications are suitable for use with Texas A&M University's Enterprise GitHub. When considering using third-party applications with GitHub, follow these general guidelines:
+
+1. Review the application's documentation and requirements
+2. Check compatibility with GitHub's current API version
+3. Understand any additional costs or resource requirements
+4. Follow the application's specific installation instructions
+5. Ensure compliance with Texas A&M University's security and privacy policies including vendor contract requirements
+
+> [!NOTE]
+> For applications that require elevated privileges or special permissions, you may need to use a personal GitHub account. While it is common and generally acceptable to use the same GitHub account that you used to access Texas A&M University’s GitHub Enterprise, you should be aware that it will not be in a Texas A&M University-managed organization.
+
+See documentation around [Vendor-Provided Application Installation](https://docs.security.tamu.edu/docs/identity-security/authentication/options/entra-id/implementation#vendor-provided-application-installation) for more information on Texas A&M University's policies and procedures.
 
 ## Personal Use
 
 Texas A&M University Enterprise GitHub is only for collaborative projects directly related to one's affiliation with Texas A&M University. Please use a personal GitHub account or organization if your project does not represent Texas A&M University or is not related to your affiliation with the University.
-
