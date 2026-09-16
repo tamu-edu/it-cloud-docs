@@ -31,7 +31,11 @@ If you're a student, you can sign-up for the [GitHub Student Developer Pack](htt
 
 Educators can apply to join the Global Campus program to join a teachers-only community on GitHub Discussions, request swag for their classroom, manage classrooms, and access educational resources from GitHub and other community members.
 
-Educators can also receive CodeSpaces credit to use in their GitHub Classrooms.
+Eligible educators may receive GitHub Codespaces credits for course use, allowing students to work in cloud-based development environments connected to their assignment repositories. See note about GitHub Classroom deprecation and the recommended replacement, Classroom 50, in the [Third-Party Applications: Classroom 50](./third_party_apps.md#github-classroom--classroom-50) section.
+
+## Third-Party Applications
+
+Many third-party GitHub applications are available to extend the functionality of your repositories and workflows. When using these applications, follow the guidelines outlined in the [Third-Party Applications](./third_party_apps.md) document to ensure compatibility and compliance with Texas A&M University's policies.
 
 ## Personal Use
 
