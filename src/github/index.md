@@ -42,6 +42,8 @@ Not all third-party applications are suitable for use with Texas A&M University'
 > [!NOTE]
 > For applications that require elevated privileges or special permissions, you may need to use a personal GitHub account. While it is common and generally acceptable to use the same GitHub account that you used to access Texas A&M University’s GitHub Enterprise, you should be aware that it will not be in a Texas A&M University-managed organization.
 
+See documentation around [Vendor-Provided Application Installation](https://docs.security.tamu.edu/docs/identity-security/authentication/options/entra-id/implementation#vendor-provided-application-installation) for more information on Texas A&M University's policies and procedures.
+
 ## Personal Use
 
 Texas A&M University Enterprise GitHub is only for collaborative projects directly related to one's affiliation with Texas A&M University. Please use a personal GitHub account or organization if your project does not represent Texas A&M University or is not related to your affiliation with the University.
