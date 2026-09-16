@@ -1,18 +1,10 @@
-# Third-Party GitHub Applications
+# GitHub Education for Educators
 
-## Installing Third-Party Applications
+[GitHub Education](https://education.github.com) (formerly GitHub Global Campus) has many programs specifically for educators. Educators can apply to join the GitHub Education program to join a teachers-only community on GitHub Discussions, request swag for their classroom, manage classrooms, and access educational resources from GitHub and other community members.
 
-Not all third-party applications are suitable for use with Texas A&M University's Enterprise GitHub. When using third-party applications with GitHub, follow these general guidelines:
+## Free GitHub Codespaces for Educators
 
-1. Review the application's documentation and requirements
-2. Check compatibility with GitHub's current API version
-3. Understand any additional costs or resource requirements
-4. Follow the application's specific installation instructions
-5. Ensure compliance with Texas A&M University's security and privacy policies
-
-For applications that require elevated privileges or special permissions, you may need to use a personal GitHub account or organization rather than the university-provided organizations. Additionally, if you are an instructor here at Texas A&M University, be sure to look into <a href="https://education.github.com">GitHub Education</a> for potential benefits and resources.
-
----
+Eligible educators are entitled to a free [GitHub Codespace](https://docs.github.com/en/education/manage-coursework-with-github-classroom/integrate-github-classroom-with-an-ide/using-github-codespaces-with-github-classroom#about-the-codespaces-education-benefit-for-verified-teachers) monthly allowance to support teaching and learning activities, including courses, labs, workshops, demonstrations, student projects, and assignments. These credits allow students and instructors to use cloud-based development environments connected to GitHub repositories, reducing the need for local setup and helping create a consistent development experience.
 
 ## GitHub Classroom / Classroom 50
 
@@ -30,8 +22,8 @@ For applications that require elevated privileges or special permissions, you ma
 For Texas A&M University instructors and students using Classroom 50:
 
 **High-Level Instructions:**
-1. Set up Classroom 50 using a personal GitHub account (this can be the same account GitHub used to access Texas A&M University's GitHub organizations but not backed by the Texas A&M NetID).
-2. Create a GitHub Organization for course(s) using that personal account.
+1. Set up Classroom 50 using a personal GitHub account (It is ok to use the same GitHub account used to access Texas A&M University’s GitHub).
+2. Create a GitHub Organization for course(s) using that personal account (This will not be associated with Texas A&M University).
 3. Students will need to also use their personal GitHub accounts to access Classroom 50 assignments, but they can and should still be invited via their Texas A&M email addresses.
 
 **Official Documentation:**
@@ -43,9 +35,7 @@ For complete, up-to-date instructions, refer to the official Classroom 50 docume
 
 ### Costs and Instructor Certification
 
-**Costs**:
-- Classroom 50 is free to use, but instructors may incur costs for GitHub Teams organizations if they exceed the free tier limits.
-- GitHub offers free Teams plans for educational use. Instructors can apply for these benefits through the [GitHub Education program](https://education.github.com).
+GitHub offers free Teams plans for educational use. Instructors can apply for these benefits through the [GitHub Education program](https://education.github.com). Classroom 50 itself is free to use on a Teams plan.
 
 **Instructor Certification**:
 - To qualify for free GitHub Education benefits, instructors must verify their academic status through GitHub's verification process.

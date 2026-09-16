@@ -42,7 +42,7 @@
   - [Organizations](github/organizations.md)
   - [Teams](github/teams.md)
   - [Advanced Features](github/advanced_features.md)
-  - [Third-Party Applications](github/third_party_apps.md)
+  - [Education Resources](github/education.md)
   - [FAQs](github/faqs.md)
   - [Migrating to Cloud](github/migrating.md)
   - [TAMU Migration Tool](github/migration_tool.md)
