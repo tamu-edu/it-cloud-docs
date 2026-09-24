@@ -20,7 +20,7 @@ Our goal is to make as many GitHub Organization features as possible available t
 
 ### Single Sign-on
 
-Texas A&M University Enterprise GitHub is connected to the Texas A&M University directory via Microsoft Azure Active Directory (Azure AD) for single-sign-on to enforce the use of NetID credentials and two-factor authentication to access resources in the organizations.
+Texas A&M University Enterprise GitHub is connected to the Texas A&M University directory via Microsoft Entra ID (formerly Azure Active Directory (Azure AD)) for single-sign-on to enforce the use of NetID credentials and two-factor authentication to access resources in the organizations.
 
 ### Membership
 
