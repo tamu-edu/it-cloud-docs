@@ -3,6 +3,9 @@
 - **Rule:** Azure Container Instances (ACI) may not be exposed directly to the public internet and must be deployed into a private subnet within the spoke VNet.
 - **Action:** Deploy ACI container groups into a delegated subnet (`Microsoft.ContainerInstance/containerGroups`) in the spoke VNet with no public IP, routing outbound traffic through the hub firewall via UDR.
 
+> [!NOTE]
+> Azure Container Instances (ACI) is the Azure service for running containers, and a *container group* is the actual resource you deploy (whether manually or as the default when using ACI). This document uses both terms interchangeably where context allows.
+
 - Container groups must be deployed with VNet integration into a dedicated delegated subnet in the spoke VNet. Public IP assignment is not permitted.
 - The delegated subnet must have a User Defined Route (UDR) directing outbound traffic (`0.0.0.0/0`) to the hub firewall.
 - NSGs on the container group subnet should follow least privilege and allow only required inbound traffic from approved sources (for example, campus network ranges, VPN, internal load balancers, or other spoke resources).
@@ -17,9 +20,11 @@
 
 The standard pattern for ACI in the TAMU managed network is a container group deployed into a delegated subnet of the spoke VNet, with outbound traffic forced through the hub firewall and inbound access provided either by direct private IP access from within the VNet or via an internal load balancer for higher availability.
 
+![Screenshot of Create Container Instance - Private Selected](images/az-create-container-instance-select-private.png)
+
 You may follow the Microsoft documentation for [deploying container instances into an Azure virtual network](https://learn.microsoft.com/en-us/azure/container-instances/container-instances-vnet) as a reference. The key points for the TAMU managed network are:
 
-1. Create a dedicated subnet in your spoke VNet delegated to `Microsoft.ContainerInstance/containerGroups`. This subnet cannot host other resource types.
+1. **Create a dedicated subnet** in your spoke VNet delegated to `Microsoft.ContainerInstance/containerGroups`. This subnet cannot host other resource types.
 2. Associate the spoke's UDR (which routes `0.0.0.0/0` to the hub firewall) with the delegated subnet.
 3. Apply an NSG to the delegated subnet that permits only the inbound traffic your application requires from approved sources.
 4. Deploy the container group with `ip_address_type = "Private"` and reference the delegated subnet.
