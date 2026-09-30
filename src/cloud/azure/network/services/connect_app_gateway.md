@@ -86,7 +86,7 @@ resource "azurerm_application_gateway" "workload" {
 
 However, in creating the new AGW, you may encounter the error <em>"Application Gateways with a tier of Standard_v2 don’t support only private IP addresses as the frontend. Supported SKU tiers are standard and WAF."</em> even if you have correctly configured the frontend as private:
 
-![warning text private-only disallowed](agw-private-only-disallowed.png)
+![warning text private-only disallowed](./images/agw-private-only-disallowed.png)
 
 This can occur if the AGW SKU/tier does not support private-only frontends or if there are lingering references to the old public frontend configuration: You can resolve this by enabling Preview Feature `EnableApplicationGatewayNetworkIsolation` in your subscription. See [Microsoft documentation](https://techcommunity.microsoft.com/blog/azureinfrastructureblog/%F0%9F%9A%80-general-availability-of-private-application-gateway-on-azure-application-gate/4508294#:~:text=Existing%20gateways%20cannot%20be%20retrofitted%E2%80%94network%20isolation%20must%20be%20enabled%20at%20creation%20time.) for details on the feature and how to enable it. After enabling the feature, you should be able to create the new AGW with a private-only frontend without encountering the error.
 
