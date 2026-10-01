@@ -20,7 +20,7 @@
 
 The standard pattern for ACI in the TAMU managed network is a container group deployed into a delegated subnet of the spoke VNet, with outbound traffic forced through the hub firewall and inbound access provided either by direct private IP access from within the VNet or via an internal load balancer for higher availability.
 
-![Screenshot of Create Container Instance - Private Selected](images/az-create-container-instance-select-private.png)
+![Screenshot of Create Container Instance - Private Selected](./images/az-create-container-instance-select-private.png)
 
 You may follow the Microsoft documentation for [deploying container instances into an Azure virtual network](https://learn.microsoft.com/en-us/azure/container-instances/container-instances-vnet) as a reference. The key points for the TAMU managed network are:
 
