@@ -333,7 +333,7 @@
 <h2 id="implementation-pattern"><a class="header" href="#implementation-pattern">Implementation Pattern</a></h2>
 <h3 id="private-container-group-with-vnet-integration"><a class="header" href="#private-container-group-with-vnet-integration">Private Container Group with VNet Integration</a></h3>
 <p>The standard pattern for ACI in the TAMU managed network is a container group deployed into a delegated subnet of the spoke VNet, with outbound traffic forced through the hub firewall and inbound access provided either by direct private IP access from within the VNet or via an internal load balancer for higher availability.</p>
-<p><img src="/images/az-create-container-instance-select-private.png" alt="Screenshot of Create Container Instance - Private Selected"></p>
+<p><img src="/cloud/azure/network/services/images/az-create-container-instance-select-private.png" alt="Screenshot of Create Container Instance - Private Selected"></p>
 <p>You may follow the Microsoft documentation for <a href="https://learn.microsoft.com/en-us/azure/container-instances/container-instances-vnet">deploying container instances into an Azure virtual network</a> as a reference. The key points for the TAMU managed network are:</p>
 <ol>
 <li><strong>Create a dedicated subnet</strong> in your spoke VNet delegated to <code>Microsoft.ContainerInstance/containerGroups</code>. This subnet cannot host other resource types.</li>
