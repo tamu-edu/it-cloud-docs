@@ -366,18 +366,18 @@
   anonymous_pull_enabled = false
 }
 </code></pre>
-<h3 id="example-assign-acrpull-role-to-a-user-assigned-managed-identity"><a class="header" href="#example-assign-acrpull-role-to-a-user-assigned-managed-identity">Example: Assign AcrPull role to a user-assigned managed identity</a></h3>
-<pre><code class="language-hcl">resource "azurerm_role_assignment" "acr_pull" {
+<h3 id="example-assign-abac-roles-to-a-managed-identity-for-pulls"><a class="header" href="#example-assign-abac-roles-to-a-managed-identity-for-pulls">Example: Assign ABAC roles to a managed identity for pulls</a></h3>
+<pre><code class="language-hcl">resource "azurerm_role_assignment" "acr_repo_reader" {
   scope                = azurerm_container_registry.acr.id
-  role_definition_name = "AcrPull"
-  principal_id         = azurerm_user_assigned_identity.example.principal_id
+  role_definition_name = "Container Registry Repository Reader"
+  principal_id         = azurerm_user_assigned_identity.pull_identity.principal_id
 }
 </code></pre>
-<h3 id="example-assign-acrpush-role-to-a-cicd-identity-eg-github-actions"><a class="header" href="#example-assign-acrpush-role-to-a-cicd-identity-eg-github-actions">Example: Assign AcrPush role to a CI/CD identity (e.g., GitHub Actions)</a></h3>
-<pre><code class="language-hcl">resource "azurerm_role_assignment" "acr_push" {
+<h3 id="example-assign-abac-role-to-a-github-oidc-service-principal-for-pushes"><a class="header" href="#example-assign-abac-role-to-a-github-oidc-service-principal-for-pushes">Example: Assign ABAC role to a GitHub OIDC service principal for pushes</a></h3>
+<pre><code class="language-hcl">resource "azurerm_role_assignment" "acr_repo_contributor" {
   scope                = azurerm_container_registry.acr.id
-  role_definition_name = "AcrPush"
-  principal_id         = azurerm_user_assigned_identity.ci_cd.principal_id
+  role_definition_name = "Container Registry Repository Contributor"
+  principal_id         = data.azuread_service_principal.github_oidc.id
 }
 </code></pre>
 
