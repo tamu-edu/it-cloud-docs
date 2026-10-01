@@ -50,22 +50,22 @@ resource "azurerm_container_registry" "acr" {
 }
 ```
 
-### Example: Assign AcrPull role to a user-assigned managed identity
+### Example: Assign ABAC roles to a managed identity for pulls
 
 ```hcl
-resource "azurerm_role_assignment" "acr_pull" {
+resource "azurerm_role_assignment" "acr_repo_reader" {
   scope                = azurerm_container_registry.acr.id
-  role_definition_name = "AcrPull"
-  principal_id         = azurerm_user_assigned_identity.example.principal_id
+  role_definition_name = "Container Registry Repository Reader"
+  principal_id         = azurerm_user_assigned_identity.pull_identity.principal_id
 }
 ```
 
-### Example: Assign AcrPush role to a CI/CD identity (e.g., GitHub Actions)
+### Example: Assign ABAC role to a GitHub OIDC service principal for pushes
 
 ```hcl
-resource "azurerm_role_assignment" "acr_push" {
+resource "azurerm_role_assignment" "acr_repo_contributor" {
   scope                = azurerm_container_registry.acr.id
-  role_definition_name = "AcrPush"
-  principal_id         = azurerm_user_assigned_identity.ci_cd.principal_id
+  role_definition_name = "Container Registry Repository Contributor"
+  principal_id         = data.azuread_service_principal.github_oidc.id
 }
 ```
