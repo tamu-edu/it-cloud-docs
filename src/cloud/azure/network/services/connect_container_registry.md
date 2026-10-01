@@ -14,7 +14,7 @@
 
 _ACR Standard SKU does not support Private Link or VNet integration. This guide focuses on securing **public** ACR instances with authenticated access._
 
-The standard pattern for ACR in the TAMU managed network is a public registry with authenticated and granular, scoped access enforced. The ACR remains publicly accessible but not anonymously.
+For Standard SKU registries that cannot use Private Link, use authenticated, scoped access and disable anonymous pulls. Prefer a Premium registry with a Private Endpoint where possible.
 
 ## Migrating
 
@@ -23,7 +23,7 @@ To convert an existing public ACR deployment to secure access:
 1. Disable the admin account (`admin_enabled = false`) and anonymous pulls (`anonymous_pull_enabled = false`).
 2. Restrict pull access to authenticated identities (e.g., managed identities with `AcrPull` role).
 3. Limit push access to CI/CD identities with the `AcrPush` role.
-4. Validate connectivity from CI/CD pipelines.
+4. Validate image pulls from every workload identity and image pushes from each CI/CD identity.
 
 ## Example Terraform Snippets
 
