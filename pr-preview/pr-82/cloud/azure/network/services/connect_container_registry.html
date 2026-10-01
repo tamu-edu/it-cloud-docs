@@ -336,14 +336,14 @@
 <h2 id="implementation-pattern"><a class="header" href="#implementation-pattern">Implementation Pattern</a></h2>
 <h3 id="public-acr-standard-sku"><a class="header" href="#public-acr-standard-sku">Public ACR (Standard SKU)</a></h3>
 <p><em>ACR Standard SKU does not support Private Link or VNet integration. This guide focuses on securing <strong>public</strong> ACR instances with authenticated access.</em></p>
-<p>The standard pattern for ACR in the TAMU managed network is a public registry with authenticated and granular, scoped access enforced. The ACR remains publicly accessible but not anonymously.</p>
+<p>For Standard SKU registries that cannot use Private Link, use authenticated, scoped access and disable anonymous pulls. Prefer a Premium registry with a Private Endpoint where possible.</p>
 <h2 id="migrating"><a class="header" href="#migrating">Migrating</a></h2>
 <p>To convert an existing public ACR deployment to secure access:</p>
 <ol>
 <li>Disable the admin account (<code>admin_enabled = false</code>) and anonymous pulls (<code>anonymous_pull_enabled = false</code>).</li>
 <li>Restrict pull access to authenticated identities (e.g., managed identities with <code>AcrPull</code> role).</li>
 <li>Limit push access to CI/CD identities with the <code>AcrPush</code> role.</li>
-<li>Validate connectivity from CI/CD pipelines.</li>
+<li>Validate image pulls from every workload identity and image pushes from each CI/CD identity.</li>
 </ol>
 <h2 id="example-terraform-snippets"><a class="header" href="#example-terraform-snippets">Example Terraform Snippets</a></h2>
 <h3 id="public-acr-with-secure-access"><a class="header" href="#public-acr-with-secure-access">Public ACR with Secure Access</a></h3>
