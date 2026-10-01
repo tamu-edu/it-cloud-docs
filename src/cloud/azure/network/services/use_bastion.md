@@ -30,7 +30,7 @@ Follow the Microsoft how-to for [connecting to a VM via Bastion from the Azure p
 1. Navigate to your VM in the Azure portal.
 2. Select **Connect**, then choose the **Bastion** tab.
 3. The shared hub Bastion will appear automatically as the available Bastion host. You will not be prompted to create a new one.
-4. Enter your VM credentials (username/password, SSH key, or Azure AD login if configured) and select **Connect**.
+4. Enter your VM credentials (username/password, SSH key, or Entra ID login if configured) and select **Connect**.
 5. A browser-based RDP or SSH session will open in a new tab.
 
 > [!NOTE]

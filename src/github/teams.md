@@ -25,7 +25,7 @@ Teams can be created using the `Create a Team` link for an organization in the [
 
 ## Managing Team Members
 
-Team members are synchronized from groups in the Texas A&M University directory using Microsoft Entra ID (formerly Azure Active Directory (Azure AD)). Team owners can add, remove, and manage members and other owners from the Texas A&M University GitHub portal under `My Teams > <Team> > Manage Members`:
+Team members are synchronized from groups in the Texas A&M University directory using Microsoft Entra ID. Team owners can add, remove, and manage members and other owners from the Texas A&M University GitHub portal under `My Teams > <Team> > Manage Members`:
 
 <details class="mdbook-collapsible aggiecustom2">
 <summary>Manage Members Buttons Screenshot</summary>
@@ -43,7 +43,7 @@ Clicking `Manage Members` will open an Entra ID screen for managing group member
 
 <em>External collaborators (non-Texas A&M University members with no NetId) cannot be added to teams. External collaborators can only be added individually, directly to repositories.</em>
 
-Users added won't be synchronized to their respective GitHub teams unless they are direct members of the organization. Instruct and encourage them to join the organization on the [Texas A&M University GitHub portal](https://github.cloud.tamu.edu). After joining the organization, their team member status will automatically synchronize within one hour.
+Users added won't be synchronized to their respective GitHub teams unless they are direct members of the organization. Instruct and encourage them to join the organization on the [Texas A&M University GitHub portal](https://github.cloud.tamu.edu). After joining the organization, their team member status will automatically synchronize after a short delay, typically within one hour.
 
 ## Repository Collaborators, Roles, and Group-Based Access Control
 
