@@ -6,7 +6,6 @@
 - Authenticated access should be enforced for all public ACR instances.
 - Pull access should be restricted to authenticated identities (e.g., managed identities with `AcrPull` role).
 - Push access should be limited to CI/CD identities with the `AcrPush` role.
-- Network access should be controlled at the workload egress level rather than at the ACR perimeter.
 
 ## Implementation Pattern
 
