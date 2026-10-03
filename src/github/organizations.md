@@ -20,11 +20,11 @@ Our goal is to make as many GitHub Organization features as possible available t
 
 ### Single Sign-on
 
-Texas A&M University Enterprise GitHub is connected to the Texas A&M University directory via Microsoft Azure Active Directory (Azure AD) for single-sign-on to enforce the use of NetID credentials and two-factor authentication to access resources in the organizations.
+Texas A&M University Enterprise GitHub is connected to the Texas A&M University directory via Microsoft Entra ID for single-sign-on to enforce the use of NetID credentials and two-factor authentication to access resources in the organizations.
 
 ### Membership
 
-Membership in an organization is managed by Azure AD using automated provisioning and de-provisioning (SCIM). Organization administrators should only modify membership in Azure AD. Users entitled to self-join can use the [Texas A&M GitHub portal](https://github.cloud.tamu.edu).
+Membership in an organization is managed by Entra ID using automated provisioning and de-provisioning (SCIM). Organization administrators should only modify membership in Entra ID. Users entitled to self-join can use the [Texas A&M GitHub portal](https://github.cloud.tamu.edu).
 
 Team membership is also managed and synchronized from the Texas A&M University directory. Please see the [Teams](teams.md) page for more details.
 
