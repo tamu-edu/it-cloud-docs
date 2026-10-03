@@ -337,6 +337,20 @@
 <h3 id="user-and-group-assignments"><a class="header" href="#user-and-group-assignments">User and Group Assignments</a></h3>
 <p>A cloud access role can be assigned to one or more users and groups. When a user is assigned a role, either directly or through a group, they can access cloud accounts in the project with the permissions granted by the role. Project owners can assign roles to users and groups, and users can request access to roles.</p>
 <p>To assign a role to a user, that user must have logged into Kion at least once to create their account in Kion’s database.</p>
+<p>Three Cloud Access Roles are automatically provided by TAMU Cloud Services on all Kion-managed projects which translate to specific roles and permissions in each respective Cloud Provider:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Role</th><th>Azure</th><th>AWS</th><th>GCP</th></tr>
+</thead>
+<tbody>
+<tr><td>Admin</td><td>ProjectOwner</td><td>AdministratorAccess</td><td>Owner</td></tr>
+<tr><td>Power User</td><td>Contributor</td><td>PowerUserAccess</td><td>Editor</td></tr>
+<tr><td>Read-Only</td><td>Reader</td><td>ReadOnlyAccess</td><td>Viewer</td></tr>
+</tbody>
+</table>
+</div>
+<p>When a cloud user activates one of these roles, it remains active until the user deactivates it or their session automatically expires.</p>
 <p>Project owners can also create groups to use for role assignments. This makes it easier to manage access for a large number of users and projects. A user must have logged into Kion at least once to be added to a group, too.</p>
 <h3 id="permissions"><a class="header" href="#permissions">Permissions</a></h3>
 <p>The permissions granted by a cloud access role are defined by IAM policies for AWS and Azure roles for Azure. These policies define what actions a user can perform and what resources they can perform those actions on.</p>
