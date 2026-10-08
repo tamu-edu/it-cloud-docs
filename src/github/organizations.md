@@ -11,6 +11,7 @@ We have limited organizations to two for various technical and administrative re
 
 [`tamu-edu-students`](https://github.com/tamu-edu-students) is the organization for instructional, academic, and student use. Use this organization for things like course material, class projects, assignments, and other academic or instructional projects.
 
+Use the [Texas A&M University GitHub](https://github.cloud.tamu.edu) site to join either organization.
 
 ---
 
@@ -59,3 +60,21 @@ Github is exploring Team-level secrets, but the feature has not made it onto the
 
 [Contact us](mailto:github@tamu.edu) if you need assistance updating or managing repository secrets.
 
+---
+
+## Troubleshooting Joining - Common Solutions
+
+As a student and/or staff, you are already affiliated with at least one of these organizations. It is usually very straightforward to join either as described [above](#organizations-and-teams). However, sometimes a confusing error message might appear that interrupts the process and requires some additional steps.
+
+### "Email address that received this invitation does not match your GitHub account"
+
+Message shown during authentication to GitHub after attempting to join:
+
+```
+There was an issue joining the organization:
+Failed to accept invitation: The email address that received this invitation does not match your GitHub account. Add the email address to your account or contact your organization owner with questions about next steps.
+```
+
+This occurs when you select to use a GitHub account that is not already affiliated with your TAMU email address.
+
+**Solution:** Add your NetID (TAMU email address that you use to sign in to other TAMU services) as an alternate email to your GitHub account.
