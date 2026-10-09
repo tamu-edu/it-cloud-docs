@@ -6,7 +6,7 @@ As of September 27, 2024, `github.tamu.edu` has been shut down. If you have not 
 
 ## Background
 
-For many years, `github.tamu.edu` had been the primary location for hosting code repositories for Texas A&M University faculty, staff, and students. However, the service became redundant with the cloud-hosted version of GitHub Enterprise (GitHub.com) and often lagged in feature sets and security patches. Therefore, `github.tamu.edu` has been deprecated in favor of all projects being hosted on Github Enterprise Cloud in the `tamu-edu` and `tamu-edu-students` organizations.
+For many years, `github.tamu.edu` had been the primary location for hosting code repositories for Texas A&M University faculty, staff, and students. However, the service became redundant with the cloud-hosted version of GitHub Enterprise (GitHub.com) and often lagged in feature sets and security patches. Therefore, `github.tamu.edu` has been deprecated in favor of all projects being hosted on GitHub Enterprise Cloud in the `tamu-edu` and `tamu-edu-students` organizations.
 
 ## Timeline
 

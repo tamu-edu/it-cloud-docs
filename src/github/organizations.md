@@ -53,9 +53,9 @@ See the main page on [Teams](teams.md) for more information.
 
 ### Secrets
 
-Organization secrets are not enabled. Set secrets that a must be shared between multiple repositories on each repository individually. It is best practice to use a unique secret for each repository.
+Organization secrets are not enabled. Set secrets that must be shared between multiple repositories on each repository individually. It is best practice to use a unique secret for each repository.
 
-Github is exploring Team-level secrets, but the feature has not made it onto their public road map.
+GitHub is exploring Team-level secrets, but the feature has not made it onto their public road map.
 
 [Contact us](mailto:github@tamu.edu) if you need assistance updating or managing repository secrets.
 

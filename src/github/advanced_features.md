@@ -27,7 +27,7 @@ A free tier for the consumption features is being made available to all reposito
 
 The institutional and student organizations have a pool of GitHub Actions minutes to use to run their project's jobs. There is no limit to the number of runner minutes that can be consumed, but there is a limit to the number of minutes that can be used in a month before billing information is required.
 
-Data transfer out from Packages to Actions is free, but action consumes Packages storage when storing artifacts.
+Data transfer out from Packages to Actions is free, but storing artifacts in Actions consumes Packages storage.
 
 ### Large File Storage (LFS)
 
@@ -79,7 +79,7 @@ To get started setting up a self-hosted runner, follow the [self-hosted runners 
 
 ### GitHub Advanced Security
 
-[GitHub Advanced Security](https://docs.github.com/en/get-started/learning-about-github/about-github-advanced-security) is a paid add-on feature that enabled additional security features, such as code and secret scanning. It is free for public repositories, and is available to purchase for use in internal and private repositories.
+[GitHub Advanced Security](https://docs.github.com/en/get-started/learning-about-github/about-github-advanced-security) is a paid add-on feature that enables additional security features, such as code and secret scanning. It is free for public repositories, and is available to purchase for use in internal and private repositories.
 
 Billing for GitHub Advanced Security is on a 90-day rolling count of unique committers to a repository with Advanced Security enabled. A committer is only ever counted once, even if they commit to multiple repositories. Billing is done on an annual basis based on a forecast of unique committers, but can be adjusted as needed at any time.
 
