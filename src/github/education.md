@@ -9,7 +9,7 @@ Eligible educators are entitled to a free [GitHub Codespace](https://docs.github
 ## GitHub Classroom / Classroom 50
 
 > [!NOTE]
-> GitHub Classroom, previously used by some TAMU instructors, [has been deprecated](https://github.com/orgs/community/discussions/196615). Classroom 50 is an officially recommended replacement, as it is the now open-sourced engine that powered GitHub Classroom. It works exactly like GitHub Classroom and is freely available for use.
+> GitHub Classroom, previously used by some TAMU instructors, [has been deprecated](https://github.com/orgs/community/discussions/196615). Classroom 50 is an officially recommended replacement, as it is now the open-source engine that powered GitHub Classroom. It works exactly like GitHub Classroom and is freely available for use.
 
 **Important Considerations for TAMU Instructors**:
 - Due to elevated privileges required for instructor accounts, Texas A&M GitHub administrators cannot currently govern or provide benefits or support for hosting Classroom 50 institutionally.

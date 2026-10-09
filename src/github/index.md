@@ -21,7 +21,7 @@ To read more about working in an organization of Texas A&M University's Enterpri
 
 ## Student Developer Pack
 
-If you're a student, you can sign-up for the [GitHub Student Developer Pack](https://education.github.com/pack) to get GitHub Pro features, free training, and lots of free services and software from GitHub partners.
+If you're a student, you can sign up for the [GitHub Student Developer Pack](https://education.github.com/pack) to get GitHub Pro features, free training, and lots of free services and software from GitHub partners.
 
 ## GitHub Resources for Education
 

@@ -2,7 +2,7 @@
 
 ## Repository Naming Conventions
 
-Consolidating to single organizations introduces naming competition and potential namespace collisions. Please name every repository to clearly communicate ownership, readability, and consistency within the organization.  We propose everyone conform to the following convention when naming repositories:
+Consolidating into two organizations introduces naming competition and potential namespace collisions. Please name every repository to clearly communicate ownership, readability, and consistency within the organization.  We propose everyone conform to the following convention when naming repositories:
 
 * The repository name should use all lowercase letters
 * Separate words using dashes (-)

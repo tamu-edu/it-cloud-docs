@@ -22,11 +22,10 @@ It is a serverless, event-driven application that uses AWS Lambda, S3, and Dynam
 
 To migrate your repositories using the TAMU Migration Tool, follow these steps:
 
-1. Visit the [TAMU GitHub](https://github.cloud.tamu.edu) website, Login, and select *Migrate from GitHub Server* in the **Server** card.
+1. Visit the [TAMU GitHub](https://github.cloud.tamu.edu) website, log in, and select *Migrate from GitHub Server* in the **Server** card.
 2. Follow the checklist to ensure you have set up all the proper authentication and permissions. Click *Next* when all items are successful.
-3. Choose the repositories you want to migrate, the destination organization (`tamu-edu` or `tamu-edu-students`) and click *Migrate*.
+3. Choose the repositories you want to migrate and the destination organization (`tamu-edu` or `tamu-edu-students`), then click *Migrate*.
 
 The tool will then begin the migration process for each repository you selected. You can monitor the progress of each migration in the tool's [status dashboard](https://github.cloud.tamu.edu/github/migration/status).
 
 Once a migration is completed, the source repository on `github.tamu.edu` will be archived. The new repository on GitHub Enterprise Cloud will be named as the source organization and repository `<org>_<repo>` and will have the migration requestor as the only owner. The new repository will be private by default. A summary of the migration will be posted as an issue in the source repository.
-

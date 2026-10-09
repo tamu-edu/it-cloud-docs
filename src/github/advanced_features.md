@@ -27,7 +27,7 @@ A free tier for the consumption features is being made available to all reposito
 
 The institutional and student organizations have a pool of GitHub Actions minutes to use to run their project's jobs. There is no limit to the number of runner minutes that can be consumed, but there is a limit to the number of minutes that can be used in a month before billing information is required.
 
-Data transfer out from Packages to Actions is free, but action consumes Packages storage when storing artifacts.
+Data transfer out from Packages to Actions is free, but storing artifacts in Actions consumes Packages storage.
 
 ### Large File Storage (LFS)
 
