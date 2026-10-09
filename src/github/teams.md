@@ -47,7 +47,7 @@ Users added won't be synchronized to their respective GitHub teams unless they a
 
 ## Repository Collaborators, Roles, and Group-Based Access Control
 
-Teams can be assigned to repositories to grant access to all team members at once. This simplifies permission management for groups like project teams or departments. Repository admins can assign roles such as `Read`, `Triage`, `Write`, `Maintain`, or `Admin` to an entire team, ensuring consistent, centralized access control for individuals across repositories. This is done through the repository settings under `Settings > Manage Access`.
+Teams can be assigned to repositories to grant access to all team members at once. This simplifies permission management for groups like project teams or departments. Repository admins can assign roles such as `Read`, `Triage`, `Write`, `Maintain`, or `Admin` to an entire team, ensuring consistent, single-point access control for individuals across repositories. This is done through the repository settings under `Settings > Manage Access`.
 
 Since only a repository `Admin` can assign teams or individuals to a repository, it is advisable to have multiple `Admin` users per repository. Implement group-based access control by creating a team with `Admin` privileges for repository administration and assigning multiple trusted users to that team to ensure continuity and proper management of repository access.
 
