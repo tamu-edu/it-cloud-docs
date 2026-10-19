@@ -64,7 +64,7 @@ Github is exploring Team-level secrets, but the feature has not made it onto the
 
 ## Troubleshooting Joining - Common Solutions
 
-As a student and/or staff, you are already affiliated with at least one of these organizations. It is usually very straightforward to join either as described [above](#organizations-and-teams). However, sometimes a confusing error message might appear that interrupts the process and requires some additional steps.
+As a student and/or staff, you are already eligible to join at least one of these organizations. It is usually very straightforward to join either as described [above](#organizations-and-teams). However, sometimes a confusing error message might appear that interrupts the process and requires some additional steps.
 
 ### "Email address that received this invitation does not match your GitHub account"
 
