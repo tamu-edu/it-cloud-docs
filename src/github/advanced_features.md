@@ -29,7 +29,11 @@ The institutional and student organizations have a pool of GitHub Actions minute
 
 Data transfer out from Packages to Actions is free, but storing artifacts in Actions consumes Packages storage.
 
-### Large File Storage (LFS)
+### Tracking Large Files in Your Github Repository
+
+Avoid strict storage limitations, repository degradation, and history bloat in GitHub by implementing specialized tooling to manage large files. Here are some recommendations for your TAMU repositories:
+
+#### Large File Storage (LFS)
 
 [Large File Storage (LFS)](https://git-lfs.github.com/) is a file storage service that allows you to store large files in your GitHub repository. LFS is enabled in the Institution organization, but disabled in the student organization. The free tier of LFS for institutional repositories is 1GB of storage and 1GB of transfer. The cost for additional usage will be made available in the future and will require billing information.
 
@@ -38,7 +42,9 @@ Data transfer out from Packages to Actions is free, but storing artifacts in Act
 | LFS Storage | 1GB |
 | LFS Data transfer out | 1GB |
 
-However, for both organizations, we strongly encourage the use of [git-annex](https://git-annex.branchable.com/) over git-lfs, with Microsoft OneDrive or Google Drive as the storage backend.
+#### Third-party Tools
+
+However, for both organizations, we strongly encourage the use of [DVC](https://dvc.org/) or [git-annex](https://git-annex.branchable.com/) over git-lfs, with Microsoft OneDrive or Google Drive as the storage backend. Your options are not limited to these, but contact support if you need help getting started.
 
 ## Metered Features
 
