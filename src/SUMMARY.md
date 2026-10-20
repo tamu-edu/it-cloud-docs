@@ -23,6 +23,7 @@
       - [Bastion](cloud/azure/network/services/use_bastion.md)
       - [Container Apps](cloud/azure/network/services/connect_container_app.md)
       - [Container Instances](cloud/azure/network/services/connect_container_instances.md)
+      - [Container Registry](cloud/azure/network/services/connect_container_registry.md)
       - [Functions](cloud/azure/network/services/connect_azure_functions.md)
       - [Kubernetes Service (AKS)](cloud/azure/network/services/connect_aks.md)
       - [Load Balancers](cloud/azure/network/services/connect_load_balancer.md)

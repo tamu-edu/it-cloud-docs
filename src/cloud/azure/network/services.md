@@ -25,6 +25,7 @@ The following is a non-exhaustive list of common Azure services that are in scop
 | [Bastion Hosts](https://learn.microsoft.com/en-us/azure/bastion/) | [Use Bastion with the TAMU network](./services/use_bastion.md) |
 | [Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/) | [Connect Container Apps to the TAMU network](./services/connect_container_app.md) |
 | [Azure Container Instances](https://learn.microsoft.com/en-us/azure/container-instances/) | [Connect Container Instances to the TAMU network](./services/connect_container_instances.md) |
+| [Azure Container Registry](https://learn.microsoft.com/en-us/azure/container-registry/) | [Connect Container Registry to the TAMU network](./services/connect_container_registry.md) |
 | [Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/) | [Connect Functions to the TAMU network](./services/connect_azure_functions.md) |
 | [Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/azure/aks/) | [Connect AKS to the TAMU network](./services/connect_aks.md) |
 | [Azure Load Balancers](https://learn.microsoft.com/en-us/azure/load-balancer/) | [Connect a load balancer to the TAMU network](./services/connect_load_balancer.md) |
