@@ -26,15 +26,15 @@ The institutional organization allows *new* repositories at any visibility level
 
 Texas A&M’s GitHub Enterprise Cloud service relies on GitHub’s vendor-hosted SaaS platform, including GitHub’s published service availability commitments, reliability practices, and disaster recovery/business continuity controls. Repository owners may review GitHub’s official Trust Center and service-level documentation for current commitments and details:
 
-* GitHub Trust Center: https://github.com/trust-center
-* GitHub Service Level Agreement (SLA): https://github.com/customer-terms/service-level-agreement
+* [GitHub Trust Center](https://github.com/trust-center)
+* [GitHub Service Level Agreement (SLA)](https://github.com/customer-terms/service-level-agreement)
 
 ### Repository-Level Backups
 
 Individual repository backup outside of GitHub’s vendor-hosted SaaS-provided capabilities is the responsibility of the repository owner. Repository owners who require independent backups should use GitHub-supported methods, such as cloning, mirroring, or duplicating repositories, as described in GitHub’s official documentation:
 
-* Backing up a repository: https://docs.github.com/en/repositories/archiving-a-github-repository/backing-up-a-repository
-* Duplicating a repository: https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository
+* [Backing up a repository](https://docs.github.com/en/repositories/archiving-a-github-repository/backing-up-a-repository)
+* [Duplicating a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository)
 
 Backup copies must be protected in accordance with applicable Texas A&M University data handling, security, retention, and compliance requirements.
 
