@@ -40,7 +40,8 @@ To expose the App Service to the internet, it must be done through the centraliz
 
 To convert an existing public App Service to private:
 
-** Target App Service **location** must be `South Central US`. If it is not, then the App Service will need to be recreated. **
+** Target App Service **location** must be `South Central US`. If it is not, then the App Service will need to be recreated. See [changing Azure Locations](#changing-azure-locations)
+. **
 
 1. Create the private endpoint and VNet integration subnets if they do not already exist.
 2. Add a Private Endpoint to the existing App Service targeting the new private endpoint subnet.
@@ -116,3 +117,19 @@ resource "azurerm_private_endpoint" "app_service" {
   }
 }
 ```
+
+## Changing Azure Locations
+
+Many resources cannot be _moved_ across locations and will instead need to be recreated in the target Region "South Central US" (`location: "southcentralus"`) for vnet private integration.
+
+### Watch out for these migration gotchas
+
+- The new "moved" resources will have a different resource ID.
+- Managed Identity principal IDs will change.
+- Access policies/RBAC assignments may need to be recreated.
+- Custom domains must be revalidated or rebound.
+- TLS certificates may need to be reuploaded or re-associated.
+- Private endpoints and VNet integration are region-specific.
+- IP addresses will change unless you are fronting the app with something like Azure Front Door or Application Gateway.
+- If you use deployment slots, recreate them in the new app.
+- If you use App Service Environment, you need to create a new ASE in the target region.
