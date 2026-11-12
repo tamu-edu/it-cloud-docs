@@ -365,7 +365,8 @@
 <p>To expose the App Service to the internet, it must be done through the centralized hub services. Submit a Cloud Services request specifying the custom domain (if any), origin hostname, and any required WAF or routing rules for the AFD configuration.</p>
 <h2 id="migrating"><a class="header" href="#migrating">Migrating</a></h2>
 <p>To convert an existing public App Service to private:</p>
-<p>** Target App Service <strong>location</strong> must be <code>South Central US</code>. If it is not, then the App Service will need to be recreated. **</p>
+<p>** Target App Service <strong>location</strong> must be <code>South Central US</code>. If it is not, then the App Service will need to be recreated. See <a href="#changing-azure-locations">changing Azure Locations</a>
+. **</p>
 <ol>
 <li>Create the private endpoint and VNet integration subnets if they do not already exist.</li>
 <li>Add a Private Endpoint to the existing App Service targeting the new private endpoint subnet.</li>
@@ -433,6 +434,20 @@ resource "azurerm_linux_web_app" "workload" {
   }
 }
 </code></pre>
+<h2 id="changing-azure-locations"><a class="header" href="#changing-azure-locations">Changing Azure Locations</a></h2>
+<p>Many resources cannot be <em>moved</em> across locations and will instead need to be recreated in the target Region “South Central US” (<code>location: "southcentralus"</code>) for vnet private integration.</p>
+<h3 id="watch-out-for-these-migration-gotchas"><a class="header" href="#watch-out-for-these-migration-gotchas">Watch out for these migration gotchas</a></h3>
+<ul>
+<li>The new “moved” resources will have a different resource ID.</li>
+<li>Managed Identity principal IDs will change.</li>
+<li>Access policies/RBAC assignments may need to be recreated.</li>
+<li>Custom domains must be revalidated or rebound.</li>
+<li>TLS certificates may need to be reuploaded or re-associated.</li>
+<li>Private endpoints and VNet integration are region-specific.</li>
+<li>IP addresses will change unless you are fronting the app with something like Azure Front Door or Application Gateway.</li>
+<li>If you use deployment slots, recreate them in the new app.</li>
+<li>If you use App Service Environment, you need to create a new ASE in the target region.</li>
+</ul>
 
                     </main>
                 </div>
