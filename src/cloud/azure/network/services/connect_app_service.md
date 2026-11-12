@@ -40,6 +40,8 @@ To expose the App Service to the internet, it must be done through the centraliz
 
 To convert an existing public App Service to private:
 
+** Target App Service **location** must be `South Central US`. If it is not, then the App Service will need to be recreated. **
+
 1. Create the private endpoint and VNet integration subnets if they do not already exist.
 2. Add a Private Endpoint to the existing App Service targeting the new private endpoint subnet.
 3. Enable VNet Integration on the App Service using the delegated integration subnet.
