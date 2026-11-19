@@ -2,10 +2,7 @@
 
 Technology Services is launching a new portal for cloud account holders: **Backstage**. Backstage is a self-service platform that gives account owners financial, organizational, and security visibility into their cloud environments, along with new capabilities that Kion did not offer.
 
-Backstage replaces Kion, the cloud management platform introduced in 2024. Backstage launches on **December 1, 2026**, and Kion will be retired in stages through **March 1, 2027**.
-
-> [!IMPORTANT]
-> New cloud spend data will not appear in Kion after December 1, 2026. Previous data remains available in Kion until Spring 2027, and the latest data plus at least one fiscal year of prior data will be available in Backstage and in the native cloud service provider (CSP) portals at launch.
+Backstage is planned to launch on **December 1, 2026**, and Kion will be retired on **January 1, 2027**.
 
 > [!NOTE]
 > More detailed Backstage documentation will be published on this site between now and December 1. A notice with a link to Backstage will be sent when the platform is available.
@@ -15,8 +12,7 @@ Backstage replaces Kion, the cloud management platform introduced in 2024. Backs
 | Date | What happens |
 | --- | --- |
 | **December 1, 2026** | Backstage launches. Kion stops receiving new cloud cost data. All other Kion features continue to function. |
-| **January 4, 2027** | Kion loses access to cloud accounts, ending its Access and Compliance functions. |
-| **March 1, 2027** | Kion is shut down. |
+| **January 1, 2027**| Kion will be shut down, and all use transition to Backstage. |
 
 ## What Backstage Provides
 
