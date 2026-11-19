@@ -25,9 +25,10 @@ Backstage is your home base for everything in the cloud: see what you're spendin
 
 Backstage is also built to grow. Technology Services and the Enterprise Compute Environment will be able to:
 
-- Integrate with more of the tools and providers you already use.
-- Offer services beyond the major public cloud providers.
-- Build features around the university's own processes, including those in the Information Resource Responsibility Agreement (IRRA).
+- Integrate with more of the tools and providers you already use, including AI agents and other agentic and automation tools.
+- Make services available to request beyond the major public cloud providers.
+- Offer one-click deployments of blueprints and pre-built solutions for common cloud use cases into your environments.
+- Build features around the university's own processes, such as the annual assessment, attestation and reporting requirements, and the Information Resource Responsibility Agreement (IRRA).
 
 ## Getting Started with Backstage
 
