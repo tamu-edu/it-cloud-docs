@@ -1,6 +1,6 @@
 # Backstage Replacing Kion
 
-Technology Services is launching a new portal for cloud account holders: **Backstage**. Backstage is a self-service platform that gives account owners financial, organizational, and security visibility into their cloud environments, along with new capabilities that Kion did not offer.
+Technology Services is launching a new portal for cloud account holders: **Backstage**. Backstage is a self-service platform that gives account owners and operators financial, organizational, and security visibility into their cloud environments, access to their cloud resources, along with new capabilities that Kion did not offer.
 
 Backstage is planned to launch on **December 1, 2026**, and Kion will be retired on **January 1, 2027**.
 
