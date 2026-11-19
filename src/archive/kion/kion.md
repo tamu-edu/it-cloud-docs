@@ -1,4 +1,7 @@
-# Cloud Management
+# Kion (Archived)
+
+> [!WARNING]
+> **Archived documentation.** Kion is being replaced by Backstage on December 1, 2026, and will be shut down on March 1, 2027. These pages are kept for reference during the transition and will not be updated. See [Backstage Replacing Kion](../../backstage/index.md).
 
 Management of cloud resources is a critical part of making cloud computing successful. Without proper management, cloud resources can become a complex liability rather than an asset. Technology Services has developed a platform called Kion to help manage cloud resources across multiple cloud service providers (CSPs). Beginning in March, 2024, Kion will be available to all TAMU AWS, Azure, and GCP customers.
 

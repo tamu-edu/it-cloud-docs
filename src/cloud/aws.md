@@ -10,7 +10,7 @@ To learn about and request an AWS account, please visit the [Public Cloud Accoun
 
 ### Using Kion
 
-Use our cloud management tool, Kion, to access the AWS console. See [Getting Started With Kion](/kion/features/getting_started) for more information.
+Use our cloud management tool, Kion, to access the AWS console. Kion is being replaced by Backstage; see [Backstage Replacing Kion](../backstage/index.md) for the timeline and what to expect.
 
 > [!NOTE]
 > AWS Access is provided through Kion at [https://kion.cloud.tamu.edu](https://kion.cloud.tamu.edu)
