@@ -3,13 +3,13 @@
 - **New to cloud?** → [*What is Cloud Computing?*](cloud/what_is_cloud_computing.md)
 - **Building on Azure?** → [*Microsoft Azure*](cloud/azure.md)
 - **Building on AWS?** → [*Amazon Web Services*](cloud/aws.md)
-- **Operating a workload?** → [*Cloud Management*](kion/kion.md)
+- **Using Kion?** → [*Backstage Replacing Kion*](backstage/index.md)
 - **Working with TAMU GitHub?** → [*GitHub*](github/index.md)
 
 ## What's Covered
 
 - **Cloud Providers** — Network design, access, migration, and service-by-service configuration for AWS and Azure.
-- **Cloud Management** — Access, budgets, compliance, troubleshooting, and CLI tooling.
+- **Backstage** — The new cloud management portal replacing Kion, and the retirement timeline.
 - **Email Authentication** — University standards and configuration.
 - **GitHub** — Guidelines, organizations, teams, and migration tooling.
 
