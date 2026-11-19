@@ -32,7 +32,7 @@ Backstage is also built to grow. Technology Services and the Enterprise Compute 
 
 ## Getting Started with Backstage
 
-Your existing Kion Projects and cloud accounts will be imported into Backstage. No action is required to migrate them.
+**Your existing Kion Projects and cloud accounts will be imported into Backstage. No action is required to migrate them.**
 
 When Backstage launches on December 1:
 
