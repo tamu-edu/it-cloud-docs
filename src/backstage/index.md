@@ -40,8 +40,7 @@ When Backstage launches on December 1:
 2. Log in with your Texas A&M University NetID.
 3. Find your project:
     - **Business customers**: your Kion Projects are now named **Environments**.
-     - **Research customers**: your Kion Projects are now named **Workspaces**.
-  
+    - **Research customers**: your Kion Projects are now named **Workspaces**.
 4. Explore information about your resources using the integrations.
 5. Test accessing your accounts in AWS, Azure, and GCP.
 
@@ -56,11 +55,11 @@ Kion and Backstage will overlap for a short period. Use the table below to plan 
 | Cloud Account access | Available until January 1, 2027 | Available on December 1 |
 | Compliance and security findings | Available until January 1, 2027 | Available on December 1 |
 
-Kion data will not be available after Kion is shut down on January 1, 2027. If you rely on historical reports or exports that are not covered by the data available in Backstage, export them from Kion before then.
+Kion data will not be available after it is shut down on January 1, 2027. If you rely on any data or features that are not covered by  Backstage, please get in touch before then.
 
 ## Preparing for the Transition
 
-- **Orient yourself**. Make sure you can log in with your NetID, and that you know where to find and can see everything that you need. Some Kion Projects may undergo small name changes or be merged with others when they're imported into Backstage.
+- **Do a quick orientation**. Make sure you can log in with your NetID, and that you know where to find and can see everything that you need. Some Kion Projects may undergo small name changes or be merged with others when they're imported into Backstage.
 - **Confirm your access.** Use the Access Profiles to confirm that you can still access your Cloud accounts. If you have a team, make sure they have also confirmed their access.
 - **Plan for the January 1 cutover.** After January 1, 2027, Kion can no longer be used to access your cloud accounts. Check this site before then for how to access your accounts through Backstage.
 - **Update your tooling.** Scripts, automation, or documentation that depend on Kion (including the Kion CLI) will stop working when Kion is shut down. Replacement details will be published.
