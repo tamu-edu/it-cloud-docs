@@ -46,7 +46,7 @@ For more information, see [Access Methods](/cloud/azure/network/access_methods.m
 
 To convert an existing public ACI deployment to private:
 
-1. Create the delegated subnet in your spoke VNet if it does not already exist, and associate the hub firewall UDR.
+1. Create the subnet delegated to `Microsoft.ContainerInstance/containerGroups` in your spoke VNet if it does not already exist, and associate the hub firewall UDR.
 2. Redeploy the container group into the delegated subnet with `ip_address_type = "Private"`. ACI does not support converting an existing container group's network configuration in place — a redeploy is required.
 3. Update any DNS records or application configurations that previously pointed to the public ACI FQDN/IP to use the new private IP or the internal load balancer fronting the container group.
 4. Validate connectivity from within the VNet (e.g. from a VM, via Azure Bastion, or via campus VPN) before decommissioning the public container group.
