@@ -32,6 +32,20 @@ The steps below are generalized for a new or existing VM.
 1. Open the attached NIC -> `IP configurations` and verify there is no associated Public IP.
 1. Open the target subnet -> `Route table` and verify hub FW UDR (see [Route Tables](/cloud/azure/network/creating_subnets.md#route-tables) in **Creating Subnets** for details) is associated.
 
+## Migrating
+
+To convert an existing public Virtual Machine to private:
+
+**Note step 6 below:** If your application needs to be publicly accessible off campus, be sure Cloud Services is available to configure the new origin once it's ready.
+
+1. Create a private subnet of the appropriate size in the provided TAMU spoke vnet, and include the provided UDR and the existing Network Security Group.
+2. Disconnect the Public IP resource from the NIC.
+3. Review and record the Virtual Machine's specific configuration (VM Size (SKU), attached os and data disks) and delete the VM: **Do not delete attached disks**
+4. Create a new VM in the same configuration as the one just deleted attached to the new subnet: This may be easiest in Azure Portal by locating the detached disk and selecting **Create VM** from it.
+5. Validate connectivity from within the VNet (e.g. from a VM or via campus VPN) per NSG open ports. Connecting over ssh, for example, should work as it worked before destroy/recreate. Any applications set to run at start should also come up.
+6. Submit a Cloud Services request to configure an AFD origin and endpoint for the App Service if it needs to remain publicly accessible off campus/vpn.
+7. Update any DNS records or application configurations that previously pointed to the public App Service hostname to use the new AFD endpoint.
+
 ## Example Terraform Snippets
 
 ### Private NIC (No Public IP)
